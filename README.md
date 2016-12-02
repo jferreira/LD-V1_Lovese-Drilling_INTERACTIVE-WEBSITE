@@ -9,12 +9,13 @@ This is the story about one of those battlegrounds. Told in 8 parts, this intera
 
 
 # __
-# Links:
+# Github:
 
 Git: https://github.com/jferreira/LD-V1
-Marvel: https://marvelapp.com/12cjh2a/screen/15056485
-Timelapse: https://www.dropbox.com/sh/yejt5qg3a8fx9rn/AACx_czb8BzPt4ZWMSXM4F3ma?lst=
 
+# __
+# Prototype:
+Marvel: https://marvelapp.com/12cjh2a
 
 # __
 # Storyline:
