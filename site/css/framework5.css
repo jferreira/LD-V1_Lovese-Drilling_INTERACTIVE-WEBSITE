@@ -1,0 +1,428 @@
+/* Eric Meyer's CSS Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+resources/_Typeface/webfontkit_Oswald 
+
+
+/*
+*	TYPEFACE ADDED ----------------------------------------------------------------------------
+*/
+
+@font-face {
+    font-family: 'oswaldbold';
+    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+         url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'oswaldlight';
+    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+         url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'oswaldregular';
+    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+         url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/*
+*	----------------------------------------------------------------------------------------------
+*/
+
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body{height:100%;}
+
+body { 
+	font-family: "oswaldregular",sans-serif;
+	font-size: 100%;
+}
+
+/*
+*	STRUCTURE
+*/
+
+#wrapper {
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding: 0;	
+}
+
+/*	
+**	MENU
+*/
+
+.nav-holder {
+	position:fixed;
+	top: 30px;
+	left: 50%;
+	z-index:999; 
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.nav {
+	display:inline-block;
+}
+.nav-list {
+	list-style:none;
+}
+.nav-item {
+	float:left;
+	display:inline;
+	text-transform: uppercase;
+	margin-right: 20px;
+}
+.nav-item a {
+	display:block;
+	padding:5px 10px;
+	color:#fff; 
+	text-decoration: none;
+}
+
+.modal-nav-item a {
+	color:#000; 
+}
+
+.nav-item a:hover {
+	text-decoration: underline;
+}
+
+.nav-item a.nav-item-highlight {
+	background-color: #fff;
+	color: #000;
+}
+
+#navigation {
+    position: fixed;
+    width: 100%;
+    height: 160px;
+	bottom: 0;
+	color: #fff;
+	z-index: 3;
+	overflow-x:scroll;
+	overflow-y:hidden;
+	/*
+	opacity: 0;
+	transition: opacity 1s;
+	*/
+}
+#navigation-interaction {
+	position:fixed;	
+	width: 100%;
+	height: 60px;
+}
+#hover-navigation {
+    width: 100%;
+    height: 30px;
+}
+
+.transition {
+  -webkit-transition: bottom 0.3s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
+     -moz-transition: bottom 0.3s ease-in-out;  /* Firefox 4-15 */
+       -o-transition: bottom 0.3s ease-in-out;  /* Opera 10.50–12.00 */
+          transition: bottom 0.3s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */		
+}
+
+.show {
+	bottom:-100px !important;
+}
+
+/*
+#navigation:hover {
+	opacity: 0.9;
+}
+*/
+
+#episodeProgress {
+	height: 30px;
+	background: rgba(0, 0, 0, 0.2);
+	width: 100%;
+}
+
+#episodeScroll {
+	padding-top: 60px;
+	width: 100%;
+	height:100%;
+}
+
+/* BOTTOM NAV GREY */
+
+#episodeSelection {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+#episodeScrollLeft {
+	height: 100%;
+	width: 5%;		
+	position:fixed;
+	left:0;
+	z-index: 10;
+}	
+
+#episodeScrollRight {
+	height: 100%;
+	width: 5%;	
+	position:fixed;
+	right:0;
+	z-index: 10;
+}
+
+#navigation .top{display:block;height:53px;width:100%;color:#fff;text-align:center}
+#navigation .info{margin-top:52px;height:28px;background:#000}
+
+/* Play Bar */
+#navigation .avancee{display:inline-block;background: rgba(255, 255, 255, 0.2);width:0;height:30px}
+
+/* Play Bar Background */
+#navigation .txt{color:#fff;position:relative;height:20px;margin-top:-23px;padding:0 20px}
+
+#navigation .txt div{display:block;line-height:20px;vertical-align:middle}
+#navigation .txt div a{float:left;font-family:ss-standard;font-size:12px;text-decoration:none;color:#fff;margin:-2px 10px 0 0;padding-top:4px}
+#navigation .txt div.border{background:red;content:'';border-bottom:1px solid #fff}
+
+#navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;}
+
+.episode {
+	height:100%;
+	text-align: left;
+	letter-spacing: 0.5px;
+	color: #fff;
+	display:inline-block;
+	padding: 10px;
+	overflow: hidden;
+	cursor: pointer;
+	word-wrap: break-word;
+}
+
+@media(min-width: 500px) { 
+	.episode h1 {
+		text-transform: uppercase;
+		color: #fff;	
+		font-family: "oswaldLight",sans-serif;
+		display: inline;
+	}
+
+	.episode h3 {
+		text-transform: uppercase;
+		color: #fff;	
+		font-family: "oswaldLight",sans-serif;
+		display: inline;
+		margin-left: 15px;
+	}
+	
+	.episode p {
+	/*font-size: 100%;*/
+	}	
+}
+
+@media(min-width: 800px) { 
+	.episode h1 {
+		text-transform: uppercase;
+		color: #fff;	
+		font-family: "oswaldLight",sans-serif;
+		display: inline;
+	}
+
+	.episode h3 {
+		text-transform: uppercase;
+		color: #fff;	
+		font-family: "oswaldLight",sans-serif;
+		display: inline;
+		margin-left: 15px;
+	}
+	
+	.episode p {
+	/*font-size: 100%;*/
+	}
+}
+
+.interactive {
+	height:100%;
+	text-align: left;
+	color: #fff;
+	display:inline-block;
+	padding: 10px;
+	overflow: hidden;
+	color: #fff;
+	cursor: pointer;
+
+	background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+ 	background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);	
+
+}
+
+#titles {
+	position: fixed;
+	left: 50%;
+	top: 40%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+	width: 100%;
+	z-index:2;
+	margin: 0 auto;
+}
+
+#play {
+	font-size: 150px;
+	color: #fff;
+	cursor:pointer;
+	clear:both;
+	display:block;
+	width: 100px;
+	margin: 0 auto;
+}
+
+#content {
+	width:100%;
+	height:100%;
+	z-index: 1;
+}
+
+/*
+*	VIDEO
+*/
+
+#video {
+    position:absolute;
+    height:100%;
+    width:100%;
+	min-width: 100%;
+	min-height: 100%;	
+    overflow: hidden;
+}
+
+#video video {
+	display: block; /*IE8*/
+	
+	/* Resizes the film to show all the content
+    height: auto;
+    max-height: 100%;
+	min-width: 100%;
+	margin: 0 auto;
+	*/
+	
+	/*Fits the video to the entire screen 
+	min-height: 100%;
+	min-width: 100%;
+	*/
+	
+	/*
+	background: url("../resources/masthead.jpg") no-repeat;	
+	background-size: cover;
+	*/
+	-webkit-transition: 1s opacity; 
+	transition: 1s opacity;	
+	
+	/* http://jsfiddle.net/xcuvbgv8/4/ */
+	position: absolute;
+	top: -9999px;
+	bottom: -9999px;
+	left: -9999px;
+	right: -9999px;
+	margin: auto;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	-webkit-transition: 1s opacity; 
+	transition: 1s opacity;		
+}
+
+/*
+*	INTERACTIVE
+*/
+
+.play {
+    width: 12px;
+    height: 16px;
+    border-top: 8px solid transparent;
+    border-left: 12px solid #fff;
+    border-bottom: 8px solid transparent;
+}
+.pause {
+    width: 12px;
+    height: 16px;
+    border-right: 4px solid #fff;
+    border-left: 4px solid #fff;
+}
+
+/*
+*	FONT STYLES ---------------------------------------
+*/
+
+h1,h2,h3,h4,h5 {
+	font-family: "oswaldregular",sans-serif;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+/*
+*	The main title
+*/
+
+h1.title {
+	font-size: 600%;
+	/*font-weight: 900;*/
+	/*font-size: 5.4vw; */
+	color: #fff;
+}
+
+span.titles {
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 200%;
+	font-weight: 400;
+	font-family: "oswaldregular",sans-serif;
+}
+
+p {
+	/*font-size: 100%;*/
+}
+
+.remodal h1 {
+	/*font-size: 250%;*/
+	line-height: 2em;
+}
+
+.remodal p {
+	text-align: left;
+	/*font-size: 100%;*/
+}
