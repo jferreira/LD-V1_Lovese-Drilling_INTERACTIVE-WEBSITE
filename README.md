@@ -18,7 +18,8 @@ Git: https://github.com/jferreira/LD-V1
 Marvel: https://marvelapp.com/12cjh2a
 
 # __
-# Storyline:
+# Storyline / Script:
+https://docs.google.com/spreadsheets/d/1evEksbRWNYi5CC9o8ftUDZg3pZfHNpBBl3k9yF_vSO8/edit#gid=1777266879
 https://docs.google.com/document/d/1vmgmuWlaj_DMIZGR-oEcZQyBZWrsLBe01SbPYRKp_HQ/edit
 
 
