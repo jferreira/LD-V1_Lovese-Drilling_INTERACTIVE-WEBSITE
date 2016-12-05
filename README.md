@@ -7,6 +7,8 @@ Across the world, local communities are fighting to stop new coal, oil and gas p
 
 This is the story about one of those battlegrounds. Told in 8 parts, this interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil- and gas industry. 
 
+Research:
+https://drive.google.com/drive/folders/0B498qSXzY79Ia05TQVhqMjhMQW8?usp=sharing
 
 # __
 # Github:
