@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15.997px" height="23.744px" viewBox="0 0 15.997 23.744" enable-background="new 0 0 15.997 23.744" xml:space="preserve">
+
+    <g class="marker-group" transform="translate(-8,-25)">
+            <ellipse class="marker-shadow" fill="rgba(0,0,0,.5)" cx="8.324" cy="25" rx="3.855" ry="1.6" />
+            <g class="marker-drop">
+            <path class="marker-path marker-left" fill="#DB4538" d="M14.769,12.244c0.774-1.231,1.229-2.684,1.229-4.246C15.997,3.581,12.416,0,7.999,0v23.744l6.773-11.5H14.769z" />
+            <path class="marker-path marker-right" fill="#C83B34" d="M0,7.999c0,1.562,0.455,3.014,1.229,4.246H1.226l6.773,11.5V0C3.581,0,0,3.581,0,7.999z" />
+            <circle fill="#FFFFFF" cx="8.324" cy="8.069" r="3.855" />
+        </g>
+    </g>
+</svg>
