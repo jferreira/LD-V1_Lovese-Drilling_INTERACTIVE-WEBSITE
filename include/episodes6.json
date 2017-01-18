@@ -8,8 +8,8 @@ var nav = {
       {"id": "6", "duration" : "3.00", "title": "Senja", "subtitle": "Episode 6:", 	"description" : "", 	"video": "resources/_Videos/_EP6_Holding_Carbon Drug Dealing.mp4", "poster": "resources/_Images/E6_Masthead.jpg", "url": "https://player.vimeo.com/video/200000244", "vid": "200000244"},
       {"id": "7", "duration" : "3.00", "title": "Breeding Grounds", "subtitle": "Episode 7:", 	"description" : "", 	"video": "resources/_Videos/_EP7_Holding_Two Futures.mp4", "poster": "resources/_Images/E7_Masthead.jpg", "url": "https://player.vimeo.com/video/200000817", "vid": "200000817"},
       {"id": "8", "duration" : "3.00", "title": "Livelihoods", "subtitle": "Episode 8:", 	"description" : "", 	"video": "resources/_Videos/_EP8_Holding_In-Action.mp4", "poster": "resources/_Images/E8_Masthead.jpg", "url": "https://player.vimeo.com/video/200001275", "vid": "200001275"},
-      {"id": "9", "duration" : "3.00", "title": "Carbon drugdealer", "subtitle": "Episode 9:", 	"description" : "", 	"video": "resources/_Videos/_EP7_Holding_Two Futures.mp4", "poster": "resources/_Images/E7_Masthead.jpg", "url": "https://player.vimeo.com/video/200001526", "vid": "200001526"},
-      {"id": "10", "duration" : "3.00", "title": "The future", "subtitle": "Episode 10:", 	"description" : "", 	"video": "resources/_Videos/_EP8_Holding_In-Action.mp4", "poster": "resources/_Images/E8_Masthead.jpg", "url": "https://player.vimeo.com/video/200001692", "vid": "200001692"}
+      {"id": "9", "duration" : "3.00", "title": "Carbon drugdealer", "subtitle": "Episode 9:", 	"description" : "", 	"video": "resources/_Videos/_EP7_Holding_Two Futures.mp4", "poster": "resources/_Images/E9_Masthead.jpg", "url": "https://player.vimeo.com/video/200001526", "vid": "200001526"},
+      {"id": "10", "duration" : "3.00", "title": "The future", "subtitle": "Episode 10:", 	"description" : "", 	"video": "resources/_Videos/_EP8_Holding_In-Action.mp4", "poster": "resources/_Images/E10_Masthead.jpg", "url": "https://player.vimeo.com/video/200001692", "vid": "200001692"}
     ],
     "interactive": [
   		{"id": "1", "title": "Carbon Battlegrounds", "html": "include/interactive/1.html"},
