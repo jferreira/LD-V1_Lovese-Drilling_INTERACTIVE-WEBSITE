@@ -1,9 +1,9 @@
-/* Bugs: 
+/* Bugs:
 - When a video is finished, clicking it will start to play it again, but also make it seem like we're pausing it
 */
 
-/* Bugs Fixed: 
-- Video stops counting down when 27 seconds is left. 
+/* Bugs Fixed:
+- Video stops counting down when 27 seconds is left.
 - Wrong logic in pause/play based on video clicked, or video play icons clicked
 */
 
@@ -12,36 +12,36 @@
 - Splash page
 - Add screen dumps of each video to the masthead background image
 
-- Add video controls to be able to jump within the film 
+- Add video controls to be able to jump within the film
 - Add a layer of confirmation when the user moves to another episode, while video playing? "Do you really want to stop watching"
 - Add share functionality
 	1) When pausing the player
-	2) Fade in/out on mouse movement? 
-	3) Always be present somewhere? 
+	2) Fade in/out on mouse movement?
+	3) Always be present somewhere?
 - Add timer (count-down) for the interactive elements, move on to next episode when finished
 - Pause/play functionality for the interactive countdown
-- Styling the player UI. Add icons, instead of buttons. 
-- Move the position of the count down timer, make it more visible. 
+- Styling the player UI. Add icons, instead of buttons.
+- Move the position of the count down timer, make it more visible.
 - CSS: break the video title in the nav episode div (responsive text)
-- CSS: Responsive break points for the whole site. Scale the video to browser size. 
+- CSS: Responsive break points for the whole site. Scale the video to browser size.
 */
 
-/* Implemented 
+/* Implemented
 - Hover to get the playback controllers
 - Call to action after video is finished
 - Function to remove (or pause) video, and show interactive content in same place
 - Video timebar/scroller
 - Indicate where the video playing is in the episode slot?
-- Drag and drop episode selection 
-- Scale the video correctly	
+- Drag and drop episode selection
+- Scale the video correctly
 - Main navigation (top horizontal menu)
-- Well designed pop up content for issue/history/action + about 
+- Well designed pop up content for issue/history/action + about
 */
 
 function updateContent(episode) {
 	interactiveState = false;
 	var episodeId;
-	
+
 	if(episode === undefined || episode === null) {
 		episodeId = currNav;
 	} else {
@@ -49,19 +49,19 @@ function updateContent(episode) {
 		currNav = episodeId;
 	}
 	$(".nav-holder *").fadeIn(500);
-	
+
 	// Remove interactive content if it's present
 	if($("#content #interactive *").is(":visible")) {
 		$("#content #interactive").empty();
 		//$("#content #interactive").load("resources/interactive/empty.html");
-	} 
+	}
 	if($('#episodeProgress *').is(":hidden")) $('#episodeProgress *').show();
-	
+
 	$("#video").css({
 		"background": 'url("'+nav.episodes[currNav].poster+'") no-repeat',
 		"background-size": 'cover'
-	});		
-	
+	});
+
 	$("#video video").attr({
 		"src": nav.episodes[episodeId].video
 		//"poster": nav.episodes[episodeId].poster
@@ -74,32 +74,32 @@ function updateContent(episode) {
 	$("#content *, #titles *").fadeIn(1000);
 	$(".timeRemaining").text("0:00");
 	$('#btn-play-pause').removeClass('pause').addClass('play');
-	$(".avancee").css({width:"0%"});	
+	$(".avancee").css({width:"0%"});
 }
 
-function loadInteractiveContent(id) {	
+function loadInteractiveContent(id) {
 	interactiveState = true;
 	// Remove anything related to the video player
 	// Concider removing the whole player layer?
 	$('#navigation').toggleClass('show');
-	
+
 	$("#video video").attr({"src": ""});
 	$(".timeRemaining").text("");
 	$(".avancee").css({width:"0%"});
 	$('#btn-play-pause').removeClass('pause').addClass('play');
-	
+
 	$(".nav-holder *").fadeOut(1000);
 	$('#episodeProgress *').hide();
-	
+
 	$("#content #video, #titles *").hide();
 	$("#content #interactive").empty();
 	$("#content #interactive").load(nav.interactive[id-1].html);
 	// Function to stop a video if its playing?
-}	
+}
 
 function twoDigits( n ) {
 	return (n <= 9 ? "0" + n : n);
-}	
+}
 
 function checkVideo() {
 	if (video.paused == true) {
@@ -108,7 +108,7 @@ function checkVideo() {
 	} else {
 		video.pause();
 		$(".nav-holder *").fadeIn(1000);
-	}		
+	}
 	if($("#titles *").is(":visible")) {
 		$("#titles *").fadeOut(1000);
 		$(".nav-holder *").fadeOut(1000);
@@ -128,24 +128,24 @@ $(document).ready( function() {
 		var episodeWidth = 350;
 		var interactiveWidth = 100;
 		newSize = newSize + episodeWidth + interactiveWidth;
-		
+
 		//var episodeWidth = 1500;
 		//var interactiveWidth = 150;
 		episodesLength += parseFloat(nav.episodes[i].duration);
-		
+
 		var episode = $('<div></div>',{
 		   id: 'episode_' + i,
 		   class: 'episode',
 		   attr: {
 			   "data-id" : nav.episodes[i].id,
 			   "onClick" : "updateContent("+i+")"
-		   },		   
+		   },
 		   html: "<h1>EP"+nav.episodes[i].id+"</h1><h3>" + nav.episodes[i].title + "</h3>",
 		   css: {
 			   'width': episodeWidth + "px"
 		   }
 		}).appendTo("#episodeSelection");
-		
+
 		var interactive = $('<div></div>',{
 		   id: 'interactive_' + i,
 		   class: 'interactive',
@@ -157,11 +157,11 @@ $(document).ready( function() {
 		   css: {
 			   'width': interactiveWidth + "px"
 		   }
-		}).appendTo("#episodeSelection");	
+		}).appendTo("#episodeSelection");
 	}
 	$("#episodeSelection").css("width",newSize);
 	//console.log(episodesLength.toFixed(2));
-	
+
 	/*
 	*	VIDEO EVENTS
 	*/
@@ -175,23 +175,23 @@ $(document).ready( function() {
 
 			seconds = Math.ceil(seconds);
 			$(".timeRemaining").text(minutes + ":" + twoDigits(seconds));
-			
+
 			var d = 100 * this.currentTime / this.duration;
-			$(".avancee").css({width:d+"%"});	
+			$(".avancee").css({width:d+"%"});
 		}
-	});	
-	
+	});
+
 	/* When a video ends */
 	video.onended = function(e) {
-		//$('[data-remodal-id=contribute]').remodal().open();	
+		//$('[data-remodal-id=contribute]').remodal().open();
     };
 
 	$("#contribute").on("click", function() {
 		console.log("modal click");
-		$('[data-remodal-id=contribute]').remodal().open();		
+		$('[data-remodal-id=contribute]').remodal().open();
 		//inst.open();
-    });		
-	
+    });
+
     $("#play").on("click", function() {
 		checkVideo();
 		$('#btn-play-pause').removeClass('play').addClass('pause');
@@ -200,10 +200,10 @@ $(document).ready( function() {
 			$("#play").fadeIn(1000);
 			$('#btn-play-pause').toggleClass('play');
 			$('#btn-play-pause').toggleClass('pause');
-		}			
-		
-    });		
-	
+		}
+
+    });
+
     $("video").on("click", function() {
 		if (video.paused == false) {
 			$(".nav-holder *").fadeIn(1000);
@@ -213,49 +213,49 @@ $(document).ready( function() {
 				$("#play").fadeIn(1000);
 				$('#btn-play-pause').toggleClass('play');
 				$('#btn-play-pause').toggleClass('pause');
-			}	
+			}
 			video.pause();
-		}		
-    });		
-	
+		}
+    });
+
 	$('#btn-play-pause').click(function(e) {
 		e.preventDefault();
 		$('#navigation').toggleClass('show');
 		$(this).toggleClass('play');
 		$(this).toggleClass('pause');
 		checkVideo();
-		
+
 		if($("#play").is(":hidden")) {
 			$("#play").fadeIn(1000);
-		}		
-		
-	});	
-	
+		}
+
+	});
+
     $("#navPrev").on("click", function() {
 		if(currNav > 0) {
 			currNav--;
 			updateContent();
 		}
-    });	
-	
+    });
+
     $("#navNext").on("click", function() {
 		if(currNav <= nav.episodes.length-2) {
 			currNav++;
 			updateContent();
 		}
     });
-	
+
 	$("#mute-video").click( function (){
 		if( $("video").prop('muted') ) {
 			$("video").prop('muted', false);
 		} else {
 			$("video").prop('muted', true);
 		}
-	});	
-	
+	});
+
 	// Run on page load
 	updateContent();
-	
+
 	/* Function for drag and span*/
 	var x,y,top,left,down;
 
@@ -273,11 +273,11 @@ $(document).ready( function() {
 			//$(this).css('cursor', 'move');
 			var newX=e.pageX;
 			var newY=e.pageY;
-			
+
 			//console.log(y+", "+newY+", "+top+", "+(top+(newY-y)));
-			
-			//$("#navigation").scrollTop(top-newY+y);    
-			$("#navigation").scrollLeft(left-newX+x);    
+
+			//$("#navigation").scrollTop(top-newY+y);
+			$("#navigation").scrollLeft(left-newX+x);
 		}
 	});
 
@@ -292,10 +292,10 @@ $(document).ready( function() {
 		console.log(interactiveState);
 		if (!video.paused) {
 			$('#navigation').toggleClass('show');
-		} 
+		}
 	});
 	*/
-	
+
 	/* Show navigation if the video is currently playing. Includes video + interactive elements */
 	$("#navigation").on("mouseenter", function() {
 		if (!video.paused || interactiveState) {
@@ -303,14 +303,14 @@ $(document).ready( function() {
 				console.log("has show class");
 				$('#navigation').removeClass('show');
 			}
-		}		
+		}
 	}).on("mouseleave", function() {
 		if (!video.paused || interactiveState) {
 			if(!$('#navigation').hasClass('show')) {
 				$('#navigation').addClass('show');
 			}
-		}			
-	});	
+		}
+	});
 
 	/* http://jsfiddle.net/andrewwhitaker/s5mgX/ */
 	/*
@@ -354,7 +354,7 @@ $(document).ready( function() {
 				scrollContent(direction);
 			}
 		});
-	}	
+	}
 */
 
 
@@ -362,17 +362,17 @@ $(document).ready( function() {
     var interval;
 
     $("#episodeScrollRight, #episodeScrollLeft").on('mouseover', function(e) {
-		
+
 		/*
-		var parentOffset = $(this).parent().offset(); 
+		var parentOffset = $(this).parent().offset();
 		var relX = e.pageX - parentOffset.left;
-		var relY = e.pageY - parentOffset.top;		
-		
+		var relY = e.pageY - parentOffset.top;
+
 		console.log(e.pageX,parentOffset.left);
 		*/
-		
+
         var div = $('#navigation');
-		var direction; 
+		var direction;
 		if($(this).hasClass("scrollLeft")) {
 			direction = true;
 		} else {
@@ -383,15 +383,15 @@ $(document).ready( function() {
 			$('#episodeScrollLeft').hide();
 		} else {
 			$('#episodeScrollLeft').show()
-		}		
-		
+		}
+
 		if(div.scrollLeft() > div.width()) {
 			$('#episodeScrollRight').hide();
 		} else {
 			$('#episodeScrollRight').show()
-		}	
-		
-		
+		}
+
+
         interval = setInterval(function(){
             var pos = div.scrollLeft();
 			if(direction) {
@@ -399,12 +399,12 @@ $(document).ready( function() {
 			} else {
 				div.scrollLeft(pos + count);
 			}
-            
+
         }, 100);
     }).on('mouseout', function() {
         // Uncomment this line if you want to reset the speed on out
         //count = 0;
         clearInterval(interval);
     });
-	 
+
 });
