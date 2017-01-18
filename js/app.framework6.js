@@ -4,6 +4,8 @@ var app = {
   currNav: 0,
   video: $("video")[0],
   interactiveState: false,
+  played: false,
+  player: 0,
   init: function() {
     app.attachObservers();
     app.attachScripts();
@@ -52,8 +54,7 @@ var app = {
   	});
 
     $(window).on("resize", function() {
-      //update stuff
-      console.log("resize");
+      $("#video").fitVids();
     });
 
   },
@@ -62,18 +63,11 @@ var app = {
 
     	var interactiveSlots = nav.episodes.length;
     	var episodesLength = 0;
-    	var newSize = 0;
 
     	for(var i = 0; i < nav.episodes.length; i++) {
-    		//var episodeWidth = 350;
-    		//var interactiveWidth = 100;
-
-
-
         var episodeWidth = 80 / nav.episodes.length;
     		var interactiveWidth = 20 / interactiveSlots;
 
-    		newSize = newSize + episodeWidth + interactiveWidth;
     		episodesLength += parseFloat(nav.episodes[i].duration);
 
     		var episode = $('<div></div>',{
@@ -83,10 +77,8 @@ var app = {
     			   "data-id" : nav.episodes[i].id,
     			   "onClick" : "app.helpers.updateContent("+i+")"
     		   },
-    		   html: "<h1>EP"+nav.episodes[i].id+"</h1><h3>" + nav.episodes[i].title + "</h3>",
-    		   css: {
-    			   'width': episodeWidth + "%"
-    		   }
+    		   html: "<h1>EP"+nav.episodes[i].id+"<br />" + nav.episodes[i].title + "</h1>",
+    		   css: {'width': episodeWidth + "%"}
     		}).appendTo("#episodeSelection");
 
     		var interactive = $('<div></div>',{
@@ -96,18 +88,28 @@ var app = {
     			   "data-id" : nav.episodes[i].id,
     			   "onClick" : "app.helpers.loadInteractiveContent("+nav.episodes[i].id+")"
     		   },
-    		   html: "<p></p>",
-    		   css: {
-    			   'width': interactiveWidth + "%"
-    		   }
+    		   html: "",
+    		   css: {'width': interactiveWidth + "%"}
     		}).appendTo("#episodeSelection");
     	}
-    	$("#episodeSelection").css("width" , "100%");
 
+    	$("#episodeSelection").css("width" , "100%");
     });
   },
   helpers: {
     updateContent: function(episode) {
+      if(!app.played) {
+        var options = {
+            id: nav.episodes[app.currNav].vid,
+            width: $("#video").width(),
+            loop: false
+        };
+
+        app.player = new Vimeo.Player('video', options);
+        app.played = true;
+      }
+      $("#video").fitVids();
+
     	app.interactiveState = false;
     	var episodeId;
 
@@ -127,12 +129,22 @@ var app = {
 
     	$("#video").css({
     		"background": 'url("'+nav.episodes[app.currNav].poster+'") no-repeat',
-    		"background-size": 'cover'
+    		"background-size": 'cover',
+        "background-position": 'center center'
     	});
 
-    	$("#video video").attr({
-    		"src": nav.episodes[episodeId].video
-    	});
+      app.player.loadVideo(nav.episodes[app.currNav].vid).then(function(id) {
+          // the video successfully loaded
+      }).catch(function(error) {});
+
+      app.player.on('play', function() {
+          console.log('played the video!');
+      });
+
+    	// $("#video video").attr({
+    	// 	"src": nav.episodes[episodeId].video
+    	// });
+
     	$("#titles h1").text(nav.episodes[episodeId].title);
     	$("#titles span.subtitle").text(nav.episodes[episodeId].subtitle);
     	$("#titles span.description").text(nav.episodes[episodeId].description);
@@ -158,8 +170,13 @@ var app = {
 
     	$("#content #video, #titles *").hide();
     	$("#content #interactive").empty();
-    	$("#content #interactive").load(nav.interactive[id-1].html);
-    	// Function to stop a video if its playing?
+
+      // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
+      $("#content #interactive").load(nav.interactive[id-1].html, function(response, status, xhr) {
+        if(status == "error") {
+          //Something went wrong, have your error fallback code here
+        }
+      });
     },
 
     checkVideo: function() {

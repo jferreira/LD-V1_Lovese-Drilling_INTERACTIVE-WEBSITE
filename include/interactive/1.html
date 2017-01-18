@@ -13,6 +13,7 @@
         #map > div.mapboxgl-control-container > div > div {
           font-size: 8px;
           color:#eee;
+          display:none;
         }
     </style>
   </head>
@@ -30,7 +31,7 @@
         bearing: 15, // bearing in degrees
         attributionControl: false
     });
-    map.addControl(new mapboxgl.AttributionControl(), 'top-left');
+    //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
 
     /*
     $("body").on("mousedown", function() {

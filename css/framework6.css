@@ -357,33 +357,25 @@ h1,h2,h3,h4,h5,span {
 */
 
 #video {
-    position:absolute;
-    height:100%;
-    width:100%;
-	min-width: 100%;
-	min-height: 100%;
-    overflow: hidden;
+  position:absolute;
+  height:100%;
+  width:100%;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+#video2 {
+  position:absolute;
+  height:100%;
+  width:100%;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 #video video {
 	display: block; /*IE8*/
-
-	/* Resizes the film to show all the content
-    height: auto;
-    max-height: 100%;
-	min-width: 100%;
-	margin: 0 auto;
-	*/
-
-	/*Fits the video to the entire screen
-	min-height: 100%;
-	min-width: 100%;
-	*/
-
-	/*
-	background: url("../resources/masthead.jpg") no-repeat;
-	background-size: cover;
-	*/
 	-webkit-transition: 1s opacity;
 	transition: 1s opacity;
 
