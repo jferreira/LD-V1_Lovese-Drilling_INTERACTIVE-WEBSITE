@@ -40,21 +40,104 @@ var app = {
 
     /* Show navigation if the video is currently playing. Includes video + interactive elements */
   	$("#navigation").on("mouseenter", function() {
-  		if (!video.paused || app.interactiveState) {
+  		if (!app.video.paused || app.interactiveState) {
   			if($('#navigation').hasClass('show')) {
   				$('#navigation').removeClass('show');
   			}
   		}
   	}).on("mouseleave", function() {
-  		if (!video.paused || app.interactiveState) {
+  		if (!app.video.paused || app.interactiveState) {
   			if(!$('#navigation').hasClass('show')) {
   				$('#navigation').addClass('show');
   			}
   		}
   	});
 
-    $(window).on("resize", function() {
-      $("#video").fitVids();
+
+    /*
+  	*	VIDEO EVENTS
+  	*/
+
+  	$("video").on("timeupdate", function(){
+  		if(this.readyState > 0) {
+  			var value = (100 / this.duration) * this.currentTime;
+
+  			var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
+  			var seconds = (this.duration - this.currentTime) % 60;
+
+  			seconds = Math.ceil(seconds);
+  			$(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
+
+  			var d = 100 * this.currentTime / this.duration;
+  			$(".avancee").css({width:d+"%"});
+  		}
+  	});
+
+  	/* When a video ends */
+    app.video.onended = function(e) {};
+
+    $("#contribute").on("click", function() {
+      $('[data-remodal-id=contribute]').remodal().open();
+    });
+
+      $("#play").on("click", function() {
+    		app.helpers.checkVideo();
+    		$('#btn-play-pause').removeClass('play').addClass('pause');
+    		$('#navigation').toggleClass('show');
+    		if($("#play").is(":hidden")) {
+    			$("#play").fadeIn(1000);
+    			$('#btn-play-pause').toggleClass('play');
+    			$('#btn-play-pause').toggleClass('pause');
+    		}
+      });
+
+    $("video").on("click", function() {
+      if (app.video.paused == false) {
+        $(".nav-holder *").fadeIn(1000);
+        $('#btn-play-pause').removeClass('play').addClass('pause');
+        $('#navigation').toggleClass('show');
+
+        if($("#play").is(":hidden")) {
+          $("#play").fadeIn(1000);
+          $('#btn-play-pause').toggleClass('play');
+          $('#btn-play-pause').toggleClass('pause');
+        }
+        app.video.pause();
+      }
+    });
+
+  	$('#btn-play-pause').click(function(e) {
+  		e.preventDefault();
+  		$('#navigation').toggleClass('show');
+  		$(this).toggleClass('play');
+  		$(this).toggleClass('pause');
+  		app.helpers.checkVideo();
+
+  		if($("#play").is(":hidden")) {
+  			$("#play").fadeIn(1000);
+  		}
+  	});
+
+    $("#navPrev").on("click", function() {
+      if(currNav > 0) {
+        currNav--;
+        app.helpers.updateContent();
+      }
+    });
+
+    $("#navNext").on("click", function() {
+      if(app.currNav <= nav.episodes.length-2) {
+        app.currNav++;
+        app.helpers.updateContent();
+      }
+    });
+
+    $("#mute-video").click( function (){
+      if( $("video").prop('muted') ) {
+        $("video").prop('muted', false);
+      } else {
+        $("video").prop('muted', true);
+      }
     });
 
   },
@@ -97,19 +180,11 @@ var app = {
     });
   },
   helpers: {
+    twoDigits: function(n) {
+    	return (n <= 9 ? "0" + n : n);
+    },
+
     updateContent: function(episode) {
-      if(!app.played) {
-        var options = {
-            id: nav.episodes[app.currNav].vid,
-            width: $("#video").width(),
-            loop: false
-        };
-
-        app.player = new Vimeo.Player('video', options);
-        app.played = true;
-      }
-      $("#video").fitVids();
-
     	app.interactiveState = false;
     	var episodeId;
 
@@ -133,17 +208,12 @@ var app = {
         "background-position": 'center center'
     	});
 
-      app.player.loadVideo(nav.episodes[app.currNav].vid).then(function(id) {
-          // the video successfully loaded
-      }).catch(function(error) {});
-
-      app.player.on('play', function() {
-          console.log('played the video!');
-      });
-
-    	// $("#video video").attr({
-    	// 	"src": nav.episodes[episodeId].video
-    	// });
+      $("video").attr({
+    		"src": nav.episodes[episodeId].mp4
+    		//"poster": nav.episodes[episodeId].poster
+    		//"preload": "auto"
+    		//"autoplay": "autoplay"
+    	});
 
     	$("#titles h1").text(nav.episodes[episodeId].title);
     	$("#titles span.subtitle").text(nav.episodes[episodeId].subtitle);

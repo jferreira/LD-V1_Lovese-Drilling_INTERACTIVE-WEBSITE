@@ -33,18 +33,13 @@
 
     <meta name="google-site-verification" content="" />
 
-		<title>Carbon Battlegrounds</title>
+		<title>Carbon Battlegrounds - A Lovese story</title>
 
-    <link rel="stylesheet" href="frameworks/Remodal-1.0.7/dist/remodal.css">
-		<link rel="stylesheet" href="frameworks/Remodal-1.0.7/dist/remodal-default-theme.css">
-		<link rel="stylesheet" href="css/framework5.css" media="screen" />
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<link rel="stylesheet" href="css/framework6.css" media="screen" />
 		<link href="resources/favicon.ico" rel="icon" type="image/x-icon" />
-
   </head>
 
   <body>
-
     <div id="wrapper">
   		<div class="nav-holder">
   			<nav class="nav">
@@ -62,13 +57,20 @@
   		<div id="titles">
   			<span class="titles subtitle"></span>
   			<h1 class="title"></h1>
-  			<div id="play" class="ion ion-play"></div>
+  			<div id="play">PLAY</div>
   			<span class="titles description"></span>
   		</div>
 
   		<div id="content">
-  			<div id="video"></div>
+  			<!-- <div id="video"></div> -->
         <!-- <iframe id="video2" src="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+
+        <div id="video-bg">
+          <video>
+            <source type="video/mp4" src="https://player.vimeo.com/external/199863373.sd.mp4?s=9f7e8959a6575877eac6110af32e4d25634f0b1d&profile_id=164">
+          </video>
+        </div>
+
   			<div id="interactive"></div>
   		</div>
 
@@ -101,10 +103,10 @@
 
     <!-- External scripts -->
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="js/jquery.fitvids"></script>
+      <script src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
+    <!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
+    <!-- <script src="js/jquery.fitvids"></script> -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
-
 
     <script type="text/javascript" src="include/episodes6.json"></script>
     <script type="text/javascript" src="js/app.framework6.js"></script>
