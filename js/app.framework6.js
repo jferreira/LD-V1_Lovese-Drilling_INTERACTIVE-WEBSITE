@@ -53,7 +53,6 @@ var app = {
   		}
   	});
 
-
     /*
   	*	VIDEO EVENTS
   	*/
@@ -84,6 +83,7 @@ var app = {
     		app.helpers.checkVideo();
     		$('#btn-play-pause').removeClass('play').addClass('pause');
     		$('#navigation').toggleClass('show');
+        $('video').css("z-index","1");
     		if($("#play").is(":hidden")) {
     			$("#play").fadeIn(1000);
     			$('#btn-play-pause').toggleClass('play');
@@ -186,6 +186,7 @@ var app = {
 
     updateContent: function(episode) {
     	app.interactiveState = false;
+      $('video').css("z-index","-1"); // Hack
     	var episodeId;
 
     	if(episode === undefined || episode === null) {
