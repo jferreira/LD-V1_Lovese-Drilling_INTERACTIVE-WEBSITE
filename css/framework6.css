@@ -320,20 +320,25 @@ h1,h2,h3,h4,h5,span {
 
 	background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
  	background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
-
 }
 
 #titles {
-	position: fixed;
+	position: absolute;
+	display:block;
 	left: 50%;
-	top: 40%;
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
+	top: 50%;
 	transform: translate(-50%, -50%);
-	text-align: center;
-	width: 100%;
 	z-index:2;
-	margin: 0 auto;
+	width: 50%;
+	height: 200px;
+	background-color: #fff;
+	text-align: center;
+}
+
+#titles .slide-container {
+   position: relative;
+   top: 50%;
+   transform: translateY(-50%);
 }
 
 #play {

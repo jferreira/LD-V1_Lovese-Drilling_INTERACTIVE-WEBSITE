@@ -31,6 +31,12 @@
         bearing: 15, // bearing in degrees
         attributionControl: false
     });
+
+
+    map.on('load', function() {
+      console.log("loaded!");
+    });
+
     //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
 
     /*
