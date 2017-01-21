@@ -16,6 +16,7 @@ var app = {
     /* Functions for dragging and spanning the episodes menu */
   	var x,y,top,left,down;
 
+    /*
   	$("#navigation").on("mousedown", function(e) {
   		e.preventDefault();
   		down = true;
@@ -37,8 +38,10 @@ var app = {
   		e.preventDefault();
   		down = false;
   	});
+    */
 
     /* Show navigation if the video is currently playing. Includes video + interactive elements */
+    /*
   	$("#navigation").on("mouseenter", function() {
   		if (!app.video.paused || app.interactiveState) {
   			if($('#navigation').hasClass('show')) {
@@ -52,6 +55,32 @@ var app = {
   			}
   		}
   	});
+    */
+
+    $("#hover-navigation .arrow").on("click", function() {
+      console.log("clicked");
+      var state = $(this).data('state');
+      // toggle the state - first click will make this "true"
+
+      // do your stuff
+      if (state) {
+        $(this).removeClass("arrow_up").addClass("arrow_down");
+          if($('#navigation').hasClass('show')) {
+    				$('#navigation').removeClass('show');
+    			}
+      } else {
+
+        $(this).removeClass("arrow_down").addClass("arrow_up");
+        //$(this).addClass("arrow_down").removeClass("arrow_up");
+        if(!$('#navigation').hasClass('show')) {
+  				$('#navigation').addClass('show');
+  			}
+      }
+      state = !state;
+
+      // put the state back
+      $(this).data('state', state);
+    });
 
     /*
   	*	VIDEO EVENTS
@@ -73,26 +102,24 @@ var app = {
   	});
 
   	/* When a video ends */
-    app.video.onended = function(e) {};
+    app.video.onended = function(e) {
 
-    $("#contribute").on("click", function() {
-      $('[data-remodal-id=contribute]').remodal().open();
+    };
+
+    $(".video-controls").on("click", function() {
+      var isPause = this.src.indexOf('_Pause_x3.png') != -1;
+      this.src    = isPause  ? this.src.replace('_Pause_x3.png', '_Play_x3.png') : this.src.replace('_Play_x3.png','_Pause_x3.png');
+
+  		app.helpers.checkVideo();
+  		$('#btn-play-pause').removeClass('play').addClass('pause');
+  		$('#navigation').toggleClass('show');
+      $('video').css("z-index","1");
+  		if($(this).is(":hidden")) {
+  			$("#titles, .video-controls").fadeIn(1000);
+  			$('#btn-play-pause').toggleClass('play');
+  			$('#btn-play-pause').toggleClass('pause');
+  		}
     });
-
-      $(".video-controls").on("click", function() {
-        var isPause = this.src.indexOf('_Pause_x3.png') != -1;
-        this.src    = isPause  ? this.src.replace('_Pause_x3.png', '_Play_x3.png') : this.src.replace('_Play_x3.png','_Pause_x3.png');
-
-    		app.helpers.checkVideo();
-    		$('#btn-play-pause').removeClass('play').addClass('pause');
-    		$('#navigation').toggleClass('show');
-        $('video').css("z-index","1");
-    		if($(this).is(":hidden")) {
-    			$("#titles, .video-controls").fadeIn(1000);
-    			$('#btn-play-pause').toggleClass('play');
-    			$('#btn-play-pause').toggleClass('pause');
-    		}
-      });
 
     $("video").on("click", function() {
       console.log("clicked");
