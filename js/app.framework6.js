@@ -79,26 +79,27 @@ var app = {
       $('[data-remodal-id=contribute]').remodal().open();
     });
 
-      $("#play").on("click", function() {
+      $(".video-controls").on("click", function() {
     		app.helpers.checkVideo();
     		$('#btn-play-pause').removeClass('play').addClass('pause');
     		$('#navigation').toggleClass('show');
         $('video').css("z-index","1");
-    		if($("#play").is(":hidden")) {
-    			$("#play").fadeIn(1000);
+    		if($(this).is(":hidden")) {
+    			$("#titles, .video-controls").fadeIn(1000);
     			$('#btn-play-pause').toggleClass('play');
     			$('#btn-play-pause').toggleClass('pause');
     		}
       });
 
     $("video").on("click", function() {
+      console.log("clicked");
       if (app.video.paused == false) {
         $(".nav-holder *").fadeIn(1000);
         $('#btn-play-pause').removeClass('play').addClass('pause');
         $('#navigation').toggleClass('show');
 
-        if($("#play").is(":hidden")) {
-          $("#play").fadeIn(1000);
+        if($(".video-controls").is(":hidden")) {
+          $("#titles, .video-controls").fadeIn(1000);
           $('#btn-play-pause').toggleClass('play');
           $('#btn-play-pause').toggleClass('pause');
         }
@@ -113,8 +114,8 @@ var app = {
   		$(this).toggleClass('pause');
   		app.helpers.checkVideo();
 
-  		if($("#play").is(":hidden")) {
-  			$("#play").fadeIn(1000);
+  		if($(".video-controls").is(":hidden")) {
+  			$(".video-controls").fadeIn(1000);
   		}
   	});
 
@@ -216,10 +217,16 @@ var app = {
     		//"autoplay": "autoplay"
     	});
 
-    	$("#titles h1").text(nav.episodes[episodeId].title);
-    	$("#titles span.subtitle").text(nav.episodes[episodeId].subtitle);
-    	$("#titles span.description").text(nav.episodes[episodeId].description);
-    	$("#content *, #titles *").fadeIn(1000);
+      $(".slide-container").css({
+        "background": 'url("'+nav.episodes[app.currNav].slide+'") no-repeat',
+    		"background-size": 'cover',
+        "background-position": 'center center'
+      });
+      //
+    	// $("#titles h1").text(nav.episodes[episodeId].title);
+    	// $("#titles span.subtitle").text(nav.episodes[episodeId].subtitle);
+    	// $("#titles span.description").text(nav.episodes[episodeId].description);
+    	$("#content *, #titles").fadeIn(1000);
     	$(".timeRemaining").text("0:00");
     	$('#btn-play-pause').removeClass('pause').addClass('play');
     	$(".avancee").css({width:"0%"});
@@ -239,7 +246,7 @@ var app = {
     	$(".nav-holder *").fadeOut(1000);
     	$('#episodeProgress *').hide();
 
-    	$("#content #video, #titles *").hide();
+    	$("#content #video, #titles").hide();
     	$("#content #interactive").empty();
 
       // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
@@ -258,8 +265,8 @@ var app = {
     		app.video.pause();
     		$(".nav-holder *").fadeIn(1000);
     	}
-    	if($("#titles *").is(":visible")) {
-    		$("#titles *").fadeOut(1000);
+    	if($("#titles").is(":visible")) {
+    		$("#titles").fadeOut(1000);
     		$(".nav-holder *").fadeOut(1000);
     	}
     }
