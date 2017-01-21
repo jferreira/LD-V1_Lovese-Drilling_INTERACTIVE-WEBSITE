@@ -80,6 +80,9 @@ var app = {
     });
 
       $(".video-controls").on("click", function() {
+        var isPause = this.src.indexOf('_Pause_x3.png') != -1;
+        this.src    = isPause  ? this.src.replace('_Pause_x3.png', '_Play_x3.png') : this.src.replace('_Play_x3.png','_Pause_x3.png');
+
     		app.helpers.checkVideo();
     		$('#btn-play-pause').removeClass('play').addClass('pause');
     		$('#navigation').toggleClass('show');
