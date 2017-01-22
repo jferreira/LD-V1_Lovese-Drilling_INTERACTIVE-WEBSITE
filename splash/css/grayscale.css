@@ -348,6 +348,15 @@ video {
   color: #fff;
 }
 
+.title-image{
+text-align: center;
+}
+
+.title-image{
+  margin-left:-650px;
+  margin-top:-250px;
+}
+
 @media(min-width:768px) {
     .intro .intro-body .brand-heading {
       text-align: center;
