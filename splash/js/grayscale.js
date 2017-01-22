@@ -47,9 +47,11 @@ $('document').ready(function(){
       if (message.status === 'pending') {
         //successful adds will have an id attribute on the object
         result = "Thank you for signing up!";
-      } else if (message.status == 400) {
-        //MC wil send back an error object with "Member Exists" as the title
+      } else if (message.title == "Member Exists") {
         result = "Thank you, but you are already signed up.";
+        //MC wil send back an error object with "Member Exists" as the title
+      } else if(message.title == "Invalid Resource") {
+        result = "You need to provide a valid email address.";
       } else {
         //something went wrong with the API call
         result = "Sorry, but there was a problem. Please try again later.";
