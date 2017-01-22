@@ -4,12 +4,50 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+
+ /*
+ *	TYPEFACE ADDED ----------------------------------------------------------------------------
+ */
+
+ @font-face {
+     font-family: 'oswaldbold';
+     src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+          url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+
+ }
+
+ @font-face {
+     font-family: 'oswaldlight';
+     src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+          url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+
+ }
+
+ @font-face {
+     font-family: 'oswaldregular';
+     src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+          url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+
+ }
+
+
+ /*
+ *	----------------------------------------------------------------------------------------------
+ */
+
+
 body {
     width: 100%;
     height: 100%;
-    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'oswaldlight';
     color: #444;
-    background-color: #fff;
+    background-color: white;
     overflow-x: hidden;
 }
 
@@ -21,13 +59,13 @@ html {
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 35px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: 'oswaldregular';
+
     letter-spacing: 1px;
 }
 
 input, textarea {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'oswaldlight';
     font-weight: 400;
     letter-spacing: 1px;
 }
@@ -174,6 +212,7 @@ a:hover, a:focus {
   position: relative;
   width: 100%;
   height: 100%;
+  color: white;
   overflow:hidden;
 }
 
@@ -236,12 +275,15 @@ video {
 
 .layer img {
   display: block;
-  width: 150%;
+  width:150%;
 }
 
 /* Parallax layers */
+
+
 .layer:nth-child(1) {
-  opacity: 0.8;
+  opacity: 1;
+  background-blend-mode: overlay;
 }
 
 .layer:nth-child(2) {
@@ -255,6 +297,7 @@ video {
 .layer:nth-child(3) {
   opacity: 0.1;
 }
+
 
 .intro .intro-body {
   position: absolute;
@@ -271,24 +314,24 @@ video {
 
 .intro .intro-body .brand-intro {
 	text-align: left;
-	font-size: 10px;
 	padding: 5px 10px 5px 10px;
 	text-transform: uppercase;
 	background-color: #fff;
-	color: #1C122F;
+	color: white;
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 12px;
+
 }
 
 .intro .intro-body .brand-heading {
-  font-size: 40px;
+
   margin-top: 15px;
-  color: #fff;
+  color: white;
 }
 
 .intro .intro-body .intro-text {
-    font-size: 16px;
-    color: #000;
+
+    font-family: 'oswaldlight';
+    color: white;
     margin-bottom: 20px;
 }
 
@@ -297,8 +340,7 @@ video {
 }
 
 .markup.white {
-  background-color: #fff;
-  color: #000;
+  color: white;
 }
 
 .markup.black {
@@ -308,23 +350,31 @@ video {
 
 @media(min-width:768px) {
     .intro .intro-body .brand-heading {
+      text-align: center;
         font-size: 65px;
     }
 
     .intro .intro-body .intro-text {
+      text-align: center;
         font-size: 18px;
     }
 
 	.intro .intro-body .brand-intro {
+    text-align: center;
 		font-size: 14px;
-		letter-spacing: 1px;
+
 	}
 }
 
 @media(min-width:1170px) {
     .intro .intro-body .intro-text {
+      text-align: center;
         font-size: 20px;
     }
+}
+
+.subscribe-btn{
+      text-align: center;
 }
 
 .btn-circle {
@@ -421,7 +471,7 @@ video {
 #divider-one {
     width: 100%;
     padding: 50px 0;
-    height: 600px;
+	height: 600px;
     color: #fff;
     background: url(../img/bg/anders_botnmark-1024.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -433,7 +483,7 @@ video {
 #divider-two {
     width: 100%;
     padding: 50px 0;
-    height: 600px;
+	height: 600px;
     color: #fff;
     background: url(../img/bg/johan_wildhagen-1024.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -486,31 +536,10 @@ p.description {
 }
 
 #newsletter-form {
+	background-color: #eee;
 	padding: 20px;
 	min-height: 200px;
 	margin-bottom: 20px;
-}
-
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
-}
-
-.parent {
-  display: table;
-  table-layout: fixed;
-}
-
-.child {
-  display: table-cell;
-  vertical-align: middle;
-  float: none;
-}
-
-.v-center {
-  position: relative;
-  transform: translateY(50%);
 }
 
 @media(min-width:767px) {
@@ -611,17 +640,16 @@ body {
 }
 */
 
-.form-group{margin-bottom:25px}
-.form-group input, .form-group textarea{padding:15px}
-.form-group input.form-control{height:auto}
-.form-group textarea.form-control{height:236px}
-.form-control:focus{border-color:#42dca3;box-shadow:none}
-
-::-webkit-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-:-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-::-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-:-ms-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-.text-danger{opacity: 0.8; font-size: 100%;}
+#contact .form-group{margin-bottom:25px}
+#contact .form-group input, #contact .form-group textarea{padding:15px}
+#contact .form-group input.form-control{height:auto}
+#contact .form-group textarea.form-control{height:236px}
+#contact .form-control:focus{border-color:#42dca3;box-shadow:none}
+#contact ::-webkit-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+#contact :-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+#contact ::-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+#contact :-ms-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+#contact .text-danger{opacity: 0.8; font-size: 100%;}
 
 /*
 .btn-primary{color:#fff;background-color:#fed136;border-color:#fed136;font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700}
