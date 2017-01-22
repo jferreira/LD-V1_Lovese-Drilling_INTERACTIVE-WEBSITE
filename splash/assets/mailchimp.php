@@ -5,7 +5,7 @@ use \DrewM\MailChimp\MailChimp;
 
 function storeAddress() {
     $key        = "927cc22bdde6d92c079f1a1428af979a-us13";
-    $list_id    = "3495d81ba5";
+    $list_id    = "3495d81ba5"; // Lovese Drilling list
 
     $merge_vars = array(
         'FNAME'     => $_POST['fname'],

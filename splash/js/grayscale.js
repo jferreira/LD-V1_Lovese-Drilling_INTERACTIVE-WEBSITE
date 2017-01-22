@@ -43,7 +43,7 @@ $('document').ready(function(){
     }).success(function(message){
       var result = '';
       console.log(message);
-      
+
       if (message.status === 'pending') {
         //successful adds will have an id attribute on the object
         result = "Thank you for signing up!";
