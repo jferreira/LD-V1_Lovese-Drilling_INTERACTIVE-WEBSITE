@@ -11,8 +11,8 @@
 
  @font-face {
      font-family: 'oswaldbold';
-     src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
-          url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+     src: url('../../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+          url('../../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 
@@ -20,8 +20,8 @@
 
  @font-face {
      font-family: 'oswaldlight';
-     src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
-          url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+     src: url('../../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+          url('../../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 
@@ -29,13 +29,20 @@
 
  @font-face {
      font-family: 'oswaldregular';
-     src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
-          url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+     src: url('../../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+          url('../../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 
  }
 
+ @font-face {
+  font-family: 'DINPro-Light';
+  src: url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
+  src: url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+ }
 
  /*
  *	----------------------------------------------------------------------------------------------
@@ -45,7 +52,7 @@
 body {
     width: 100%;
     height: 100%;
-    font-family: 'oswaldlight';
+    font-family: 'DINPro-Light', sans-serif;
     color: #444;
     background-color: white;
     overflow-x: hidden;
@@ -60,13 +67,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 0 35px;
     text-transform: uppercase;
     font-family: 'oswaldregular';
-
     letter-spacing: 1px;
 }
 
+p, span, a, input, textarea, ul, li {
+  font-family: 'DINPro-Light', sans-serif;
+}
+
 input, textarea {
-    font-family: 'oswaldlight';
-    font-weight: 400;
     letter-spacing: 1px;
 }
 
@@ -93,7 +101,7 @@ span.roles {
 @media(min-width:768px) {
     p {
         margin: 0 0 35px;
-        font-size: 20px;
+        font-size: 22px;
         line-height: 1.6;
     }
 	ul.list {
@@ -121,7 +129,8 @@ a:hover, a:focus {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: 'DINPro-Light', sans-serif;
     background-color: #000;
 }
 
@@ -212,7 +221,6 @@ a:hover, a:focus {
   position: relative;
   width: 100%;
   height: 100%;
-  color: white;
   overflow:hidden;
 }
 
@@ -298,7 +306,6 @@ video {
   opacity: 0.1;
 }
 
-
 .intro .intro-body {
   position: absolute;
 	display:block;
@@ -306,8 +313,8 @@ video {
 	top: 50%;
 	transform: translate(-50%, -50%);
 
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: auto;
   display: table-cell;
   vertical-align: middle;
 }
@@ -318,21 +325,21 @@ video {
 	text-transform: uppercase;
 	background-color: #fff;
 	color: white;
+  /*
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  */
 
 }
 
 .intro .intro-body .brand-heading {
-
   margin-top: 15px;
   color: white;
 }
 
 .intro .intro-body .intro-text {
-
-    font-family: 'oswaldlight';
     color: white;
     margin-bottom: 20px;
+    font-size: 20px!important;
 }
 
 .markup {
@@ -551,6 +558,11 @@ p.description {
 	margin-bottom: 20px;
 }
 
+#mc-newsletter-message, #mc-newsletter-message p {
+  font-size: 14px;
+  color: white;
+}
+
 @media(min-width:767px) {
     .content-section {
         padding-top: 100px;
@@ -564,7 +576,7 @@ p.description {
 .btn {
     border-radius: 0;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
     font-weight: 400;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -608,8 +620,8 @@ ul.banner-social-buttons {
 }
 
 footer {
-    padding: 50px 0;
-	background-color: #000;
+  padding: 50px 0;
+  background-color: #000;
 }
 
 footer p {
@@ -617,15 +629,15 @@ footer p {
 }
 
 ::-moz-selection {
-    text-shadow: none;
-    background: #42dca3;
-	color: #fff;
+  text-shadow: none;
+  background: #42dca3;
+  color: #fff;
 }
 
 ::selection {
-    text-shadow: none;
-    background: #42dca3;
-	color: #fff;
+  text-shadow: none;
+  background: #42dca3;
+  color: #fff;
 }
 
 img::selection {
@@ -649,16 +661,17 @@ body {
 }
 */
 
-#contact .form-group{margin-bottom:25px}
-#contact .form-group input, #contact .form-group textarea{padding:15px}
-#contact .form-group input.form-control{height:auto}
-#contact .form-group textarea.form-control{height:236px}
-#contact .form-control:focus{border-color:#42dca3;box-shadow:none}
-#contact ::-webkit-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact :-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact ::-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact :-ms-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact .text-danger{opacity: 0.8; font-size: 100%;}
+.form-group{margin-bottom:25px}
+.form-group input, .form-group textarea{padding:15px}
+.form-group input.form-control{height:auto}
+.form-group textarea.form-control{height:236px}
+.form-control:focus{border-color:#42dca3;box-shadow:none}
+
+::-webkit-input-placeholder{text-transform:uppercase;font-weight:700;color:#bbb}
+:-moz-placeholder{text-transform:uppercase;font-weight:700;color:#bbb}
+::-moz-placeholder{text-transform:uppercase;font-weight:700;color:#bbb}
+:-ms-input-placeholder{text-transform:uppercase;font-weight:700;color:#bbb}
+.text-danger{opacity: 0.8; font-size: 100%;}
 
 /*
 .btn-primary{color:#fff;background-color:#fed136;border-color:#fed136;font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700}
@@ -676,15 +689,14 @@ body {
 button.btn {
 	position: relative;
 	height: 50px;
-    margin: 0;
-    padding: 0 20px;
-    vertical-align: middle;
+  margin: 0;
+  padding: 0 20px;
+  vertical-align: middle;
 
-    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-    text-shadow: none;
-    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
-
+  -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+  text-shadow: none;
+  -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+  -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 
 

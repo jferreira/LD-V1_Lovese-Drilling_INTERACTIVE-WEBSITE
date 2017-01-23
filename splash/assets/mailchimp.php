@@ -7,9 +7,19 @@ function storeAddress() {
     $key        = "927cc22bdde6d92c079f1a1428af979a-us13";
     $list_id    = "3495d81ba5"; // Lovese Drilling list
 
+    if(empty($_POST['name']) || empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+      echo "No arguments Provided!";
+      return false;
+    }
+
+    $name = explode(" ", $_POST['name']);
+    $firstname = $name[0];
+    array_shift($name);
+    $lastname = implode(" ", $name);
+
     $merge_vars = array(
-        'FNAME'     => $_POST['fname'],
-        'LNAME'     => $_POST['lname']
+        'FNAME'     => $name[0],
+        'LNAME'     => $lastname
     );
 
     $mc = new MailChimp($key);
