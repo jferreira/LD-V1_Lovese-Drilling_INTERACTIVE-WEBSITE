@@ -338,11 +338,30 @@ video {
 	top: 50%;
 	transform: translate(-50%, -50%);
 
-
   width: 100%;
   height: 50%;
   display: table-cell;
   vertical-align: middle;
+  text-align: center;
+}
+
+.header-title {
+  height: 50%;
+  width: 100%;
+  background: url("../img/_Parallax/E0_Title_Lovese-Drilling.png") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.header-title:after {
+  content: " ";
+}
+
+.intro .intro-body img {
+  width: 100%;
+  height: auto;
 }
 
 .intro .intro-body .brand-intro {
