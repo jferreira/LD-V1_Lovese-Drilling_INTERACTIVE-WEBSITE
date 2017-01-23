@@ -68,7 +68,13 @@
       { cubeMapPreviewUrl: "tiles/" + sceneData.id + "/preview.jpg" });
     var geometry = new Marzipano.CubeGeometry(sceneData.levels);
 
-    var limiter = Marzipano.RectilinearView.limit.traditional(sceneData.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    //var limiter = Marzipano.RectilinearView.limit.traditional(sceneData.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+
+    var limiter = Marzipano.util.compose(
+     Marzipano.RectilinearView.limit.traditional(sceneData.faceSize, 100*Math.PI/180, 120*Math.PI/180),
+     Marzipano.RectilinearView.limit.pitch(0.115,90) // Hide the top
+    );
+
     var view = new Marzipano.RectilinearView(sceneData.initialViewParameters, limiter);
 
     var marzipanoScene = viewer.createScene({
