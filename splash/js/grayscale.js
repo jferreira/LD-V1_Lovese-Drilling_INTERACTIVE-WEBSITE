@@ -4,6 +4,22 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+/*
+ $(window).load( function(){
+
+ });
+
+var images
+
+function preload() {
+  for(var i = 1; i < app.roseAnimation; i++) {
+    var img = new Image ();
+    img.src = images[index][‘serving_url’];
+    //$('<img />').attr('src',"img/rose/Rose_16fr_farve_" + i + ".jpg").appendTo('#preload').css('display','none');
+  }
+}
+*/
+
 // jQuery to collapse the navbar on scroll
 $(window).scroll(function() {
     if ($(".navbar").offset().top > 50) {
