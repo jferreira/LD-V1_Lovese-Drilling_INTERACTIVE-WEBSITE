@@ -106,4 +106,6 @@ $('document').ready(function(){
   	zoom: 6
   });
 
+  map.scrollZoom.disable();
+
 });
