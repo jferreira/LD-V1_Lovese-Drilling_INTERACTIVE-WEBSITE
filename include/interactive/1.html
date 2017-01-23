@@ -4,8 +4,8 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <!-- <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script> -->
+    <!-- <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script> -->
+    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script> -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
@@ -17,6 +17,7 @@
         }
     </style>
   </head>
+  
   <body>
 
   <div id='map'></div>
@@ -31,21 +32,6 @@
         bearing: 15, // bearing in degrees
         attributionControl: false
     });
-
-
-    map.on('load', function() {
-      console.log("loaded!");
-    });
-
-    //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
-
-    /*
-    $("body").on("mousedown", function() {
-      var center = map.getCenter().wrap();
-      var zoom = map.getZoom();
-      console.log(center, zoom);
-    });
-    */
   </script>
 
   </body>
