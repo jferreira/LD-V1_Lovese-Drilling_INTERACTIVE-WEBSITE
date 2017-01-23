@@ -59,14 +59,6 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1720869058148049";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -86,7 +78,7 @@
         					<li><a class="page-scroll" href="#issue">Issue</a></li>
         					<li><a class="page-scroll" href="#team">About</a></li>
         					<li><a class="page-scroll" href="#action">Newsletter</a></li>
-                  <li><a class="page-scroll" href="https://www.patreon.com/lovese">Support</a></li>
+                  <li><a class="page-scroll" href="#support">Support</a></li>
 
                 </ul>
             </div>
@@ -113,15 +105,20 @@
         <li class="layer" data-depth-x="0.2" data-depth-y="0.60"><img src="img/_Parallax/E0_01_Parallax_Noise-Grain.jpg"></li>
       </ul>
 
-
       <div class="intro-body">
-        <img class="title-image"src="img/_Parallax/E0_Title_Lovese-Drilling.png">
-        <!--   <h1 class="brand-heading">LoVeSe Drilling</h1> -->
-        <p class="intro-text">Across the world, local communities are fighting to stop new coal, oil and gas projects. This is an interactive documentary told over 10 episodes which explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017. </p>
+        <h1 class="brand-heading">LoVeSe Drilling</h1>
+
+        <p class="intro-text">Across the world, local communities are fighting to stop new coal, oil and gas projects. Our common future is being decided on these <span class="markup white">carbon battlegrounds.</span></p>
+        <p class="intro-text">This is the story about one of those battlegrounds. Told in 10 parts, this interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil- and gas industry. </p>
 
 
+<<<<<<< 786bd70b8996774c1afc828802dee7e36c6f3b48
+        <p>
+          <a href="#action" class="btn btn-default btn-lg"> <span class="network-name">Get notified</span></a>
+=======
         <p class='subscribe-btn'>
           <a href="#action" class="btn btn-default btn-lg"> <span class="network-name">Subscribe</span></a>
+>>>>>>> Centered text - Paralax
         </p>
       </div>
     </header>
@@ -147,10 +144,6 @@
       				<p>The oil industry is Norway’s largest polluter, and since 1990 it’s CO2-emissions has increased with 80 percent. The oil and gas that Norway exports every year produces CO2-emissions which are 10 times higher than the annual emissions of Norway combined.</p>
 
       				<p>In 2017 the temporary moratorium against oil drilling in the area expires. The same year a new government will be elected in the parliament elections. They will decide the future of these areas. Help us make sure they keep them safe for generations to come.</p>
-
-              <div class="fb-post" data-href="https://www.facebook.com/romvesenas/photos/a.1057081047640508.1073741829.735876886427594/1370443719637571/?type=3&amp;theater" data-width="500" data-show-text="true"><blockquote cite="https://www.facebook.com/romvesenas/posts/1370443719637571:0" class="fb-xfbml-parse-ignore"><p>V&#xe6;r&#xf8;y - Lovese Drilling</p>Posted by <a href="https://www.facebook.com/romvesenas/">Romvesen AS</a> on&nbsp;<a href="https://www.facebook.com/romvesenas/posts/1370443719637571:0">Thursday, July 21, 2016</a></blockquote></div>
-              <br /><br />
-
             </div>
 
       			<div class="col-lg-4">
@@ -161,7 +154,37 @@
       </div>
     </section>
 
-	<div id="divider-one"></div>
+	<div id="divider-one">
+<div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <h1>Stay up to date</h1>
+        <p></p>
+      </div>
+      <div class="col-lg-5" style="padding-top: 10%;">
+        <div id="newsletter-form">
+          <form id="mc-newsletter-signup">
+            <div class="form-group">
+              <input class="form-control" type="text" name="fname" id="fname" placeholder="Firstname" />
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="lname" id="lname" placeholder="Lastname" />
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+              <input class="form-control" type="email" name="email" id="email" placeholder="Email" />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default btn-lg" id="SendButton" name="submit">Sign up</button>
+            </div>
+          </form>
+          <div id="mc-newsletter-message" class="text-center"></div>
+        </div>
+      </div>
+    </div>
+</div>
+  </div>
 
     <!-- Team Section -->
     <section id="team" class="container content-section">
@@ -284,30 +307,6 @@
 
       					</div>
       					<div class="col-md-5" id="contact">
-
-      						<div id="newsletter-form" class="text-center">
-      							<h3>Stay up to date</h3>
-      							<p>Connect with us the get the latest news on our development.</p>
-
-                    <form id="mc-newsletter-signup">
-                      <div class="form-group">
-                        <input class="form-control" type="text" name="fname" id="fname" placeholder="Firstname" />
-                      </div>
-                      <div class="clear"></div>
-                      <div class="form-group">
-                        <input class="form-control" type="text" name="lname" id="lname" placeholder="Lastname" />
-                      </div>
-                      <div class="clear"></div>
-                      <div class="form-group">
-                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" />
-                      </div>
-                      <div class="form-group">
-                        <button type="submit" class="btn btn-default btn-lg" id="SendButton" name="submit">Sign up</button>
-                      </div>
-                    </form>
-                    <div id="mc-newsletter-message" class="text-center"></div>
-      						</div>
-
       						<br><br>
 
       						<div id="contact-form">

@@ -16,7 +16,7 @@ var nav = {
         "slide": "resources/_Images/E2_Title_The-Lovese-Story.png",
         "url": "https://player.vimeo.com/video/199864020",
         "vid": "199864020",
-        "mp4": "https://player.vimeo.com/external/199864020.hd.mp4?s=f3515ac9a9e6b92e57654f5dbbfda19ab4c69f38&profile_id=119"
+        "mp4": "https://player.vimeo.com/external/199864020.hd.mp4?s=f3515ac9a9e6b92e57654f5dbbfda19ab4c69f38&profile_id=174"
       },
       {"id": "3", "duration" : "3.00", "title": "Norway & Oil", "subtitle": "Episode 3:",
         "description" : "",

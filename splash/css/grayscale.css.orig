@@ -275,7 +275,11 @@ video {
 
 .layer img {
   display: block;
+<<<<<<< 786bd70b8996774c1afc828802dee7e36c6f3b48
+  width: 150%;
+=======
   width:150%;
+>>>>>>> Centered text - Paralax
 }
 
 /* Parallax layers */
@@ -346,15 +350,6 @@ video {
 .markup.black {
   background-color: #000;
   color: #fff;
-}
-
-.title-image{
-text-align: center;
-}
-
-.title-image{
-  margin-left:-650px;
-  margin-top:-250px;
 }
 
 @media(min-width:768px) {
@@ -480,7 +475,7 @@ text-align: center;
 #divider-one {
     width: 100%;
     padding: 50px 0;
-	height: 600px;
+    height: 600px;
     color: #fff;
     background: url(../img/bg/anders_botnmark-1024.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -492,7 +487,7 @@ text-align: center;
 #divider-two {
     width: 100%;
     padding: 50px 0;
-	height: 600px;
+    height: 600px;
     color: #fff;
     background: url(../img/bg/johan_wildhagen-1024.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -545,10 +540,31 @@ p.description {
 }
 
 #newsletter-form {
-	background-color: #eee;
 	padding: 20px;
 	min-height: 200px;
 	margin-bottom: 20px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.parent {
+  display: table;
+  table-layout: fixed;
+}
+
+.child {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+
+.v-center {
+  position: relative;
+  transform: translateY(50%);
 }
 
 @media(min-width:767px) {
@@ -649,16 +665,17 @@ body {
 }
 */
 
-#contact .form-group{margin-bottom:25px}
-#contact .form-group input, #contact .form-group textarea{padding:15px}
-#contact .form-group input.form-control{height:auto}
-#contact .form-group textarea.form-control{height:236px}
-#contact .form-control:focus{border-color:#42dca3;box-shadow:none}
-#contact ::-webkit-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact :-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact ::-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact :-ms-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
-#contact .text-danger{opacity: 0.8; font-size: 100%;}
+.form-group{margin-bottom:25px}
+.form-group input, .form-group textarea{padding:15px}
+.form-group input.form-control{height:auto}
+.form-group textarea.form-control{height:236px}
+.form-control:focus{border-color:#42dca3;box-shadow:none}
+
+::-webkit-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+:-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+::-moz-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+:-ms-input-placeholder{font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700;color:#bbb}
+.text-danger{opacity: 0.8; font-size: 100%;}
 
 /*
 .btn-primary{color:#fff;background-color:#fed136;border-color:#fed136;font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform:uppercase;font-weight:700}
