@@ -251,7 +251,7 @@ var app = {
     		//"poster": nav.episodes[episodeId].poster
     		//"preload": "auto"
     		//"autoplay": "autoplay"
-    	});
+    	}).hide(); //hack to fix the load of video before image issue
 
       $(".slide-container").css({
         "background": 'url("'+nav.episodes[app.currNav].slide+'") no-repeat',
