@@ -465,3 +465,7 @@ video::-webkit-media-controls {
     border-right: 4px solid #fff;
     border-left: 4px solid #fff;
 }
+
+#preload {
+	display: none;
+}

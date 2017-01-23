@@ -9,6 +9,7 @@ var app = {
   init: function() {
     app.attachObservers();
     app.attachScripts();
+    app.helpers.preload();
     app.helpers.updateContent();
   },
   attachObservers: function() {
@@ -211,6 +212,11 @@ var app = {
     });
   },
   helpers: {
+    preload: function() {
+      for(var i = 1; i < nav.episodes.length; i++) {
+        $('<img />').attr('src', nav.episodes[i].poster).appendTo('#preload').css('display','none');
+      }
+    },
     twoDigits: function(n) {
     	return (n <= 9 ? "0" + n : n);
     },
