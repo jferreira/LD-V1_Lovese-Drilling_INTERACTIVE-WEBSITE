@@ -121,6 +121,11 @@ a:hover, a:focus {
     color: #1d9b6c;
 }
 
+
+.white-text{
+  color: white;
+}
+
 .light {
     font-weight: 400;
 }
