@@ -102,7 +102,7 @@ $('document').ready(function(){
   var map = new mapboxgl.Map({
   	container: 'map',
   	style: 'mapbox://styles/mapbox/emerald-v8',
-  	center: [15.463257,68.635428],
+  	center: [14.463257,68.735428],
   	zoom: 6
   });
 

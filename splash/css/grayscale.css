@@ -603,6 +603,10 @@ p.description {
   color: #444;
 }
 
+.button-xlarge {
+	font-size: 200%;
+}
+
 @media(min-width:767px) {
     .content-section {
         padding-top: 100px;
