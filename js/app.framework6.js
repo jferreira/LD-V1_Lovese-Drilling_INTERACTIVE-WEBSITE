@@ -2,167 +2,44 @@
 
 var app = {
   currNav: 0,
-  video: $("video")[0],
   interactiveState: false,
-  played: false,
-  player: 0,
+
   init: function() {
+    app.video.init();
+    app.navigation.init();
+
     app.attachObservers();
     app.attachScripts();
+
     app.helpers.preload();
     app.helpers.updateContent();
   },
   attachObservers: function() {
+    // Navigation
+    $("#hover-navigation .arrow").on("click", app.navigation.toggle);
 
-    /* Functions for dragging and spanning the episodes menu */
-  	var x,y,top,left,down;
+    // Video control
+    $(".video-controls").on("click", app.video.start);
+    $("video").on("click",           app.video.toggle);
+  	$('#btn-play-pause').on("click", app.video.toggle);
 
-    /*
-  	$("#navigation").on("mousedown", function(e) {
-  		e.preventDefault();
-  		down = true;
-  		x = e.pageX;
-  		y = e.pageY;
-  		top = $(this).scrollTop();
-  		left = $(this).scrollLeft();
-  	});
+    // Internal events
+    $("video").on("timeupdate", app.updateTime);
 
-  	$("#navigation").on("mousemove", function(e) {
-  		if(down){
-  			var newX = e.pageX;
-  			var newY = e.pageY;
-  			$("#navigation").scrollLeft(left - newX + x);
-  		}
-  	});
+    // Shortcuts
+    $("body").on('keydown', function(event) {
+      if (event.keyCode == 32) // Spacebar
+        app.video.toggle();
 
-  	$("#navigation").on("mouseup", function(e) {
-  		e.preventDefault();
-  		down = false;
-  	});
-    */
+      if (event.keyCode == 37) // Left
+        app.toPrevious();
 
-    /* Show navigation if the video is currently playing. Includes video + interactive elements */
-    /*
-  	$("#navigation").on("mouseenter", function() {
-  		if (!app.video.paused || app.interactiveState) {
-  			if($('#navigation').hasClass('show')) {
-  				$('#navigation').removeClass('show');
-  			}
-  		}
-  	}).on("mouseleave", function() {
-  		if (!app.video.paused || app.interactiveState) {
-  			if(!$('#navigation').hasClass('show')) {
-  				$('#navigation').addClass('show');
-  			}
-  		}
-  	});
-    */
-
-    $("#hover-navigation .arrow").on("click", function() {
-      console.log("clicked");
-      var state = $(this).data('state');
-      // toggle the state - first click will make this "true"
-
-      // do your stuff
-      if (state) {
-        $(this).removeClass("arrow_up").addClass("arrow_down");
-          if($('#navigation').hasClass('show')) {
-    				$('#navigation').removeClass('show');
-    			}
-      } else {
-
-        $(this).removeClass("arrow_down").addClass("arrow_up");
-        //$(this).addClass("arrow_down").removeClass("arrow_up");
-        if(!$('#navigation').hasClass('show')) {
-  				$('#navigation').addClass('show');
-  			}
-      }
-      state = !state;
-
-      // put the state back
-      $(this).data('state', state);
+      if (event.keyCode == 39) // Right
+        app.toNext();
     });
 
-    /*
-  	*	VIDEO EVENTS
-  	*/
-
-  	$("video").on("timeupdate", function(){
-  		if(this.readyState > 0) {
-  			var value = (100 / this.duration) * this.currentTime;
-
-  			var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
-  			var seconds = (this.duration - this.currentTime) % 60;
-
-  			seconds = Math.ceil(seconds);
-  			$(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
-
-  			var d = 100 * this.currentTime / this.duration;
-  			$(".avancee").css({width:d+"%"});
-  		}
-  	});
-
-  	/* When a video ends */
-    app.video.onended = function(e) {
-
-    };
-
-    $(".video-controls").on("click", function() {
-      var isPause = this.src.indexOf('_Pause_x3.png') != -1;
-      this.src    = isPause  ? this.src.replace('_Pause_x3.png', '_Play_x3.png') : this.src.replace('_Play_x3.png','_Pause_x3.png');
-
-  		app.helpers.checkVideo();
-  		$('#btn-play-pause').removeClass('play').addClass('pause');
-  		$('#navigation').toggleClass('show');
-      $('video').css("z-index","1");
-  		if($(this).is(":hidden")) {
-  			$("#titles, .video-controls").fadeIn(1000);
-  			$('#btn-play-pause').toggleClass('play');
-  			$('#btn-play-pause').toggleClass('pause');
-  		}
-    });
-
-    $("video").on("click", function() {
-      console.log("clicked");
-      if (app.video.paused == false) {
-        $(".nav-holder *").fadeIn(1000);
-        $('#btn-play-pause').removeClass('play').addClass('pause');
-        $('#navigation').toggleClass('show');
-
-        if($(".video-controls").is(":hidden")) {
-          $("#titles, .video-controls").fadeIn(1000);
-          $('#btn-play-pause').toggleClass('play');
-          $('#btn-play-pause').toggleClass('pause');
-        }
-        app.video.pause();
-      }
-    });
-
-  	$('#btn-play-pause').click(function(e) {
-  		e.preventDefault();
-  		$('#navigation').toggleClass('show');
-  		$(this).toggleClass('play');
-  		$(this).toggleClass('pause');
-  		app.helpers.checkVideo();
-
-  		if($(".video-controls").is(":hidden")) {
-  			$(".video-controls").fadeIn(1000);
-  		}
-  	});
-
-    $("#navPrev").on("click", function() {
-      if(currNav > 0) {
-        currNav--;
-        app.helpers.updateContent();
-      }
-    });
-
-    $("#navNext").on("click", function() {
-      if(app.currNav <= nav.episodes.length-2) {
-        app.currNav++;
-        app.helpers.updateContent();
-      }
-    });
+    $("#navPrev").on("click", app.toPrevious);
+    $("#navNext").on("click", app.toNext);
 
     $("#mute-video").click( function (){
       if( $("video").prop('muted') ) {
@@ -171,45 +48,68 @@ var app = {
         $("video").prop('muted', true);
       }
     });
-
   },
+
   attachScripts: function() {
-    $(document).ready(function() {
-
-    	var interactiveSlots = nav.episodes.length;
-    	var episodesLength = 0;
-
-    	for(var i = 0; i < nav.episodes.length; i++) {
-        var episodeWidth = 80 / nav.episodes.length;
-    		var interactiveWidth = 20 / interactiveSlots;
-
-    		episodesLength += parseFloat(nav.episodes[i].duration);
-
-    		var episode = $('<div></div>',{
-    		   id: 'episode_' + i,
-    		   class: 'episode',
-    		   attr: {
-    			   "data-id" : nav.episodes[i].id,
-    			   "onClick" : "app.helpers.updateContent("+i+")"
-    		   },
-    		   html: "<h1>EP"+nav.episodes[i].id+"<br />" + nav.episodes[i].title + "</h1>",
-    		   css: {'width': episodeWidth + "%"}
-    		}).appendTo("#episodeSelection");
-
-    		var interactive = $('<div></div>',{
-    		   id: 'interactive_' + i,
-    		   class: 'interactive',
-    		   attr: {
-    			   "data-id" : nav.episodes[i].id,
-    			   "onClick" : "app.helpers.loadInteractiveContent("+nav.episodes[i].id+")"
-    		   },
-    		   html: "",
-    		   css: {'width': interactiveWidth + "%"}
-    		}).appendTo("#episodeSelection");
-    	}
-
-    	$("#episodeSelection").css("width" , "100%");
+    // Always have the arrow down when navigation is visible
+    // and up when hidden
+    app.navigation.callbacks.preShow.push(function() {
+      $("#hover-navigation .arrow").removeClass("arrow_up").addClass("arrow_down");
     });
+    app.navigation.callbacks.preHide.push(function() {
+      $("#hover-navigation .arrow").removeClass("arrow_down").addClass("arrow_up");
+    });
+
+    // Hide various elements when the video starts playing
+    // and show them again when paused
+    app.video.callbacks.preStart.push(function() {
+      app.navigation.hide();
+
+      $("#video").css({
+          "background-image":"none", 
+          "background-color": "#000"
+      });
+      $("#titles").fadeOut(1000);
+      $(".nav-holder *").fadeOut(1000);
+
+      $('#btn-play-pause').removeClass('play').addClass('pause');
+      $('video').css("z-index","1");
+    });
+    app.video.callbacks.prePause.push(function() {
+      app.navigation.show();
+
+      $(".nav-holder *").fadeIn(1000);
+      $("#titles, .video-controls").fadeIn(1000);
+
+      $('#btn-play-pause').removeClass('pause').addClass('play');
+      $('video').css("z-index","0");
+    });
+  },
+  toPrevious: function() {
+    if (currNav > 0) {
+      currNav--;
+      app.helpers.updateContent();
+    }
+  },
+  toNext: function() {
+    if (app.currNav <= nav.episodes.length-2) {
+      app.currNav++;
+      app.helpers.updateContent();
+    }
+  },
+  updateTime: function() {
+    if(this.readyState > 0) {
+      var value = (100 / this.duration) * this.currentTime;
+
+      var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
+      var seconds = (this.duration - this.currentTime) % 60;
+
+      seconds = Math.ceil(seconds);
+      $(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
+
+      var d = 100 * this.currentTime / this.duration;
+      $(".avancee").css({width:d+"%"});
+    }
   },
   helpers: {
     preload: function() {
@@ -223,7 +123,10 @@ var app = {
 
     updateContent: function(episode) {
     	app.interactiveState = false;
-      $('video').css("z-index","-1"); // Hack
+      
+      app.video.pause();
+      $('video').css("z-index","-1");
+
     	var episodeId;
 
     	if(episode === undefined || episode === null) {
@@ -235,13 +138,14 @@ var app = {
     	$(".nav-holder *").fadeIn(500);
 
     	// Remove interactive content if it's present
-    	if($("#content #interactive *").is(":visible")) {
+    	if ($("#content #interactive *").is(":visible"))
     		$("#content #interactive").empty();
-    	}
-    	if($('#episodeProgress *').is(":hidden")) $('#episodeProgress *').show();
+
+    	if ($('#episodeProgress *').is(":hidden"))
+        $('#episodeProgress *').show();
 
     	$("#video").css({
-    		"background": 'url("'+nav.episodes[app.currNav].poster+'") no-repeat',
+    		"background": 'url("' + nav.episodes[app.currNav].poster + '") no-repeat',
     		"background-size": 'cover',
         "background-position": 'center center'
     	});
@@ -258,7 +162,7 @@ var app = {
     		"background-size": 'cover',
         "background-position": 'center center'
       });
-      //
+
     	// $("#titles h1").text(nav.episodes[episodeId].title);
     	// $("#titles span.subtitle").text(nav.episodes[episodeId].subtitle);
     	// $("#titles span.description").text(nav.episodes[episodeId].description);
@@ -272,7 +176,7 @@ var app = {
     	app.interactiveState = true;
     	// Remove anything related to the video player
     	// Concider removing the whole player layer?
-    	$('#navigation').toggleClass('show');
+    	app.navigation.hide();
 
     	$("#video video").attr({"src": ""});
     	$(".timeRemaining").text("");
@@ -291,20 +195,6 @@ var app = {
           //Something went wrong, have your error fallback code here
         }
       });
-    },
-
-    checkVideo: function() {
-    	if (app.video.paused == true) {
-    		app.video.play();
-    		$("#video").css({"background-image":"none", "background-color": "#000"});
-    	} else {
-    		app.video.pause();
-    		$(".nav-holder *").fadeIn(1000);
-    	}
-    	if($("#titles").is(":visible")) {
-    		$("#titles").fadeOut(1000);
-    		$(".nav-holder *").fadeOut(1000);
-    	}
     }
   }
 }
