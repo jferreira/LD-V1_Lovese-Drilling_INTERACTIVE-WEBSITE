@@ -2,86 +2,33 @@
 
 var app = {
   currNav: 0,
-  video: $("video")[0],
   interactiveState: false,
-  played: false,
-  player: 0,
+
   init: function() {
     app.attachObservers();
     app.attachScripts();
+
     app.helpers.preload();
     app.helpers.updateContent();
   },
   attachObservers: function() {
 
-    /* Functions for dragging and spanning the episodes menu */
-  	var x,y,top,left,down;
-
-    /*
-  	$("#navigation").on("mousedown", function(e) {
-  		e.preventDefault();
-  		down = true;
-  		x = e.pageX;
-  		y = e.pageY;
-  		top = $(this).scrollTop();
-  		left = $(this).scrollLeft();
-  	});
-
-  	$("#navigation").on("mousemove", function(e) {
-  		if(down){
-  			var newX = e.pageX;
-  			var newY = e.pageY;
-  			$("#navigation").scrollLeft(left - newX + x);
-  		}
-  	});
-
-  	$("#navigation").on("mouseup", function(e) {
-  		e.preventDefault();
-  		down = false;
-  	});
-    */
-
-    /* Show navigation if the video is currently playing. Includes video + interactive elements */
-    /*
-  	$("#navigation").on("mouseenter", function() {
-  		if (!app.video.paused || app.interactiveState) {
-  			if($('#navigation').hasClass('show')) {
-  				$('#navigation').removeClass('show');
-  			}
-  		}
-  	}).on("mouseleave", function() {
-  		if (!app.video.paused || app.interactiveState) {
-  			if(!$('#navigation').hasClass('show')) {
-  				$('#navigation').addClass('show');
-  			}
-  		}
-  	});
-    */
-
     $("#hover-navigation .arrow").on("click", function() {
-      console.log("clicked");
-      var state = $(this).data('state');
-      // toggle the state - first click will make this "true"
+      var state = app.navigation.state;
+
+      if (state == app.navigation.visible) {
+        app.navigation.hide();
+      } else {
+        app.navigation.show();
+      }
+    });
 
       // do your stuff
-      if (state) {
-        $(this).removeClass("arrow_up").addClass("arrow_down");
-          if($('#navigation').hasClass('show')) {
-    				$('#navigation').removeClass('show');
-    			}
-      } else {
-
-        $(this).removeClass("arrow_down").addClass("arrow_up");
-        //$(this).addClass("arrow_down").removeClass("arrow_up");
-        if(!$('#navigation').hasClass('show')) {
-  				$('#navigation').addClass('show');
-  			}
-      }
-      state = !state;
-
-      // put the state back
-      $(this).data('state', state);
-    });
+      // if (state) {
+      //   $(this).removeClass("arrow_up").addClass("arrow_down");
+      // } else {
+      //   $(this).removeClass("arrow_down").addClass("arrow_up");
+      // }
 
     /*
   	*	VIDEO EVENTS
