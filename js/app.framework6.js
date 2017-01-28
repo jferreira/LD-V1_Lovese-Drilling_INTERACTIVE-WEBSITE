@@ -125,6 +125,7 @@ var app = {
     	app.interactiveState = false;
       
       app.video.pause();
+      $('video').css("z-index","-1");
 
     	var episodeId;
 
