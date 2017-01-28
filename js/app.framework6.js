@@ -12,23 +12,16 @@ var app = {
     app.helpers.updateContent();
   },
   attachObservers: function() {
+    $("#hover-navigation .arrow").on("click", app.navigation.toggle);
 
-    $("#hover-navigation .arrow").on("click", function() {
-      var state = app.navigation.state;
-
-      if (state == app.navigation.visible) {
-        app.navigation.hide();
-      } else {
-        app.navigation.show();
-      }
+    // Always have the arrow down when navigation is visible
+    // and up when hidden
+    app.navigation.callbacks.preShow.push(function() {
+      $("#hover-navigation .arrow").removeClass("arrow_up").addClass("arrow_down");
     });
-
-      // do your stuff
-      // if (state) {
-      //   $(this).removeClass("arrow_up").addClass("arrow_down");
-      // } else {
-      //   $(this).removeClass("arrow_down").addClass("arrow_up");
-      // }
+    app.navigation.callbacks.preHide.push(function() {
+      $("#hover-navigation .arrow").removeClass("arrow_down").addClass("arrow_up");
+    });
 
     /*
   	*	VIDEO EVENTS

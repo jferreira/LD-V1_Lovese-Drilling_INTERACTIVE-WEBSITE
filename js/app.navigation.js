@@ -36,8 +36,9 @@ app.navigation = {
         app.navigation.call('preShow');
 
         // Show navigation
-        if (! app.navigation.element.hasClass('show'))
-            app.navigation.element.addClass('show');
+        app.navigation.element.addClass('visible');
+
+        app.navigation.state = app.navigation.visible;
 
         app.navigation.call('postShow');
     },
@@ -45,10 +46,18 @@ app.navigation = {
         app.navigation.call('preHide');
 
         // Hide
-        if (app.navigation.element.hasClass('show'))
-            app.navigation.element.removeClass('show');
+        app.navigation.element.removeClass('visible');
+
+        app.navigation.state = app.navigation.hidden;
 
         app.navigation.call('postHide');
+    },
+    toggle: function() {
+        if (app.navigation.state == app.navigation.visible) {
+          app.navigation.hide();
+        } else {
+          app.navigation.show();
+        }
     }
 };
 $(app.navigation.init);
