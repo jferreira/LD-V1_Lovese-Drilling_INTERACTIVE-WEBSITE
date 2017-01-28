@@ -18,15 +18,15 @@ app.video = {
     callbacks: {
         'preStart':  [],
         'postStart': [],
-        'prePauze':  [],
-        'postPauze': [],
-        'preStop':   [],
-        'postStop':  []
+        'prePause':  [],
+        'postPause': []
     },
 
     init: function() {
         app.video.state   = app.video.stopped;
         app.video.element = $("video")[0];
+
+        app.video.element.load();
     },
     call: function(eventType) {
         if (! $.inArray(eventType, app.video.callbacks))
@@ -41,23 +41,27 @@ app.video = {
         app.video.call('preStart');
 
         // Start video
-        
+        app.video.element.play();
+
+        app.video.state = app.video.playing;
+
         app.video.call('postStart');
     },
     pause: function() {
-        app.video.call('prePauze');
+        app.video.call('prePause');
 
-        // Pauze video
+        // Pause video
+        app.video.element.pause();
 
-        app.video.call('postPauze');
+        app.video.state = app.video.stopped;
+
+        app.video.call('postPause');
     },
-    stop: function() {
-        app.video.call('prePauze');
-
-        // Stop video
-
-        app.video.call('postPauze');
+    toggle: function() {
+        if (app.video.state == app.video.playing) {
+          app.video.pause();
+        } else {
+          app.video.start();
+        }
     }
 };
-
-$(app.video.init);

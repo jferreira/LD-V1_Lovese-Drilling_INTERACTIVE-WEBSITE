@@ -192,6 +192,7 @@ h1,h2,h3,h4,h5,span {
 	width:30px;
 	height:28px;
 	margin: 0 auto;
+    cursor: pointer;
 }
 
 .arrow_up {
@@ -457,12 +458,29 @@ video::-webkit-media-controls {
     border-top: 8px solid transparent;
     border-left: 12px solid #fff;
     border-bottom: 8px solid transparent;
+    border-right: 0;
+
+    background:none!important;
+    padding:0!important;
+    font: inherit;
+    cursor: pointer;
+    display: block;
+    outline: 0;
 }
 .pause {
     width: 12px;
     height: 16px;
     border-right: 4px solid #fff;
     border-left: 4px solid #fff;
+    border-top:0;
+    border-bottom: 0;
+
+    background:none!important;
+    padding:0!important;
+    font: inherit;
+    cursor: pointer;
+    display: block;
+    outline: 0;
 }
 
 #preload {
