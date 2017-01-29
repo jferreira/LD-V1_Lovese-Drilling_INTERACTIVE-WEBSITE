@@ -7,6 +7,7 @@ var app = {
   init: function() {
     app.video.init();
     app.navigation.init();
+    app.layover.init();
 
     app.attachObservers();
     app.attachScripts();
