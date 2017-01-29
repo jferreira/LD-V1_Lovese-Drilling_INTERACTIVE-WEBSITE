@@ -37,10 +37,13 @@ app.layover = {
     updateContent: function(content) {
         app.layover.call('preContent');
         
-        app.layover.element.innerHtml = content;
+        app.layover.element.find('.content').html(content);
 
         app.layover.call('postContent');
     },
+    setClass: function(className) {
+        app.layover.element.attr('class', className);
+    },  
     show: function() {
         app.layover.call('preShow');
 
