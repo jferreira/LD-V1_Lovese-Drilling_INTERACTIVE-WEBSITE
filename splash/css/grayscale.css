@@ -11,8 +11,8 @@
 
  @font-face {
      font-family: 'oswaldbold';
-     src: url('../../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
-          url('../../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+     src: url('../assets/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+          url('../assets/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 
@@ -20,8 +20,8 @@
 
  @font-face {
      font-family: 'oswaldlight';
-     src: url('../../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
-          url('../../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+     src: url('../assets/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+          url('../assets/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 
@@ -29,8 +29,8 @@
 
  @font-face {
      font-family: 'oswaldregular';
-     src: url('../../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
-          url('../../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+     src: url('../assets/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+          url('../assets/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 
@@ -38,10 +38,10 @@
 
  @font-face {
   font-family: 'DINPro-Light';
-  src: url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
-  src: url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
-       url('../../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+  src: url('../assets/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
+  src: url('../assets/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../assets/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
  }
 
  /*

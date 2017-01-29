@@ -1,6 +1,6 @@
 <?php // for MailChimp API v3.0
 
-include('../../frameworks/MailChimp.php');  // path to API wrapper downloaded from GitHub
+include('MailChimpAPI.php');  // path to API wrapper downloaded from GitHub
 use \DrewM\MailChimp\MailChimp;
 
 function storeAddress() {
@@ -18,7 +18,7 @@ function storeAddress() {
     $lastname = implode(" ", $name);
 
     $merge_vars = array(
-        'FNAME'     => $name[0],
+        'FNAME'     => $firstname,
         'LNAME'     => $lastname
     );
 
