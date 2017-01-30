@@ -7,12 +7,16 @@ var app = {
   init: function() {
     app.video.init();
     app.navigation.init();
+    app.layover.init();
 
     app.attachObservers();
     app.attachScripts();
 
-    app.helpers.preload();
     app.helpers.updateContent();
+
+    app.showIntroScreen();
+
+    app.helpers.preload();
   },
   attachObservers: function() {
     // Navigation
@@ -23,8 +27,11 @@ var app = {
     $("video").on("click",           app.video.toggle);
   	$('#btn-play-pause').on("click", app.video.toggle);
 
-    // Internal events
+    // Internal video events
     $("video").on("timeupdate", app.updateTime);
+
+    // Layover
+    $("body").on("click", "[rel=closelayover]", app.layover.hide);
 
     // Shortcuts
     $("body").on('keydown', function(event) {
@@ -196,6 +203,14 @@ var app = {
         }
       });
     }
+  },
+  showIntroScreen: function() {
+    app.layover.updateContent(
+      "Hey there, welcome to our wonderful application!" +
+      "<br />" +
+      "<button rel=\"closelayover\">Ok let's go</button>"
+    );
+    app.layover.show();
   }
 }
 $(app.init);
