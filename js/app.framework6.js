@@ -3,6 +3,7 @@
 var app = {
   currNav: 0,
   interactiveState: false,
+  textPageState: false,
 
   init: function() {
     app.video.init();
@@ -73,7 +74,7 @@ var app = {
       app.navigation.hide();
 
       $("#video").css({
-          "background-image":"none", 
+          "background-image":"none",
           "background-color": "#000"
       });
       $("#titles").fadeOut(1000);
@@ -130,7 +131,8 @@ var app = {
 
     updateContent: function(episode) {
     	app.interactiveState = false;
-      
+      app.textPageState = false;
+
       app.video.pause();
       $('video').css("z-index","-1");
 
@@ -181,6 +183,7 @@ var app = {
 
     loadInteractiveContent: function(id) {
     	app.interactiveState = true;
+      app.textPageState = false;
     	// Remove anything related to the video player
     	// Concider removing the whole player layer?
     	app.navigation.hide();
@@ -202,6 +205,31 @@ var app = {
           //Something went wrong, have your error fallback code here
         }
       });
+    },
+    loadTextPage: function(id) {
+      app.textPageState = true;
+      app.navigation.hide();
+
+      // Copied from loadInteractiveContent
+      $("#video video").attr({"src": ""});
+    	$(".timeRemaining").text("");
+    	$(".avancee").css({width:"0%"});
+    	$('#btn-play-pause').removeClass('pause').addClass('play');
+
+    	$(".nav-holder *").fadeOut(1000);
+    	$('#episodeProgress *').hide();
+
+    	$("#content #video, #titles").hide();
+    	$("#content #interactive").empty();
+
+
+      // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
+      $("#content #interactive").load(nav.textPages[id-1].html, function(response, status, xhr) {
+        if(status == "error") {
+          //Something went wrong, have your error fallback code here
+        }
+      });
+
     }
   },
   showIntroScreen: function() {
