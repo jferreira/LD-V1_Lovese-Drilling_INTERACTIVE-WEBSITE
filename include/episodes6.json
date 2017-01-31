@@ -46,5 +46,10 @@ var nav = {
   		{"id": "8", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/8.html"},
       {"id": "9", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/9.html"},
       {"id": "10", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/10.html"}
-  	]
+  	],
+    "textPages": [
+      {"id":"1", "html": "include/text/1.html"},
+      {"id":"2", "html": "include/text/2.html"},
+      {"id":"3", "html": "include/text/3.html"},
+    ]
 };
