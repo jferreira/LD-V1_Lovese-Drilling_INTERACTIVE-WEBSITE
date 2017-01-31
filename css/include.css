@@ -67,7 +67,7 @@ html, body {
 
 body {
   font-size: 100%;
-  font-family: "oswaldregular",sans-serif;
+  font-family: 'DINPro-Light', sans-serif;
   background: #000;
   color: #fff;
 }
@@ -82,6 +82,7 @@ body {
          url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+
 }
 
 @font-face {
@@ -90,6 +91,7 @@ body {
          url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+
 }
 
 @font-face {
@@ -98,12 +100,26 @@ body {
          url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+
 }
 
-h1,h2,h3,h4,h5,span {
-    font-family: "oswaldregular",sans-serif;
+@font-face {
+ font-family: 'DINPro-Light';
+ src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
+ src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+      url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+      url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 35px;
     text-transform: uppercase;
-    font-weight: normal;
+    font-family: 'oswaldregular';
+    letter-spacing: 1px;
+}
+
+p, span, a, input, textarea, ul, li {
+  font-family: 'DINPro-Light', sans-serif;
 }
 
 .textwrapper {

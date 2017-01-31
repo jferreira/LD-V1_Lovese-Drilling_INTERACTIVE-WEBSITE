@@ -1,19 +1,32 @@
 TODO:
 
-. Parallax:
-- http://www.jqueryscript.net/animation/Mouse-aware-Parallax-Effect-with-jQuery-and-TweenMax-Mouse-Parallax.html
-- https://jsfiddle.net/philllchabbb/71d1ew8j/
-- http://stephen.band/jparallax/
+Skriv e-post til Folkeaksjonen:
+- Hva som skjer
+- Hva de kan skrive
+- Hva de kan dele
 
-. Mapbox template for interactive slides
+After Episode 1:
+- Signup button
+- Share to twitter
+- Share to FB
 
-. Vimeo custom player
+CB interactive map
+ - Ajax load call
+ - JSON with all the battlegrounds
+ - Scroll function working with flyto
+ - Fix bootstrap issue with the nav bar
 
-. Style vimeo play/pause
 
-. Loading graphics:
-- Cod, pollock, haddock, herring
-- Fun facts about them
+ Clean up the folder structure, push to Havard, then pull req to production branch
 
-. Sign up button
-- 
+ Concider having a count down clock on lovese.org
+
+
+
+
+
+ Across the world, local communities are fighting to stop new coal, oil and gas projects.
+
+ This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017.
+
+ Coming on the 1st of February 2017.
