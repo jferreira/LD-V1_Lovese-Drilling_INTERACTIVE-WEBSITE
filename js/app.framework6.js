@@ -15,6 +15,7 @@ var app = {
 
     app.helpers.updateContent();
     app.showIntroScreen();
+    app.helpers.updateContent(0);
 
     app.helpers.preload();
   },
