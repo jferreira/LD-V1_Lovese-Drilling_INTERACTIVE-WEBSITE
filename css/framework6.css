@@ -529,7 +529,7 @@ video::-webkit-media-controls {
 }
 
 #layover .content {
-    background: #464857;
+    background: transparent;
     width: 600px;
     height: 200px;
     margin: 0 auto;
@@ -538,4 +538,9 @@ video::-webkit-media-controls {
     border-radius: 12px;
     top: 20%;
     position: relative;
+    text-align: center;
+}
+
+#layover .content p {
+  font-size: 20px;
 }
