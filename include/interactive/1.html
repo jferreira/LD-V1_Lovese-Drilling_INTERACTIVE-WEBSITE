@@ -206,6 +206,10 @@
                     <img src="resources/_Images/_BG-Headers/23.png" />
                 </section>
 
+                <p style="text-align:center;">
+                  Want to add your Carbon Battleground to the map? Get in touch with us at <a href="mailto:info@lovese.org">info@lovese.org</a>.
+                </p>
+
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             </div>
@@ -271,6 +275,7 @@
     });
 
     map.on('style.load', function (e) {
+      map.resize();
         //console.log(e.style.sprite); // Available markers
         map.addSource('markers', {
             "type": "geojson",
