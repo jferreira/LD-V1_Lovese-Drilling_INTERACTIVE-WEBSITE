@@ -294,7 +294,7 @@ p, span, a, input, textarea, ul, li {
 #navigation .txt div a{float:left;font-family:ss-standard;font-size:12px;text-decoration:none;color:#fff;margin:-2px 10px 0 0;padding-top:4px}
 #navigation .txt div.border{background:red;content:'';border-bottom:1px solid #fff}
 
-#navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;}
+#navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;margin-top:-18px;}
 
 .episode {
     height:100%;
@@ -536,7 +536,7 @@ video::-webkit-media-controls {
     color: #fff;
     padding: 15px;
     border-radius: 12px;
-    top: 20%;
+    top: 25%;
     position: relative;
     text-align: center;
 }

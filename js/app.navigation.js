@@ -78,7 +78,7 @@ app.navigation = {
                    "data-id" : nav.episodes[i].id,
                    "onClick" : "app.helpers.updateContent(" + i + ")"
                },
-               html: "<h1>EP" + nav.episodes[i].id + "<br />" + nav.episodes[i].title + "</h1>",
+               html: "<h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1>",
                css: {'width': episodeWidth + "%"}
             }).appendTo("#episodeSelection");
 
