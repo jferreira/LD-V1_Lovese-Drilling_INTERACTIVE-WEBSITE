@@ -530,6 +530,7 @@ video::-webkit-media-controls {
     background: rgba(0,0,0,1);
     z-index: 12;
     display: none;
+    background-color: #000;
     background: url("../resources/_Images/E0_Masthead.jpg") no-repeat center center;
     background-size: cover;
 }
