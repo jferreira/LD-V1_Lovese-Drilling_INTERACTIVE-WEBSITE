@@ -306,6 +306,11 @@ p, span, a, input, textarea, ul, li {
     overflow: hidden;
     cursor: pointer;
     word-wrap: break-word;
+    opacity: 0.35;
+}
+
+.episode.live {
+  opacity: 1;
 }
 
 @media(min-width: 500px) {

@@ -13,7 +13,7 @@ var app = {
     app.attachObservers();
     app.attachScripts();
 
-    app.helpers.updateContent();
+    app.helpers.updateContent(0);
 
     app.showIntroScreen();
 
@@ -130,6 +130,16 @@ var app = {
     },
 
     updateContent: function(episode) {
+
+      // Quick fix to hide the play functionality.
+      if(episode > 0) {
+        $("img.video-controls").css({"width": 0, "height" : 0});
+        $("button.play").attr("disabled", true);
+      } else {
+        $("img.video-controls").css({"width": "50px", "height" : "auto"});
+        $("button.play").attr("disabled", false);
+      }
+
     	app.interactiveState = false;
       app.textPageState = false;
 

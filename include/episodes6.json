@@ -18,7 +18,7 @@ var nav = {
         "vid": "199864020",
         "mp4": "https://player.vimeo.com/external/199864020.hd.mp4?s=f3515ac9a9e6b92e57654f5dbbfda19ab4c69f38&profile_id=174"
       },
-      {"id": "3", "duration" : "3.00", "title": "Norway & Oil", "subtitle": "Episode 3:",
+      {"id": "3", "duration" : "3.00", "title": "An oily identity", "subtitle": "Episode 3:",
         "description" : "",
         "video": "resources/holding_titles/_EP3_Holding_Norway & Oil.mp4",
         "poster": "resources/_Images/E3_Masthead.jpg",
