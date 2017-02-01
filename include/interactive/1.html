@@ -4,34 +4,352 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <!-- <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script> -->
-    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script> -->
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+     <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
+     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
     <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
+        body,html { margin:0; padding:0;}
+        html {
+        }
+        #map {
+          z-index: 0;
+          position:absolute;
+          top:0;
+          bottom:0;
+          width:100%;
+          height:100%;
+        }
+
         #map > div.mapboxgl-control-container > div > div {
           font-size: 8px;
           color:#eee;
           display:none;
         }
+
+        .container-full {
+          margin: 0 auto;
+          padding:0;
+          width: 100%;
+          height: 100%;
+        }
+
+        div.overlay {
+          position:absolute;
+          z-index: 2;
+          top:0;
+          left:0;
+          width: 100%;
+          height:100%;
+          overflow:hidden;
+          color: #fff;
+        }
+
+        div.overlay-text {
+          z-index: 3;
+          position: absolute;
+          padding: 50px;
+          width: 100%;
+          text-transform: uppercase;
+          text-align: center;
+        }
+
+        a {
+          cursor: pointer;
+        }
+
+        div.mask{
+          z-index: 2;
+          position:absolute;
+          top:0;
+          left:0;
+          width: 100%;
+          height:100%;
+          overflow:hidden;
+          pointer-events: none; /* send mouse events beneath this layer */
+          padding:0;
+          margin: 0;
+        }
+
+        /* Responsive mask */
+        /*  http://codeitdown.com/css-circles/
+            http://wpandsuch.com/make-responsive-perfect-circles-with-css/
+            */
+        div.mask:after{
+          content:'';
+          display: block;
+          position:absolute;
+          -moz-border-radius: 50%;
+          -webkit-border-radius: 50%;
+          border-radius: 50%;
+
+          width: 66%;
+          height:0;
+          padding-bottom: 65%;
+          box-shadow: 0px 0px 0px 2000px #000;
+
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+
+        /*
+        div.mask:after{
+          content:'';
+          position:absolute;
+          border-radius:100%;
+          width:500px;
+          height:500px;
+          box-shadow: 0px 0px 0px 2000px #000;
+          top: 50%;
+          left: 15%;
+          transform: translateX(-15%) translateY(-50%);
+        }
+        */
+
+        .battlegrounds-list {
+          height: 100%;
+          width: 100%;
+        }
+
+
+        #features {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+
+          height: 80%;
+          width: 80%;
+          font-family: sans-serif;
+          overflow-y: scroll;
+        }
+        section {
+            padding:  25px 50px;
+            line-height: 25px;
+            opacity: 0.35;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        section.active {
+            opacity: 1;
+        }
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 200px;
+        }
+        section img {
+          width: 100%;
+          height: auto;
+        }
+
+        h1 {
+          /* Need to fix this as bootstrap? breaks the nav stiles */
+        }
     </style>
   </head>
-  
   <body>
 
-  <div id='map'></div>
+
+
+
+  <!--
+  <div class="mask">
+    <div class="overlay">
+      <div class="">Carbon Battlerounds</div>
+    </div>
+  </div>
+  -->
+
+  <div class="overlay">
+    <div class="container-full">
+      <div class="row" style="height:100vh;">
+        <div class="col-md-5">
+          <!--
+          <div class="overlay-text">
+            <h1>Carbon Battlegrounds</h1>
+          </div>
+        -->
+          <div class="mask"></div>
+          <div id='map'></div>
+        </div>
+
+        <div class="col-md-7" style="background:#000">
+          <div class="battlegrounds-list">
+
+            <div id='features'>
+              <!--
+                <section id='cb-1' class='active'>
+                    <img src="../../resources/_Images/_BG-Headers/01.png" />
+                </section>
+                <section id='cb-2'>
+                    <img src="../../resources/_Images/_BG-Headers/02.png" />
+                </section>
+                <section id='cb-3'>
+                    <img src="../../resources/_Images/_BG-Headers/03.png" />
+                </section>
+                <section id='cb-4'>
+                    <img src="../../resources/_Images/_BG-Headers/04.png" />
+                </section>
+                <section id='cb-5'>
+                    <img src="../../resources/_Images/_BG-Headers/05.png" />
+                </section>
+                <section id='cb-6'>
+                    <h3>13 Caulfield Gardens</h3>
+                    <p>Holmes deduces that the murderer placed West atop a stopped train at Caulfield Gardens. The train traveled to Aldgate Station before West's body finally toppled off. Backtracking to the criminal's apartment, Holmes finds a series of classified ads from <em>The Daily Telegraph</em> stashed away. All are under the name Pierrot: "Monday night after nine. Two taps. Only ourselves. Do not be so suspicious. Payment in hard cash when goods delivered."</p>
+
+                </section>
+                <section id='cb-7'>
+                    <h3>The Daily Telegraph</h3>
+                    <p>Holmes and Watson head to The Daily Telegraph and place an ad to draw out the criminal. It reads: "To-night. Same hour. Same place. Two taps. Most vitally important. Your own safety at stake. Pierrot." The trap works and Holmes catches the criminal: Colonel Valentine Walter, the brother of Woolwich Arsenal's chief. He confesses to working for Hugo Oberstein to obtain the submarine plans in order to pay off his debts.</p>
+
+                </section>
+                <section id='cb-8'>
+                    <h3>Charing Cross Hotel</h3>
+                    <p>Walter writes to Oberstein and convinces him to meet in the smoking room of the Charing Cross Hotel where he promises additional plans for the submarine in exchange for money. The plan works and Holmes and Watson catch both criminals.</p>
+                </section>
+
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+              -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="background"></div> -->
+
+  <script type="text/javascript" src="../cb.json"></script>
   <script>
+
+  for(var i = 0; i < 33; i++) {
+    console.log();
+      var section = $('<section></section>',{
+         id: 'cb-' + (i+1),
+         attr: {
+             "data-id" : (i+1)
+         },
+         html: "<img src='../../resources/_Images/_BG-Headers/" + (i+1) + ".png' />",
+         css: {}
+      }).appendTo("#features");
+    }
+    $("#features section:first-child").addClass("active");
+
     mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
     var map = new mapboxgl.Map({
         container: 'map', // container id
         style: 'mapbox://styles/lovese/ciy1xowr100e22rqlyky3qgcg', //hosted style id
-        center: [12.901721434467618,68.71391887946749], // starting position
-        zoom: 6.54, // starting zoom,
-        pitch: 80, // pitch in degrees
-        bearing: 15, // bearing in degrees
+        center: [90.36488217450665,42.73538828488597], // starting position
+        zoom: 2, // starting zoom,
         attributionControl: false
     });
+
+    var chapters = {
+        'cb-1': {
+            center: [-102.2756374,45.9449108],
+        },
+        'cb-2': {
+            duration: 6000,
+            center: [-0.07571203, 51.51424049],
+        },
+        'cb-3': {
+            center: [-0.08533793, 51.50438536],
+            speed: 0.6,
+        },
+        'cb-4': {
+            center: [0.05991101, 51.48752939],
+        },
+        'cb-5': {
+            center: [-0.18335806, 51.49439521],
+            speed: 0.5
+        },
+        'cb-6': {
+            center: [-0.19684993, 51.5033856],
+        },
+        'cb-7': {
+            center: [-0.10669358, 51.51433123],
+        },
+        'cb-8': {
+            center: [-0.12416858, 51.50779757],
+        }
+    };
+
+
+    $(document).ready(function () {
+        var scrollChange = true;
+
+        $("#features").scroll(function (event) {
+          var scrollPos = Math.round($(window).scrollTop());
+          //console.log(scrollPos);
+          $('section').each(function () {
+              var currLink = $(this);
+
+              var $this = $(this);
+              var offset = $this.offset();
+              var width = $this.width();
+              var height = $this.height();
+
+              var centerX = offset.left + width / 2;
+              var centerY = offset.top + height / 2;
+
+              if (currLink.position().top <= scrollPos && currLink.position().top + centerY > scrollPos) {
+                  if(scrollChange) {
+                    setActiveChapter(currLink.attr("id"));
+                    currLink.addClass("active");
+                  }
+              } else {
+                  currLink.removeClass("active");
+              }
+          });
+        });
+
+        //smoothscroll
+        $('section').on('click', function (e) {
+            e.preventDefault();
+            scrollChange = false;
+
+            $('section').each(function () {
+                $(this).removeClass('active');
+            });
+
+            $("#features").animate({scrollTop: $("#features").scrollTop() + $(this).position().top}, 500, function() {
+              // Animation complete.
+              $(this).addClass('active');
+              scrollChange = true;
+            });
+
+        });
+
+        var activeChapterName = 'cb-1';
+        function setActiveChapter(chapterName) {
+            if (chapterName === activeChapterName) return;
+            map.flyTo(chapters[chapterName]);
+            activeChapterName = chapterName;
+        }
+      });
+
+    map.on('load', function() {
+      console.log("loaded!");
+    });
+
+    //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
+
+
+  /*
+    $("body").on("mousedown", function() {
+      var center = map.getCenter().wrap();
+      var zoom = map.getZoom();
+      console.log(center, zoom);
+    });
+    */
+
   </script>
 
   </body>
