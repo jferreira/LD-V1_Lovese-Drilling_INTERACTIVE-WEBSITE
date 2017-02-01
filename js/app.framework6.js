@@ -37,7 +37,7 @@ var app = {
     //$('#seek-bar').on('mousedown', app.video.toggle);
     //$('#seek-bar').on('mouseup', app.video.toggle);
 
-    // SCRUBBER: 
+    // SCRUBBER:
     // https://html5etc.wordpress.com/2011/11/27/a-basic-html5-video-scrub-bar-using-jquery/
 
     // Layover
@@ -278,8 +278,9 @@ var app = {
   },
   showIntroScreen: function() {
     app.layover.updateContent(
-      "Hey there, welcome to our wonderful application!" +
-      "<br />" +
+      "<p>Across the world, local communities are fighting to stop new coal, oil and gas projects.</p><br />"+
+      "<p>This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil industry in 2017."+
+      "<br /><br />" +
       "<button rel=\"closelayover\">Ok let's go</button>"
     );
     app.layover.show();
