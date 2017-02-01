@@ -8,7 +8,7 @@ $('document').ready(function(){
     //grab attributes and values out of the form
     var name = $('#fullname').val();
     var firstName = name;
-    var endpoint = "frameworks/mailchimp.php";
+    var endpoint = "frameworks/MailChimp.php";
 
     // Check for white space in name for Success/Fail message
     if (firstName.indexOf(' ') >= 0) {
