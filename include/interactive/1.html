@@ -116,7 +116,6 @@
           width: 100%;
         }
 
-
         #features {
           position: absolute;
           top: 50%;
@@ -128,6 +127,7 @@
           font-family: sans-serif;
           overflow-y: scroll;
         }
+
         section {
             padding:  25px 50px;
             line-height: 25px;
@@ -180,41 +180,31 @@
 
         <div class="col-md-7" style="background:#000">
           <div class="battlegrounds-list">
-
             <div id='features'>
-              <!--
                 <section id='cb-1' class='active'>
-                    <img src="../../resources/_Images/_BG-Headers/01.png" />
+                    <img src="../../resources/_Images/_BG-Headers/1.png" />
                 </section>
                 <section id='cb-2'>
-                    <img src="../../resources/_Images/_BG-Headers/02.png" />
+                    <img src="../../resources/_Images/_BG-Headers/3.png" />
                 </section>
                 <section id='cb-3'>
-                    <img src="../../resources/_Images/_BG-Headers/03.png" />
+                    <img src="../../resources/_Images/_BG-Headers/7.png" />
                 </section>
                 <section id='cb-4'>
-                    <img src="../../resources/_Images/_BG-Headers/04.png" />
+                    <img src="../../resources/_Images/_BG-Headers/11.png" />
                 </section>
                 <section id='cb-5'>
-                    <img src="../../resources/_Images/_BG-Headers/05.png" />
+                    <img src="../../resources/_Images/_BG-Headers/15.png" />
                 </section>
                 <section id='cb-6'>
-                    <h3>13 Caulfield Gardens</h3>
-                    <p>Holmes deduces that the murderer placed West atop a stopped train at Caulfield Gardens. The train traveled to Aldgate Station before West's body finally toppled off. Backtracking to the criminal's apartment, Holmes finds a series of classified ads from <em>The Daily Telegraph</em> stashed away. All are under the name Pierrot: "Monday night after nine. Two taps. Only ourselves. Do not be so suspicious. Payment in hard cash when goods delivered."</p>
-
+                    <img src="../../resources/_Images/_BG-Headers/18.png" />
                 </section>
                 <section id='cb-7'>
-                    <h3>The Daily Telegraph</h3>
-                    <p>Holmes and Watson head to The Daily Telegraph and place an ad to draw out the criminal. It reads: "To-night. Same hour. Same place. Two taps. Most vitally important. Your own safety at stake. Pierrot." The trap works and Holmes catches the criminal: Colonel Valentine Walter, the brother of Woolwich Arsenal's chief. He confesses to working for Hugo Oberstein to obtain the submarine plans in order to pay off his debts.</p>
-
-                </section>
-                <section id='cb-8'>
-                    <h3>Charing Cross Hotel</h3>
-                    <p>Walter writes to Oberstein and convinces him to meet in the smoking room of the Charing Cross Hotel where he promises additional plans for the submarine in exchange for money. The plan works and Holmes and Watson catch both criminals.</p>
+                    <img src="../../resources/_Images/_BG-Headers/23.png" />
                 </section>
 
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-              -->
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             </div>
 
           </div>
@@ -223,12 +213,9 @@
     </div>
   </div>
 
-
-  <!-- <div class="background"></div> -->
-
-  <script type="text/javascript" src="../cb.json"></script>
+  <!-- <script type="text/javascript" src="../cb.json"></script> -->
   <script>
-
+  /*
   for(var i = 0; i < 33; i++) {
     console.log();
       var section = $('<section></section>',{
@@ -241,13 +228,14 @@
       }).appendTo("#features");
     }
     $("#features section:first-child").addClass("active");
+    */
 
     mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
     var map = new mapboxgl.Map({
         container: 'map', // container id
         style: 'mapbox://styles/lovese/ciya7qynz006v2rl940yajywr', //hosted style id
-        center: [90.36488217450665,42.73538828488597], // starting position
-        zoom: 2, // starting zoom,
+        center: [-102.2756374,45.9449108], // starting position
+        zoom: 2.1, // starting zoom,
         attributionControl: false
     });
 
@@ -256,31 +244,124 @@
             center: [-102.2756374,45.9449108],
         },
         'cb-2': {
-            duration: 6000,
-            center: [-0.07571203, 51.51424049],
+            center: [-98.25156673438437,40.75160515850669],
         },
         'cb-3': {
-            center: [-0.08533793, 51.50438536],
-            speed: 0.6,
+            center: [-165.35335965166905, 70.06500741925603],
         },
         'cb-4': {
-            center: [0.05991101, 51.48752939],
+            center: [150.47846597498315, -31.216397623097627],
         },
         'cb-5': {
-            center: [-0.18335806, 51.49439521],
-            speed: 0.5
+            center: [131.35201521118802, -36.822138393420495],
         },
         'cb-6': {
-            center: [-0.19684993, 51.5033856],
+            center: [14.032907135048276, 68.61364646452617],
         },
         'cb-7': {
-            center: [-0.10669358, 51.51433123],
+            center: [-75.8069082, -1.0019231],
         },
-        'cb-8': {
-            center: [-0.12416858, 51.50779757],
-        }
     };
 
+
+    map.on('style.load', function (e) {
+        //console.log(e.style.sprite); // Available markers
+        map.addSource('markers', {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features":
+                [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-102.2756374,45.9449108]
+                    },
+                    "properties": {
+                        "title": "North Dakota Pipeline",
+                        "icon": "star"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [-98.25156673438437,40.75160515850669]
+                    },
+                    "properties": {
+                        "title": "Keystone XL Pipeline",
+                        "icon": "star"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [-165.35335965166905, 70.06500741925603]
+                    },
+                    "properties": {
+                        "title": "Shell's Arctic Drilling",
+                        "icon": "star"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [150.47846597498315, -31.216397623097627]
+                    },
+                    "properties": {
+                        "title": "Leard Blockade",
+                        "icon": "star"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [131.35201521118802, -36.822138393420495]
+                    },
+                    "properties": {
+                        "title": "Great Australian Bight",
+                        "icon": "star"
+                    }
+                } , {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [14.032907135048276, 68.61364646452617]
+                    },
+                    "properties": {
+                        "title": "Lovese Drilling",
+                        "icon": "star"
+                    }
+                } , {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [-75.8069082, -1.0019231]
+                    },
+                    "properties": {
+                        "title": "Save Yasuní Rainforest",
+                        "icon": "star"
+                    }
+                }
+
+              ]
+            }
+        });
+
+        map.addLayer({
+            "id": "markers",
+            "source": "markers",
+            "type": "symbol",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+            },
+            "paint": {
+                "text-color": "#fff"
+            },
+        });
+    });
 
     $(document).ready(function () {
         var scrollChange = true;
@@ -341,14 +422,13 @@
 
     //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
 
-
-  /*
     $("body").on("mousedown", function() {
       var center = map.getCenter().wrap();
       var zoom = map.getZoom();
       console.log(center, zoom);
     });
-    */
+
+
 
   </script>
 
