@@ -29,7 +29,7 @@ app.navigation = {
         if (! $.inArray(eventType, app.navigation.callbacks))
             throw new Error('Unknown event type "' + eventType + '"');
 
-        app.navigation.callbacks[eventType].forEach(function(eventFunction) { 
+        app.navigation.callbacks[eventType].forEach(function(eventFunction) {
             eventFunction();
         });
     },
@@ -72,7 +72,7 @@ app.navigation = {
             episodesLength += parseFloat(nav.episodes[i].duration);
 
             var episode = $('<div></div>',{
-               id: 'episode_' + i,
+               id: 'episode_' + (i+1),
                class: 'episode',
                attr: {
                    "data-id" : nav.episodes[i].id,
@@ -83,7 +83,7 @@ app.navigation = {
             }).appendTo("#episodeSelection");
 
             var interactive = $('<div></div>',{
-               id: 'interactive_' + i,
+               id: 'interactive_' + (i+1),
                class: 'interactive',
                attr: {
                    "data-id" : nav.episodes[i].id,
@@ -95,5 +95,7 @@ app.navigation = {
         }
 
         $("#episodeSelection").css("width" , "100%");
+        $("#episodeSelection .episode:first-child").addClass("live");
+
     }
 };
