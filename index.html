@@ -83,7 +83,7 @@
         <!-- <iframe id="video2" src="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
 
         <div id="video" class="pauseTransition">
-          <video poster="">
+          <video poster="" id="v">
             <source type="video/mp4" src="">
               Video not supported on your device.
           </video>
@@ -108,6 +108,7 @@
   							<button id="navNext">Next</button>
   						-->
   							<button class="play" id="btn-play-pause"></button>
+                <input type="range" id="seek-bar" value="0">
   							<span class="timeRemaining"></span>
   						</div>
   					</div>
