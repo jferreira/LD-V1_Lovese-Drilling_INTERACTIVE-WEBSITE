@@ -13,8 +13,8 @@ var app = {
     app.attachObservers();
     app.attachScripts();
 
+    app.helpers.updateContent();
     app.showIntroScreen();
-    app.helpers.updateContent(0);
 
     app.helpers.preload();
   },
