@@ -536,7 +536,7 @@ video::-webkit-media-controls {
     color: #fff;
     padding: 15px;
     border-radius: 12px;
-    top: 20%;
+    top: 25%;
     position: relative;
     text-align: center;
 }
