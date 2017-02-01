@@ -1,18 +1,15 @@
 TODO:
 
 CB interactive map
- - JSON with all the battlegrounds
  - Fix bootstrap issue with the nav bar
-
-- Find 10 sites
-- Write 10 texts
-- Add markers for each site
+ - Write 10 texts
 
  --
 
 
 Splash screen:
 - Copy splash page styling and use that for the button + text
+- Add title screen
 
 After Episode 1:
 - See interactive map of battlegrounds
