@@ -1,25 +1,26 @@
 TODO:
 
-Skriv e-post til Folkeaksjonen:
-- Hva som skjer
-- Hva de kan skrive
-- Hva de kan dele
+CB interactive map
+ - JSON with all the battlegrounds
+ - Fix bootstrap issue with the nav bar
 
-After Episode 1:
-- Signup button newsletter
-- Share to twitter
-- Share to FB
-- See interactive map of battlegrounds
+- Find 10 sites
+- Write 10 texts
+- Add markers for each site
+
+ --
+
 
 Splash screen:
-- Legg til tekst
-- Copy splash page styling and use that
+- Copy splash page styling and use that for the button + text
+
+After Episode 1:
+- See interactive map of battlegrounds
+
+
+
+NICE TO HAVE:
+--
 
 Video:
 -scrubbing
-
-CB interactive map
- - Ajax load call
- - JSON with all the battlegrounds
- - Scroll function working with flyto
- - Fix bootstrap issue with the nav bar

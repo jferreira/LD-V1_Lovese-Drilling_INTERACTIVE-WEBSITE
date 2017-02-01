@@ -13,9 +13,8 @@ var app = {
     app.attachObservers();
     app.attachScripts();
 
-    app.helpers.updateContent(0);
-
     app.showIntroScreen();
+    app.helpers.updateContent(0);
 
     app.helpers.preload();
   },
@@ -111,6 +110,8 @@ var app = {
       $(".nav-holder *").fadeIn(1000);
       $("#titles, .video-controls").fadeIn(1000);
 
+      $(".slide-container").css({"background-image": 'none'}); // Remove the title slide when video is paused
+
       $('#btn-play-pause').removeClass('pause').addClass('play');
       $('video').css("z-index","0");
     });
@@ -146,9 +147,9 @@ var app = {
   videoEnded: function() {
     // Hide the video
     // Overlay sharing possibility
+    app.helpers.loadTextPage(4);
   },
   videoChange: function() {
-
       var time = app.video.element.duration * ($("#seek-bar").val() / 100);
       // Update the video time
       app.video.element.currentTime = time;
@@ -237,7 +238,7 @@ var app = {
     	$(".avancee").css({width:"0%"});
     	$('#btn-play-pause').removeClass('pause').addClass('play');
 
-    	$(".nav-holder *").fadeOut(1000);
+    	//$(".nav-holder *").fadeOut(1000);
     	$('#episodeProgress *').hide();
 
     	$("#content #video, #titles").hide();
@@ -260,7 +261,7 @@ var app = {
     	$(".avancee").css({width:"0%"});
     	$('#btn-play-pause').removeClass('pause').addClass('play');
 
-    	$(".nav-holder *").fadeOut(1000);
+    	//$(".nav-holder *").fadeOut(1000);
     	$('#episodeProgress *').hide();
 
     	$("#content #video, #titles").hide();
@@ -278,10 +279,12 @@ var app = {
   },
   showIntroScreen: function() {
     app.layover.updateContent(
-      "<p>Across the world, local communities are fighting to stop new coal, oil and gas projects.</p><br />"+
-      "<p>This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil industry in 2017."+
+      "<h1 class='brand-heading'>LoVeSe Drilling</h1>"+
+      "<p class='intro-text'>Across the world, local communities are fighting to stop new coal, oil and gas projects.</p><br />"+
+      "<p class='intro-text'>This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil industry in 2017."+
       "<br /><br />" +
-      "<button rel=\"closelayover\">Ok let's go</button>"
+      "<p class='intro-text'>After each episode there is an interactive element which you can use to explore the issue.</p>" +
+      "<button class='btn btn-default btn-lg' rel=\"closelayover\">Start the experience</button>"
     );
     app.layover.show();
   }
