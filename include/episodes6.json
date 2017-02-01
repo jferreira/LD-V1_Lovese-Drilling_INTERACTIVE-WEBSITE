@@ -1,55 +1,183 @@
 var nav = {
-    "episodes": [
-      {"id": "1",	"duration" : "3.27", "title": "Carbon Battlegrounds",	"subtitle": "Episode 1:",
-        "description" : "",
-        "video": "resources/_Videos/_EP1_Episode_Carbon-Batlegrounds.mp4",
-        "poster": "resources/_Images/E1_Masthead.jpg",
-        "slide": "resources/_Images/E1_Title_Carbon-Battlegrounds.png",
-        "url": "https://player.vimeo.com/video/199863373",
-        "vid": "199863373",
-        "mp4": "https://player.vimeo.com/external/199863373.hd.mp4?s=8083e556c6ea57cbfef55b02820924b10f70722b&profile_id=119"
-      },
-      {"id": "2", "duration" : "3.00", "title": "The Lovese Story", "subtitle": "Episode 2:",
-        "description" : "",
-        "video": "resources/_Videos/_EP2_A-Lovese-Story.mov",
-        "poster": "resources/_Images/E2_Masthead.jpg",
-        "slide": "resources/_Images/E2_Title_The-Lovese-Story.png",
-        "url": "https://player.vimeo.com/video/199864020",
-        "vid": "199864020",
-        "mp4": "https://player.vimeo.com/external/199864020.hd.mp4?s=f3515ac9a9e6b92e57654f5dbbfda19ab4c69f38&profile_id=174"
-      },
-      {"id": "3", "duration" : "3.00", "title": "An oily identity", "subtitle": "Episode 3:",
-        "description" : "",
-        "video": "resources/holding_titles/_EP3_Holding_Norway & Oil.mp4",
-        "poster": "resources/_Images/E3_Masthead.jpg",
-        "slide": "resources/_Images/E3_Title_An-Oily-Idenity.png",
-        "url": "https://player.vimeo.com/video/199998670",
-        "vid": "199998670",
-        "mp4": "https://player.vimeo.com/external/199998670.hd.mp4?s=18a8b7aa0f71c4e8a5a297c98c05a62d02c04984&profile_id=174"
-      },
-      {"id": "4", "duration" : "3.00", "title": "Lofoten", "subtitle": "Episode 4:", 	"description" : "", 	"video": "resources/_Videos/_EP4_Holding_Industry.mp4", "poster": "resources/_Images/E4_Masthead.jpg", "slide": "resources/_Images/E4_Title_Lofoten.png", "url": "https://player.vimeo.com/video/199999805", "vid": "199999805"},
-      {"id": "5", "duration" : "3.00", "title": "Vesterålen", "subtitle": "Episode 5:", 	"description" : "", 	"video": "resources/_Videos/_EP5_Holding_Breeding-Grounds.mp4", "poster": "resources/_Images/E5_Masthead.jpg", "slide": "resources/_Images/E5_Title_Vesteralen.png", "url": "https://player.vimeo.com/video/199999902", "vid": "199999902"},
-      {"id": "6", "duration" : "3.00", "title": "Senja", "subtitle": "Episode 6:", 	"description" : "", 	"video": "resources/_Videos/_EP6_Holding_Carbon Drug Dealing.mp4", "poster": "resources/_Images/E6_Masthead.jpg", "slide": "resources/_Images/E6_Title_Senja.png", "url": "https://player.vimeo.com/video/200000244", "vid": "200000244"},
-      {"id": "7", "duration" : "3.00", "title": "Breeding Grounds", "subtitle": "Episode 7:", 	"description" : "", 	"video": "resources/_Videos/_EP7_Holding_Two Futures.mp4", "poster": "resources/_Images/E7_Masthead.jpg", "slide": "resources/_Images/E7_Title_Breeding-Grounds.png", "url": "https://player.vimeo.com/video/200000817", "vid": "200000817"},
-      {"id": "8", "duration" : "3.00", "title": "Livelihoods", "subtitle": "Episode 8:", 	"description" : "", 	"video": "resources/_Videos/_EP8_Holding_In-Action.mp4", "poster": "resources/_Images/E8_Masthead.jpg", "slide": "resources/_Images/E8_Title_Livelihoods.png", "url": "https://player.vimeo.com/video/200001275", "vid": "200001275"},
-      {"id": "9", "duration" : "3.00", "title": "Carbon Dealing", "subtitle": "Episode 9:", 	"description" : "", 	"video": "resources/_Videos/_EP7_Holding_Two Futures.mp4", "poster": "resources/_Images/E9_Masthead.jpg", "slide": "resources/_Images/E9_Title_Carbon-Dealing.png", "url": "https://player.vimeo.com/video/200001526", "vid": "200001526"},
-      {"id": "10", "duration" : "3.00", "title": "An Election", "subtitle": "Episode 10:", 	"description" : "", 	"video": "resources/_Videos/_EP8_Holding_In-Action.mp4", "poster": "resources/_Images/E10_Masthead.jpg", "slide": "resources/_Images/E10_Title_An-Election.png", "url": "https://player.vimeo.com/video/200001692", "vid": "200001692"}
+    "episodes": [{
+            "id": "1",
+            "duration": "3.27",
+            "title": "Carbon Battlegrounds",
+            "subtitle": "Episode 1:",
+            "description": "",
+            "video": "resources/_Videos/_EP1_Episode_Carbon-Batlegrounds.mp4",
+            "poster": "resources/_Images/E1_Masthead.jpg",
+            "slide": "resources/_Images/E1_Title_Carbon-Battlegrounds.png",
+            "url": "https://player.vimeo.com/video/199863373",
+            "vid": "199863373",
+            "mp4": "https://player.vimeo.com/external/199863373.hd.mp4?s=8083e556c6ea57cbfef55b02820924b10f70722b&profile_id=119"
+        },
+        {
+            "id": "2",
+            "duration": "3.00",
+            "title": "The Lovese Story",
+            "subtitle": "Episode 2:",
+            "description": "",
+            "video": "resources/_Videos/_EP2_A-Lovese-Story.mov",
+            "poster": "resources/_Images/E2_Masthead.jpg",
+            "slide": "resources/_Images/E2_Title_The-Lovese-Story_CS.png",
+            "url": "https://player.vimeo.com/video/199864020",
+            "vid": "199864020",
+            "mp4": "https://player.vimeo.com/external/199864020.hd.mp4?s=f3515ac9a9e6b92e57654f5dbbfda19ab4c69f38&profile_id=174"
+        },
+        {
+            "id": "3",
+            "duration": "3.00",
+            "title": "An oily identity",
+            "subtitle": "Episode 3:",
+            "description": "",
+            "video": "resources/holding_titles/_EP3_Holding_Norway & Oil.mp4",
+            "poster": "resources/_Images/E3_Masthead.jpg",
+            "slide": "resources/_Images/E3_Title_An-Oily-Idenity_CS.png",
+            "url": "https://player.vimeo.com/video/199998670",
+            "vid": "199998670",
+            "mp4": "https://player.vimeo.com/external/199998670.hd.mp4?s=18a8b7aa0f71c4e8a5a297c98c05a62d02c04984&profile_id=174"
+        },
+        {
+            "id": "4",
+            "duration": "3.00",
+            "title": "Lofoten",
+            "subtitle": "Episode 4:",
+            "description": "",
+            "poster": "resources/_Images/E4_Masthead.jpg",
+            "slide": "resources/_Images/E4_Title_Lofoten_CS.png",
+            "url": "https://player.vimeo.com/video/199999805",
+            "vid": "199999805"
+        },
+        {
+            "id": "5",
+            "duration": "3.00",
+            "title": "Vesterålen",
+            "subtitle": "Episode 5:",
+            "description": "",
+            "poster": "resources/_Images/E5_Masthead.jpg",
+            "slide": "resources/_Images/E5_Title_Vesteralen_CS.png",
+            "url": "https://player.vimeo.com/video/199999902",
+            "vid": "199999902"
+        },
+        {
+            "id": "6",
+            "duration": "3.00",
+            "title": "Senja",
+            "subtitle": "Episode 6:",
+            "description": "",
+            "poster": "resources/_Images/E6_Masthead.jpg",
+            "slide": "resources/_Images/E6_Title_Senja_CS.png",
+            "url": "https://player.vimeo.com/video/200000244",
+            "vid": "200000244"
+        },
+        {
+            "id": "7",
+            "duration": "3.00",
+            "title": "Breeding Grounds",
+            "subtitle": "Episode 7:",
+            "description": "",
+            "poster": "resources/_Images/E7_Masthead.jpg",
+            "slide": "resources/_Images/E7_Title_Breeding-Grounds_CS.png",
+            "url": "https://player.vimeo.com/video/200000817",
+            "vid": "200000817"
+        },
+        {
+            "id": "8",
+            "duration": "3.00",
+            "title": "Livelihoods",
+            "subtitle": "Episode 8:",
+            "description": "",
+            "poster": "resources/_Images/E8_Masthead.jpg",
+            "slide": "resources/_Images/E8_Title_Livelihoods_CS.png",
+            "url": "https://player.vimeo.com/video/200001275",
+            "vid": "200001275"
+        },
+        {
+            "id": "9",
+            "duration": "3.00",
+            "title": "Carbon Dealing",
+            "subtitle": "Episode 9:",
+            "description": "",
+            "poster": "resources/_Images/E9_Masthead.jpg",
+            "slide": "resources/_Images/E9_Title_Carbon-Dealing_CS.png",
+            "url": "https://player.vimeo.com/video/200001526",
+            "vid": "200001526"
+        },
+        {
+            "id": "10",
+            "duration": "3.00",
+            "title": "An Election",
+            "subtitle": "Episode 10:",
+            "description": "",
+            "poster": "resources/_Images/E10_Masthead.jpg",
+            "slide": "resources/_Images/E10_Title_An-Election_CS.png",
+            "url": "https://player.vimeo.com/video/200001692",
+            "vid": "200001692"
+        }
     ],
-    "interactive": [
-  		{"id": "1", "title": "Carbon Battlegrounds", "html": "include/interactive/1.html"},
-  		{"id": "2", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/2.html"},
-  		{"id": "3", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/3.html"},
-  		{"id": "4", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/4.html"},
-  		{"id": "5", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/5.html"},
-  		{"id": "6", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/6.html"},
-  		{"id": "7", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/7.html"},
-  		{"id": "8", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/8.html"},
-      {"id": "9", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/9.html"},
-      {"id": "10", "title": "Lofoten, Vesterålen and Senja", "html": "include/interactive/10.html"}
-  	],
-    "textPages": [
-      {"id":"1", "html": "include/text/1.html"},
-      {"id":"2", "html": "include/text/2.html"},
-      {"id":"3", "html": "include/text/3.html"},
+    "interactive": [{
+            "id": "1",
+            "title": "Carbon Battlegrounds",
+            "html": "include/interactive/1.html"
+        },
+        {
+            "id": "2",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/2.html"
+        },
+        {
+            "id": "3",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/3.html"
+        },
+        {
+            "id": "4",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/4.html"
+        },
+        {
+            "id": "5",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/5.html"
+        },
+        {
+            "id": "6",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/6.html"
+        },
+        {
+            "id": "7",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/7.html"
+        },
+        {
+            "id": "8",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/8.html"
+        },
+        {
+            "id": "9",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/9.html"
+        },
+        {
+            "id": "10",
+            "title": "Lofoten, Vesterålen and Senja",
+            "html": "include/interactive/10.html"
+        }
+    ],
+    "textPages": [{
+            "id": "1",
+            "html": "include/text/1.html"
+        },
+        {
+            "id": "2",
+            "html": "include/text/2.html"
+        },
+        {
+            "id": "3",
+            "html": "include/text/3.html"
+        },
     ]
 };

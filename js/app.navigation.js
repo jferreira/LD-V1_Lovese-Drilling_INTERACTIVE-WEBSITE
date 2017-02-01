@@ -92,6 +92,11 @@ app.navigation = {
                html: "",
                css: {'width': interactiveWidth + "%"}
             }).appendTo("#episodeSelection");
+
+            // Disable all interactive parts except the first one
+            if(i > 0) {
+                interactive.attr("onClick",false);
+            }
         }
 
         $("#episodeSelection").css("width" , "100%");
