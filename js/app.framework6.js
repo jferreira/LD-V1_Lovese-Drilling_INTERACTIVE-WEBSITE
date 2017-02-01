@@ -31,6 +31,15 @@ var app = {
     // Internal video events
     $("video").on("timeupdate", app.updateTime);
 
+    $('video').on('ended', app.videoEnded);
+    $('#seek-bar').on('change', app.videoChange);
+
+    //$('#seek-bar').on('mousedown', app.video.toggle);
+    //$('#seek-bar').on('mouseup', app.video.toggle);
+
+    // SCRUBBER: 
+    // https://html5etc.wordpress.com/2011/11/27/a-basic-html5-video-scrub-bar-using-jquery/
+
     // Layover
     $("body").on("click", "[rel=closelayover]", app.layover.hide);
 
@@ -56,6 +65,19 @@ var app = {
         $("video").prop('muted', true);
       }
     });
+
+    /*
+    document.getElementById('v').addEventListener('ended',myHandler,false);
+    function myHandler(e) {
+        // What you want to do after the event
+        console.log("video ended", e);
+    }
+
+      $('video').on('ended',function(){
+        console.log('Video has ended!');
+      });
+    */
+
   },
 
   attachScripts: function() {
@@ -117,7 +139,20 @@ var app = {
 
       var d = 100 * this.currentTime / this.duration;
       $(".avancee").css({width:d+"%"});
+
+      $("#seek-bar").val(value);
     }
+  },
+  videoEnded: function() {
+    // Hide the video
+    // Overlay sharing possibility
+  },
+  videoChange: function() {
+
+      var time = app.video.element.duration * ($("#seek-bar").val() / 100);
+      // Update the video time
+      app.video.element.currentTime = time;
+      console.log("scrub", time);
   },
   helpers: {
     preload: function() {
@@ -130,7 +165,6 @@ var app = {
     },
 
     updateContent: function(episode) {
-
       // Quick fix to hide the play functionality.
       if(episode > 0) {
         $("img.video-controls").css({"width": 0, "height" : 0});

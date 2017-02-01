@@ -504,6 +504,10 @@ video::-webkit-media-controls {
     outline: 0;
 }
 
+#seek-bar {
+  width: 100%;
+}
+
 #preload {
     display: none;
 }
@@ -514,9 +518,10 @@ video::-webkit-media-controls {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,1);
     z-index: 12;
     display: none;
+    background: 
 }
 #layover.visible {
     display: block;
