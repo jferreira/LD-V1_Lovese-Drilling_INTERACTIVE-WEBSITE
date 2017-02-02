@@ -248,6 +248,7 @@ p, span, a, input, textarea, ul, li {
     height: 30px;
     background: rgba(0, 0, 0, 0.2);
     width: 100%;
+    cursor: pointer;
 }
 
 #episodeScroll {
@@ -360,13 +361,25 @@ p, span, a, input, textarea, ul, li {
     text-align: left;
     color: #fff;
     display:inline-block;
-    padding: 10px;
     overflow: hidden;
     color: #fff;
     cursor: pointer;
 
     background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
-     background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+    background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+}
+
+.interactive span {
+    background: url(/resources/_Images/_Icons/_Plus-Circle@3x.png) no-repeat 0 0;
+    display: block;
+    background-size: 20px;
+    height: 20px;
+    width: 20px;
+    margin: 40px auto 0;
+    opacity: 0.35;
+}
+.interactive.live span {
+    opacity: 1;
 }
 
 #titles {

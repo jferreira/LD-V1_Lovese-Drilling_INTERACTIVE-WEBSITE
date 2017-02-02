@@ -63,5 +63,9 @@ app.video = {
         } else {
           app.video.start();
         }
+    },
+
+    setTo: function(percentage) {
+        app.video.element.currentTime = percentage * app.video.element.duration;
     }
 };

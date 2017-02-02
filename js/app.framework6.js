@@ -13,7 +13,6 @@ var app = {
     app.attachObservers();
     app.attachScripts();
 
-    app.helpers.updateContent();
     app.showIntroScreen();
     app.helpers.updateContent(0);
 
@@ -37,8 +36,7 @@ var app = {
     //$('#seek-bar').on('mousedown', app.video.toggle);
     //$('#seek-bar').on('mouseup', app.video.toggle);
 
-    // SCRUBBER:
-    // https://html5etc.wordpress.com/2011/11/27/a-basic-html5-video-scrub-bar-using-jquery/
+    $('#episodeProgress').on("click", app.handleProgressClick);
 
     // Layover
     $("body").on("click", "[rel=closelayover]", app.layover.hide);
@@ -118,8 +116,8 @@ var app = {
     });
   },
   toPrevious: function() {
-    if (currNav > 0) {
-      currNav--;
+    if (app.currNav > 0) {
+      app.currNav--;
       app.helpers.updateContent();
     }
   },
@@ -144,6 +142,16 @@ var app = {
 
       $("#seek-bar").val(value);
     }
+  },
+  handleProgressClick: function(event) {
+    // Ignore clicks on other elements in the progress bar
+    if ($(event.target).is('button'))
+      return;
+
+    var x       = event.pageX - $(this).offset().left;
+    var percent = x / $(this).width();
+
+    app.video.setTo(percent);
   },
   videoEnded: function() {
     // Hide the video
