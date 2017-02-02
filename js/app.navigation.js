@@ -89,7 +89,7 @@ app.navigation = {
                    "data-id" : nav.episodes[i].id,
                    "onClick" : "app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")"
                },
-               html: "",
+               html: "<span></span>",
                css: {'width': interactiveWidth + "%"}
             }).appendTo("#episodeSelection");
 
@@ -101,6 +101,7 @@ app.navigation = {
 
         $("#episodeSelection").css("width" , "100%");
         $("#episodeSelection .episode:first-child").addClass("live");
+        $("#episodeSelection .interactive").first().addClass("live");
 
     }
 };
