@@ -116,8 +116,8 @@ var app = {
     });
   },
   toPrevious: function() {
-    if (currNav > 0) {
-      currNav--;
+    if (app.currNav > 0) {
+      app.currNav--;
       app.helpers.updateContent();
     }
   },
