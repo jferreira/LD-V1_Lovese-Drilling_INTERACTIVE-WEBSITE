@@ -19,8 +19,11 @@ function setSizes() {
 map.on('load', function() {
   console.log("loaded everything");
   map.resize();
-  $(".loading").fadeOut(1500);
   $(".container-full").show();
+  $(".loading").fadeOut(1500).promise().done(function() {
+    // Fadeout done, start the timer for going through the map (2 minutes)
+    startMapFeautures();
+  });
 });
 
 map.on('style.load', function (e) {
@@ -31,6 +34,11 @@ $(window).resize(function() {
   //setSizes();
 });
 
+$("body").on("mousedown", function() {
+  var center = map.getCenter().wrap();
+  var zoom = map.getZoom();
+  console.log(center, zoom);
+});
 
 $("#hover-navigation .arrow").on("click", function() {
   if (app.navigation.state == app.navigation.visible) {
@@ -39,3 +47,28 @@ $("#hover-navigation .arrow").on("click", function() {
     $(".interactive-pane").css({"bottom":"30px"});
   }
 });
+
+function startMapFeautures() {
+  var totalTime = (60 * 2) * 1000
+  var sectionTime = totalTime / $('.map-details').length;
+  sectionTime = 1000;
+
+  var mapF = $('.map-features .map-details');
+  var $active = mapF.eq(0);
+
+  var $next = $active.next();
+  var timer = setInterval(function() {
+    $next.addClass("active");
+    $active.removeClass("active");
+    $active = $next;
+
+    // Do map operations
+
+    $next = (mapF.last().index() == mapF.index($active)) ?
+    $next = mapF.eq(0): $active.next();
+    if(mapF.last().index() == mapF.index($active)) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }, sectionTime);
+}
