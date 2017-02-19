@@ -249,7 +249,7 @@ helpers: {
     $('#btn-play-pause').removeClass('pause').addClass('play');
 
     //$(".nav-holder *").fadeOut(1000);
-    $('#episodeProgress *').hide();
+    //$('#episodeProgress *').hide();
 
     $("#content #video, #titles").hide();
     $("#content #interactive").empty();

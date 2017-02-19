@@ -60,19 +60,24 @@
 }
 
 .map-features {
-  min-height: 400px;
-  overflow-y: scroll;
+  min-height: 300px;
+  pointer-events:auto;
 }
 
 section {
     line-height: 25px;
-    opacity: 0.35;
+    display: none;
     font-size: 13px;
     cursor: pointer;
+    font-family: 'DINPro-Light', sans-serif;
 }
 
 section.active {
-    opacity: 1;
+    display:block;
+}
+
+section.hide {
+    display:none;
 }
 
 #map { position:absolute; top:0; left:0; width:100%; height:100%; }
