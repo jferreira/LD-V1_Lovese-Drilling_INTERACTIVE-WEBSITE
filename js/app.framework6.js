@@ -250,6 +250,8 @@ helpers: {
 
     //$(".nav-holder *").fadeOut(1000);
     //$('#episodeProgress *').hide();
+    $('#btn-play-pause').hide();
+
 
     $("#content #video, #titles").hide();
     $("#content #interactive").empty();

@@ -126,13 +126,14 @@ if(this.readyState > 0) {
 }
 */
 
+// TODO: Need to incorporate this into the overall framework.
+// E.g: Interactive parts need to have their JS in the overall JS framework
 function startTimer(duration) {
   var timer = duration;
   var minutes;
   var seconds;
 
   countdown = setInterval(function() {
-
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
 
@@ -158,29 +159,19 @@ function startTimer(duration) {
     }
   }, 1000);
 }
-/*
-$('.start-timer').on('click', function() {
-  if (countdown) {
-    clearInterval(countdown);
-  }
-  paused = false;
-  var fiveMinutes = 60 * 2;
-  startTimer(fiveMinutes);
-});
 
 // Pause/Unpause timer
-
-$('body').on('click', '#countdown-timer', function() {
+$('#btn-play-pause').on('click', '#countdown-timer', function() {
+  console.log("clicked");
   if (paused) {
-    var timer = $(this).text().split(':');
-    startTimer(Number(timer[0] * 60) + Number(timer[1]), $('#countdown-timer'));
+    var timer = $(".timeRemaining").text().split(':');
+    startTimer(Number(timer[0] * 60) + Number(timer[1]));
     paused = false;
   } else {
     clearInterval(countdown);
     paused = true;
   }
 });
-*/
 
 function startMapFeautures() {
   var sectionTime = (totalTime * 1000) / $('.map-details').length;
