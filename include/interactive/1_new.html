@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!-- <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script> -->
+    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script> -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        #map > div.mapboxgl-control-container > div > div {
+          font-size: 8px;
+          color:#eee;
+          display:none;
+        }
+    </style>
+  </head>
+
+  <body>
+
+  <div id='map'></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/lovese/ciy1xowr100e22rqlyky3qgcg', //hosted style id
+        center: [12.901721434467618,68.71391887946749], // starting position
+        zoom: 6.54, // starting zoom,
+        pitch: 80, // pitch in degrees
+        bearing: 15, // bearing in degrees
+        attributionControl: false
+    });
+  </script>
+
+  </body>
+</html>
