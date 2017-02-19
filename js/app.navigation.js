@@ -27,7 +27,7 @@ app.navigation = {
     },
     call: function(eventType) {
         if (! $.inArray(eventType, app.navigation.callbacks))
-            throw new Error('Unknown event type "' + eventType + '"');
+        throw new Error('Unknown event type "' + eventType + '"');
 
         app.navigation.callbacks[eventType].forEach(function(eventFunction) {
             eventFunction();
@@ -56,9 +56,9 @@ app.navigation = {
     },
     toggle: function() {
         if (app.navigation.state == app.navigation.visible) {
-          app.navigation.hide();
+            app.navigation.hide();
         } else {
-          app.navigation.show();
+            app.navigation.show();
         }
     },
 
@@ -72,36 +72,35 @@ app.navigation = {
             episodesLength += parseFloat(nav.episodes[i].duration);
 
             var episode = $('<div></div>',{
-               id: 'episode_' + (i+1),
-               class: 'episode',
-               attr: {
-                   "data-id" : nav.episodes[i].id,
-                   "onClick" : "app.helpers.updateContent(" + i + ")"
-               },
-               html: "<h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1>",
-               css: {'width': episodeWidth + "%"}
+                id: 'episode_' + (i+1),
+                class: 'episode',
+                attr: {
+                    "data-id" : nav.episodes[i].id,
+                    "onClick" : "app.helpers.updateContent(" + i + ")"
+                },
+                html: "<h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1>",
+                css: {'width': episodeWidth + "%"}
             }).appendTo("#episodeSelection");
 
             var interactive = $('<div></div>',{
-               id: 'interactive_' + (i+1),
-               class: 'interactive',
-               attr: {
-                   "data-id" : nav.episodes[i].id,
-                   "onClick" : "app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")"
-               },
-               html: "<span></span>",
-               css: {'width': interactiveWidth + "%"}
+                id: 'interactive_' + (i+1),
+                class: 'interactive',
+                attr: {
+                    "data-id" : nav.episodes[i].id,
+                    "onClick" : "app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")"
+                },
+                html: "<span></span>",
+                css: {'width': interactiveWidth + "%"}
             }).appendTo("#episodeSelection");
 
-            // Disable all interactive parts except the first one
-            if(i > 0) {
+            // If the episode is marked as being live, add live classes. Otherwise, disable interactive part.
+            if(i <= app.liveEpisodes) {
+                $(episode).addClass("live");
+                $(interactive).addClass("live");
+            } else {
                 interactive.attr("onClick",false);
             }
         }
-
         $("#episodeSelection").css("width" , "100%");
-        $("#episodeSelection .episode:first-child").addClass("live");
-        $("#episodeSelection .interactive").first().addClass("live");
-
     }
 };

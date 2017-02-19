@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -16,35 +16,35 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-    display: block;
+  display: block;
 }
 body {
-    line-height: 1;
+  line-height: 1;
 }
 ol, ul {
-    list-style: none;
+  list-style: none;
 }
 blockquote, q {
-    quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
-    content: none;
+  content: '';
+  content: none;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /*
@@ -76,45 +76,45 @@ body {
 */
 
 @font-face {
-    font-family: 'oswaldbold';
-    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
-         url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswaldbold';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
 @font-face {
-    font-family: 'oswaldlight';
-    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
-         url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswaldlight';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
 @font-face {
-    font-family: 'oswaldregular';
-    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
-         url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswaldregular';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
 @font-face {
- font-family: 'DINPro-Light';
- src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
- src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-      url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
-      url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+  font-family: 'DINPro-Light';
+  src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
+  src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+  url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 35px;
-    text-transform: uppercase;
-    font-family: 'oswaldregular';
-    letter-spacing: 1px;
+  margin: 0 0 35px;
+  text-transform: uppercase;
+  font-family: 'oswaldregular';
+  letter-spacing: 1px;
 }
 
 p, span, a, input, textarea, ul, li {
@@ -123,66 +123,65 @@ p, span, a, input, textarea, ul, li {
 
 
 a {
-    color: #42dca3;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+  color: #42dca3;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 a:hover, a:focus {
-    text-decoration: none;
-    color: #1d9b6c;
+  text-decoration: none;
+  color: #1d9b6c;
 }
-
 
 /*
 **    MENU
 */
 
 .nav-holder {
-    position:fixed;
-    top: 30px;
-    left: 50%;
-    z-index:11;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+  position:fixed;
+  top: 30px;
+  left: 50%;
+  z-index:11;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .nav {
-    display:inline-block;
-    font-family: 'DINPro-Light', sans-serif;
+  display:inline-block;
+  font-family: 'DINPro-Light', sans-serif;
 }
 
 .nav-list {
-    list-style:none;
+  list-style:none;
 }
 
 .nav-item {
-    float:left;
-    display:inline;
-    text-transform: uppercase;
-    margin-right: 20px;
+  float:left;
+  display:inline;
+  text-transform: uppercase;
+  margin-right: 20px;
 }
 
 .nav-item a {
-    display:block;
-    padding:5px 10px;
-    color:#fff;
-    text-decoration: none;
+  display:block;
+  padding:5px 10px;
+  color:#fff;
+  text-decoration: none;
 }
 
 .modal-nav-item a {
-    color:#000;
+  color:#000;
 }
 
 .nav-item a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .nav-item a.nav-item-highlight {
-    background-color: #fff;
-    color: #000;
+  background-color: #fff;
+  color: #000;
 }
 
 /* Content */
@@ -201,12 +200,12 @@ a:hover, a:focus {
 }
 
 .textwrapper .container {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 
-    width: 50%;
-    height: 80%;
+  width: 50%;
+  height: 80%;
 }
 
 .textwrapper .container .brand-heading {
@@ -216,9 +215,9 @@ a:hover, a:focus {
 }
 
 .textwrapper .container .intro-text {
-    color: #fff;
-    font-size: 18px;
-    margin-bottom: 20px;
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .textwrapper .container p {
@@ -229,18 +228,18 @@ a:hover, a:focus {
 }
 
 @media(min-width:768px) {
-    .textwrapper .container .brand-heading {
-      text-align: center;
-      font-size: 30px;
-    }
+  .textwrapper .container .brand-heading {
+    text-align: center;
+    font-size: 30px;
+  }
 
-    .textwrapper .container .intro-text {
-      text-align: center;
-      font-size: 18px;
-    }
-    .textwrapper .container p {
-      font-size: 18px;
-    }
+  .textwrapper .container .intro-text {
+    text-align: center;
+    font-size: 18px;
+  }
+  .textwrapper .container p {
+    font-size: 18px;
+  }
 }
 
 @media(min-width:1170px) {
@@ -250,7 +249,7 @@ a:hover, a:focus {
   }
   .textwrapper .container .intro-text {
     text-align: center;
-      font-size: 20px;
+    font-size: 20px;
   }
   .textwrapper .container p {
     font-size: 20px;
@@ -258,49 +257,49 @@ a:hover, a:focus {
 }
 
 .btn {
-    border-radius: 0;
-    text-transform: uppercase;
-    /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
-    font-weight: 400;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+  border-radius: 0;
+  text-transform: uppercase;
+  /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
+  font-weight: 400;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .btn-default {
-    border: 1px solid #42dca3;
-    color: white;
-    background-color: transparent;
+  border: 1px solid #42dca3;
+  color: white;
+  background-color: transparent;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #42dca3;
-    outline: 0;
-    color: #fff;
-    background-color: #42dca3;
+  border: 1px solid #42dca3;
+  outline: 0;
+  color: #fff;
+  background-color: #42dca3;
 }
 
 ul.banner-social-buttons {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 @media(max-width:1199px) {
-    ul.banner-social-buttons {
-        margin-top: 15px;
-    }
+  ul.banner-social-buttons {
+    margin-top: 15px;
+  }
 }
 
 @media(max-width:767px) {
-    ul.banner-social-buttons li {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
+  ul.banner-social-buttons li {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0;
+  }
 
-    ul.banner-social-buttons li:last-child {
-        margin-bottom: 0;
-    }
+  ul.banner-social-buttons li:last-child {
+    margin-bottom: 0;
+  }
 }
 
 
@@ -317,23 +316,23 @@ ul.banner-social-buttons {
 }
 
 img::selection {
-    background: 0 0;
+  background: 0 0;
 }
 
 img::-moz-selection {
-    background: 0 0;
+  background: 0 0;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /*
 body {
-    webkit-tap-highlight-color: rgba(255,255,255,.2);
+webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
 */
 
