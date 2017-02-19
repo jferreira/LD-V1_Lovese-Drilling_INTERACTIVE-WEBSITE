@@ -20,6 +20,7 @@ map.on('load', function() {
   console.log("loaded everything");
   map.resize();
   $(".loading").fadeOut(1500);
+  $(".container-full").show();
 });
 
 map.on('style.load', function (e) {

@@ -286,7 +286,7 @@ opacity: 0.9;
 #navigation .info{margin-top:52px;height:28px;background:#000}
 
 /* Play Bar */
-#navigation .avancee{display:inline-block;background: rgba(255, 255, 255, 0.2);width:0;height:30px}
+#navigation .avancee{display:inline-block;background: rgba(0, 240, 198, 1); width:0;height:30px}
 
 /* Play Bar Background */
 #navigation .txt{color:#fff;position:relative;height:20px;margin-top:-23px;padding:0 20px}
@@ -312,6 +312,10 @@ opacity: 0.9;
 
 .episode.live {
   opacity: 1;
+}
+
+.color-player-timeline {
+  background-color: #00F0C6;
 }
 
 @media(min-width: 500px) {
