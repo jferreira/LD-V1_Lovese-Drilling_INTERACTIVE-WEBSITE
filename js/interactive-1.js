@@ -231,7 +231,6 @@ $(document).ready(function () {
     });
   });
 
-  //smoothscroll
   $('section.battleground').on('click', function (e) {
     e.preventDefault();
     scrollChange = false;
@@ -250,7 +249,7 @@ $(document).ready(function () {
 
   });
 
-  var activeChapterName = 'cb-1';
+  var activeChapterName = 'cb-6';
   function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
     map.flyTo(chapters[chapterName]);
