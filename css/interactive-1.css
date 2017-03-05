@@ -116,7 +116,7 @@ div.mask:after{
   transform: translateX(-50%) translateY(-50%);
 
   height: 80%;
-  width: 80%;
+  width: 90%;
   font-family: sans-serif;
   overflow-y: scroll;
 }
@@ -143,8 +143,8 @@ section img {
 }
 
 section p {
-  padding-left: 120px;
-  padding-right: 120px;
+  padding-left: 130px;
+  padding-right: 130px;
 }
 section.other {
   opacity: 1;
