@@ -62,6 +62,7 @@ map.on('load', function() {
 map.on('style.load', function (e) {
   map.resize();
   //console.log(e.style.sprite); // Available markers
+
   map.addSource('markers', {
     "type": "geojson",
     "data": {
@@ -170,6 +171,7 @@ map.on('style.load', function (e) {
       }
     ]
   }
+
 });
 
 
@@ -187,6 +189,7 @@ map.on('style.load', function (e) {
 }
 */
 
+
 map.addLayer({
   "id": "markers",
   "source": "markers",
@@ -195,13 +198,177 @@ map.addLayer({
     "icon-image": "{icon}-15",
     "text-field": "{title}",
     "text-offset": [0, 0.6],
-    "text-anchor": "top"
+    "text-anchor": "top",
   },
   "paint": {
     "text-color": "#fff"
   },
 });
 });
+
+/*
+var geojson = {
+  "type": "FeatureCollection",
+  "features":
+  [{
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [14.032907135048276, 68.61364646452617]
+    },
+    "properties": {
+      "title": "Lovese Drilling",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-102.2756374,45.9449108]
+    },
+    "properties": {
+      "title": "North Dakota Pipeline",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-98.25156673438437,40.75160515850669]
+    },
+    "properties": {
+      "title": "Keystone XL Pipeline",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-165.35335965166905, 70.06500741925603]
+    },
+    "properties": {
+      "title": "Shell's Arctic Drilling",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [150.47846597498315, -31.216397623097627]
+    },
+    "properties": {
+      "title": "Leard Blockade",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [131.35201521118802, -36.822138393420495]
+    },
+    "properties": {
+      "title": "Great Australian Bight",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.401834935632564, 55.630479754891866]
+    },
+    "properties": {
+      "title": "Baltic Pipeline",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [6.575265599982572, 53.259401645954114]
+    },
+    "properties": {
+      "title": "Groningen Gas Fields",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-4.6440335746212895, 56.18290330382942]
+    },
+    "properties": {
+      "title": "Scotland Fracking",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [14.166268, 45.1336358]
+    },
+    "properties": {
+      "title": "Plomin C",
+      "icon": "circle",
+      "iconUrl" : "resources/_Images/_Icons/_Plus-Circle.png",
+      "iconSize": [20, 20]
+    }
+  }
+  ]
+};
+
+geojson.features.forEach(function(marker) {
+  // Create a div element for the marker
+  var el = document.createElement('div');
+  // Add a class called 'marker' to each div
+  el.className = 'marker';
+  // By default the image for your custom marker will be anchored
+  // by its top left corner. Adjust the position accordingly
+  el.style.left = '-20px';
+  el.style.top = '-20px';
+  // Create the custom markers, set their position, and add to map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .addTo(map);
+});
+
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+    // create a DOM element for the marker
+    var el = document.createElement('div');
+    el.className = 'marker';
+    el.style.backgroundImage = 'url('+ marker.properties.iconUrl + ')';
+    el.style.width = marker.properties.iconSize[0] + 'px';
+    el.style.height = marker.properties.iconSize[1] + 'px';
+
+    el.addEventListener('click', function() {
+        window.alert(marker.properties.title);
+    });
+
+    // add marker to map
+    new mapboxgl.Marker(el, {offset: [-marker.properties.iconSize[0] / 2, -marker.properties.iconSize[1] / 2]})
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+});
+*/
 
 $(document).ready(function () {
   var scrollChange = true;
