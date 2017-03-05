@@ -29,21 +29,21 @@ app.layover = {
         if (! $.inArray(eventType, app.layover.callbacks))
             throw new Error('Unknown event type "' + eventType + '"');
 
-        app.layover.callbacks[eventType].forEach(function(eventFunction) { 
+        app.layover.callbacks[eventType].forEach(function(eventFunction) {
             eventFunction();
         });
     },
 
     updateContent: function(content) {
         app.layover.call('preContent');
-        
+
         app.layover.element.find('.content').html(content);
 
         app.layover.call('postContent');
     },
     setClass: function(className) {
         app.layover.element.attr('class', className);
-    },  
+    },
     show: function() {
         app.layover.call('preShow');
 

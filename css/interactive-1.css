@@ -93,6 +93,17 @@ div.mask:after{
 }
 */
 
+.marker {
+    display: block;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: 20px;
+    width: 20px;
+    background-image: url("../resources/_Images/_Icons/_Plus-Circle.png");
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .battlegrounds-list {
   height: 100%;
   width: 100%;
