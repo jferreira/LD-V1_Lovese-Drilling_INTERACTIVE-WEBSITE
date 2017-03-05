@@ -52,6 +52,9 @@ var app = {
 
       if (event.keyCode == 39) // Right
       app.toNext();
+
+      if(event.keyCode == 38 || event.keyCode == 40) // up / down
+      app.navigation.toggle();
     });
 
     $("#navPrev").on("click", app.toPrevious);
