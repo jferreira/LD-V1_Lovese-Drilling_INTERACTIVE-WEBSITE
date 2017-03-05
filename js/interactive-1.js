@@ -76,7 +76,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Lovese Drilling",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-6"
         }
       }, {
         "type": "Feature",
@@ -86,7 +87,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "North Dakota Pipeline",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-1"
         }
       }, {
         "type": "Feature",
@@ -96,7 +98,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Keystone XL Pipeline",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-2"
         }
       }, {
         "type": "Feature",
@@ -106,7 +109,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Shell's Arctic Drilling",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-3"
         }
       }, {
         "type": "Feature",
@@ -116,7 +120,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Leard Blockade",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-4"
         }
       }, {
         "type": "Feature",
@@ -126,7 +131,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Great Australian Bight",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-5"
         }
       }, {
         "type": "Feature",
@@ -136,7 +142,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Baltic Pipeline",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-7"
         }
       }, {
         "type": "Feature",
@@ -146,7 +153,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Groningen Gas Fields",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-8"
         }
       }, {
         "type": "Feature",
@@ -156,7 +164,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Scotland Fracking",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-9"
         }
       }, {
         "type": "Feature",
@@ -166,7 +175,8 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Plomin C",
-          "icon": "circle"
+          "icon": "circle",
+          "id": "cb-10"
         }
       }
     ]
@@ -189,6 +199,7 @@ map.on('style.load', function (e) {
 }
 */
 
+// Reference: https://www.mapbox.com/mapbox-gl-js/style-spec/#layout_symbol
 
 map.addLayer({
   "id": "markers",
@@ -197,8 +208,10 @@ map.addLayer({
   "layout": {
     "icon-image": "{icon}-15",
     "text-field": "{title}",
+    "icon-size" : 1,
     "text-offset": [0, 0.6],
     "text-anchor": "top",
+    "icon-allow-overlap": true
   },
   "paint": {
     "text-color": "#fff"
@@ -370,9 +383,44 @@ geojson.features.forEach(function(marker) {
 });
 */
 
-$(document).ready(function () {
-  var scrollChange = true;
+var scrollChange = true;
 
+function scrollToCarbonBattleground (element) {
+  scrollChange = false;
+
+  if(!$(element).hasClass("active")) {
+    $('section').each(function () {
+      $(element).removeClass('active');
+    });
+  }
+
+  $("#features").animate({scrollTop: $("#features").scrollTop() + $(element).position().top}, 500, function() {
+    // Animation complete.
+    $(element).addClass('active');
+    scrollChange = true;
+  });
+}
+
+map.on('click', function (e) {
+    // Use queryRenderedFeatures to get features at a click event's point
+    // Use layer option to avoid getting results from other layers
+    var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+    // if there are features within the given radius of the click event,
+    // fly to the location of the click event
+    if (features.length) {
+        // Get coordinates from the symbol and center the map on those coordinates
+        map.flyTo({center: features[0].geometry.coordinates});
+        var element = $('#' + features[0].properties.id);
+        scrollToCarbonBattleground(element);
+    }
+});
+
+map.on('mousemove', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+    map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+
+$(document).ready(function () {
   $("#features").scroll(function (event) {
     var scrollPos = Math.round($(window).scrollTop());
     //console.log(scrollPos);
@@ -400,20 +448,7 @@ $(document).ready(function () {
 
   $('section.battleground').on('click', function (e) {
     e.preventDefault();
-    scrollChange = false;
-
-    if(!$(this).hasClass("active")) {
-      $('section').each(function () {
-        $(this).removeClass('active');
-      });
-    }
-
-    $("#features").animate({scrollTop: $("#features").scrollTop() + $(this).position().top}, 500, function() {
-      // Animation complete.
-      $(this).addClass('active');
-      scrollChange = true;
-    });
-
+    scrollToCarbonBattleground($(this));
   });
 
   var activeChapterName = 'cb-6';
