@@ -2,21 +2,21 @@
 
 var app = {
   currNav: 0,
-  liveEpisodes: 1, // Second episode is live
+  liveEpisodes: 0, // Second episode is live
   interactiveState: false,
   textPageState: false,
 
   init: function() {
+    app.layover.init();
+    app.showIntroScreen();
+
     app.video.init();
     app.navigation.init();
-    app.layover.init();
 
     app.attachObservers();
     app.attachScripts();
 
-    //app.showIntroScreen();
     app.helpers.updateContent(0);
-
     app.helpers.preload();
   },
   attachObservers: function() {
@@ -255,7 +255,6 @@ helpers: {
     //$('#episodeProgress *').hide();
     $('#btn-play-pause').hide();
 
-
     $("#content #video, #titles").hide();
     $("#content #interactive").empty();
 
@@ -281,7 +280,6 @@ helpers: {
 
     $("#content #video, #titles").hide();
     $("#content #interactive").empty();
-
 
     // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
     $("#content #interactive").load(nav.textPages[id-1].html, function(response, status, xhr) {

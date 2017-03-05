@@ -261,9 +261,11 @@ $(document).ready(function () {
 
 //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
 
+/*
 
 $("body").on("mousedown", function() {
   var center = map.getCenter().wrap();
   var zoom = map.getZoom();
   console.log(center, zoom);
 });
+*/
