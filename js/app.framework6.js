@@ -264,6 +264,10 @@ helpers: {
         //Something went wrong, have your error fallback code here
       }
     });
+
+    if (app.navigation.state == app.navigation.visible) {
+        app.navigation.hide();
+    }
   },
   loadTextPage: function(id) {
     app.textPageState = true;
