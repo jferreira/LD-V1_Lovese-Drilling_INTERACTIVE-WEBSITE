@@ -18,7 +18,7 @@ var map = new mapboxgl.Map({
   container: 'map', // container id
   style: 'mapbox://styles/lovese/ciya7qynz006v2rl940yajywr', //hosted style id
   center: [14.032907135048276, 68.61364646452617], // starting position
-  zoom: 2.5, // starting zoom,
+  zoom: 2.7, // starting zoom,
   attributionControl: false
 });
 

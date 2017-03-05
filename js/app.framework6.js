@@ -122,13 +122,13 @@ attachScripts: function() {
 toPrevious: function() {
   if (app.currNav > 0) {
     app.currNav--;
-    app.helpers.updateContent();
+    app.helpers.updateContent(0); // Quick fix for hiding the player button
   }
 },
 toNext: function() {
   if (app.currNav <= nav.episodes.length-2) {
     app.currNav++;
-    app.helpers.updateContent();
+    app.helpers.updateContent(0); // Quick fix for hiding the player button
   }
 },
 updateTime: function() {
@@ -172,6 +172,7 @@ helpers: {
   preload: function() {
     for(var i = 1; i < nav.episodes.length; i++) {
       $('<img />').attr('src', nav.episodes[i].poster).appendTo('#preload').css('display','none');
+      $('<img />').attr('src', nav.episodes[i].slide).appendTo('#preload').css('display','none');
     }
   },
   twoDigits: function(n) {
