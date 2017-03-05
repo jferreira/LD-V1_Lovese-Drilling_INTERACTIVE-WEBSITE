@@ -17,7 +17,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc
 var map = new mapboxgl.Map({
   container: 'map', // container id
   style: 'mapbox://styles/lovese/ciya7qynz006v2rl940yajywr', //hosted style id
-  center: [-102.2756374,45.9449108], // starting position
+  center: [14.032907135048276, 68.61364646452617], // starting position
   zoom: 2.1, // starting zoom,
   attributionControl: false
 });
@@ -59,6 +59,16 @@ map.on('style.load', function (e) {
       "type": "FeatureCollection",
       "features":
       [{
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [14.032907135048276, 68.61364646452617]
+        },
+        "properties": {
+          "title": "Lovese Drilling",
+          "icon": "star"
+        }
+      }, {
         "type": "Feature",
         "geometry": {
           "type": "Point",
@@ -108,31 +118,24 @@ map.on('style.load', function (e) {
           "title": "Great Australian Bight",
           "icon": "star"
         }
-      } , {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [14.032907135048276, 68.61364646452617]
-        },
-        "properties": {
-          "title": "Lovese Drilling",
-          "icon": "star"
-        }
-      } , {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-75.8069082, -1.0019231]
-        },
-        "properties": {
-          "title": "Save Yasuní Rainforest",
-          "icon": "star"
-        }
       }
-
     ]
   }
 });
+
+/*
+, {
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-75.8069082, -1.0019231]
+  },
+  "properties": {
+    "title": "Save Yasuní Rainforest",
+    "icon": "star"
+  }
+}
+*/
 
 map.addLayer({
   "id": "markers",
@@ -156,7 +159,7 @@ $(document).ready(function () {
   $("#features").scroll(function (event) {
     var scrollPos = Math.round($(window).scrollTop());
     //console.log(scrollPos);
-    $('section').each(function () {
+    $('section.battleground').each(function () {
       var currLink = $(this);
 
       var $this = $(this);
@@ -164,8 +167,8 @@ $(document).ready(function () {
       var width = $this.width();
       var height = $this.height();
 
-      var centerX = offset.left + width / 2;
-      var centerY = offset.top + height / 2;
+      var centerX = offset.left + width / 1.5;
+      var centerY = offset.top + height / 1.5;
 
       if (currLink.position().top <= scrollPos && currLink.position().top + centerY > scrollPos) {
         if(scrollChange) {
@@ -179,13 +182,15 @@ $(document).ready(function () {
   });
 
   //smoothscroll
-  $('section').on('click', function (e) {
+  $('section.battleground').on('click', function (e) {
     e.preventDefault();
     scrollChange = false;
 
-    $('section').each(function () {
-      $(this).removeClass('active');
-    });
+    if(!$(this).hasClass("active")) {
+      $('section').each(function () {
+        $(this).removeClass('active');
+      });
+    }
 
     $("#features").animate({scrollTop: $("#features").scrollTop() + $(this).position().top}, 500, function() {
       // Animation complete.

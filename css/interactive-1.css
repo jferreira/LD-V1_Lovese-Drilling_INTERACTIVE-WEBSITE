@@ -115,7 +115,9 @@ section {
     opacity: 0.35;
     font-size: 13px;
     cursor: pointer;
+    margin-bottom: 50px;
 }
+
 section.active {
     opacity: 1;
 }
@@ -127,6 +129,14 @@ section img {
   padding:  25px 50px;
   width: 100%;
   height: auto;
+}
+
+section p {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+section.other {
+  opacity: 1;
 }
 
 h1 {
