@@ -18,7 +18,7 @@ var map = new mapboxgl.Map({
   container: 'map', // container id
   style: 'mapbox://styles/lovese/ciya7qynz006v2rl940yajywr', //hosted style id
   center: [14.032907135048276, 68.61364646452617], // starting position
-  zoom: 2.1, // starting zoom,
+  zoom: 2.5, // starting zoom,
   attributionControl: false
 });
 
@@ -42,7 +42,16 @@ var chapters = {
     center: [14.032907135048276, 68.61364646452617],
   },
   'cb-7': {
-    center: [-75.8069082, -1.0019231],
+    center: [12.401834935632564, 55.630479754891866],
+  },
+  'cb-8': {
+    center: [6.575265599982572, 53.259401645954114],
+  },
+  'cb-9': {
+    center: [-4.6440335746212895, 56.18290330382942],
+  },
+  'cb-10': {
+    center: [14.166268,45.1336358],
   },
 };
 
@@ -66,7 +75,7 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Lovese Drilling",
-          "icon": "star"
+          "icon": "circle"
         }
       }, {
         "type": "Feature",
@@ -76,7 +85,7 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "North Dakota Pipeline",
-          "icon": "star"
+          "icon": "circle"
         }
       }, {
         "type": "Feature",
@@ -86,7 +95,7 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Keystone XL Pipeline",
-          "icon": "star"
+          "icon": "circle"
         }
       }, {
         "type": "Feature",
@@ -96,7 +105,7 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Shell's Arctic Drilling",
-          "icon": "star"
+          "icon": "circle"
         }
       }, {
         "type": "Feature",
@@ -106,7 +115,7 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Leard Blockade",
-          "icon": "star"
+          "icon": "circle"
         }
       }, {
         "type": "Feature",
@@ -116,12 +125,53 @@ map.on('style.load', function (e) {
         },
         "properties": {
           "title": "Great Australian Bight",
-          "icon": "star"
+          "icon": "circle"
+        }
+      }, {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [12.401834935632564, 55.630479754891866]
+        },
+        "properties": {
+          "title": "Baltic Pipeline",
+          "icon": "circle"
+        }
+      }, {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [6.575265599982572, 53.259401645954114]
+        },
+        "properties": {
+          "title": "Groningen Gas Fields",
+          "icon": "circle"
+        }
+      }, {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.6440335746212895, 56.18290330382942]
+        },
+        "properties": {
+          "title": "Scotland Fracking",
+          "icon": "circle"
+        }
+      }, {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [14.166268, 45.1336358]
+        },
+        "properties": {
+          "title": "Plomin C",
+          "icon": "circle"
         }
       }
     ]
   }
 });
+
 
 /*
 , {
@@ -132,7 +182,7 @@ map.on('style.load', function (e) {
   },
   "properties": {
     "title": "Save Yasuní Rainforest",
-    "icon": "star"
+    "icon": "circle"
   }
 }
 */
@@ -208,14 +258,12 @@ $(document).ready(function () {
   }
 });
 
-/*
+
 //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
 
 
 $("body").on("mousedown", function() {
-var center = map.getCenter().wrap();
-var zoom = map.getZoom();
-console.log(center, zoom);
+  var center = map.getCenter().wrap();
+  var zoom = map.getZoom();
+  console.log(center, zoom);
 });
-
-*/
