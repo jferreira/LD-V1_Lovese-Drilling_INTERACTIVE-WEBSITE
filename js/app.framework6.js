@@ -122,13 +122,13 @@ attachScripts: function() {
 toPrevious: function() {
   if (app.currNav > 0) {
     app.currNav--;
-    app.helpers.updateContent(0); // Quick fix for hiding the player button
+    app.helpers.updateContent();
   }
 },
 toNext: function() {
   if (app.currNav <= nav.episodes.length-2) {
     app.currNav++;
-    app.helpers.updateContent(0); // Quick fix for hiding the player button
+    app.helpers.updateContent();
   }
 },
 updateTime: function() {
@@ -180,8 +180,16 @@ helpers: {
   },
 
   updateContent: function(episode) {
-    // Quick fix to hide the play functionality.
-    if(episode > 0) {
+
+    var episodeId;
+    if(episode === undefined || episode === null) {
+      episodeId = app.currNav;
+    } else {
+      episodeId = episode;
+      app.currNav = episodeId;
+    }
+
+    if(episodeId > 0) {
       $("img.video-controls").css({"width": 0, "height" : 0});
       $("button.play").attr("disabled", true);
     } else {
@@ -194,15 +202,6 @@ helpers: {
 
     app.video.pause();
     $('video').css("z-index","-1");
-
-    var episodeId;
-
-    if(episode === undefined || episode === null) {
-      episodeId = app.currNav;
-    } else {
-      episodeId = episode;
-      app.currNav = episodeId;
-    }
     $(".nav-holder *").fadeIn(500);
 
     // Remove interactive content if it's present
