@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -16,35 +16,35 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-    display: block;
+  display: block;
 }
 body {
-    line-height: 1;
+  line-height: 1;
 }
 ol, ul {
-    list-style: none;
+  list-style: none;
 }
 blockquote, q {
-    quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
-    content: none;
+  content: '';
+  content: none;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /*
@@ -66,8 +66,8 @@ html, body {
 }
 
 body {
-    font-size: 100%;
-    font-family: 'DINPro-Light', sans-serif;
+  font-size: 100%;
+  font-family: 'DINPro-Light', sans-serif;
 }
 
 /*
@@ -75,45 +75,45 @@ body {
 */
 
 @font-face {
-    font-family: 'oswaldbold';
-    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
-         url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswaldbold';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
 @font-face {
-    font-family: 'oswaldlight';
-    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
-         url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswaldlight';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
 @font-face {
-    font-family: 'oswaldregular';
-    src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
-         url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswaldregular';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
 }
 
 @font-face {
- font-family: 'DINPro-Light';
- src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
- src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-      url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
-      url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+  font-family: 'DINPro-Light';
+  src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
+  src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+  url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 35px;
-    text-transform: uppercase;
-    font-family: 'oswaldregular';
-    letter-spacing: 1px;
+  margin: 0 0 35px;
+  text-transform: uppercase;
+  font-family: 'oswaldregular';
+  letter-spacing: 1px;
 }
 
 p, span, a, input, textarea, ul, li {
@@ -121,10 +121,10 @@ p, span, a, input, textarea, ul, li {
 }
 
 #wrapper {
-    width:100%;
-    height:100%;
-    margin: 0;
-    padding: 0;
+  width:100%;
+  height:100%;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -132,161 +132,161 @@ p, span, a, input, textarea, ul, li {
 */
 
 .nav-holder {
-    position:fixed;
-    top: 30px;
-    left: 50%;
-    z-index:11;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+  position:fixed;
+  top: 30px;
+  left: 50%;
+  z-index:11;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .nav {
-    display:inline-block;
-    font-family: 'DINPro-Light', sans-serif;
+  display:inline-block;
+  font-family: 'DINPro-Light', sans-serif;
 }
 
 .nav-list {
-    list-style:none;
+  list-style:none;
 }
 
 .nav-item {
-    float:left;
-    display:inline;
-    text-transform: uppercase;
-    margin-right: 20px;
+  float:left;
+  display:inline;
+  text-transform: uppercase;
+  margin-right: 20px;
 }
 
 .nav-item a {
-    display:block;
-    padding:5px 10px;
-    color:#fff;
-    text-decoration: none;
+  display:block;
+  padding:5px 10px;
+  color:#fff;
+  text-decoration: none;
 }
 
 .modal-nav-item a {
-    color:#000;
+  color:#000;
 }
 
 .nav-item a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .nav-item a.nav-item-highlight {
-    background-color: #fff;
-    color: #000;
+  background-color: #fff;
+  color: #000;
 }
 
 #navigation {
-    position: fixed;
-    width: 100%;
-    height: 160px;
-    bottom: -100px;
-    color: #fff;
-    z-index: 3;
-    overflow-x:hidden;
-    overflow-y:hidden;
+  position: fixed;
+  width: 100%;
+  height: 160px;
+  bottom: -100px;
+  color: #fff;
+  z-index: 3;
+  overflow-x:hidden;
+  overflow-y:hidden;
 }
 #navigation.visible {
-    bottom: 0;
+  bottom: 0;
 }
 
 #navigation-interaction {
-    position:fixed;
-    width: 100%;
-    height: 60px;
+  position:fixed;
+  width: 100%;
+  height: 60px;
 }
 
 #hover-navigation {
-    width: 100%;
-    height: 30px;
-        text-align: center;
+  width: 100%;
+  height: 30px;
+  text-align: center;
 }
 
 .arrow {
-    background: url(../resources/_Images/_Icons/_Arrow_@1x.png) no-repeat;
-    width:30px;
-    height:28px;
-    margin: 0 auto;
-    cursor: pointer;
+  background: url(../resources/_Images/_Icons/_Arrow_@1x.png) no-repeat;
+  width:30px;
+  height:28px;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
 .arrow_up {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .arrow_down {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .transition {
   -webkit-transition: bottom 0.3s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
-     -moz-transition: bottom 0.3s ease-in-out;  /* Firefox 4-15 */
-       -o-transition: bottom 0.3s ease-in-out;  /* Opera 10.50–12.00 */
-          transition: bottom 0.3s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+  -moz-transition: bottom 0.3s ease-in-out;  /* Firefox 4-15 */
+  -o-transition: bottom 0.3s ease-in-out;  /* Opera 10.50–12.00 */
+  transition: bottom 0.3s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 
 .show {
-    bottom:-100px !important;
+  bottom:-100px !important;
 }
 
 /*
 #navigation:hover {
-    opacity: 0.9;
+opacity: 0.9;
 }
 */
 
 #episodeProgress {
-    height: 30px;
-    background: rgba(0, 0, 0, 0.2);
-    width: 100%;
-    cursor: pointer;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  cursor: pointer;
 }
 
 #episodeScroll {
-    padding-top: 60px;
-    width: 100%;
-    height:100%;
+  padding-top: 60px;
+  width: 100%;
+  height:100%;
 }
 
 /* BOTTOM NAV GREY */
 
 #episodeSelection {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 #episodeScrollLeft {
-    height: 100%;
-    width: 5%;
-    position:fixed;
-    left:0;
-    z-index: 10;
+  height: 100%;
+  width: 5%;
+  position:fixed;
+  left:0;
+  z-index: 10;
 }
 
 #episodeScrollRight {
-    height: 100%;
-    width: 5%;
-    position:fixed;
-    right:0;
-    z-index: 10;
+  height: 100%;
+  width: 5%;
+  position:fixed;
+  right:0;
+  z-index: 10;
 }
 
 #navigation .top{display:block;height:53px;width:100%;color:#fff;text-align:center}
 #navigation .info{margin-top:52px;height:28px;background:#000}
 
 /* Play Bar */
-#navigation .avancee{display:inline-block;background: rgba(255, 255, 255, 0.2);width:0;height:30px}
+#navigation .avancee{display:inline-block;background: rgba(0, 240, 198, 1); width:0;height:30px}
 
 /* Play Bar Background */
 #navigation .txt{color:#fff;position:relative;height:20px;margin-top:-23px;padding:0 20px}
@@ -298,133 +298,137 @@ p, span, a, input, textarea, ul, li {
 #navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;margin-top:-18px;}
 
 .episode {
-    height:100%;
-    text-align: left;
-    letter-spacing: 0.5px;
-    color: #fff;
-    display:inline-block;
-    padding: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    word-wrap: break-word;
-    opacity: 0.35;
+  height:100%;
+  text-align: left;
+  letter-spacing: 0.5px;
+  color: #fff;
+  display:inline-block;
+  padding: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  word-wrap: break-word;
+  opacity: 0.35;
 }
 
 .episode.live {
   opacity: 1;
 }
 
+.color-player-timeline {
+  background-color: #00F0C6;
+}
+
 @media(min-width: 500px) {
-    .episode h1 {
-        text-transform: uppercase;
-        color: #fff;
-        font-family: "oswaldLight",sans-serif;
-        display: inline;
-    }
+  .episode h1 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+  }
 
-    .episode h3 {
-        text-transform: uppercase;
-        color: #fff;
-        font-family: "oswaldLight",sans-serif;
-        display: inline;
-        margin-left: 15px;
-    }
+  .episode h3 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+    margin-left: 15px;
+  }
 
-    .episode p {
+  .episode p {
     /*font-size: 100%;*/
-    }
+  }
 }
 
 @media(min-width: 800px) {
-    .episode h1 {
-        text-transform: uppercase;
-        color: #fff;
-        font-family: "oswaldLight",sans-serif;
-        display: inline;
-    }
+  .episode h1 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+  }
 
-    .episode h3 {
-        text-transform: uppercase;
-        color: #fff;
-        font-family: "oswaldLight",sans-serif;
-        display: inline;
-        margin-left: 15px;
-    }
+  .episode h3 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+    margin-left: 15px;
+  }
 
-    .episode p {
+  .episode p {
     /*font-size: 100%;*/
-    }
+  }
 }
 
 .interactive {
-    height:100%;
-    text-align: left;
-    color: #fff;
-    display:inline-block;
-    overflow: hidden;
-    color: #fff;
-    cursor: pointer;
+  height:100%;
+  text-align: left;
+  color: #fff;
+  display:inline-block;
+  overflow: hidden;
+  color: #fff;
+  cursor: pointer;
 
-    background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
-    background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+  background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
 }
 
 .interactive span {
-    background: url(/resources/_Images/_Icons/_Plus-Circle@3x.png) no-repeat 0 0;
-    display: block;
-    background-size: 20px;
-    height: 20px;
-    width: 20px;
-    margin: 40px auto 0;
-    opacity: 0.35;
+  background: url(../resources/_Images/_Icons/_Plus-Circle@3x.png) no-repeat 0 0;
+  display: block;
+  background-size: 20px;
+  height: 20px;
+  width: 20px;
+  margin: 40px auto 0;
+  opacity: 0.35;
 }
 .interactive.live span {
-    opacity: 1;
+  opacity: 1;
 }
 
 #titles {
-    position: absolute;
-    display:block;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index:2;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+  position: absolute;
+  display:block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index:2;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 
 #titles .slide-container {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 #titles .slide-container img.video-controls {
-    position: relative;
-    width: 50px;
-    height: auto;
-    top: 60%;
-    cursor: pointer;
+  position: relative;
+  width: 50px;
+  height: auto;
+  top: 60%;
+  cursor: pointer;
 }
 
 #play {
-    font-size: 150px;
-    color: #fff;
-    cursor:pointer;
-    clear:both;
-    display:block;
-    width: 100px;
-    margin: 0 auto;
+  font-size: 150px;
+  color: #fff;
+  cursor:pointer;
+  clear:both;
+  display:block;
+  width: 100px;
+  margin: 0 auto;
 }
 
 #content {
-    width:100%;
-    height:100%;
-    z-index: 1;
+  width:100%;
+  height:100%;
+  z-index: 1;
 }
 
 /*
@@ -433,53 +437,53 @@ p, span, a, input, textarea, ul, li {
 
 /*
 #video {
-  position:absolute;
-  height:100%;
-  width:100%;
-  min-width: 100%;
-  min-height: 100%;
-  overflow: hidden;
+position:absolute;
+height:100%;
+width:100%;
+min-width: 100%;
+min-height: 100%;
+overflow: hidden;
 }
 */
 
 #video {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    overflow: hidden;
-    height:100%;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  overflow: hidden;
+  height:100%;
   width:100%;
   min-width: 100%;
   min-height: 100%;
 }
 
 #video > video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: 1s opacity;
-    transition: 1s opacity;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
+  z-index: -1;
 }
 /* 1. No object-fit support: */
 @media (min-aspect-ratio: 16/9) {
-    #video > video { height: 300%; top: -100%; }
+  #video > video { height: 300%; top: -100%; }
 }
 @media (max-aspect-ratio: 16/9) {
-    #video > video { width: 300%; left: -100%; }
+  #video > video { width: 300%; left: -100%; }
 }
 /* 2. If supporting object-fit, overriding (1): */
 @supports (object-fit: cover) {
-    #video-bg > video {
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        object-fit: cover;
-    }
+  #video-bg > video {
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
 }
 
 video::-webkit-media-controls {
-    display: none;
+  display: none;
 }
 
 /*
@@ -487,34 +491,34 @@ video::-webkit-media-controls {
 */
 
 .play {
-    width: 12px;
-    height: 16px;
-    border-top: 8px solid transparent;
-    border-left: 12px solid #fff;
-    border-bottom: 8px solid transparent;
-    border-right: 0;
+  width: 12px;
+  height: 16px;
+  border-top: 8px solid transparent;
+  border-left: 12px solid #fff;
+  border-bottom: 8px solid transparent;
+  border-right: 0;
 
-    background:none!important;
-    padding:0!important;
-    font: inherit;
-    cursor: pointer;
-    display: block;
-    outline: 0;
+  background:none!important;
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+  display: block;
+  outline: 0;
 }
 .pause {
-    width: 12px;
-    height: 16px;
-    border-right: 4px solid #fff;
-    border-left: 4px solid #fff;
-    border-top:0;
-    border-bottom: 0;
+  width: 12px;
+  height: 16px;
+  border-right: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-top:0;
+  border-bottom: 0;
 
-    background:none!important;
-    padding:0!important;
-    font: inherit;
-    cursor: pointer;
-    display: block;
-    outline: 0;
+  background:none!important;
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+  display: block;
+  outline: 0;
 }
 
 #seek-bar {
@@ -522,36 +526,36 @@ video::-webkit-media-controls {
 }
 
 #preload {
-    display: none;
+  display: none;
 }
 
 #layover {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,1);
-    z-index: 12;
-    display: none;
-    background: url("../resources/_Images/E0_Masthead.jpg") no-repeat center center;
-    background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,1);
+  z-index: 12;
+  display: none;
+  background: url("../resources/_Images/E0_Masthead.jpg") no-repeat center center;
+  background-size: cover;
 }
 #layover.visible {
-    display: block;
+  display: block;
 }
 
 #layover .content {
-    background: transparent;
-    width: 50%;
-    height: 200px;
-    margin: 0 auto;
-    color: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    top: 25%;
-    position: relative;
-    text-align: center;
+  background: transparent;
+  width: 50%;
+  height: 200px;
+  margin: 0 auto;
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  top: 25%;
+  position: relative;
+  text-align: center;
 }
 
 #layover .content .brand-heading {
@@ -561,21 +565,21 @@ video::-webkit-media-controls {
 }
 
 #layover .content .intro-text {
-    color: #fff;
-    font-size: 18px;
-    margin-bottom: 10px;
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 @media(min-width:768px) {
-    #layover .content .brand-heading {
-      text-align: center;
-      font-size: 65px;
-    }
+  #layover .content .brand-heading {
+    text-align: center;
+    font-size: 65px;
+  }
 
-    #layover .content .intro-text {
-      text-align: center;
-      font-size: 18px;
-    }
+  #layover .content .intro-text {
+    text-align: center;
+    font-size: 18px;
+  }
 }
 
 @media(min-width:1170px) {
@@ -585,6 +589,6 @@ video::-webkit-media-controls {
   }
   #layover .content .intro-text {
     text-align: center;
-      font-size: 20px;
+    font-size: 20px;
   }
 }

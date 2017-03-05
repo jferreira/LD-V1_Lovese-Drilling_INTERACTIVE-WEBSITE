@@ -1,445 +1,129 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8' />
-    <title></title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link href='/css/include.css' rel='stylesheet' />
+<link href='/css/interactive-1.css' rel='stylesheet' />
 
-
-     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
-     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
-
-     <link rel="stylesheet" href="css/framework6.css" media="screen" />
-    <style>
-        body,html { margin:0; padding:0;}
-        html {
-        }
-        #map {
-          z-index: 0;
-          position:absolute;
-          top:0;
-          bottom:0;
-          width:100%;
-          height:100%;
-        }
-
-        #map > div.mapboxgl-control-container > div > div {
-          font-size: 8px;
-          color:#eee;
-          display:none;
-        }
-
-        .container-full {
-          margin: 0 auto;
-          padding:0;
-          width: 100%;
-          height: 100%;
-        }
-
-        div.overlay {
-          position:absolute;
-          z-index: 2;
-          top:0;
-          left:0;
-          width: 100%;
-          height:100%;
-          overflow:hidden;
-          color: #fff;
-        }
-
-        div.overlay-text {
-          z-index: 3;
-          position: absolute;
-          padding: 50px;
-          width: 100%;
-          text-transform: uppercase;
-          text-align: center;
-        }
-
-        a {
-          cursor: pointer;
-        }
-
-        div.mask{
-          z-index: 2;
-          position:absolute;
-          top:0;
-          left:0;
-          width: 100%;
-          height:100%;
-          overflow:hidden;
-          pointer-events: none; /* send mouse events beneath this layer */
-          padding:0;
-          margin: 0;
-        }
-
-        /* Responsive mask */
-        /*  http://codeitdown.com/css-circles/
-            http://wpandsuch.com/make-responsive-perfect-circles-with-css/
-            */
-        div.mask:after{
-          content:'';
-          display: block;
-          position:absolute;
-          -moz-border-radius: 50%;
-          -webkit-border-radius: 50%;
-          border-radius: 50%;
-
-          width: 66%;
-          height:0;
-          padding-bottom: 65%;
-          box-shadow: 0px 0px 0px 2000px #000;
-
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-        }
-
-        /*
-        div.mask:after{
-          content:'';
-          position:absolute;
-          border-radius:100%;
-          width:500px;
-          height:500px;
-          box-shadow: 0px 0px 0px 2000px #000;
-          top: 50%;
-          left: 15%;
-          transform: translateX(-15%) translateY(-50%);
-        }
-        */
-
-        .battlegrounds-list {
-          height: 100%;
-          width: 100%;
-        }
-
-        #features {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-
-          height: 80%;
-          width: 80%;
-          font-family: sans-serif;
-          overflow-y: scroll;
-        }
-
-        section {
-            padding:  25px 50px;
-            line-height: 25px;
-            opacity: 0.35;
-            font-size: 13px;
-            cursor: pointer;
-        }
-        section.active {
-            opacity: 1;
-        }
-        section:last-child {
-            border-bottom: none;
-            margin-bottom: 200px;
-        }
-        section img {
-          width: 100%;
-          height: auto;
-        }
-
-        h1 {
-          /* Need to fix this as bootstrap? breaks the nav stiles */
-        }
-    </style>
-  </head>
-  <body>
-
-
-
-
-  <!--
-  <div class="mask">
-    <div class="overlay">
-      <div class="">Carbon Battlerounds</div>
-    </div>
-  </div>
-  -->
-
-  <div class="overlay">
-    <div class="container-full">
-      <div class="row" style="height:100vh;">
-        <div class="col-md-5">
-          <!--
-          <div class="overlay-text">
-            <h1>Carbon Battlegrounds</h1>
-          </div>
-        -->
-          <div class="mask"></div>
-          <div id='map'></div>
-        </div>
-
-        <div class="col-md-7" style="background:#000">
-          <div class="battlegrounds-list">
-            <div id='features'>
-                <section id='cb-1' class='active'>
-                    <img src="resources/_Images/_BG-Headers/1.png" />
-                </section>
-                <section id='cb-2'>
-                    <img src="resources/_Images/_BG-Headers/3.png" />
-                </section>
-                <section id='cb-3'>
-                    <img src="resources/_Images/_BG-Headers/7.png" />
-                </section>
-                <section id='cb-4'>
-                    <img src="resources/_Images/_BG-Headers/11.png" />
-                </section>
-                <section id='cb-5'>
-                    <img src="resources/_Images/_BG-Headers/15.png" />
-                </section>
-                <section id='cb-6'>
-                    <img src="resources/_Images/_BG-Headers/18.png" />
-                </section>
-                <section id='cb-7'>
-                    <img src="resources/_Images/_BG-Headers/23.png" />
-                </section>
-
-                <p style="text-align:center;">
-                  Want to add your Carbon Battleground to the map? Get in touch with us at <a href="mailto:info@lovese.org">info@lovese.org</a>.
-                </p>
-
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            </div>
-
-          </div>
-        </div>
+<div class="overlay">
+  <div class="container-full">
+    <div class="row" style="height:100vh;">
+      <div class="col-md-5">
+        <!--
+        <div class="overlay-text">
+        <h1>Carbon Battlegrounds</h1>
       </div>
-    </div>
+    -->
+    <div class="mask"></div>
+    <div id='map'></div>
   </div>
 
-  <!-- <script type="text/javascript" src="../cb.json"></script> -->
-  <script>
-  /*
-  for(var i = 0; i < 33; i++) {
-    console.log();
-      var section = $('<section></section>',{
-         id: 'cb-' + (i+1),
-         attr: {
-             "data-id" : (i+1)
-         },
-         html: "<img src='../../resources/_Images/_BG-Headers/" + (i+1) + ".png' />",
-         css: {}
-      }).appendTo("#features");
-    }
-    $("#features section:first-child").addClass("active");
-    */
+  <div class="col-md-7" style="background:#000">
+    <div class="battlegrounds-list">
+      <div id='features'>
+        <section class="battleground active" id='cb-6'>
+          <img src="resources/_Images/_BG-Headers/18.png" />
+          <p>For more than 20 years the oil industry have tried to gain access to the areas off the coast of Lofoten, Vesterålen and Senja - Lovese in short. This is the last sea area in Norway which is still off limits for the oil industry.</p>
+          <br />
+          <p>In 2017 the temporary moratorium against oil drilling in the area expires. The same year a new government will be elected in the parliament elections. They will decide the future of these areas.</p>
+        </section>
+        <section class="battleground" id='cb-1'>
+          <img src="resources/_Images/_BG-Headers/1.png" />
+          <p>
+            The Standing Rock Sioux tribe has led the protest effort against the pipeline, a nearly 1,900km long pipeline that will transport 470,000 barrels of crude oil a day across four states. Obama halted the work on the pipeline, but Trump signed executive orders to allow the construction to go forth.
+            <br><br>
+            <a href="http://standwithstandingrock.net/" target="_blank">Read more about this issue</a>
+          </p>
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
-    var map = new mapboxgl.Map({
-        container: 'map', // container id
-        style: 'mapbox://styles/lovese/ciya7qynz006v2rl940yajywr', //hosted style id
-        center: [-102.2756374,45.9449108], // starting position
-        zoom: 2.1, // starting zoom,
-        attributionControl: false
-    });
+        </section>
+        <section class="battleground" id='cb-2'>
+          <img src="resources/_Images/_BG-Headers/3.png" />
+          <p>
+            Keystone XL is a proposed tar sands pipeline that would  would carry 800,000 barrels per day of tar sands oil across the United States to be refined, exported and burned.Tar sands oil has a massive carbon footprint — sometimes requiring more energy to produce than it creates — and Keystone XL is the key to making burning that oil economically feasible.Obama initially stopped the project, but Trump signed executive orders to allow construction of the Keystone XL pipeline.
+            <br><br>
+            <a href="https://act.350.org/sign/nokxl-nodapl-pipeline-pledge/" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
+        <section class="battleground" id='cb-3'>
+          <img src="resources/_Images/_BG-Headers/7.png" />
+          <p>
+            In 2015 Shell abandoned its controversial drilling operations in the Alaskan Arctic in the face of mounting opposition in what jubilant environmentalists described as “an unmitigated defeat” for big oil.
+            <br><br>
+            <a href="http://www.greenpeace.org/international/en/news/Blogs/makingwaves/save-the-arctic-shell-abandons-arctic-drilling/blog/54263/" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
+        <section class="battleground" id='cb-4'>
+          <img src="resources/_Images/_BG-Headers/11.png" />
+          <p>
+            Leard Blockade is the first coal mine blockade camp in Australia. The #LeardBlockade started 5 August 2012 in the Leard State Forest. Front Line Action on Coal is committed to community led, non-violent direct action. The #LeardBlockade aims to protect farms, forest, community, culture and the climate from Whitehaven Coal’s proposed Maules Creek mine and other coal mining operations in the Leard State Forest.
+            <br><br>
+            <a href="https://frontlineaction.org/" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
+        <section class="battleground" id='cb-5'>
+          <img src="resources/_Images/_BG-Headers/15.png" />
+          <p>
+            Oil companies are pushing to drill in the Great Australian Bight, placing the pristine marine environment at risk. The Great Australian Bight is home to a unique and extraordinary array of marine life.  Whales, sea lions, birds, turtles, fish and sponge gardens all depend on its pristine waters.  The indigenous people of the Nullarbor and Western Eyre Peninsula have been its custodians for tens of thousands of years - and remain so today. In october 2016 BP announced that they are dropping any plans to drill for oil in the area, a major victory for the movement which works to preserve these areas.
+            <br><br>
+            <a href="http://www.fightforthebight.org.au" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
 
-    var chapters = {
-        'cb-1': {
-            center: [-102.2756374,45.9449108],
-        },
-        'cb-2': {
-            center: [-98.25156673438437,40.75160515850669],
-        },
-        'cb-3': {
-            center: [-165.35335965166905, 70.06500741925603],
-        },
-        'cb-4': {
-            center: [150.47846597498315, -31.216397623097627],
-        },
-        'cb-5': {
-            center: [131.35201521118802, -36.822138393420495],
-        },
-        'cb-6': {
-            center: [14.032907135048276, 68.61364646452617],
-        },
-        'cb-7': {
-            center: [-75.8069082, -1.0019231],
-        },
-    };
+        <section class="battleground" id='cb-7'>
+          <img src="resources/_Images/_BG-Headers/34.png" />
+          <p>
+            Campaigning against a new proposed gas pipeline between Poland and Denmark. The project will lock Denmark and Poland into a dependency on gas for many years to come, it won’t solve Poland’s issue on energy independency and it is not in line with the Paris agreement. The project will increase the use of gas and will encourage drilling for gas in the Norwegian Arctic. Finally, it is to be funded by European taxpayers but does not lead to a more just Europe and is only in the interest of the gas lobby. Through awareness raising we aim to put focus on this project and present sustainable solutions instead.
+            <br><br>
+            <a href="https://ec.europa.eu/inea/en/connecting-europe-facility/cef-energy/projects-by-country/multi-country/8.3-0019-dkpl-s-m-15" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
 
-    map.on('load', function() {
-      map.resize();
-    });
+        <section class="battleground" id='cb-8'>
+          <img src="resources/_Images/_BG-Headers/35.png" />
+          <p>
+            The Groningen gas field, owned by Shell, Exxon and the Dutch state lies in the North of the Netherlands. It is by far the biggest gas field in Europe and supplies houses and buildings in the Netherlands, Germany, France and Belgium with gas. Gas production also caused more then a thousand small earthquakes the last ten years,  damaging more then 60.000 buildings in the area until now. More and more of them beyond repair and risking collapse. We campaign to shut down the gas field, force Shell and Exxon to repair the damage and kickstart a transition towards sustainable heating. With the mounting public pressure the gas valves are slowly closing, but there is still a tough battle ahead.
+            <br><br>
+            <a href="https://milieudefensie.nl/gasboringen-groningen" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
 
-    map.on('style.load', function (e) {
-      map.resize();
-        //console.log(e.style.sprite); // Available markers
-        map.addSource('markers', {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features":
-                [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-102.2756374,45.9449108]
-                    },
-                    "properties": {
-                        "title": "North Dakota Pipeline",
-                        "icon": "star"
-                    }
-                }, {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [-98.25156673438437,40.75160515850669]
-                    },
-                    "properties": {
-                        "title": "Keystone XL Pipeline",
-                        "icon": "star"
-                    }
-                }, {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [-165.35335965166905, 70.06500741925603]
-                    },
-                    "properties": {
-                        "title": "Shell's Arctic Drilling",
-                        "icon": "star"
-                    }
-                }, {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [150.47846597498315, -31.216397623097627]
-                    },
-                    "properties": {
-                        "title": "Leard Blockade",
-                        "icon": "star"
-                    }
-                }, {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [131.35201521118802, -36.822138393420495]
-                    },
-                    "properties": {
-                        "title": "Great Australian Bight",
-                        "icon": "star"
-                    }
-                } , {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [14.032907135048276, 68.61364646452617]
-                    },
-                    "properties": {
-                        "title": "Lovese Drilling",
-                        "icon": "star"
-                    }
-                } , {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [-75.8069082, -1.0019231]
-                    },
-                    "properties": {
-                        "title": "Save Yasun� Rainforest",
-                        "icon": "star"
-                    }
-                }
+        <section class="battleground" id='cb-9'>
+          <img src="resources/_Images/_BG-Headers/36.png" />
+          <p>
+            Working with communities across the country Friends of the Earth succeeded in getting a moratorium on shale gas fracking and coalbed methane in January 2015. The challenge now is to turn the moratorium into a robust ban citing climate impacts as a key reason not to pursue these new sources of fossil fuel. There is strong political and public momentum in this campaign and a decision is anticipated to be made by the Scottish Government by mid 2017, following a public consultation on the issue.
+            <br><br>
+            <a href="http://www.foe-scotland.org.uk/fracking" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
 
-              ]
-            }
-        });
+        <section class="battleground" id='cb-10'>
+          <img src="resources/_Images/_BG-Headers/37.png" />
+          <p>
+            After 5 years of intense campaigning against a new coal power plant the environmental organizations in Croatia won, when the Croatian Minister of Economy stated that the harmful coal power project 'Plomin C' would not go through.
+            <br><br>
+            <a href="http://zelena-akcija.hr/en/programmes/energy_and_climate_change/we_stopped_the_harmful_coal_project_plomin_c" target="_blank">Read more about this issue</a>
+          </p>
+        </section>
 
-        map.addLayer({
-            "id": "markers",
-            "source": "markers",
-            "type": "symbol",
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-            },
-            "paint": {
-                "text-color": "#fff"
-            },
-        });
-    });
+        <!--
+        <section id='cb-7'>
+          <img src="resources/_Images/_BG-Headers/23.png" />
+        </section>
+      -->
+      <section class="other">
+        <p>
+          Want to add your Carbon Battleground to the map? Get in touch with us at <a href="mailto:info@lovese.org">info@lovese.org</a>.
+        </p>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </section
+      </div>
 
-    $(document).ready(function () {
-        var scrollChange = true;
+    </div>
+  </div>
+</div>
+</div>
+</div>
 
-        $("#features").scroll(function (event) {
-          var scrollPos = Math.round($(window).scrollTop());
-          //console.log(scrollPos);
-          $('section').each(function () {
-              var currLink = $(this);
-
-              var $this = $(this);
-              var offset = $this.offset();
-              var width = $this.width();
-              var height = $this.height();
-
-              var centerX = offset.left + width / 2;
-              var centerY = offset.top + height / 2;
-
-              if (currLink.position().top <= scrollPos && currLink.position().top + centerY > scrollPos) {
-                  if(scrollChange) {
-                    setActiveChapter(currLink.attr("id"));
-                    currLink.addClass("active");
-                  }
-              } else {
-                  currLink.removeClass("active");
-              }
-          });
-        });
-
-        //smoothscroll
-        $('section').on('click', function (e) {
-            e.preventDefault();
-            scrollChange = false;
-
-            $('section').each(function () {
-                $(this).removeClass('active');
-            });
-
-            $("#features").animate({scrollTop: $("#features").scrollTop() + $(this).position().top}, 500, function() {
-              // Animation complete.
-              $(this).addClass('active');
-              scrollChange = true;
-            });
-
-        });
-
-        var activeChapterName = 'cb-1';
-        function setActiveChapter(chapterName) {
-            if (chapterName === activeChapterName) return;
-            map.flyTo(chapters[chapterName]);
-            activeChapterName = chapterName;
-        }
-      });
-
-  /*
-    //map.addControl(new mapboxgl.AttributionControl(), 'top-left');
-
-
-    $("body").on("mousedown", function() {
-      var center = map.getCenter().wrap();
-      var zoom = map.getZoom();
-      console.log(center, zoom);
-    });
-
-  */
-
-  </script>
-
-  </body>
-</html>
+<script type="text/javascript" src="/js/interactive-1.js"></script>

@@ -32,7 +32,7 @@ app.video = {
         if (! $.inArray(eventType, app.video.callbacks))
             throw new Error('Unknown event type "' + eventType + '"');
 
-        app.video.callbacks[eventType].forEach(function(eventFunction) { 
+        app.video.callbacks[eventType].forEach(function(eventFunction) {
             eventFunction();
         });
     },

@@ -1,0 +1,22 @@
+var cb = {
+  "sites": [
+    {
+      "name": "North Dakota Access Pipeline",
+      "country": "US",
+      "description" : "",
+      "mapbox": {
+        "center": [-0.18335806, 51.49439521],
+        "speed": 0.5
+      }
+    },
+    {
+      "name": "",
+      "country": "Philippines",
+      "description" : "",
+      "mapbox": {
+        "center": [-0.18335806, 51.49439521],
+        "speed": 0.5
+      }
+    },
+  ]
+}

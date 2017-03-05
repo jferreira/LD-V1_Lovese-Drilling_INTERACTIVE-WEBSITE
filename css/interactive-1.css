@@ -1,0 +1,144 @@
+#map {
+  z-index: 0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+}
+
+#map > div.mapboxgl-control-container > div > div {
+  font-size: 8px;
+  color:#eee;#000
+  display:none;
+}
+
+.container-full {
+  margin: 0 auto;
+  padding:0;
+  width: 100%;
+  height: 100%;
+}
+
+div.overlay {
+  position:absolute;
+  z-index: 2;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  overflow:hidden;
+  color: #fff;
+}
+
+div.overlay-text {
+  z-index: 3;
+  position: absolute;
+  padding: 50px;
+  width: 100%;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
+}
+
+div.mask{
+  z-index: 2;
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  overflow:hidden;
+  pointer-events: none; /* send mouse events beneath this layer */
+  padding:0;
+  margin: 0;
+}
+
+/* Responsive mask */
+/*  http://codeitdown.com/css-circles/
+    http://wpandsuch.com/make-responsive-perfect-circles-with-css/
+    */
+div.mask:after{
+  content:'';
+  display: block;
+  position:absolute;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+
+  width: 66%;
+  height:0;
+  padding-bottom: 65%;
+  box-shadow: 0px 0px 0px 2000px #000;
+
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/*
+div.mask:after{
+  content:'';
+  position:absolute;
+  border-radius:100%;
+  width:500px;
+  height:500px;
+  box-shadow: 0px 0px 0px 2000px #000;
+  top: 50%;
+  left: 15%;
+  transform: translateX(-15%) translateY(-50%);
+}
+*/
+
+.battlegrounds-list {
+  height: 100%;
+  width: 100%;
+}
+
+#features {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  height: 80%;
+  width: 80%;
+  font-family: sans-serif;
+  overflow-y: scroll;
+}
+
+section {
+    line-height: 25px;
+    opacity: 0.35;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 50px;
+}
+
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+}
+section img {
+  padding:  25px 50px;
+  width: 100%;
+  height: auto;
+}
+
+section p {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+section.other {
+  opacity: 1;
+}
+
+h1 {
+  /* Need to fix this as bootstrap? breaks the nav stiles */
+}
