@@ -18,6 +18,9 @@ var app = {
     app.helpers.updateContent(0);
 
     app.helpers.preload();
+
+    if (localStorage.mobilenoticehidden)
+      $('#mobile-notice').hide();
   },
   attachObservers: function() {
     // Navigation
@@ -41,6 +44,9 @@ var app = {
 
     // Layover
     $("body").on("click", "[rel=closelayover]", app.layover.hide);
+
+    // Layover
+    $("body").on("click", "[rel=closemobilenotice]", app.mobilenotice.hide);
 
     // Shortcuts
     $("body").on('keydown', function(event) {
@@ -299,6 +305,13 @@ showIntroScreen: function() {
     "<button class='btn btn-default btn-lg' rel=\"closelayover\">Start the experience</button>"
   );
   app.layover.show();
+},
+mobilenotice: {
+  hide: function() {
+    localStorage.mobilenoticehidden = true;
+
+    $('#mobile-notice').hide();
+  }
 }
 }
 $(app.init);

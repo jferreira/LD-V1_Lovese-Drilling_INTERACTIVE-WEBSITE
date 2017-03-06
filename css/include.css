@@ -145,6 +145,8 @@ a:hover, a:focus {
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+
+  min-width: 484px;
 }
 
 .nav {
@@ -160,7 +162,11 @@ a:hover, a:focus {
   float:left;
   display:inline;
   text-transform: uppercase;
-  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.nav-item:first-of-type {
+  margin-left: 0;
 }
 
 .nav-item a {
@@ -183,6 +189,7 @@ a:hover, a:focus {
   color: #000;
 }
 
+
 /* Content */
 
 .textwrapper {
@@ -198,6 +205,15 @@ a:hover, a:focus {
   overflow-y:scroll!important;
 }
 
+@media (max-width: 750px) {
+  .textwrapper {
+    top: 0;
+    left:0;
+    transform: translate(0);
+    padding-top: 40px;
+  }
+
+
 .textwrapper .container {
   position: relative;
   top: 50%;
@@ -205,6 +221,13 @@ a:hover, a:focus {
 
   width: 50%;
   height: 80%;
+}
+@media (max-width: 750px) {
+  .textwrapper .container {
+    width: 100%;
+    transform: translateY(0);
+    top: 0;
+  }
 }
 
 .textwrapper .container .brand-heading {
