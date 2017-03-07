@@ -1,0 +1,38 @@
+#intro {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,1);
+  z-index: 12;
+  display: none;
+  background: url("../resources/_Images/E0_Masthead.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+#intro.visible {
+  display: block;
+}
+
+.content {
+  background: transparent;
+  width: 50%;
+  height: 200px;
+  margin: 0 auto;
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  top: 25%;
+  position: relative;
+  text-align: center;
+  display: none;
+}
+
+.active {
+    display:block;
+}
+
+.hide {
+    display:none;
+}
