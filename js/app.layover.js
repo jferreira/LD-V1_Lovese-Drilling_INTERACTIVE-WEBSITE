@@ -15,6 +15,8 @@ app.layover = {
     callbacks: {
         'preShow':  [],
         'postShow': [],
+        'preCycle':  [],
+        'postCycle': [],        
         'preContent': [],
         'postContent': [],
         'preHide': [],
@@ -23,7 +25,7 @@ app.layover = {
 
     init: function() {
         app.layover.state   = app.layover.visible;
-        app.layover.element = $('#layover');
+        app.layover.element = $('#intro');
     },
     call: function(eventType) {
         if (! $.inArray(eventType, app.layover.callbacks))
@@ -33,7 +35,31 @@ app.layover = {
             eventFunction();
         });
     },
+    cycleIntroContent: function(totalTime) {
+      app.layover.call('preCycle');
+      var sectionTime = (totalTime * 1000) / $(app.layover.element).children().length;
 
+      var mapF = $(app.layover.element).children();
+      var $active = mapF.eq(0);
+
+      var $next = $active.next();
+      var timer = setInterval(function() {
+        $next.addClass("active");
+        $active.removeClass("active");
+        $active = $next;
+
+        // Do map operations
+        $next = (mapF.last().index() == mapF.index($active)) ? $next = mapF.eq(0): $active.next();
+
+        if(mapF.last().index() == mapF.index($active)) {
+          console.log("finished");
+          clearInterval(timer);
+          timer = null;
+        }
+      }, sectionTime);
+
+      app.layover.call('postCycle');
+    },
     updateContent: function(content) {
         app.layover.call('preContent');
 

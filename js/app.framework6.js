@@ -295,6 +295,7 @@ helpers: {
   }
 },
 showIntroScreen: function() {
+  /*
   app.layover.updateContent(
     "<h1 class='brand-heading'>LoVeSe Drilling</h1>"+
     "<p class='intro-text'>Across the world, local communities are fighting to stop new coal, oil and gas projects.</p><br />"+
@@ -303,6 +304,9 @@ showIntroScreen: function() {
     "<p class='intro-text'>After each episode there is an interactive element which you can use to explore the issue.</p>" +
     "<button class='btn btn-default btn-lg' rel=\"closelayover\">Start the experience</button>"
   );
+  */
+  var totalTime = 30;
+  app.layover.cycleIntroContent(totalTime);
   app.layover.show();
 }
 }
