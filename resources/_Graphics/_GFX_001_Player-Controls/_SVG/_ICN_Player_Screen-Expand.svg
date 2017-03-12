@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>_ICN_Screen-Expand</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="_Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_ICN_Screen-Expand" stroke="#FFFFFF">
+            <polyline id="Stroke-1" transform="translate(10.500000, 10.168199) scale(1, -1) translate(-10.500000, -10.168199) " points="8.5 8.28584559 8.5 12.0505515 12.5 12.0505515"></polyline>
+            <path d="M8.96914315,12.5501817 L13.0355339,8.72299015" id="Line" stroke-linecap="square" transform="translate(11.000000, 10.638787) scale(1, -1) translate(-11.000000, -10.638787) "></path>
+            <polyline id="Stroke-1" points="8.5 18.6387868 8.5 22.4034926 12.5 22.4034926"></polyline>
+            <path d="M8.96914315,21.9619464 L13.0355339,18.1347549" id="Line" stroke-linecap="square"></path>
+            <polyline id="Stroke-1" transform="translate(21.500000, 10.168199) scale(-1, -1) translate(-21.500000, -10.168199) " points="19.5 8.28584559 19.5 12.0505515 23.5 12.0505515"></polyline>
+            <path d="M12.9691432,18.1972405 L23.012454,8.74471272" id="Line" stroke-linecap="square" transform="translate(18.000000, 13.462316) scale(-1, -1) translate(-18.000000, -13.462316) "></path>
+            <polyline id="Stroke-1" transform="translate(21.500000, 20.521140) scale(-1, 1) translate(-21.500000, -20.521140) " points="19.5 18.6387868 19.5 22.4034926 23.5 22.4034926"></polyline>
+            <path d="M18.9691432,21.9619464 L23.0355339,18.1347549" id="Line" stroke-linecap="square" transform="translate(21.000000, 20.050551) scale(-1, 1) translate(-21.000000, -20.050551) "></path>
+        </g>
+    </g>
+</svg>
