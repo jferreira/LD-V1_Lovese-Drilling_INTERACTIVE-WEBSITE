@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>_ICN_LABEL_Point_Top-Right</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="_Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_ICN_LABEL_Point_Top-Right" fill="#FFFFFF">
+            <path d="M36.7605656,32.0882 C36.7605656,34.6222 34.7065656,36.6762 32.1725656,36.6762 C29.6385656,36.6762 27.5840656,34.6222 27.5840656,32.0882 C27.5840656,29.5542 29.6385656,27.5002 32.1725656,27.5002 C34.7065656,27.5002 36.7605656,29.5542 36.7605656,32.0882 Z M32.6723656,31.5882 L34.3847656,31.5882 L34.3847656,32.5882 L32.6723656,32.5882 L32.6723656,34.3823 L31.6723656,34.3823 L31.6723656,32.5882 L29.9597656,32.5882 L29.9597656,31.5882 L31.6723656,31.5882 L31.6723656,29.7943 L32.6723656,29.7943 L32.6723656,31.5882 Z" id="Combined-Shape"></path>
+            <g id="Group" transform="translate(32.000000, 32.000000) scale(-1, 1) translate(-32.000000, -32.000000) translate(2.000000, 2.000000)">
+                <circle id="Oval-Copy" stroke="#FFFFFF" stroke-dasharray="2" fill-opacity="0" opacity="0.45" cx="30" cy="30" r="30"></circle>
+                <rect id="Rectangle" x="7" y="7" width="4" height="4"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200px" height="32px" viewBox="0 0 200 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>_ICN_LABEL_Vesterålen-Archipelago</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="_Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_ICN_LABEL_Vesterålen-Archipelago">
+            <polygon id="Fill-55" fill="#FEFEFE" points="0 32 169.5 32 169.5 0 0 0"></polygon>
+            <text id="Vesterålen-Archipela" font-family="DINPro-Regular, DINPro" font-size="12.2894" font-weight="normal" fill="#061819">
+                <tspan x="16.7792969" y="21">Vesterålen Archipelago</tspan>
+            </text>
+            <path d="M153.746154,16 C153.746154,7.17824 160.92337,1.13686838e-13 169.746154,1.13686838e-13 C178.568938,1.13686838e-13 185.746154,7.17824 185.746154,16 C185.746154,24.82176 178.568938,32 169.746154,32 C160.92337,32 153.746154,24.82176 153.746154,16 Z" id="Fill-10-Copy-9" stroke="#FFFFFF" stroke-width="0.5" fill="#354651"></path>
+            <path d="M174.228943,20.2482785 C172.858547,21.6739016 170.940698,22.5577879 168.817997,22.5577879 C165.97831,22.5577879 163.505945,20.9753463 162.22738,18.6337604 C162.167337,18.5304027 162.114358,18.4270451 162.06491,18.3236874 L165.974778,12.2897377 L167.525304,9.89825495 L168.775614,11.8299742 L173.183486,18.6337604 L174.228943,20.2482785 L174.228943,20.2482785 Z" id="Stroke-1" stroke="#FFFFFF" stroke-width="0.5"></path>
+            <path d="M175.415642,18.6337604 C175.412111,18.6408885 175.408579,18.6444526 175.405047,18.6515807 C175.083639,19.2360862 174.688061,19.7706948 174.228908,20.2482785 L170.499169,14.4780691 L171.438668,14.5564784 L172.812596,12.9669086 L174.931765,15.5508505 L176.326885,15.6114395 C176.235055,16.7020411 175.913647,17.7249257 175.415642,18.6337604 Z" id="Stroke-3" stroke="#FFFFFF" stroke-width="0.5"></path>
+        </g>
+    </g>
+</svg>
