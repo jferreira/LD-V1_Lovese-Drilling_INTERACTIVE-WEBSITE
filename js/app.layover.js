@@ -37,7 +37,8 @@ app.layover = {
     },
     cycleIntroContent: function(totalTime, elements) {
       app.layover.call('preCycle');
-      var sectionTime = (totalTime * 1000) / $(app.layover.element).children(elements).length;
+      var elementsLength = $(app.layover.element).children(elements).length;
+      var sectionTime = (totalTime * 1000) / elementsLength;
       var mapF = $(app.layover.element).children(elements);
       var $active = mapF.eq(0);
       $active.addClass("active");
@@ -49,10 +50,10 @@ app.layover = {
         $active = $next;
 
         // Do map operations
-        $next = (mapF.last().index() == mapF.index($active)) ? $next = mapF.eq(0): $active.next();
-
-        if(mapF.last().index() == mapF.index($active)) {
-          console.log("finished");
+        $next = (elementsLength == mapF.index($active)) ? $next = mapF.eq(0): $active.next();
+        // console.log(elementsLength, mapF.last().index(), mapF.index($active));
+        if((elementsLength -1) == mapF.index($active)) {
+          // console.log("finished!!");
           clearInterval(timer);
           timer = null;
         }

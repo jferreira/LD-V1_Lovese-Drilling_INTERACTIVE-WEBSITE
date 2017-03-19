@@ -5,8 +5,8 @@ var app = {
   liveEpisodes: 1, // Second episode is live
   interactiveState: false,
   textPageState: false,
-  introSequence1Time: 20,
-  introSequence2Time: 15,
+  introSequence1Time: 10,
+  introSequence2Time: 10,
 
   init: function() {
     app.layover.init();
@@ -314,7 +314,7 @@ showIntroScreen1: function() {
 showIntroScreen2: function() {
   $(app.layover.element).children(".content-first").removeClass("active");
   app.layover.cycleIntroContent(app.introSequence2Time,".content-second");
-  app.layover.show();
+  //app.layover.show();
 }
 }
 $(app.init);
