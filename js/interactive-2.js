@@ -26,6 +26,30 @@ function setSizes() {
 
 map.on('load', function() {
   console.log("loaded everything");
+
+
+  map.addSource('corals', { type: 'geojson', data: '../include/map-layers/corals.geojson' });
+  //map.addSource('oil', { type: 'json', data: '../include/map-layers/prospekter.json' });
+
+  // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
+
+  map.addLayer({
+      "id": "corals",
+      "type": "circle",
+      "source": "corals",
+      'layout': {
+          'visibility': 'visible'
+      },
+      "paint": {
+        'circle-radius': 5,
+        'circle-opacity': 0.5,
+        'circle-color': 'rgba(172,255,178,1)'
+      },
+      "filter": ["==", "$type", "Point"],
+  });
+
+
+
   map.resize();
   $(".loading").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (2 minutes)
@@ -52,7 +76,7 @@ $("body").on("mousedown", function() {
 $("#hover-navigation .arrow").on("click", function() {
   if (app.navigation.state == app.navigation.visible) {
     $(".interactive-pane").css({"bottom":"130px"});
-  } else {
+  } else if(app.navigation.state == app.navigation.hidden) {
     $(".interactive-pane").css({"bottom":"30px"});
   }
 });
