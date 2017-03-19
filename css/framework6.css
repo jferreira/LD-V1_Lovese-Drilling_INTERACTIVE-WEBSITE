@@ -215,18 +215,22 @@ p, span, a, input, textarea, ul, li {
   cursor: pointer;
   width:32px;
   height:32px;
+  display: block;
 }
 
 .arrow_show_hide {
-  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Down@1x.png) no-repeat;
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Down@2x.png) no-repeat 0 0;
+  background-size: 32px;
 }
 
 .arrow_left {
-  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Left@1x.png) no-repeat;
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Left@2x.png) no-repeat 0 0;
+  background-size: 32px;
 }
 
 .arrow_right {
-  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Right@1x.png) no-repeat;
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Right@2x.png) no-repeat 0 0;
+  background-size: 32px;
 }
 
 .arrow_up {
