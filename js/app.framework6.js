@@ -41,7 +41,7 @@ var app = {
 
     // Layover
     $("body").on("click", "[rel=closelayover]", app.layover.hide);
-
+    
     // Shortcuts
     $("body").on('keydown', function(event) {
       if (event.keyCode == 32) // Spacebar
@@ -180,7 +180,6 @@ helpers: {
   },
 
   updateContent: function(episode) {
-
     var episodeId;
     if(episode === undefined || episode === null) {
       episodeId = app.currNav;
@@ -292,7 +291,6 @@ helpers: {
         //Something went wrong, have your error fallback code here
       }
     });
-
   }
 },
 showIntroScreen: function() {
@@ -306,9 +304,9 @@ showIntroScreen: function() {
   "<button class='btn btn-default btn-lg' rel=\"closelayover\">Start the experience</button>"
 );
 */
-var totalTime = 30;
-app.layover.cycleIntroContent(totalTime);
-app.layover.show();
-}
+  var totalTime = 30;
+  app.layover.cycleIntroContent(totalTime);
+  app.layover.show();
+  }
 }
 $(app.init);
