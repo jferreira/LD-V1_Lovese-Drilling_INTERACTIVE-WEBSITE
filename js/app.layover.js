@@ -16,7 +16,7 @@ app.layover = {
         'preShow':  [],
         'postShow': [],
         'preCycle':  [],
-        'postCycle': [],        
+        'postCycle': [],
         'preContent': [],
         'postContent': [],
         'preHide': [],
@@ -69,6 +69,12 @@ app.layover = {
     },
     setClass: function(className) {
         app.layover.element.attr('class', className);
+    },
+    showSpecificScreen: function(screenIndex) {
+      var index = $(app.layover.element).children();
+      var $active = index.eq(screenIndex);
+      $active.addClass("active").siblings("").removeClass("active");
+      app.layover.show();
     },
     show: function() {
         app.layover.call('preShow');
