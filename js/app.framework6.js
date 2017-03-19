@@ -5,10 +5,12 @@ var app = {
   liveEpisodes: 1, // Second episode is live
   interactiveState: false,
   textPageState: false,
+  introSequence1Time: 20,
+  introSequence2Time: 15,
 
   init: function() {
     app.layover.init();
-    app.showIntroScreen();
+    app.showIntroScreen1();
 
     app.video.init();
     app.navigation.init();
@@ -40,8 +42,10 @@ var app = {
     $('#episodeProgress').on("click", app.handleProgressClick);
 
     // Layover
+
     $("body").on("click", "[rel=closelayover]", app.layover.hide);
-    
+    $("body").on("click", "[rel=nextlayover]", app.showIntroScreen2);
+
     // Shortcuts
     $("body").on('keydown', function(event) {
       if (event.keyCode == 32) // Spacebar
@@ -293,7 +297,7 @@ helpers: {
     });
   }
 },
-showIntroScreen: function() {
+showIntroScreen1: function() {
   /*
   app.layover.updateContent(
   "<h1 class='brand-heading'>LoVeSe Drilling</h1>"+
@@ -304,9 +308,13 @@ showIntroScreen: function() {
   "<button class='btn btn-default btn-lg' rel=\"closelayover\">Start the experience</button>"
 );
 */
-  var totalTime = 30;
-  app.layover.cycleIntroContent(totalTime);
+  app.layover.cycleIntroContent(app.introSequence1Time, ".content-first");
   app.layover.show();
-  }
+},
+showIntroScreen2: function() {
+  $(app.layover.element).children(".content-first").removeClass("active");
+  app.layover.cycleIntroContent(app.introSequence2Time,".content-second");
+  app.layover.show();
+}
 }
 $(app.init);

@@ -35,12 +35,12 @@ app.layover = {
             eventFunction();
         });
     },
-    cycleIntroContent: function(totalTime) {
+    cycleIntroContent: function(totalTime, elements) {
       app.layover.call('preCycle');
-      var sectionTime = (totalTime * 1000) / $(app.layover.element).children().length;
-
-      var mapF = $(app.layover.element).children();
+      var sectionTime = (totalTime * 1000) / $(app.layover.element).children(elements).length;
+      var mapF = $(app.layover.element).children(elements);
       var $active = mapF.eq(0);
+      $active.addClass("active");
 
       var $next = $active.next();
       var timer = setInterval(function() {
@@ -71,10 +71,10 @@ app.layover = {
         app.layover.element.attr('class', className);
     },
     showSpecificScreen: function(screenIndex) {
-      var index = $(app.layover.element).children();
-      var $active = index.eq(screenIndex);
-      $active.addClass("active").siblings("").removeClass("active");
-      app.layover.show();
+        var index = $(app.layover.element).children();
+        var $active = index.eq(screenIndex);
+        $active.addClass("active").siblings().removeClass("active");
+        app.layover.show();
     },
     show: function() {
         app.layover.call('preShow');
