@@ -242,6 +242,7 @@ p, span, a, input, textarea, ul, li {
   width:32px;
   height:32px;
   display: block;
+  margin-left: -12.5%;
 }
 
 .arrow_show_hide {
