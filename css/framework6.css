@@ -202,6 +202,32 @@ p, span, a, input, textarea, ul, li {
   height: 30px;
 }
 
+.navigation-elements {
+  width: 100%;
+  display: flex;                  /* establish flex container */
+}
+
+.play_pause {
+  margin-left: 0;
+}
+
+.play_pause_button {
+  cursor: pointer;
+  width:32px;
+  height:32px;
+  display: block;
+}
+
+.play {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.pause {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Pause@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
 .arrows {
   display: flex;                  /* establish flex container */
   flex-direction: row;            /* default value; can be omitted */
@@ -512,6 +538,7 @@ video::-webkit-media-controls {
 *    INTERACTIVE
 */
 
+/*
 .play {
   width: 12px;
   height: 16px;
@@ -542,6 +569,7 @@ video::-webkit-media-controls {
   display: block;
   outline: 0;
 }
+*/
 
 #seek-bar {
   width: 100%;

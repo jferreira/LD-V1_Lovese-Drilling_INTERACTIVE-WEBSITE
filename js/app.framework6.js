@@ -30,7 +30,9 @@ var app = {
     // Video control
     $(".video-controls").on("click", app.video.start);
     $("video").on("click",           app.video.toggle);
-    $('#btn-play-pause').on("click", app.video.toggle);
+    //$('#btn-play-pause').on("click", app.video.toggle);
+    $('.play_pause_button').on("click", app.video.toggle);
+
 
     // Internal video events
     $("video").on("timeupdate", app.updateTime);
@@ -110,7 +112,7 @@ attachScripts: function() {
     $("#titles").fadeOut(1000);
     $(".nav-holder *").fadeOut(1000);
 
-    $('#btn-play-pause').removeClass('play').addClass('pause');
+    $('.play_pause_button').removeClass('play').addClass('pause');
     $('video').css("z-index","1");
   });
   app.video.callbacks.prePause.push(function() {
@@ -121,7 +123,7 @@ attachScripts: function() {
 
     $(".slide-container").css({"background-image": 'none'}); // Remove the title slide when video is paused
 
-    $('#btn-play-pause').removeClass('pause').addClass('play');
+    $('.play_pause_button').removeClass('pause').addClass('play');
     $('video').css("z-index","0");
   });
 },
@@ -196,10 +198,12 @@ helpers: {
 
     if(episodeId > 0) {
       $("img.video-controls").css({"width": 0, "height" : 0});
-      $("button.play").attr("disabled", true);
+      //$("button.play").attr("disabled", true);
+      $(".play_pause_button").hide();
     } else {
       $("img.video-controls").css({"width": "50px", "height" : "auto"});
-      $("button.play").attr("disabled", false);
+      //$("button.play").attr("disabled", false);
+      $(".play_pause_button").show();
     }
 
     app.interactiveState = false;
@@ -240,7 +244,7 @@ helpers: {
     // $("#titles span.description").text(nav.episodes[episodeId].description);
     $("#content *, #titles").fadeIn(1000);
     $(".timeRemaining").text("0:00");
-    $('#btn-play-pause').removeClass('pause').addClass('play');
+    $('.play_pause_button').removeClass('pause').addClass('play');
     $(".avancee").css({width:"0%"});
   },
 
@@ -254,11 +258,11 @@ helpers: {
     $("#video video").attr({"src": ""});
     $(".timeRemaining").text("");
     $(".avancee").css({width:"0%"});
-    $('#btn-play-pause').removeClass('pause').addClass('play');
+    $('.play_pause_button').removeClass('pause').addClass('play');
 
     //$(".nav-holder *").fadeOut(1000);
     //$('#episodeProgress *').hide();
-    $('#btn-play-pause').hide();
+    $('.play_pause_button').hide();
 
     $("#content #video, #titles").hide();
     $("#content #interactive").empty();
@@ -283,7 +287,7 @@ helpers: {
     $("#video video").attr({"src": ""});
     $(".timeRemaining").text("");
     $(".avancee").css({width:"0%"});
-    $('#btn-play-pause').removeClass('pause').addClass('play');
+    $('.play_pause_button').removeClass('pause').addClass('play');
 
     //$(".nav-holder *").fadeOut(1000);
     $('#episodeProgress *').hide();
