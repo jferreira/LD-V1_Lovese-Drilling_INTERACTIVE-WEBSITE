@@ -43,7 +43,7 @@ var app = {
 
     // Layover
 
-    $("body").on("click", "[rel=closelayover]", app.layover.hide);
+    $("body").on("click", "[rel=closelayover]", app.closeLayover);
     $("body").on("click", "[rel=nextlayover]", app.showIntroScreen2);
 
     // Shortcuts
@@ -315,6 +315,10 @@ showIntroScreen2: function() {
   $(app.layover.element).children(".content-first").removeClass("active");
   app.layover.cycleIntroContent(app.introSequence2Time,".content-second");
   //app.layover.show();
+},
+closeLayover: function() {
+  app.helpers.updateContent(0);
+  app.layover.hide();
 }
 }
 $(app.init);
