@@ -34,18 +34,18 @@ map.on('load', function() {
   // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
 
   map.addLayer({
-      "id": "corals",
-      "type": "circle",
-      "source": "corals",
-      'layout': {
-          'visibility': 'visible'
-      },
-      "paint": {
-        'circle-radius': 5,
-        'circle-opacity': 0.5,
-        'circle-color': 'rgba(172,255,178,1)'
-      },
-      "filter": ["==", "$type", "Point"],
+    "id": "corals",
+    "type": "circle",
+    "source": "corals",
+    'layout': {
+      'visibility': 'visible'
+    },
+    "paint": {
+      'circle-radius': 5,
+      'circle-opacity': 0.5,
+      'circle-color': 'rgba(172,255,178,1)'
+    },
+    "filter": ["==", "$type", "Point"],
   });
 
 
@@ -135,18 +135,18 @@ function zoomToArea() {
 
 /*
 if(this.readyState > 0) {
-  var value = (100 / this.duration) * this.currentTime;
+var value = (100 / this.duration) * this.currentTime;
 
-  var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
-  var seconds = (this.duration - this.currentTime) % 60;
+var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
+var seconds = (this.duration - this.currentTime) % 60;
 
-  seconds = Math.ceil(seconds);
-  $(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
+seconds = Math.ceil(seconds);
+$(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
 
-  var d = 100 * this.currentTime / this.duration;
-  $(".avancee").css({width:d+"%"});
+var d = 100 * this.currentTime / this.duration;
+$(".avancee").css({width:d+"%"});
 
-  $("#seek-bar").val(value);
+$("#seek-bar").val(value);
 }
 */
 
