@@ -200,31 +200,49 @@ p, span, a, input, textarea, ul, li {
 #hover-navigation {
   width: 100%;
   height: 30px;
-  text-align: center;
+}
+
+.arrows {
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+  width: 500px;
+  margin: 0 auto;
 }
 
 .arrow {
-  background: url(../resources/_Images/_Icons/_Arrow_@1x.png) no-repeat;
-  width:30px;
-  height:28px;
-  margin: 0 auto;
   cursor: pointer;
+  width:32px;
+  height:32px;
+}
+
+.arrow_show_hide {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Down@1x.png) no-repeat;
+}
+
+.arrow_left {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Left@1x.png) no-repeat;
+}
+
+.arrow_right {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Right@1x.png) no-repeat;
 }
 
 .arrow_up {
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
-.arrow_down {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+.arrow_down {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .transition {

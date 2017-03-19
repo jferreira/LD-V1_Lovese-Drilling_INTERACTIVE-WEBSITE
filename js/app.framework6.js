@@ -10,7 +10,7 @@ var app = {
 
   init: function() {
     app.layover.init();
-    app.showIntroScreen1();
+    //app.showIntroScreen1();
 
     app.video.init();
     app.navigation.init();
@@ -23,7 +23,9 @@ var app = {
   },
   attachObservers: function() {
     // Navigation
-    $("#hover-navigation .arrow").on("click", app.navigation.toggle);
+    $("#hover-navigation .arrow_left").on("click", app.toPrevious);
+    $("#hover-navigation .arrow_show_hide").on("click", app.navigation.toggle);
+    $("#hover-navigation .arrow_right").on("click", app.toNext);
 
     // Video control
     $(".video-controls").on("click", app.video.start);
@@ -90,10 +92,10 @@ attachScripts: function() {
   // Always have the arrow down when navigation is visible
   // and up when hidden
   app.navigation.callbacks.preShow.push(function() {
-    $("#hover-navigation .arrow").removeClass("arrow_up").addClass("arrow_down");
+    $("#hover-navigation .arrow_show_hide").removeClass("arrow_up").addClass("arrow_down");
   });
   app.navigation.callbacks.preHide.push(function() {
-    $("#hover-navigation .arrow").removeClass("arrow_down").addClass("arrow_up");
+    $("#hover-navigation .arrow_show_hide").removeClass("arrow_down").addClass("arrow_up");
   });
 
   // Hide various elements when the video starts playing
