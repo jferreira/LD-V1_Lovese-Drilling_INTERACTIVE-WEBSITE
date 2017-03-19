@@ -8,7 +8,7 @@ var app = {
 
   init: function() {
     app.layover.init();
-    //app.showIntroScreen();
+    app.showIntroScreen();
 
     app.video.init();
     app.navigation.init();
