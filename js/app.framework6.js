@@ -1,8 +1,9 @@
 "use strict";
 
 var app = {
-  currNav: 0,
-  liveEpisodes: 1, // Second episode is live
+  currEpisode: 0,
+  currInteractive: 0,
+  liveEpisodes: 1, // 0=1,1=2,2=3 etc. Second episode is live
   interactiveState: false,
   textPageState: false,
   introSequence1Time: 10,
@@ -65,8 +66,8 @@ var app = {
       app.navigation.toggle();
     });
 
-    $("#navPrev").on("click", app.toPrevious);
-    $("#navNext").on("click", app.toNext);
+    //$("#navPrev").on("click", app.toPrevious);
+    //$("#navNext").on("click", app.toNext);
 
     $("#mute-video").click( function (){
       if( $("video").prop('muted') ) {
@@ -127,15 +128,53 @@ attachScripts: function() {
     $('video').css("z-index","0");
   });
 },
+/**
+* TODO: These two new functions which would include interactive parts
+* Navigate to the previous episode or interactive part.
+*/
+/*
 toPrevious: function() {
-  if (app.currNav > 0) {
-    app.currNav--;
+  if (app.currEpisode > 0) {
+    if(app.currEpisode > app.currInteractive) {
+      app.helpers.loadInteractiveContent(app.currInteractive+1);
+      app.currInteractive--;
+      console.log("interactive now: " + app.currInteractive)
+    } else {
+      app.currEpisode--;
+      app.helpers.updateContent();
+      console.log("episode now: " + app.currEpisode)
+    }
+  }
+},
+*/
+/**
+* Navigate to the next episode or interactive part.
+* If we are at last viewable content, show prompt to subscribe to newsletter.
+*/
+/*
+toNext: function() {
+  if (app.currEpisode <= nav.episodes.length-2) {
+    if(app.currEpisode == app.currInteractive && app.currEpisode <= app.liveEpisodes) {
+      app.helpers.loadInteractiveContent(app.currInteractive+1);
+      app.currInteractive++;
+      console.log("interactive now: " + app.currInteractive)
+    } else {
+      app.currEpisode++;
+      app.helpers.updateContent();
+      console.log("episode now: " + app.currEpisode)
+    }
+  }
+},
+*/
+toPrevious: function() {
+  if (app.currEpisode > 0) {
+    app.currEpisode--;
     app.helpers.updateContent();
   }
 },
 toNext: function() {
-  if (app.currNav <= nav.episodes.length-2) {
-    app.currNav++;
+  if (app.currEpisode <= nav.episodes.length-2) {
+    app.currEpisode++;
     app.helpers.updateContent();
   }
 },
@@ -190,10 +229,10 @@ helpers: {
   updateContent: function(episode) {
     var episodeId;
     if(episode === undefined || episode === null) {
-      episodeId = app.currNav;
+      episodeId = app.currEpisode;
     } else {
       episodeId = episode;
-      app.currNav = episodeId;
+      app.currEpisode = episodeId;
     }
 
     if(episodeId > 0) {
@@ -221,7 +260,7 @@ helpers: {
     $('#episodeProgress *').show();
 
     $("#video").css({
-      "background": 'url("' + nav.episodes[app.currNav].poster + '") no-repeat',
+      "background": 'url("' + nav.episodes[app.currEpisode].poster + '") no-repeat',
       "background-size": 'cover',
       "background-position": 'center center'
     });
@@ -234,7 +273,7 @@ helpers: {
     }).hide(); //hack to fix the load of video before image issue
 
     $(".slide-container").css({
-      "background": 'url("'+nav.episodes[app.currNav].slide+'") no-repeat',
+      "background": 'url("'+nav.episodes[app.currEpisode].slide+'") no-repeat',
       "background-size": 'cover',
       "background-position": 'center center'
     });
