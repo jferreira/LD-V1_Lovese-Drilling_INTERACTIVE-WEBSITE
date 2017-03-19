@@ -2,13 +2,13 @@
 
 var app = {
   currNav: 0,
-  liveEpisodes: 0, // Second episode is live
+  liveEpisodes: 1, // Second episode is live
   interactiveState: false,
   textPageState: false,
 
   init: function() {
     app.layover.init();
-    app.showIntroScreen();
+    //app.showIntroScreen();
 
     app.video.init();
     app.navigation.init();
@@ -266,7 +266,8 @@ helpers: {
     });
 
     if (app.navigation.state == app.navigation.visible) {
-        app.navigation.hide();
+      app.navigation.state = app.navigation.hidden;
+      app.navigation.hide();
     }
   },
   loadTextPage: function(id) {
