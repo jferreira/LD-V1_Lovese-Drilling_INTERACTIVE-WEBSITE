@@ -1,3 +1,11 @@
+// https://stackoverflow.com/questions/35452705/mapbox-leaflet-increase-marker-size-on-zoom
+// Show/hide on specific zoom level: https://www.mapbox.com/mapbox-gl-js/example/updating-choropleth/
+// Use layers instead of markers? https://stackoverflow.com/questions/40153538/how-to-hide-point-labels-at-certain-zoom-levels-in-mapbox-gl-js
+// min zoom or stops: http://android.wekeepcoding.com/article/11539332/How+to+hide+point+labels+at+certain+zoom+levels+in+mapbox-gl-js%3F
+// https://www.mapbox.com/mapbox-gl-js/example/add-image/
+// OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
+
+
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 2000;
@@ -6,7 +14,8 @@ var totalTime = 60 * 2;
 var paused;
 var countdown;
 
-var geojson = {
+// https://www.mapbox.com/help/custom-markers-gl-js/
+var areas = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -57,6 +66,52 @@ var geojson = {
     ]
 };
 
+var oilareas = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "TROMS II"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [16.89656278272045, 69.99959900300283]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NORDLAND VII"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [12.54395051590086, 68.67553211914631]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NORDLAND VI",
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [9.682141227345937, 67.69129025619176]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NORDLAND V",
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [11.62876179579601, 66.77177798313087]
+            }
+        }
+    ]
+};
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
 
 var map = new mapboxgl.Map({
@@ -69,15 +124,13 @@ var map = new mapboxgl.Map({
   attributionControl: false
 });
 
-
-// add markers to map
-geojson.features.forEach(function(marker) {
+// add marker for each area to map
+areas.features.forEach(function(marker) {
     // create a DOM element for the marker
     var el = document.createElement('div');
     el.className = 'marker';
 
     el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
-    //el.style.backgroundImage = 'url(https://placekitten.com/g/' + marker.properties.iconSize.join('/') + '/)';
     el.style.width = marker.properties.iconSize[0] + 'px';
     el.style.height = marker.properties.iconSize[1] + 'px';
 
@@ -125,14 +178,35 @@ function setSizes() {
 }
 
 map.on('load', function() {
-  console.log("loaded everything");
+  //console.log("loaded everything");
 
   map.addSource('corals', { type: 'geojson', data: '../include/map-layers/corals.geojson' });
   map.addSource('cod', { type: 'geojson', data: '../include/map-layers/cod.geojson' });
-  //map.addSource('oil', { type: 'json', data: '../include/map-layers/prospekter.json' });
+
+  map.addSource('lovese', { type: 'geojson', data: '../include/map-layers/lovese_blocks.geojson' });
+  map.addSource('oil_prospects', { type: 'geojson', data: '../include/map-layers/prospekter_union.geojson' });
+  map.addSource('oil_areas', {type: 'geojson', data : oilareas});
+  map.addSource('opened_oil_areas', { type: 'geojson', data: '../include/map-layers/opened_areas.geojson' });
+
+  // Do this after loading the sub areas (with the timed transition or on click)
+  map.addLayer({
+    "id": "clusters-label",
+    "type": "symbol",
+    "source": "oilareas",
+    "layout": {
+      "text-field": "{name}",
+      "text-font": [
+        "DIN Offc Pro Medium",
+        "Arial Unicode MS Bold"
+      ],
+      "text-size": 10,
+    },
+    "paint": {
+      "text-color": "#fff"
+    },
+  });
 
   // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
-
   // map.addLayer({
   //   "id": "corals",
   //   "type": "circle",
@@ -148,28 +222,28 @@ map.on('load', function() {
   //   "filter": ["==", "$type", "Point"],
   // });
 
+  var filters = document.getElementById('map-filters');
+  var item = filters.appendChild(document.createElement('div'));
+  var checkbox = item.appendChild(document.createElement('input'));
+  var label = item.appendChild(document.createElement('label'));
+  checkbox.type = 'checkbox';
+  checkbox.id = "Test";
+  label.innerHTML = "Test";
+  label.setAttribute('for', "Test");
+  checkbox.addEventListener('change', update);
 
-    var item = filters.appendChild(document.createElement('div'));
-    var checkbox = item.appendChild(document.createElement('input'));
-    var label = item.appendChild(document.createElement('label'));
-    checkbox.type = 'checkbox';
-    checkbox.id = "Test";
-    label.innerHTML = "Test";
-    label.setAttribute('for', "Test");
-    checkbox.addEventListener('change', update);
+  function update() {
+  (checkbox.checked) ? map.addLayer({"id":"lovese","source":"lovese","type":"fill","paint": {"fill-opacity":0.5, "fill-color":"#fff","fill-outline-color":"#000"}}) : map.removeLayer("lovese");
+    console.log("Updated");
+  }
 
-    function update() {
-      (checkbox.checked) ? map.addLayer({"id":"cod","source":"cod","type":"fill"}) : map.removeLayer("cod");
-      console.log("Updated");
-    }
-
-
-    var el = document.createElement('div');
-    el.className = 'marker';
-    el.style.backgroundImage = 'url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_LABEL_Lofoten-Archipelago@1x.png")';
-    new mapboxgl.Marker(el)
-     .setLngLat([68.13847130824598,13.528224720620983]) //13.528224720620983, lat: 68.13847130824598
-     .addTo(map);
+  // map.on('click', 'body > #lovese', function (e) {
+  //   console.log("CLICKED");
+  //   // new mapboxgl.Popup()
+  //   //   .setLngLat(e.features[0].geometry.coordinates)
+  //   //   .setHTML(e.features[0].properties.description)
+  //   //   .addTo(map);
+  // });
 
   map.resize();
   $(".loading").fadeOut(1500).promise().done(function() {
@@ -195,6 +269,17 @@ map.on("mousedown", function(e) {
   console.log(center, zoom, e.lngLat, e.point);
 });
 
+// Change the cursor to a pointer when the mouse is over the places layer.
+// Does not work on the dynamically added layers?
+map.on('mouseenter', 'lovese', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'lovese', function () {
+    map.getCanvas().style.cursor = '';
+});
+
 $("#hover-navigation .arrow").on("click", function() {
   if (app.navigation.state == app.navigation.visible) {
     $(".interactive-pane").css({"bottom":"130px"});
@@ -214,7 +299,7 @@ map.on('moveend', function(e){
   if(!flying && zoomedToArea){
     // tooltip or overlay here
     //map.fire(flyend);
-    console.log("we are here");
+    //console.log("we are here");
     $(".container-full").fadeIn("1500");
     //startMapFeautures();
 
