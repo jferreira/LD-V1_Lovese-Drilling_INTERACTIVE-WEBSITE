@@ -6,6 +6,18 @@
 <link href='/css/include.css' rel='stylesheet' />
 <link href='/css/interactive-2.css' rel='stylesheet' />
 
+<style>
+.filter-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:100;
+  padding:10px;
+  border-radius:3px;
+  }
+</style>
+
 <div class="loading">
   <div class="interactive-content">
     Loading...
@@ -60,6 +72,9 @@
     <div class="col-md-4 col-lg-3 interactive-pane transition"></div>
   </div>
 </div>
+
+<nav id='filters' class='filter-ui'>
+</nav>
 
 <div id='map'></div>
 

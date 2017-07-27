@@ -18,6 +18,31 @@ var map = new mapboxgl.Map({
   attributionControl: false
 });
 
+// var filters = document.getElementById('filters');
+//
+// map.addSource('cod', {
+//     type: 'geojson',
+//     data: 'cod.geojson'
+// }).on('ready', layer);
+//
+// function layer() {
+//   var layer = this;
+//   var name = layer.getGeoJSON().name;
+//
+//   var item = filters.appendChild(document.createElement('div'));
+//   var checkbox = item.appendChild(document.createElement('input'));
+//   var label = item.appendChild(document.createElement('label'));
+//   checkbox.type = 'checkbox';
+//   checkbox.id = name;
+//   label.innerHTML = name;
+//   label.setAttribute('for', name);
+//   checkbox.addEventListener('change', update);
+//
+//   function update() {
+//     (checkbox.checked) ? layer.addTo(map) : map.removeLayer(layer);
+//   }
+// }
+
 function setSizes() {
   console.log("Resize")
   var containerHeight = $(".interactive-pane").height();
@@ -27,27 +52,41 @@ function setSizes() {
 map.on('load', function() {
   console.log("loaded everything");
 
-
   map.addSource('corals', { type: 'geojson', data: '../include/map-layers/corals.geojson' });
+  map.addSource('cod', { type: 'geojson', data: '../include/map-layers/cod.geojson' });
   //map.addSource('oil', { type: 'json', data: '../include/map-layers/prospekter.json' });
 
   // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
 
-  map.addLayer({
-    "id": "corals",
-    "type": "circle",
-    "source": "corals",
-    'layout': {
-      'visibility': 'visible'
-    },
-    "paint": {
-      'circle-radius': 5,
-      'circle-opacity': 0.5,
-      'circle-color': 'rgba(172,255,178,1)'
-    },
-    "filter": ["==", "$type", "Point"],
-  });
+  // map.addLayer({
+  //   "id": "corals",
+  //   "type": "circle",
+  //   "source": "corals",
+  //   'layout': {
+  //     'visibility': 'visible'
+  //   },
+  //   "paint": {
+  //     'circle-radius': 5,
+  //     'circle-opacity': 0.5,
+  //     'circle-color': 'rgba(172,255,178,1)'
+  //   },
+  //   "filter": ["==", "$type", "Point"],
+  // });
 
+
+    var item = filters.appendChild(document.createElement('div'));
+    var checkbox = item.appendChild(document.createElement('input'));
+    var label = item.appendChild(document.createElement('label'));
+    checkbox.type = 'checkbox';
+    checkbox.id = "Test";
+    label.innerHTML = "Test";
+    label.setAttribute('for', "Test");
+    checkbox.addEventListener('change', update);
+
+    function update() {
+      (checkbox.checked) ? map.addLayer({"id":"cod","source":"cod","type":"fill"}) : map.removeLayer("cod");
+      console.log("Updated");
+    }
 
 
   map.resize();
