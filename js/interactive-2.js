@@ -6,6 +6,57 @@ var totalTime = 60 * 2;
 var paused;
 var countdown;
 
+var geojson = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "message": "Lofoten",
+                "iconSize": [200, 32],
+                "imgName" : "_ICN_LABEL_Lofoten-Archipelago@1x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.467073883438474,
+                    68.14785141282243
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "message": "Vesterålen",
+                "iconSize": [200, 32],
+                "imgName" : "_ICN_LABEL_Vesterålen-Archipelago@1x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.908509488458321,
+                    68.72214903472567
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "message": "Senja",
+                "iconSize": [200, 32],
+                "imgName" : "_ICN_LABEL_Senja-Archipelago@1x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    17.24538248797009,
+                    69.33534478960459
+                ]
+            }
+        }
+    ]
+};
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
 
 var map = new mapboxgl.Map({
@@ -17,6 +68,30 @@ var map = new mapboxgl.Map({
   bearing: 0, // bearing in degrees
   attributionControl: false
 });
+
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+    // create a DOM element for the marker
+    var el = document.createElement('div');
+    el.className = 'marker';
+
+    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+    //el.style.backgroundImage = 'url(https://placekitten.com/g/' + marker.properties.iconSize.join('/') + '/)';
+    el.style.width = marker.properties.iconSize[0] + 'px';
+    el.style.height = marker.properties.iconSize[1] + 'px';
+
+    el.addEventListener('click', function() {
+        window.alert(marker.properties.message);
+    });
+
+    // add marker to map
+    //new mapboxgl.Marker(el)
+    new mapboxgl.Marker(el, { offset: [-50 / 2, -50 / 2] })
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+});
+
 
 // var filters = document.getElementById('filters');
 //
@@ -89,6 +164,13 @@ map.on('load', function() {
     }
 
 
+    var el = document.createElement('div');
+    el.className = 'marker';
+    el.style.backgroundImage = 'url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_LABEL_Lofoten-Archipelago@1x.png")';
+    new mapboxgl.Marker(el)
+     .setLngLat([68.13847130824598,13.528224720620983]) //13.528224720620983, lat: 68.13847130824598
+     .addTo(map);
+
   map.resize();
   $(".loading").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (2 minutes)
@@ -106,10 +188,11 @@ $(window).resize(function() {
   //setSizes();
 });
 
-$("body").on("mousedown", function() {
+//$("body")
+map.on("mousedown", function(e) {
   var center = map.getCenter().wrap();
   var zoom = map.getZoom();
-  console.log(center, zoom);
+  console.log(center, zoom, e.lngLat, e.point);
 });
 
 $("#hover-navigation .arrow").on("click", function() {
@@ -155,8 +238,9 @@ function zoomToArea() {
   map.flyTo({
     center: [12.901721434467618,68.71391887946749],
     zoom: 6.54,
-    pitch: 80, // pitch in degrees
-    bearing: 15, // bearing in degrees
+    // For perspektiv:
+    // pitch: 80, // pitch in degrees
+    // bearing: 15, // bearing in degrees
 
     // These options control the flight curve, making it move
     // slowly and zoom out almost completely before starting
