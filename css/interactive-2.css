@@ -125,6 +125,15 @@
   cursor: pointer;
 }
 
+.people-marker {
+  border-radius: 50%;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;         /* Generic*/
+  cursor: pointer;
+}
+
 section {
   line-height: 25px;
   display: none;

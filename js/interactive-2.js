@@ -38,6 +38,21 @@ mapLayersStyle["oil_prospects"] = {
     border_color : "#000"
 }
 
+var peopleIcons = new Array(3);
+peopleIcons["eldar"] = {
+  zoomedTo : false,
+  playedVideo : false,
+  clicked : 0,
+  coordinates : []
+}
+
+var zoomed = new Array(5);
+zoomed["first"] = false;
+zoomed["second"] = false;
+zoomed["third"] = false;
+zoomed["fourth"] = false;
+zoomed["fifth"] = false;
+
 var paused;
 var countdown;
 
@@ -138,6 +153,27 @@ var oilareas = {
     ]
 };
 
+var people = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "message": "Eldar",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_IMG-INT-01@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.71917260338634,
+                    67.6552201739818
+                ]
+            }
+        }
+    ]
+};
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
 
 var map = new mapboxgl.Map({
@@ -174,7 +210,7 @@ map.on('load', function() {
   $(".loading").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (set in top of script)
     setTimeout(function() {
-      zoomToArea();
+      zoomToArea("first", [12.901721434467618,68.71391887946749], 6.54, 0.5, 1.5, 0, 0, [0,0]);
     }, startDelay);
   });
 });
@@ -214,6 +250,7 @@ $("#hover-navigation .arrow").on("click", function() {
   }
 });
 
+// Functions for flying to a specific part of the map
 map.on('flystart', function(){
   flying = true;
 });
@@ -221,46 +258,70 @@ map.on('flyend', function(){
   flying = false;
 });
 map.on('moveend', function(e){
+
+  //TODO: Need to implement a check here on the different times we're zooming on the map
+  /*Need:
+    zoom into Norway/the areas
+    zoom out to see all the areas Norway has opened for oil
+    zoom into Værøy / zoom out from Værøy
+    zoom to Johanne / zoom out from Johanne (Napp)
+    zoom to Anne Birgit / zoom out from Anne B. (Flakstad)
+  */
+
   if(!flying && zoomedToArea){
     //map.fire(flyend);
-    $(".container-full").fadeIn("1500");
+    if(zoomed["first"]) {
+      console.log("First zoom event!");
+      $(".container-full").fadeIn("1500");
 
-    // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
-    areas.features.forEach(function(marker) {
-        // create a DOM element for the marker
-        var el = document.createElement('div');
-        el.className = 'areas-marker';
+      // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
+      areas.features.forEach(function(marker) {
+          // create a DOM element for the marker
+          var el = document.createElement('div');
+          el.className = 'areas-marker';
 
-        el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
-        el.style.width = marker.properties.iconSize[0] + 'px';
-        el.style.height = marker.properties.iconSize[1] + 'px';
+          el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+          el.style.width = marker.properties.iconSize[0] + 'px';
+          el.style.height = marker.properties.iconSize[1] + 'px';
 
-        // Get the screen x,y representation of the coordinates
-        //var lnglat = new mapboxgl.LngLat(marker.geometry.coordinates);
-        var point = map.project(marker.geometry.coordinates);
+          // Get the screen x,y representation of the coordinates
+          //var lnglat = new mapboxgl.LngLat(marker.geometry.coordinates);
+          var point = map.project(marker.geometry.coordinates);
 
-        el.addEventListener('click', function() {
-            console.log(marker.properties.message, point);
-        });
+          el.addEventListener('click', function() {
+              console.log(marker.properties.message, point);
+          });
 
-        // add marker to map
-        //new mapboxgl.Marker(el)
-        new mapboxgl.Marker(el, { offset: [-100 / 2, -50 / 2] })
-            .setLngLat(marker.geometry.coordinates)
-            .addTo(map);
-    });
+          // add marker to map
+          //new mapboxgl.Marker(el)
+          new mapboxgl.Marker(el, { offset: [-100 / 2, -50 / 2] })
+              .setLngLat(marker.geometry.coordinates)
+              .addTo(map);
+      });
 
-    // Show map filters
-    $("#map-filters").show();
+      // Show map filters
+      $("#map-filters").show();
 
-    if (countdown) {
-      clearInterval(countdown);
+      if (countdown) {
+        clearInterval(countdown);
+      }
+      paused = false;
+
+      startTimer(totalTime);
+      startMapFeautures();
+      zoomed["first"] = false; // Not to do this again
+    } else if(zoomed["second"]) {
+      console.log("finished zooming second");
+
+      var point = map.project(peopleIcons["eldar"].coordinates);
+
+      $(".cd-modal-action").css({'left':point.x, 'top':point.y});
+      $(".cd-section").show();
+
+      zoomed["second"] = false;
     }
-    paused = false;
 
-    startTimer(totalTime);
-    startMapFeautures();
-    zoomedToArea = false;
+    zoomedToArea = false; // Always do this
   }
 });
 
@@ -330,12 +391,16 @@ function showMapLayer(layer){
       mapLayers[layer].visible = true;
     }
   }
+
+  if(layer === "islands") {
+    console.log("Adding people");
+    addPeopleIcons();
+  }
 }
 
 // Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer){
   if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "islands") {
-    console.log(layer, mapLayers[layer]);
     if(mapLayers[layer].visible == true && layer !== "islands") {
       //map.removeLayer(layer);
       map.setLayoutProperty(layer, 'visibility', 'none');
@@ -349,30 +414,88 @@ function removeMapLayer(layer){
   }
 }
 
+function addPeopleIcons() {
+  // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
+  people.features.forEach(function(marker) {
+      // create a DOM element for the marker
+      var el = document.createElement('div');
+      el.className = 'people-marker';
+
+      el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+      el.style.width = marker.properties.iconSize[0] + 'px';
+      el.style.height = marker.properties.iconSize[1] + 'px';
+
+      el.addEventListener('click', function() {
+          //console.log(marker.properties.message, point);
+          var point = map.project(marker.geometry.coordinates);
+          peopleIcons["eldar"].coordinates = marker.geometry.coordinates;
+
+          // Zoom into Værøy
+          // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
+          //console.log(peopleIcons["eldar"]);
+
+          if(peopleIcons["eldar"].zoomedTo == false) {
+              zoomToArea("second", marker.geometry.coordinates, 12.325, 0.5, 1.5, 150, -10, [650,0]);
+              peopleIcons["eldar"].zoomedTo = true;
+              peopleIcons["eldar"].clicked += 1;
+          } else {
+            // 3. If eldar icon is clicked more than once
+            if(peopleIcons["eldar"].clicked >= 1) {
+              console.log("Play the video", point);
+
+              // TODO: Make this work
+              // var actionBtn = $(this),
+          		// 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+              //
+          		// actionBtn.addClass('to-circle');
+          		// actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+          		// 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+          		// });
+              //
+          		// //if browser doesn't support transitions...
+          		// if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+              //
+              // peopleIcons["eldar"].playedVideo = true;
+            }
+          }
+
+          // 2. Add the 360 icons to the map
+
+
+      });
+
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+  });
+}
+
 function setSizes() {
   // Currently not in use
   var containerHeight = $(".interactive-pane").height();
   $(".interactive-pane").height(containerHeight - 130);
 }
 
-function zoomToArea() {
+function zoomToArea(zoomElement, center, zoom, speed, curve, pitch, bearing, offset) {
   if(app.navigation.state == app.navigation.visible) {
     $(".interactive-pane").css({"bottom":"30px"});
     app.navigation.toggle(); // toggle the nav
   }
+  zoomed[zoomElement] = true;
   zoomedToArea = true;
   map.flyTo({
-    center: [12.901721434467618,68.71391887946749],
-    zoom: 6.54,
+    center: center, //[12.901721434467618,68.71391887946749],
+    zoom: zoom,
+    offset: offset,
     // For perspective on the zoom - implement this to handle specific sections (oil prospects etc.)
-    // pitch: 80, // pitch in degrees
-    // bearing: 15, // bearing in degrees
+    pitch: pitch, // pitch in degrees - 80
+    bearing: bearing, // bearing in degrees - 15
 
     // These options control the flight curve, making it move
     // slowly and zoom out almost completely before starting
     // to pan.
-    speed: 0.5, // make the flying slow
-    curve: 1.5, // change the speed at which it zooms out
+    speed: speed, //0.5, // make the flying slow
+    curve: curve, //1.5, // change the speed at which it zooms out
 
     // This can be any easing function: it takes a number between
     // 0 and 1 and returns another number between 0 and 1.
@@ -477,3 +600,87 @@ function startMapFeautures() {
 // https://www.mapbox.com/mapbox-gl-js/example/add-image/
 // OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
 // https://www.mapbox.com/help/custom-markers-gl-js/
+
+
+// Open videos and 360s:
+	//trigger the animation - open modal window
+	// $('[data-type="modal-trigger"]').on('click', function(){
+  //   console.log("clicked button");
+	// 	var actionBtn = $(this),
+	// 		scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+  //
+	// 	actionBtn.addClass('to-circle');
+	// 	actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+	// 		animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+	// 	});
+  //
+	// 	//if browser doesn't support transitions...
+	// 	if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+	// });
+
+	//trigger the animation - close modal window
+	$('.cd-section .cd-modal-close').on('click', function(){
+		closeModal();
+	});
+
+	$(document).keyup(function(event){
+		if(event.which=='27') closeModal();
+	});
+
+	$(window).on('resize', function(){
+		//on window resize - update cover layer dimention and position
+		if($('.cd-section.modal-is-visible').length > 0) window.requestAnimationFrame(updateLayer);
+	});
+
+	function retrieveScale(btn) {
+		var btnRadius = btn.width()/2,
+			left = btn.offset().left + btnRadius,
+			top = btn.offset().top + btnRadius - $(window).scrollTop(),
+			scale = scaleValue(top, left, btnRadius, $(window).height(), $(window).width());
+
+		btn.css('position', 'fixed').velocity({
+			top: top - btnRadius,
+			left: left - btnRadius,
+			translateX: 0,
+		}, 0);
+
+		return scale;
+	}
+
+	function scaleValue( topValue, leftValue, radiusValue, windowW, windowH) {
+		var maxDistHor = ( leftValue > windowW/2) ? leftValue : (windowW - leftValue),
+			maxDistVert = ( topValue > windowH/2) ? topValue : (windowH - topValue);
+		return Math.ceil(Math.sqrt( Math.pow(maxDistHor, 2) + Math.pow(maxDistVert, 2) )/radiusValue);
+	}
+
+	function animateLayer(layer, scaleVal, bool) {
+		layer.velocity({ scale: scaleVal }, 400, function(){
+			$('body').toggleClass('overflow-hidden', bool);
+			(bool)
+				? layer.parents('.cd-section').addClass('modal-is-visible').end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend')
+				: layer.removeClass('is-visible').removeAttr( 'style' ).siblings('[data-type="modal-trigger"]').removeClass('to-circle');
+		});
+	}
+
+	function updateLayer() {
+		var layer = $('.cd-section.modal-is-visible').find('.cd-modal-bg'),
+			layerRadius = layer.width()/2,
+			layerTop = layer.siblings('.btn').offset().top + layerRadius - $(window).scrollTop(),
+			layerLeft = layer.siblings('.btn').offset().left + layerRadius,
+			scale = scaleValue(layerTop, layerLeft, layerRadius, $(window).height(), $(window).width());
+
+		layer.velocity({
+			top: layerTop - layerRadius,
+			left: layerLeft - layerRadius,
+			scale: scale,
+		}, 0);
+	}
+
+	function closeModal() {
+		var section = $('.cd-section.modal-is-visible');
+		section.removeClass('modal-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+			animateLayer(section.find('.cd-modal-bg'), 1, false);
+		});
+		//if browser doesn't support transitions...
+		if(section.parents('.no-csstransitions').length > 0 ) animateLayer(section.find('.cd-modal-bg'), 1, false);
+	}
