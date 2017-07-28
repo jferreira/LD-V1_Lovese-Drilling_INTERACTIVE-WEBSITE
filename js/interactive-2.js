@@ -4,9 +4,22 @@ var startDelay = 0; //2000
 var totalTime = 30 * 1; // Minutes - should be 60
 
 var mapLayers = new Array(3);
-mapLayers["lovese"] = false;
-mapLayers["opened_oil_areas"] = false;
-mapLayers["oil_prospects"] = false;
+mapLayers["lovese"] = {
+  added : false,
+  visible : false
+}
+mapLayers["opened_oil_areas"] = {
+  added : false,
+  visible : false
+}
+mapLayers["oil_prospects"] = {
+  added : false,
+  visible : false
+}
+mapLayers["islands"] = {
+  added : false,
+  visible : false
+}
 
 var mapLayersStyle = new Array(3);
 mapLayersStyle["lovese"] = {
@@ -146,6 +159,17 @@ map.on('load', function() {
   map.addSource('oil_prospects', { type: 'geojson', data: '../include/map-layers/prospekter_union.geojson' });
   map.addSource('opened_oil_areas', { type: 'geojson', data: '../include/map-layers/opened_areas.geojson' });
 
+  //console.log(map.getLayer('opened_oil_areas'), map.querySourceFeatures('opened_oil_areas'));
+  // https://bl.ocks.org/danswick/83a8ddff7fb9193176a975a02a896792 or https://stackoverflow.com/questions/35673704/how-do-i-get-the-bounding-box-of-a-mapboxgl-geojsonsource-object
+  // or: https://github.com/mapbox/geojson-extent
+  // Get boudning box of geojson - need to load the file first.
+  //var bbox = turf.bbox(geojson);
+
+
+  // map.on('sourcedata', function(e) {
+  //   console.log(e);
+  // });
+
   map.resize();
   $(".loading").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (set in top of script)
@@ -242,11 +266,11 @@ map.on('moveend', function(e){
 
 $("#map-filters ul li").on('click', function () {
   $(this).siblings().each(function(){
-     $(this).removeClass("active");
+     $(this).removeClass("active"); // The button
      // Turn off any visible layers
      removeMapLayer($(this).attr('data-layer-name'));
      // remove any previously set info panes
-     $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").removeClass("active");
+     $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").removeClass("active"); // The info pane
   });
   $(this).addClass("active");
   // Turn on this map layer
@@ -255,45 +279,72 @@ $("#map-filters ul li").on('click', function () {
   $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").addClass("active");
 });
 
-// Add a given map layer to the map
+// Add a given map layer to the map, except the islands layer - which has no layer
 function showMapLayer(layer){
-  if(layer !== undefined || layer !== null) {
-    if(mapLayers[layer] == false) {
-      map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
+  if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "islands") {
+    if(mapLayers[layer].visible == false) {
+      if(!mapLayers[layer].added && layer !== "islands") {
+        map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
+        if(layer === "lovese") {
+          // Add labels for the different sea areas
+          map.addLayer({
+            "id": "lovese-labels",
+            "type": "symbol",
+            "source": "oil_areas",
+            "layout": {
+              "text-field": "{name}",
+              "text-font": [
+                "DIN Offc Pro Medium",
+                "Arial Unicode MS Bold"
+              ],
+              "text-size": 10,
+            },
+            "paint": {
+              "text-color": "#fff"
+            },
+          });
+        }
+        mapLayers[layer].added = true;
+      }
+
+      // // Geographic coordinates of the LineString
+      // var coordinates = geojson.features[0].geometry.coordinates;
+      //
+      // // Pass the first coordinates in the LineString to `lngLatBounds` &
+      // // wrap each coordinate pair in `extend` to include them in the bounds
+      // // result. A variation of this technique could be applied to zooming
+      // // to the bounds of multiple Points or Polygon geomteries - it just
+      // // requires wrapping all the coordinates with the extend method.
+      // var bounds = coordinates.reduce(function(bounds, coord) {
+      //     return bounds.extend(coord);
+      // }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+      //
+      // map.fitBounds(bounds, {
+      //     padding: 20
+      // });
 
       if(layer === "lovese") {
-        // Add labels for the different sea areas
-        map.addLayer({
-          "id": "lovese-labels",
-          "type": "symbol",
-          "source": "oil_areas",
-          "layout": {
-            "text-field": "{name}",
-            "text-font": [
-              "DIN Offc Pro Medium",
-              "Arial Unicode MS Bold"
-            ],
-            "text-size": 10,
-          },
-          "paint": {
-            "text-color": "#fff"
-          },
-        });
+        map.setLayoutProperty("lovese-labels", 'visibility', 'visible');
       }
-      mapLayers[layer] = true;
+      if(layer !== "islands") map.setLayoutProperty(layer, 'visibility', 'visible');
+      mapLayers[layer].visible = true;
     }
   }
 }
 
-// Remove a given map layer
+// Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer){
-  if(layer !== undefined || layer !== null || layer !== "undefined") {
-    if(mapLayers[layer] == true) {
-      map.removeLayer(layer);
+  if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "islands") {
+    console.log(layer, mapLayers[layer]);
+    if(mapLayers[layer].visible == true && layer !== "islands") {
+      //map.removeLayer(layer);
+      map.setLayoutProperty(layer, 'visibility', 'none');
       if(layer === "lovese") {
-        map.removeLayer("lovese-labels");
+        //map.removeLayer("lovese-labels");
+        map.setLayoutProperty("lovese-labels", 'visibility', 'none');
       }
-      mapLayers[layer] = false;
+      //mapLayers[layer] = false;
+      mapLayers[layer].visible = false;
     }
   }
 }
