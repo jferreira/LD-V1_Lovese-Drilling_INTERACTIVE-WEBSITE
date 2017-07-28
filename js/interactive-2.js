@@ -8,8 +8,30 @@
 
 var zoomedToArea = false;
 var flying = false;
-var startDelay = 2000;
-var totalTime = 60 * 2;
+var startDelay = 0; //2000
+var totalTime = 10 * 1; // Minutes - should be 60
+
+var mapLayers = new Array(3);
+mapLayers["lovese"] = false;
+mapLayers["opened_oil_areas"] = false;
+mapLayers["oil_prospects"] = false;
+
+var mapLayersStyle = new Array(3);
+mapLayersStyle["lovese"] = {
+    color : "#fff",
+    opacity : 0.5,
+    border_color : "#fff"
+}
+mapLayersStyle["opened_oil_areas"] = {
+    color : "#E7A930",
+    opacity : 1,
+    border_color : "#fff"
+}
+mapLayersStyle["oil_prospects"] = {
+    color : "#000",
+    opacity : 0.9,
+    border_color : "#000"
+}
 
 var paused;
 var countdown;
@@ -320,27 +342,29 @@ function showMapLayer(layer){
   // Create a global array with the specific colors and opacity for each layer
 
   if(layer !== undefined || layer !== null) {
-    map.removeLayer(layer);
-    map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":0.5, "fill-color":"#fff","fill-outline-color":"#000"}});
+    if(mapLayers[layer] == false) {
+      map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
 
-    if(layer === "lovese") {
-      // Do this after loading the sub areas (with the timed transition or on click)
-      map.addLayer({
-        "id": "lovese-labels",
-        "type": "symbol",
-        "source": "oil_areas",
-        "layout": {
-          "text-field": "{name}",
-          "text-font": [
-            "DIN Offc Pro Medium",
-            "Arial Unicode MS Bold"
-          ],
-          "text-size": 10,
-        },
-        "paint": {
-          "text-color": "#fff"
-        },
-      });
+      if(layer === "lovese") {
+        // Do this after loading the sub areas (with the timed transition or on click)
+        map.addLayer({
+          "id": "lovese-labels",
+          "type": "symbol",
+          "source": "oil_areas",
+          "layout": {
+            "text-field": "{name}",
+            "text-font": [
+              "DIN Offc Pro Medium",
+              "Arial Unicode MS Bold"
+            ],
+            "text-size": 10,
+          },
+          "paint": {
+            "text-color": "#fff"
+          },
+        });
+      }
+      mapLayers[layer] = true;
     }
   }
 }
@@ -348,10 +372,13 @@ function showMapLayer(layer){
 // Remove a given map layer
 function removeMapLayer(layer){
   if(layer !== undefined || layer !== null || layer !== "undefined") {
+    if(mapLayers[layer] == true) {
       map.removeLayer(layer);
-  }
-  if(layer === "lovese") {
-    map.removeLayer("lovese-labels");
+      if(layer === "lovese") {
+        map.removeLayer("lovese-labels");
+      }
+      mapLayers[layer] = false;
+    }
   }
 }
 
@@ -455,18 +482,21 @@ $('#btn-play-pause').on('click', '#countdown-timer', function() {
 function startMapFeautures() {
   var sectionTime = (totalTime * 1000) / $('.map-details').length;
   //sectionTime = 1000;
+  $(".map-features-count p span.current").text(1);
+  $(".map-features-count p span.total").text($('.map-details').length);
 
   var mapF = $('.map-features .map-details');
   var $active = mapF.eq(0);
 
   var $next = $active.next();
   var timer = setInterval(function() {
+
     $next.addClass("active");
     $active.removeClass("active");
     $active = $next;
 
     // Do map operations
-
+    $(".map-features-count p span.current").text(mapF.index($next) + 1);
     $next = (mapF.last().index() == mapF.index($active)) ? $next = mapF.eq(0): $active.next();
 
     if(mapF.last().index() == mapF.index($active)) {
