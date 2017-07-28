@@ -23,13 +23,13 @@ var areas = {
             "properties": {
                 "message": "Lofoten",
                 "iconSize": [200, 32],
-                "imgName" : "_ICN_LABEL_Lofoten-Archipelago@1x"
+                "imgName" : "_ICN_LABEL_Lofoten-Archipelago@2x"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.467073883438474,
-                    68.14785141282243
+                    14.248825694533252,
+                    68.26400752799873
                 ]
             }
         },
@@ -38,7 +38,7 @@ var areas = {
             "properties": {
                 "message": "Vesterålen",
                 "iconSize": [200, 32],
-                "imgName" : "_ICN_LABEL_Vesterålen-Archipelago@1x"
+                "imgName" : "_ICN_LABEL_Vesterålen-Archipelago@2x"
             },
             "geometry": {
                 "type": "Point",
@@ -53,13 +53,13 @@ var areas = {
             "properties": {
                 "message": "Senja",
                 "iconSize": [200, 32],
-                "imgName" : "_ICN_LABEL_Senja-Archipelago@1x"
+                "imgName" : "_ICN_LABEL_Senja-Archipelago@2x"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    17.24538248797009,
-                    69.33534478960459
+                    17.457677872120883,
+                    69.30793670755747
                 ]
             }
         }
@@ -124,28 +124,6 @@ var map = new mapboxgl.Map({
   attributionControl: false
 });
 
-// add marker for each area to map
-areas.features.forEach(function(marker) {
-    // create a DOM element for the marker
-    var el = document.createElement('div');
-    el.className = 'marker';
-
-    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
-    el.style.width = marker.properties.iconSize[0] + 'px';
-    el.style.height = marker.properties.iconSize[1] + 'px';
-
-    el.addEventListener('click', function() {
-        window.alert(marker.properties.message);
-    });
-
-    // add marker to map
-    //new mapboxgl.Marker(el)
-    new mapboxgl.Marker(el, { offset: [-50 / 2, -50 / 2] })
-        .setLngLat(marker.geometry.coordinates)
-        .addTo(map);
-});
-
-
 // var filters = document.getElementById('filters');
 //
 // map.addSource('cod', {
@@ -171,12 +149,6 @@ areas.features.forEach(function(marker) {
 //   }
 // }
 
-function setSizes() {
-  console.log("Resize")
-  var containerHeight = $(".interactive-pane").height();
-  $(".interactive-pane").height(containerHeight - 130);
-}
-
 map.on('load', function() {
   //console.log("loaded everything");
 
@@ -184,27 +156,10 @@ map.on('load', function() {
   map.addSource('cod', { type: 'geojson', data: '../include/map-layers/cod.geojson' });
 
   map.addSource('lovese', { type: 'geojson', data: '../include/map-layers/lovese_blocks.geojson' });
-  map.addSource('oil_prospects', { type: 'geojson', data: '../include/map-layers/prospekter_union.geojson' });
   map.addSource('oil_areas', {type: 'geojson', data : oilareas});
-  map.addSource('opened_oil_areas', { type: 'geojson', data: '../include/map-layers/opened_areas.geojson' });
 
-  // Do this after loading the sub areas (with the timed transition or on click)
-  map.addLayer({
-    "id": "clusters-label",
-    "type": "symbol",
-    "source": "oilareas",
-    "layout": {
-      "text-field": "{name}",
-      "text-font": [
-        "DIN Offc Pro Medium",
-        "Arial Unicode MS Bold"
-      ],
-      "text-size": 10,
-    },
-    "paint": {
-      "text-color": "#fff"
-    },
-  });
+  map.addSource('oil_prospects', { type: 'geojson', data: '../include/map-layers/prospekter_union.geojson' });
+  map.addSource('opened_oil_areas', { type: 'geojson', data: '../include/map-layers/opened_areas.geojson' });
 
   // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
   // map.addLayer({
@@ -222,15 +177,15 @@ map.on('load', function() {
   //   "filter": ["==", "$type", "Point"],
   // });
 
-  var filters = document.getElementById('map-filters');
-  var item = filters.appendChild(document.createElement('div'));
-  var checkbox = item.appendChild(document.createElement('input'));
-  var label = item.appendChild(document.createElement('label'));
-  checkbox.type = 'checkbox';
-  checkbox.id = "Test";
-  label.innerHTML = "Test";
-  label.setAttribute('for', "Test");
-  checkbox.addEventListener('change', update);
+  // var filters = document.getElementById('map-filters');
+  // var item = filters.appendChild(document.createElement('div'));
+  // var checkbox = item.appendChild(document.createElement('input'));
+  // var label = item.appendChild(document.createElement('label'));
+  // checkbox.type = 'checkbox';
+  // checkbox.id = "Test";
+  // label.innerHTML = "Test";
+  // label.setAttribute('for', "Test");
+  // checkbox.addEventListener('change', update);
 
   function update() {
   (checkbox.checked) ? map.addLayer({"id":"lovese","source":"lovese","type":"fill","paint": {"fill-opacity":0.5, "fill-color":"#fff","fill-outline-color":"#000"}}) : map.removeLayer("lovese");
@@ -301,7 +256,35 @@ map.on('moveend', function(e){
     //map.fire(flyend);
     //console.log("we are here");
     $(".container-full").fadeIn("1500");
-    //startMapFeautures();
+
+    // add marker for each area to map
+    areas.features.forEach(function(marker) {
+        // create a DOM element for the marker
+        var el = document.createElement('div');
+        el.className = 'areas-marker';
+
+        el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+        el.style.width = marker.properties.iconSize[0] + 'px';
+        el.style.height = marker.properties.iconSize[1] + 'px';
+
+        // Get the screen x,y representation of the coordinates
+        //var lnglat = new mapboxgl.LngLat(marker.geometry.coordinates);
+        var point = map.project(marker.geometry.coordinates);
+
+        el.addEventListener('click', function() {
+            //window.alert(marker.properties.message);
+            console.log(marker, point);
+        });
+
+        // add marker to map
+        //new mapboxgl.Marker(el)
+        new mapboxgl.Marker(el, { offset: [-100 / 2, -50 / 2] })
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+    });
+
+    // Show map filters
+    $("#map-filters").show();
 
     if (countdown) {
       clearInterval(countdown);
@@ -313,6 +296,70 @@ map.on('moveend', function(e){
     zoomedToArea = false;
   }
 });
+
+// $('#map-filters img').on('mouseenter mouseleave', function() {
+//   console.log("Should change");
+//     $(this).attr({
+//         'src': $(this).attr('data-other-src'), 'data-other-src': $(this).attr('src')
+//     });
+// });
+
+$("#map-filters ul li").on('click', function () {
+  $(this).siblings().each(function(){
+     $(this).removeClass("active");
+     // Turn off any visible layers
+     removeMapLayer($(this).attr('data-layer-name'));
+  });
+  $(this).addClass("active");
+  // Turn on this map layer
+  showMapLayer($(this).attr('data-layer-name'));
+});
+
+// Add a given map layer to the map
+function showMapLayer(layer){
+  // Create a global array with the specific colors and opacity for each layer
+
+  if(layer !== undefined || layer !== null) {
+    map.removeLayer(layer);
+    map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":0.5, "fill-color":"#fff","fill-outline-color":"#000"}});
+
+    if(layer === "lovese") {
+      // Do this after loading the sub areas (with the timed transition or on click)
+      map.addLayer({
+        "id": "lovese-labels",
+        "type": "symbol",
+        "source": "oil_areas",
+        "layout": {
+          "text-field": "{name}",
+          "text-font": [
+            "DIN Offc Pro Medium",
+            "Arial Unicode MS Bold"
+          ],
+          "text-size": 10,
+        },
+        "paint": {
+          "text-color": "#fff"
+        },
+      });
+    }
+  }
+}
+
+// Remove a given map layer
+function removeMapLayer(layer){
+  if(layer !== undefined || layer !== null || layer !== "undefined") {
+      map.removeLayer(layer);
+  }
+  if(layer === "lovese") {
+    map.removeLayer("lovese-labels");
+  }
+}
+
+function setSizes() {
+  // Currently not in use
+  var containerHeight = $(".interactive-pane").height();
+  $(".interactive-pane").height(containerHeight - 130);
+}
 
 function zoomToArea() {
   if(app.navigation.state == app.navigation.visible) {
