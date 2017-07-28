@@ -9,7 +9,7 @@
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
-var totalTime = 10 * 1; // Minutes - should be 60
+var totalTime = 30 * 1; // Minutes - should be 60
 
 var mapLayers = new Array(3);
 mapLayers["lovese"] = false;
@@ -294,8 +294,7 @@ map.on('moveend', function(e){
         var point = map.project(marker.geometry.coordinates);
 
         el.addEventListener('click', function() {
-            //window.alert(marker.properties.message);
-            console.log(marker, point);
+            console.log(marker.properties.message, point);
         });
 
         // add marker to map
@@ -487,9 +486,22 @@ function startMapFeautures() {
 
   var mapF = $('.map-features .map-details');
   var $active = mapF.eq(0);
+  var currMapLayer = $active.attr('data-layer-name');
+  showMapLayer(currMapLayer);
+  $("#map-filters ul").find("[data-layer-name='" + currMapLayer + "']").addClass("active");
 
   var $next = $active.next();
   var timer = setInterval(function() {
+
+    // TODO: Need to update the toggle li navigation
+    //console.log($next.attr('data-layer-name'));
+    $next.siblings().each(function(){
+       // Turn off any visible layers
+       removeMapLayer($(this).attr('data-layer-name'));
+       $("#map-filters ul").find("[data-layer-name='" + $(this).attr('data-layer-name') + "']").removeClass("active");
+    });
+    showMapLayer($next.attr('data-layer-name'));
+    $("#map-filters ul").find("[data-layer-name='" + $next.attr('data-layer-name') + "']").addClass("active");
 
     $next.addClass("active");
     $active.removeClass("active");
