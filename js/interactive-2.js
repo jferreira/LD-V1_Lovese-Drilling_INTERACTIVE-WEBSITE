@@ -1,10 +1,3 @@
-// https://stackoverflow.com/questions/35452705/mapbox-leaflet-increase-marker-size-on-zoom
-// Show/hide on specific zoom level: https://www.mapbox.com/mapbox-gl-js/example/updating-choropleth/
-// Use layers instead of markers? https://stackoverflow.com/questions/40153538/how-to-hide-point-labels-at-certain-zoom-levels-in-mapbox-gl-js
-// min zoom or stops: http://android.wekeepcoding.com/article/11539332/How+to+hide+point+labels+at+certain+zoom+levels+in+mapbox-gl-js%3F
-// https://www.mapbox.com/mapbox-gl-js/example/add-image/
-// OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
-
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
@@ -35,7 +28,6 @@ mapLayersStyle["oil_prospects"] = {
 var paused;
 var countdown;
 
-// https://www.mapbox.com/help/custom-markers-gl-js/
 var areas = {
     "type": "FeatureCollection",
     "features": [
@@ -253,10 +245,14 @@ $("#map-filters ul li").on('click', function () {
      $(this).removeClass("active");
      // Turn off any visible layers
      removeMapLayer($(this).attr('data-layer-name'));
+     // remove any previously set info panes
+     $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").removeClass("active");
   });
   $(this).addClass("active");
   // Turn on this map layer
   showMapLayer($(this).attr('data-layer-name'));
+  // Update the info pane which corresponds to the button
+  $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").addClass("active");
 });
 
 // Add a given map layer to the map
@@ -420,3 +416,13 @@ function startMapFeautures() {
     }
   }, sectionTime);
 }
+
+// NOTES
+
+// https://stackoverflow.com/questions/35452705/mapbox-leaflet-increase-marker-size-on-zoom
+// Show/hide on specific zoom level: https://www.mapbox.com/mapbox-gl-js/example/updating-choropleth/
+// Use layers instead of markers? https://stackoverflow.com/questions/40153538/how-to-hide-point-labels-at-certain-zoom-levels-in-mapbox-gl-js
+// min zoom or stops: http://android.wekeepcoding.com/article/11539332/How+to+hide+point+labels+at+certain+zoom+levels+in+mapbox-gl-js%3F
+// https://www.mapbox.com/mapbox-gl-js/example/add-image/
+// OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
+// https://www.mapbox.com/help/custom-markers-gl-js/
