@@ -5,7 +5,6 @@
 // https://www.mapbox.com/mapbox-gl-js/example/add-image/
 // OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
 
-
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
@@ -146,100 +145,34 @@ var map = new mapboxgl.Map({
   attributionControl: false
 });
 
-// var filters = document.getElementById('filters');
-//
-// map.addSource('cod', {
-//     type: 'geojson',
-//     data: 'cod.geojson'
-// }).on('ready', layer);
-//
-// function layer() {
-//   var layer = this;
-//   var name = layer.getGeoJSON().name;
-//
-//   var item = filters.appendChild(document.createElement('div'));
-//   var checkbox = item.appendChild(document.createElement('input'));
-//   var label = item.appendChild(document.createElement('label'));
-//   checkbox.type = 'checkbox';
-//   checkbox.id = name;
-//   label.innerHTML = name;
-//   label.setAttribute('for', name);
-//   checkbox.addEventListener('change', update);
-//
-//   function update() {
-//     (checkbox.checked) ? layer.addTo(map) : map.removeLayer(layer);
-//   }
-// }
-
 map.on('load', function() {
-  //console.log("loaded everything");
-
+  // Add all the data sources that we need:
   map.addSource('corals', { type: 'geojson', data: '../include/map-layers/corals.geojson' });
   map.addSource('cod', { type: 'geojson', data: '../include/map-layers/cod.geojson' });
-
   map.addSource('lovese', { type: 'geojson', data: '../include/map-layers/lovese_blocks.geojson' });
   map.addSource('oil_areas', {type: 'geojson', data : oilareas});
-
   map.addSource('oil_prospects', { type: 'geojson', data: '../include/map-layers/prospekter_union.geojson' });
   map.addSource('opened_oil_areas', { type: 'geojson', data: '../include/map-layers/opened_areas.geojson' });
 
-  // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
-  // map.addLayer({
-  //   "id": "corals",
-  //   "type": "circle",
-  //   "source": "corals",
-  //   'layout': {
-  //     'visibility': 'visible'
-  //   },
-  //   "paint": {
-  //     'circle-radius': 5,
-  //     'circle-opacity': 0.5,
-  //     'circle-color': 'rgba(172,255,178,1)'
-  //   },
-  //   "filter": ["==", "$type", "Point"],
-  // });
-
-  // var filters = document.getElementById('map-filters');
-  // var item = filters.appendChild(document.createElement('div'));
-  // var checkbox = item.appendChild(document.createElement('input'));
-  // var label = item.appendChild(document.createElement('label'));
-  // checkbox.type = 'checkbox';
-  // checkbox.id = "Test";
-  // label.innerHTML = "Test";
-  // label.setAttribute('for', "Test");
-  // checkbox.addEventListener('change', update);
-
-  function update() {
-  (checkbox.checked) ? map.addLayer({"id":"lovese","source":"lovese","type":"fill","paint": {"fill-opacity":0.5, "fill-color":"#fff","fill-outline-color":"#000"}}) : map.removeLayer("lovese");
-    console.log("Updated");
-  }
-
-  // map.on('click', 'body > #lovese', function (e) {
-  //   console.log("CLICKED");
-  //   // new mapboxgl.Popup()
-  //   //   .setLngLat(e.features[0].geometry.coordinates)
-  //   //   .setHTML(e.features[0].properties.description)
-  //   //   .addTo(map);
-  // });
-
   map.resize();
   $(".loading").fadeOut(1500).promise().done(function() {
-    // Fadeout done, start the timer for going through the map (2 minutes)
+    // Fadeout done, start the timer for going through the map (set in top of script)
     setTimeout(function() {
       zoomToArea();
     }, startDelay);
   });
 });
 
-map.on('style.load', function (e) {
-  console.log("loaded style")
-});
+// Not currently in use
+// map.on('style.load', function (e) {
+//   console.log("loaded style")
+// });
 
-$(window).resize(function() {
-  //setSizes();
-});
+// Not currently in use
+// $(window).resize(function() {
+//   //setSizes();
+// });
 
-//$("body")
 map.on("mousedown", function(e) {
   var center = map.getCenter().wrap();
   var zoom = map.getZoom();
@@ -272,14 +205,11 @@ map.on('flyend', function(){
   flying = false;
 });
 map.on('moveend', function(e){
-  console.log("moveend");
   if(!flying && zoomedToArea){
-    // tooltip or overlay here
     //map.fire(flyend);
-    //console.log("we are here");
     $(".container-full").fadeIn("1500");
 
-    // add marker for each area to map
+    // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
     areas.features.forEach(function(marker) {
         // create a DOM element for the marker
         var el = document.createElement('div');
@@ -318,13 +248,6 @@ map.on('moveend', function(e){
   }
 });
 
-// $('#map-filters img').on('mouseenter mouseleave', function() {
-//   console.log("Should change");
-//     $(this).attr({
-//         'src': $(this).attr('data-other-src'), 'data-other-src': $(this).attr('src')
-//     });
-// });
-
 $("#map-filters ul li").on('click', function () {
   $(this).siblings().each(function(){
      $(this).removeClass("active");
@@ -338,14 +261,12 @@ $("#map-filters ul li").on('click', function () {
 
 // Add a given map layer to the map
 function showMapLayer(layer){
-  // Create a global array with the specific colors and opacity for each layer
-
   if(layer !== undefined || layer !== null) {
     if(mapLayers[layer] == false) {
       map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
 
       if(layer === "lovese") {
-        // Do this after loading the sub areas (with the timed transition or on click)
+        // Add labels for the different sea areas
         map.addLayer({
           "id": "lovese-labels",
           "type": "symbol",
@@ -396,7 +317,7 @@ function zoomToArea() {
   map.flyTo({
     center: [12.901721434467618,68.71391887946749],
     zoom: 6.54,
-    // For perspektiv:
+    // For perspective on the zoom - implement this to handle specific sections (oil prospects etc.)
     // pitch: 80, // pitch in degrees
     // bearing: 15, // bearing in degrees
 
@@ -413,23 +334,6 @@ function zoomToArea() {
     }
   });
 }
-
-/*
-if(this.readyState > 0) {
-var value = (100 / this.duration) * this.currentTime;
-
-var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
-var seconds = (this.duration - this.currentTime) % 60;
-
-seconds = Math.ceil(seconds);
-$(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
-
-var d = 100 * this.currentTime / this.duration;
-$(".avancee").css({width:d+"%"});
-
-$("#seek-bar").val(value);
-}
-*/
 
 // TODO: Need to incorporate this into the overall framework.
 // E.g: Interactive parts need to have their JS in the overall JS framework
@@ -493,8 +397,6 @@ function startMapFeautures() {
   var $next = $active.next();
   var timer = setInterval(function() {
 
-    // TODO: Need to update the toggle li navigation
-    //console.log($next.attr('data-layer-name'));
     $next.siblings().each(function(){
        // Turn off any visible layers
        removeMapLayer($(this).attr('data-layer-name'));
