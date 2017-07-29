@@ -200,31 +200,80 @@ p, span, a, input, textarea, ul, li {
 #hover-navigation {
   width: 100%;
   height: 30px;
-  text-align: center;
+}
+
+.navigation-elements {
+  width: 100%;
+  display: flex;                  /* establish flex container */
+}
+
+.play_pause {
+  margin-left: 0;
+}
+
+.play_pause_button {
+  cursor: pointer;
+  width:32px;
+  height:32px;
+  display: block;
+}
+
+.play {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.pause {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Pause@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrows {
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+  width: 500px;
+  margin: 0 auto;
 }
 
 .arrow {
-  background: url(../resources/_Images/_Icons/_Arrow_@1x.png) no-repeat;
-  width:30px;
-  height:28px;
-  margin: 0 auto;
   cursor: pointer;
+  width:32px;
+  height:32px;
+  display: block;
+  margin-left: -12.5%;
+}
+
+.arrow_show_hide {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Down@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrow_left {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Left@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrow_right {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Right@2x.png) no-repeat 0 0;
+  background-size: 32px;
 }
 
 .arrow_up {
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
-.arrow_down {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+.arrow_down {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .transition {
@@ -490,6 +539,7 @@ video::-webkit-media-controls {
 *    INTERACTIVE
 */
 
+/*
 .play {
   width: 12px;
   height: 16px;
@@ -520,6 +570,7 @@ video::-webkit-media-controls {
   display: block;
   outline: 0;
 }
+*/
 
 #seek-bar {
   width: 100%;
