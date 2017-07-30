@@ -20,7 +20,8 @@ Main Components
 }
 
 .cd-modal {
-  position: fixed;
+  z-index: 99999999999999;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -90,6 +91,7 @@ Main Components
 }
 
 .cd-modal-action .btn {
+  cursor: pointer;
   z-index: 1000;
   display: inline-block;
   background-color: #34383c;
@@ -151,7 +153,7 @@ Main Components
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3) url(../img/cd-icon-close.svg) no-repeat center center;
+  background: rgba(0, 0, 0, 0.3) url(../resources/_Graphics/_GFX_005_EP2_LD/cd-icon-close.svg) no-repeat center center;
   /* image replacement */
   overflow: hidden;
   text-indent: 100%;

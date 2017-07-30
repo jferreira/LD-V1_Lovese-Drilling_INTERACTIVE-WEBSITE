@@ -523,7 +523,6 @@ function addPeopleIcons() {
 
           // 2. Add the 360 icons to the map
 
-
       });
 
       new mapboxgl.Marker(el)
@@ -666,19 +665,22 @@ function startMapFeautures() {
 
 // Open videos and 360s:
 	//trigger the animation - open modal window
-	// $('[data-type="modal-trigger"]').on('click', function(){
-  //   console.log("clicked button");
-	// 	var actionBtn = $(this),
-	// 		scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
-  //
-	// 	actionBtn.addClass('to-circle');
-	// 	actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-	// 		animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-	// 	});
-  //
-	// 	//if browser doesn't support transitions...
-	// 	if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-	// });
+	$('[data-type="modal-trigger"]').on('click', function(){
+    console.log("clicked button");
+    $("#eldar").attr("src", "http://www.romvesen.as/Lofoten/");
+
+		var actionBtn = $(this),
+			scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+
+		actionBtn.addClass('to-circle');
+		actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+			animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+		});
+
+		//if browser doesn't support transitions...
+		if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+
+	});
 
 	//trigger the animation - close modal window
 	$('.cd-section .cd-modal-close').on('click', function(){
