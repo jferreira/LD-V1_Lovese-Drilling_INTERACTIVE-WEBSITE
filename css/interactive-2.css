@@ -96,19 +96,28 @@
   height: 64px;
 }
 
-#map-filters ul li.sub-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area@2x.png");}
-#map-filters ul li.sub-areas:hover {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
+
+#map-filters ul li.land-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
+#map-filters ul li.land-areas:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+
+#map-filters ul li.sea-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area@2x.png");}
+#map-filters ul li.sea-areas:hover {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
+#map-filters ul li.opened-oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
+#map-filters ul li.opened-oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 #map-filters ul li.ncs {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf@2x.png");}
 #map-filters ul li.ncs:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
 #map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
 #map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
-#map-filters ul li.islands {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
-#map-filters ul li.islands:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
+#map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
 
-#map-filters ul li.sub-areas.active {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
+#map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.sea-areas.active {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
+#map-filters ul li.opened-oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 #map-filters ul li.ncs.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
 #map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
-#map-filters ul li.islands.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+
 
 #map-filters img {
   cursor: pointer;
