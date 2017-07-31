@@ -1,3 +1,4 @@
+var disableMapControls = true;
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
@@ -41,12 +42,24 @@ mapLayersStyle["oil_prospects"] = {
     opacity : 0.9,
     border_color : "#000"
 }
-var persons = ["eldar","anne","johanna"];
+var mapIcons = ["eldar","anne","johanna", "image360_1", "image360_2", "image360_3", "image360_4", "image360_5", "image360_6"];
 var peopleAdded = false;
-var peopleIcons = new Array(3);
-peopleIcons["eldar"] = {zoomedTo : false,playedVideo : false,clicked : 0,coordinates : []}
-peopleIcons["anne"] = {zoomedTo : false,playedVideo : false,clicked : 0,coordinates : []}
-peopleIcons["johanna"] = {zoomedTo : false,playedVideo : false,clicked : 0,coordinates : []}
+
+// var peopleIcons = new Array(3);
+// peopleIcons["eldar"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+// peopleIcons["anne"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+// peopleIcons["johanna"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+
+var addedMapIcons = new Array(6);
+addedMapIcons["eldar"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["anne"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["johanna"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_1"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_2"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_3"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_4"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_5"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_6"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
 
 // TODO: Should give these better names
 var zoomed = new Array(5);
@@ -209,6 +222,108 @@ var people = {
     ]
 };
 
+var images360 = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Verøy",
+                "name": "image360_1",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.621902777778,
+                    67.658158333333
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Sørlandsvågen",
+                "name": "image360_2",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.725080555556,
+                    67.648355555556
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Nordland",
+                "name": "image360_3",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.729925,
+                    67.694366666667
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Værøy",
+                "name": "image360_4",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.700561111111,
+                    67.654016666667
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Flakstad",
+                "name": "image360_5",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.223294444444,
+                    68.100188888889
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Napp",
+                "name": "image360_6",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.471063888889,
+                    68.126827777778
+                ]
+            }
+        }
+    ]
+};
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
 
 var map = new mapboxgl.Map({
@@ -220,6 +335,26 @@ var map = new mapboxgl.Map({
   bearing: 0, // bearing in degrees
   attributionControl: false
 });
+
+if(disableMapControls) {
+  mapControls(true);
+}
+
+function mapControls(disable) {
+  if(disable) {
+    map.scrollZoom.disable();
+    map.dragRotate.disable();
+    map.dragPan.disable();
+    map.touchZoomRotate.disableRotation();
+    map.doubleClickZoom.disable();
+  } else {
+    map.scrollZoom.enable();
+    map.dragRotate.enable();
+    map.dragPan.enable();
+    map.touchZoomRotate.enable();
+    map.doubleClickZoom.enable();
+  }
+}
 
 map.on('load', function() {
   // Add geojson sources and calculate the bbox for each layer for later use
@@ -380,9 +515,10 @@ map.on('load', function() {
         startTimer(totalTime);
         startMapFeautures();
         zoomed["first"] = false; // Not to do this again
-      } else if(zoomed["eldar"] || zoomed["anne"] || zommed["johanna"]) {
-        // We have zoomed in on one of the persons, so update their marker overlay position accordingly
-        updateMarkerOverlayPos();
+      } else if(zoomed["eldar"]) {
+        // We have zoomed in on the first interview, so update their marker overlay position accordingly
+        add360Icons(); // Should we move this - or even break it down for each person?
+        //updateMarkerOverlayPos();
 
         // var point = map.project(peopleIcons["eldar"].coordinates);
         //
@@ -396,7 +532,6 @@ map.on('load', function() {
     }
 
     if(peopleAdded) {
-      console.log("movend---");
       updateMarkerOverlayPos();
       //
       // try{
@@ -412,16 +547,14 @@ map.on('load', function() {
 });
 
 function updateMarkerOverlayPos() {
-  console.log("Update and show overlay!");
   $(".cd-modal-action").show();
-
-  persons.forEach(function(person) {
-    console.log("Update overlay for: ", person);
+  mapIcons.forEach(function(icon) {
     try{
       // Update the overlay if the map moves
-      var point = map.project(peopleIcons[person].coordinates);
-      $(".cd-modal-action."+ person +" ").css({'left':point.x-20, 'top':point.y-20});
-      console.log(point);
+      var point = map.project(addedMapIcons[icon].coordinates);
+      console.log("Update overlay for: ", icon, point);
+      $(".cd-modal-action."+ icon +" ").css({'left':point.x-20, 'top':point.y-20});
+      //console.log(point);
     }
     catch(err) {
         console.log(err);
@@ -514,7 +647,7 @@ function showMapLayer(layer){
         mapLayers[layer].visible = true;
 
         // Fit the map to the bounderies of the specific layer
-        console.log(layer);
+        //console.log(layer);
         map.fitBounds(dataLayerBounds[layer], {padding: 20, linear:false, duration: 2000});
       }
     }
@@ -522,7 +655,6 @@ function showMapLayer(layer){
 
   // Stuff to do for ncs (lovese_land is already loaded after the zoom event)
   if(layer === "people") {
-    console.log("Adding people");
     addPeopleIcons();
   }
 
@@ -577,8 +709,8 @@ function addPeopleIcons() {
       el.style.width = marker.properties.iconSize[0] + 'px';
       el.style.height = marker.properties.iconSize[1] + 'px';
 
-      var point = map.project(marker.geometry.coordinates);
-      peopleIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
+      //var point = map.project(marker.geometry.coordinates);
+      addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
 
       el.addEventListener('click', function() {
         // Add reference to function which will handle stuff from here.
@@ -593,15 +725,15 @@ function addPeopleIcons() {
 
 function zoomToPerson(marker) {
   // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
-  if(peopleIcons[marker.properties.name].zoomedTo == false) {
+  if(addedMapIcons[marker.properties.name].zoomedTo == false) {
       // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
       zoomToArea(marker.properties.name, marker.geometry.coordinates, 11, 1, 1, 150, -10, [350,0]);
-      peopleIcons[marker.properties.name].zoomedTo = true;
-      peopleIcons[marker.properties.name].clicked += 1;
-      console.log("this person has: ", peopleIcons[marker.properties.name].coordinates);
+      addedMapIcons[marker.properties.name].zoomedTo = true;
+      addedMapIcons[marker.properties.name].clicked += 1;
+      console.log("this person has: ", addedMapIcons[marker.properties.name].coordinates);
   } else {
     // 3. If person icon is clicked more than once
-    if(peopleIcons[marker.properties.name].clicked >= 1) {
+    if(addedMapIcons[marker.properties.name].clicked >= 1) {
       console.log("Play the video of ", marker.properties.name);
 
       // TODO: Make this work (popup for watching the video)
@@ -619,8 +751,31 @@ function zoomToPerson(marker) {
       // peopleIcons["eldar"].playedVideo = true;
     }
   }
+}
 
+function add360Icons() {
   // 2. Add the 360 icons to the map
+  images360.features.forEach(function(marker) {
+      // create a DOM element for the marker
+      var el = document.createElement('div');
+      el.className = 'marker-360';
+
+      el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_010_EP7_BG/' + marker.properties.imgName + '.png)';
+      el.style.width = marker.properties.iconSize[0] + 'px';
+      el.style.height = marker.properties.iconSize[1] + 'px';
+
+      //var point = map.project(marker.geometry.coordinates);
+      addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
+
+      // el.addEventListener('click', function() {
+      //   // Add reference to function which will handle stuff from here.
+      //   //zoomToPerson(marker);
+      // });
+
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+  });
 }
 
 function setSizes() {
@@ -777,16 +932,31 @@ function startMapFeautures() {
           contentUrl = "//player.vimeo.com/video/199863373?byline=0&amp;portrait=0";
           break;
       }
-    } else if($(this).parent().attr('data-type') == '360') {
+    } else if($(this).parent().attr('data-type') == 'images360') {
       switch($(this).parent().attr('data-id')) {
         case "1":
           console.log("Værøy 1");
+          contentUrl = "../resources/_360/Veroy.html";
           break;
         case "2":
           console.log("Værøy 2");
+          contentUrl = "../resources/_360/Veroy.html";
           break;
         case "3":
           console.log("Værøy 3");
+          contentUrl = "../resources/_360/Veroy.html";
+          break;
+        case "4":
+          console.log("Værøy 4");
+          contentUrl = "../resources/_360/Veroy.html";
+          break;
+        case "5":
+          console.log("Flakstad");
+          contentUrl = "../resources/_360/Flakstad.html";
+          break;
+        case "6":
+          console.log("Napp");
+          contentUrl = "../resources/_360/Napp.html";
           break;
       }
     }

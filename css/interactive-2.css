@@ -134,7 +134,7 @@
   cursor: pointer;
 }
 
-.people-marker {
+.people-marker, .marker-360 {
   border-radius: 50%;
   -webkit-background-size: cover; /* For WebKit*/
   -moz-background-size: cover;    /* Mozilla*/
