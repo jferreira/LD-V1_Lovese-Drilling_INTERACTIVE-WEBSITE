@@ -32,7 +32,7 @@
   display: none;
 }
 
-.row {
+.full-row {
   height: 100%;
 }
 
@@ -158,6 +158,33 @@ section.hide {
   display:none;
 }
 
+.interview {
+  opacity: 0.35;
+  cursor: pointer;
+}
+
+.interview.active {
+  opacity: 1;
+}
+
+.interview:hover {
+  opacity: 1;
+}
+
+.interview h2 {
+  margin-top: 10px;
+  margin-bottom: 0px!important;
+  font-size: 18px;
+  text-transform: none!important;
+}
+
+.interview p {
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
 #map { position:absolute; top:0; left:0; width:100%; height:100%; }
 
 #map > div.mapboxgl-control-container > div > div {
@@ -193,7 +220,7 @@ h2.title {
 
 p.text {
   color: #fff;
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 20px;
   cursor: auto;
 }

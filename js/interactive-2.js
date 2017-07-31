@@ -45,11 +45,6 @@ mapLayersStyle["oil_prospects"] = {
 var mapIcons = ["eldar","anne","johanna", "image360_1", "image360_2", "image360_3", "image360_4", "image360_5", "image360_6"];
 var peopleAdded = false;
 
-// var peopleIcons = new Array(3);
-// peopleIcons["eldar"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
-// peopleIcons["anne"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
-// peopleIcons["johanna"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
-
 var addedMapIcons = new Array(6);
 addedMapIcons["eldar"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
 addedMapIcons["anne"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
@@ -61,8 +56,7 @@ addedMapIcons["image360_4"] = {zoomedTo : false, playedVideo : false, clicked : 
 addedMapIcons["image360_5"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
 addedMapIcons["image360_6"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
 
-// TODO: Should give these better names
-var zoomed = new Array(5);
+var zoomed = new Array(4);
 zoomed["first"] = false;
 zoomed["eldar"] = false;
 zoomed["anne"] = false;
@@ -531,7 +525,8 @@ map.on('load', function() {
       zoomedToArea = false; // Always do this
     }
 
-    if(peopleAdded) {
+    // Used to be peopleAdded
+    if(zoomed["eldar"]) {
       updateMarkerOverlayPos();
       //
       // try{
@@ -553,7 +548,7 @@ function updateMarkerOverlayPos() {
       // Update the overlay if the map moves
       var point = map.project(addedMapIcons[icon].coordinates);
       console.log("Update overlay for: ", icon, point);
-      $(".cd-modal-action."+ icon +" ").css({'left':point.x-20, 'top':point.y-20});
+      $(".cd-modal-action."+ icon +" ").css({'left':point.x-19, 'top':point.y-19});
       //console.log(point);
     }
     catch(err) {
@@ -580,6 +575,7 @@ $("#hover-navigation .arrow").on("click", function() {
   }
 });
 
+// Map filter
 $("#map-filters ul li").on('click', function () {
   $(this).siblings().each(function(){
      $(this).removeClass("active"); // The button
@@ -593,6 +589,16 @@ $("#map-filters ul li").on('click', function () {
   showMapLayer($(this).attr('data-layer-name'));
   // Update the info pane which corresponds to the button
   $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").addClass("active");
+});
+
+// Interviewees pane - move to the area of the person on click
+$(".interview").on('click', function () {
+  $(this).siblings().each(function(){
+     $(this).removeClass("active");
+  });
+  $(this).addClass("active");
+  var person = $(this).attr('data-person');
+  zoomToPerson(person);
 });
 
 // Add a given map layer to the map, except the islands layer - which has no layer
@@ -660,27 +666,6 @@ function showMapLayer(layer){
 
 }
 
-// function zoomToExtent(features){
-//   //var features = map.queryRenderedFeatures({layers:['lovese']});
-//   // var relatedFeatures = map.querySourceFeatures(layer, {
-//   //             sourceLayer: layer
-//   //             //filter: ['in', 'COUNTY', feature.properties.COUNTY]
-//   //         });
-//
-//   var bounds = new mapboxgl.LngLatBounds();
-//   console.log(features);
-//
-//   features.forEach(function(feature) {
-//     console.log(feature);
-//     feature.geometry.coordinates.forEach(function(g) {
-//       console.log(g);
-//       bounds.extend([g[1],g[0]]);
-//     });
-//   });
-//   //console.log(bounds, bounds._sw);
-//   map.fitBounds([bounds._sw, bounds._ne], { padding: '250' });
-// }
-
 // Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer){
   if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
@@ -714,7 +699,7 @@ function addPeopleIcons() {
 
       el.addEventListener('click', function() {
         // Add reference to function which will handle stuff from here.
-        zoomToPerson(marker);
+        zoomToPerson(marker.properties.name);
       });
 
       new mapboxgl.Marker(el)
@@ -723,34 +708,35 @@ function addPeopleIcons() {
   });
 }
 
-function zoomToPerson(marker) {
+function zoomToPerson(name) {
   // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
-  if(addedMapIcons[marker.properties.name].zoomedTo == false) {
-      // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
-      zoomToArea(marker.properties.name, marker.geometry.coordinates, 11, 1, 1, 150, -10, [350,0]);
-      addedMapIcons[marker.properties.name].zoomedTo = true;
-      addedMapIcons[marker.properties.name].clicked += 1;
-      console.log("this person has: ", addedMapIcons[marker.properties.name].coordinates);
-  } else {
-    // 3. If person icon is clicked more than once
-    if(addedMapIcons[marker.properties.name].clicked >= 1) {
-      console.log("Play the video of ", marker.properties.name);
 
-      // TODO: Make this work (popup for watching the video)
-      // var actionBtn = $(this),
-      // 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
-      //
-      // actionBtn.addClass('to-circle');
-      // actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-      // 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-      // });
-      //
-      // //if browser doesn't support transitions...
-      // if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-      //
-      // peopleIcons["eldar"].playedVideo = true;
-    }
-  }
+  //if(addedMapIcons[name].zoomedTo == false) {
+  // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
+  zoomToArea(name, addedMapIcons[name].coordinates, 11, 1, 1, 150, -10, [350,0]);
+  addedMapIcons[name].zoomedTo = true;
+  addedMapIcons[name].clicked += 1;
+  //console.log("this person has: ", addedMapIcons[name].coordinates);
+  // } else {
+  //   // 3. If person icon is clicked more than once
+  //   if(addedMapIcons[name].clicked >= 1) {
+  //     console.log("Play the video of ", name);
+  //
+  //     // TODO: Make this work (popup for watching the video)
+  //     // var actionBtn = $(this),
+  //     // 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+  //     //
+  //     // actionBtn.addClass('to-circle');
+  //     // actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+  //     // 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+  //     // });
+  //     //
+  //     // //if browser doesn't support transitions...
+  //     // if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+  //     //
+  //     // peopleIcons["eldar"].playedVideo = true;
+  //   }
+  // }
 }
 
 function add360Icons() {
@@ -894,6 +880,9 @@ function startMapFeautures() {
     if(mapF.last().index() == mapF.index($active)) {
       clearInterval(timer);
       timer = null;
+      // Move to Eldar
+      zoomToPerson("eldar");
+
       // Move to next episode.
     }
   }, sectionTime);

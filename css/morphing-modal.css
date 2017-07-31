@@ -92,7 +92,7 @@ Main Components
 
 .cd-modal-action .btn {
   display: inline-block;
-  background-color: #34383c;
+  background-color: transparent;
 
   height: 2.5em;
   width: 2.5em;
