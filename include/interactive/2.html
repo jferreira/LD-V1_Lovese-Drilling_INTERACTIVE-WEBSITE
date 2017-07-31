@@ -12,8 +12,8 @@
 </div>
 
 <div class="container-fluid container-full">
-  <div class="row v-center">
-    <div class="col-md-4 col-lg-3 interactive-pane-text">
+  <div class="full-row row v-center">
+    <div class="col-md-4 col-lg-3 interactive-pane-text" style="display:none; z-index:-99999;">
 
       <div class="map-features-count" style="width: 100%; text-align:center;">
         <p><span class="current"></span> / <span class="total"></span></p>
@@ -24,14 +24,26 @@
       </div>
 
       <div class="map-features block-content">
-        <section class="map-details active" data-layer-name="lovese">
+        <section class="map-details active" data-layer-name="lovese_land">
           <div class="title-holder" style="padding: 20px; margin-bottom: 10px; height: auto;">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@3x.png" style="width: 94px; height: 94px; float:left;">
-            <h2 class="title">The Area: Lovese Drilling</h2>
+            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@3x.png" style="width: 94px; height: 94px; float:left;">
+            <h2 class="title">The Area</h2>
           </div>
 
           <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 20px;">
-            <p class="text">These are the areas of Lofoten, Vesterålen and Senja - Lovese in short. The body of water off the coast is the epicenter of this story. For more than 50 years, these areas has remained untouched by the oil- and gas industry.
+            <p class="text">These are the areas of Lofoten, Vesterålen and Senja - Lovese in short. [More text about the area]
+            </p>
+          </div>
+        </section>
+
+        <section class="map-details" data-layer-name="lovese_sea">
+          <div class="title-holder" style="padding: 20px; margin-bottom: 10px; height: auto;">
+            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@3x.png" style="width: 94px; height: 94px; float:left;">
+            <h2 class="title">Lovese Drilling Zones</h2>
+          </div>
+
+          <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 20px;">
+            <p class="text">The body of water off the coast from Lofoten, Vesterålen and Senja is the epicenter of this story. For more than 50 years, these sea areas has remained untouched by the oil- and gas industry.
               <br />But this year, that could all change.
             </p>
           </div>
@@ -39,8 +51,20 @@
 
         <section class="map-details" data-layer-name="opened_oil_areas">
           <div class="title-holder" style="padding: 20px; margin-bottom: 10px; height: auto;">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png" style="width: 94px; height: 94px; float:left;">
-            <h2 class="title">The Norwegian Continental Shelf</h2>
+            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil_Inverted@3x.png" style="width: 94px; height: 94px; float:left;">
+            <h2 class="title">A big oil producer</h2>
+          </div>
+
+
+          <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 20px;">
+            <p class="text">If we zoom out, we see that Norway has opened vast sea areas for oil and gas exploration. The sea areas outside of Lovese are some of the last areas which has been spared.</p>
+          </div>
+        </section>
+
+        <section class="map-details" data-layer-name="ncs">
+          <div class="title-holder" style="padding: 20px; margin-bottom: 10px; height: auto;">
+            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@3x.png" style="width: 94px; height: 94px; float:left;">
+            <h2 class="title">A slim continental shelf</h2>
           </div>
 
 
@@ -51,7 +75,7 @@
 
         <section class="map-details" data-layer-name="oil_prospects">
           <div class="title-holder" style="padding: 20px; margin-bottom: 10px; height: auto;">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png" style="width: 94px; height: 94px; float:left;">
+            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil_Inverted@3x.png" style="width: 94px; height: 94px; float:left;">
             <h2 class="title">Oil and gas reservoirs</h2>
           </div>
 
@@ -60,79 +84,135 @@
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="islands">
+        <section class="map-details" data-layer-name="people">
           <div class="title-holder" style="padding: 20px; margin-bottom: 10px; height: auto;">
             <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png" style="width: 94px; height: 94px; float:left;">
             <h2 class="title">People of Lofoten</h2>
           </div>
 
           <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 20px;">
-            <p class="text">Text.</p>
+
+            <div class="row">
+              <div class="col-md-12"> <!--  style="height: 200px; overflow-y: scroll;"> -->
+
+                <div class="row interview active eldar" data-person="eldar">
+                  <div class="col-md-4 col-lg-3">
+                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_IMG-INT-01@3x.png" style="width: 94px; height: 94px; float:left;" />
+                  </div>
+                  <div class="col-md-8 col-lg-9">
+                    <h2>Eldar</h2>
+                    <p>Eldar has been a fisher since he finished elementary school.</p>
+                  </div>
+                </div>
+
+                <div class="row interview anne" data-person="anne">
+                  <div class="col-md-4 col-lg-3">
+                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_IMG-INT-01@3x.png" style="width: 94px; height: 94px; float:left;" />
+                  </div>
+                  <div class="col-md-8 col-lg-9">
+                    <h2>Anne-Birgit</h2>
+                    <p>Anne-Birgit recently moved back to Lofoten with her family.</p>
+                  </div>
+                </div>
+
+                <div class="row interview johanna" data-person="johanna">
+                  <div class="col-md-4 col-lg-3">
+                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_IMG-INT-01@3x.png" style="width: 94px; height: 94px; float:left;" />
+                  </div>
+                  <div class="col-md-8 col-lg-9">
+                    <h2>Johanna</h2>
+                    <p>Johanna grew up in Napp.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
-
-        <!-- <section class="map-details">
-          <h2 class="title">Breeding grounds</h2>
-          <p class="text">One of the most apparent effects is the breeding grounds. More than 80 percent of the North-Atlantic cod stock spends it first living years here. </p>
-        </section>
-
-        <section class="map-details">
-          <h2 class="title">Coral reefs</h2>
-          <p class="text">Text.</p>
-        </section>
-
-        <section class="map-details">
-          <h2 class="title">Seabirds</h2>
-          <p class="text">Text.</p>
-        </section>
-
-        <section class="map-details">
-          <h2 class="title">Værøy</h2>
-          <p class="text">Text.</p>
-        </section> -->
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4 col-lg-3 interactive-pane transition"></div>
   </div>
-
-  <section class="cd-section">
-		<div class="cd-modal-action">
-			<a href="#0" class="btn" data-type="modal-trigger">x</a>
-			<span class="cd-modal-bg"></span>
-		</div> <!-- cd-modal-action -->
-
-		<div class="cd-modal">
-			<div class="cd-modal-content" style="overflow:hidden;">
-				<iframe id="" src="http://www.romvesen.as/Lofoten/" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%;height:100%;"></iframe>
-			</div> <!-- cd-modal-content -->
-		</div> <!-- cd-modal -->
-
-		<a href="#0" class="cd-modal-close">Close</a>
-	</section> <!-- .cd-section -->
-
 </div>
 
 <nav id='map-filters' class='filter-ui'>
   <ul>
-    <li class="sub-areas" data-id="1" data-layer-name="lovese"></li>
-    <li class="ncs" data-id="2" data-layer-name="opened_oil_areas"></li>
-    <li class="oil" data-id="3" data-layer-name="oil_prospects"></li>
-    <li class="islands" data-id="4" data-layer-name="islands"></li>
+    <li class="land-areas" data-layer-name="lovese_land"></li>
+    <li class="sea-areas" data-layer-name="lovese_sea"></li>
+    <li class="opened-oil" data-layer-name="opened_oil_areas"></li>
+    <li class="ncs" data-layer-name="ncs"></li>
+    <li class="oil" data-layer-name="oil_prospects"></li>
+    <li class="people" data-layer-name="people"></li>
   </ul>
-
-  <!--
-  <img data-other-src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png" src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area@2x.png" style="width: 64px; height: 64px;" /><br />
-  <img data-other-src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png" src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf@2x.png" style="width: 64px; height: 64px;" /><br />
-  <img data-other-src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png" src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png" style="width: 64px; height: 64px;" /><br />
-  <img data-other-src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png" src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png" style="width: 64px; height: 64px;" />
-  -->
 </nav>
+
+<section class="cd-section" style="display:none; z-index:-99999;">
+  <!-- Interview overlay triggers -->
+  <div class="cd-modal-action eldar" data-type="person" data-id="eldar">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action anne" data-type="person" data-id="anne">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action johanna" data-type="person" data-id="johanna">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <!-- 360 image overlay triggers -->
+  <div class="cd-modal-action image360_1" data-type="images360" data-id="1">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_2" data-type="images360" data-id="2">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_3" data-type="images360" data-id="3">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_4" data-type="images360" data-id="4">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_5" data-type="images360" data-id="5">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_6" data-type="images360" data-id="6">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <!-- Overlay container -->
+  <div class="cd-modal">
+    <div class="cd-modal-content" style="overflow:hidden;">
+      <iframe id="overlayContent" src="" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%;height:100%;"></iframe>
+      <!-- <iframe src="//player.vimeo.com/video/11712103?byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%; height:100%;"></iframe> -->
+      <!-- <div class='embed-container'><iframe id="overlayConent" src='https://player.vimeo.com/video/11712103' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div> -->
+    </div> <!-- cd-modal-content -->
+  </div> <!-- cd-modal -->
+
+  <a href="#0" class="cd-modal-close">Close</a>
+</section> <!-- .cd-section -->
 
 <div id='map'></div>
 
+<script type="text/javascript" src="/js/modernizr.js"></script> <!-- Modernizr -->
+<script type="text/javascript" src="/js/velocity.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-<!-- <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>  -->
+<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
 <script type="text/javascript" src="/js/interactive-2.js"></script>

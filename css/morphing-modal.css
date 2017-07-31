@@ -45,11 +45,11 @@ Main Components
 .cd-modal p {
   color: #ffffff;
   line-height: 1.6;
-  margin: 2em 0;
+  margin: 2.5em 0;
 }
 
 .modal-is-visible .cd-modal {
-  z-index: 1;
+  z-index: 10;
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
@@ -80,24 +80,24 @@ Main Components
 
 .cd-modal-action {
   position: fixed;
-  z-index: 10000;
+  z-index: 10;
+  display: none;
 }
 
 .cd-modal-action .cd-modal-bg {
   display: inline-block;
-  height: 4em;
+  height: 2.5em;
   background-color: #34383c;
 }
 
 .cd-modal-action .btn {
-  z-index: 1000;
   display: inline-block;
-  background-color: #34383c;
+  background-color: transparent;
 
-  height: 4em;
-  width: 4em;
-  line-height: 4em;
-  border-radius: 4em;
+  height: 2.5em;
+  width: 2.5em;
+  line-height: 2.5em;
+  border-radius: 2.5em;
   color: #ffffff;
   white-space: nowrap;
   font-weight: 700;
@@ -109,7 +109,7 @@ Main Components
   transition: color 0.2s 0.3s, width 0.3s 0s;
 }
 .cd-modal-action .btn.to-circle {
-  width: 4em;
+  width: 2.5em;
   color: transparent;
   -webkit-transition: color 0.2s 0s, width 0.3s 0.2s;
   -moz-transition: color 0.2s 0s, width 0.3s 0.2s;
@@ -117,10 +117,10 @@ Main Components
 }
 .cd-modal-action .cd-modal-bg {
   position: absolute;
-  z-index: 1;
+  z-index: 11;
   left: 50%;
   top: 0;
-  width: 4em;
+  width: 2.5em;
   border-radius: 50%;
   opacity: 0;
   visibility: hidden;
@@ -129,11 +129,11 @@ Main Components
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transform: translateX(-2em);
-  -moz-transform: translateX(-2em);
-  -ms-transform: translateX(-2em);
-  -o-transform: translateX(-2em);
-  transform: translateX(-2em);
+  -webkit-transform: translateX(-2.5em);
+  -moz-transform: translateX(-2.5em);
+  -ms-transform: translateX(-2.5em);
+  -o-transform: translateX(-2.5em);
+  transform: translateX(-2.5em);
   -webkit-transition: visibility 0s 0.5s;
   -moz-transition: visibility 0s 0.5s;
   transition: visibility 0s 0.5s;
@@ -145,13 +145,13 @@ Main Components
 
 .cd-modal-close {
   position: fixed;
-  z-index: 1;
+  z-index: 11;
   top: 20px;
   right: 5%;
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3) url(../img/cd-icon-close.svg) no-repeat center center;
+  background: rgba(0, 0, 0, 0.3) url(../resources/_Graphics/_GFX_005_EP2_LD/cd-icon-close.svg) no-repeat center center;
   /* image replacement */
   overflow: hidden;
   text-indent: 100%;

@@ -78,7 +78,10 @@ app.navigation = {
                     "data-id" : nav.episodes[i].id,
                     "onClick" : "app.helpers.updateContent(" + i + ")"
                 },
-                html: "<h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1>",
+                html: "<div style='height:100%; float:left; margin-right:5px;'> \
+                    <img src='../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play_Embed@2x' style='float:left; width:32px; height: auto;'> \
+                  </div> \
+                  <div style='height:100%; padding-top: 5px;'><h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1></div>",
                 css: {'width': episodeWidth + "%"}
             }).appendTo("#episodeSelection");
 

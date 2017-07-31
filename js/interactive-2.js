@@ -1,28 +1,33 @@
+var disableMapControls = true;
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
 var totalTime = 30 * 1; // Minutes - should be 60
 
-var mapLayers = new Array(3);
-mapLayers["lovese"] = {
-  added : false,
-  visible : false
-}
-mapLayers["opened_oil_areas"] = {
-  added : false,
-  visible : false
-}
-mapLayers["oil_prospects"] = {
-  added : false,
-  visible : false
-}
-mapLayers["islands"] = {
-  added : false,
-  visible : false
-}
+// Name of layers used in the interface
+//var dataLayers = ['lovese_land', 'lovese_sea', 'opened_oil_areas', 'oil_prospects'];
+
+// GeoJSON data sources for MapBox layers
+var dataSources = [
+  {name:'corals', data:'../include/map-layers/corals.geojson'},
+  {name:'cod', data:'../include/map-layers/cod.geojson'},
+  {name:'lovese_sea', data:'../include/map-layers/lovese_blocks.geojson'},
+  {name:'oil_prospects', data:'../include/map-layers/prospekter_union.geojson'},
+  {name:'opened_oil_areas', data:'../include/map-layers/opened_areas.geojson'},
+];
+
+var dataLayerBounds = new Array(dataSources.length);
+
+var mapLayers = new Array(6);
+mapLayers["lovese_land"] = {added : false,visible : false}
+mapLayers["lovese_sea"] = {added : false,visible : false}
+mapLayers["opened_oil_areas"] = {added : false,visible : false}
+mapLayers["ncs"] = {added : false,visible : false}
+mapLayers["oil_prospects"] = {added : false,visible : false}
+mapLayers["people"] = {added : false,visible : false}
 
 var mapLayersStyle = new Array(3);
-mapLayersStyle["lovese"] = {
+mapLayersStyle["lovese_sea"] = {
     color : "#fff",
     opacity : 0.5,
     border_color : "#fff"
@@ -37,26 +42,30 @@ mapLayersStyle["oil_prospects"] = {
     opacity : 0.9,
     border_color : "#000"
 }
+var mapIcons = ["eldar","anne","johanna", "image360_1", "image360_2", "image360_3", "image360_4", "image360_5", "image360_6"];
+var peopleAdded = false;
 
-var peopleIcons = new Array(3);
-peopleIcons["eldar"] = {
-  zoomedTo : false,
-  playedVideo : false,
-  clicked : 0,
-  coordinates : []
-}
+var addedMapIcons = new Array(6);
+addedMapIcons["eldar"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["anne"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["johanna"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_1"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_2"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_3"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_4"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_5"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
+addedMapIcons["image360_6"] = {zoomedTo : false, playedVideo : false, clicked : 0, coordinates : []}
 
-var zoomed = new Array(5);
+var zoomed = new Array(4);
 zoomed["first"] = false;
-zoomed["second"] = false;
-zoomed["third"] = false;
-zoomed["fourth"] = false;
-zoomed["fifth"] = false;
+zoomed["eldar"] = false;
+zoomed["anne"] = false;
+zoomed["johanna"] = false;
 
 var paused;
 var countdown;
 
-var areas = {
+var land_areas_lavbels = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -159,7 +168,8 @@ var people = {
         {
             "type": "Feature",
             "properties": {
-                "message": "Eldar",
+                "title": "Eldar",
+                "name": "eldar",
                 "iconSize": [42, 42],
                 "imgName" : "_ICN_IMG-INT-01@3x"
             },
@@ -168,6 +178,140 @@ var people = {
                 "coordinates": [
                     12.71917260338634,
                     67.6552201739818
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Anne-Birgit",
+                "name": "anne",
+                "iconSize": [32, 32],
+                "imgName" : "_Plus-Circle@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.241099194372055,
+                    68.09483751373435
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Johanna",
+                "name": "johanna",
+                "iconSize": [32, 32],
+                "imgName" : "_Plus-Circle@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.435388,
+                    68.133261
+                ]
+            }
+        }
+    ]
+};
+
+var images360 = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Verøy",
+                "name": "image360_1",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.621902777778,
+                    67.658158333333
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Sørlandsvågen",
+                "name": "image360_2",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.725080555556,
+                    67.648355555556
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Nordland",
+                "name": "image360_3",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.729925,
+                    67.694366666667
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Værøy",
+                "name": "image360_4",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.700561111111,
+                    67.654016666667
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Flakstad",
+                "name": "image360_5",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.223294444444,
+                    68.100188888889
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Napp",
+                "name": "image360_6",
+                "iconSize": [42, 42],
+                "imgName" : "_ICN_BTN_Birds@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.471063888889,
+                    68.126827777778
                 ]
             }
         }
@@ -186,21 +330,77 @@ var map = new mapboxgl.Map({
   attributionControl: false
 });
 
+if(disableMapControls) {
+  mapControls(true);
+}
+
+function mapControls(disable) {
+  if(disable) {
+    map.scrollZoom.disable();
+    map.dragRotate.disable();
+    map.dragPan.disable();
+    map.touchZoomRotate.disableRotation();
+    map.doubleClickZoom.disable();
+  } else {
+    map.scrollZoom.enable();
+    map.dragRotate.enable();
+    map.dragPan.enable();
+    map.touchZoomRotate.enable();
+    map.doubleClickZoom.enable();
+  }
+}
+
 map.on('load', function() {
-  // Add all the data sources that we need:
-  map.addSource('corals', { type: 'geojson', data: '../include/map-layers/corals.geojson' });
-  map.addSource('cod', { type: 'geojson', data: '../include/map-layers/cod.geojson' });
-  map.addSource('lovese', { type: 'geojson', data: '../include/map-layers/lovese_blocks.geojson' });
-  map.addSource('oil_areas', {type: 'geojson', data : oilareas});
-  map.addSource('oil_prospects', { type: 'geojson', data: '../include/map-layers/prospekter_union.geojson' });
-  map.addSource('opened_oil_areas', { type: 'geojson', data: '../include/map-layers/opened_areas.geojson' });
+  // Add geojson sources and calculate the bbox for each layer for later use
+  dataSources.forEach(function(source) {
+    $.ajax({
+      beforeSend: function(xhr){
+        if (xhr.overrideMimeType)
+        {
+          xhr.overrideMimeType("application/json");
+        }
+      },
+      dataType: "json",
+      url: source.data,
+      success: function(data){
+        var bounds = turf.bbox(data);
+        map.addSource(source.name, {type: 'geojson', data : data});
+        dataLayerBounds[source.name] = bounds;
+      }
+    });
+  });
+
+  // Add labels
+  map.addSource('oil_areas_labels', {type: 'geojson', data : oilareas});
+
+  // Crude way of checking if a layer has been added when the map re-renders
+  // Could add all the layers here, and loop through them to check if they have been added
+  // map.on("render", function() {
+  //   if(map.loaded()) {
+  //     dataLayers.forEach(function(layer) {
+  //       if(map.getLayer(layer)) {
+  //         //var features = map.queryRenderedFeatures({layers:[layer]});
+  //         var relatedFeatures = map.querySourceFeatures(layer, {
+  //                     sourceLayer: layer
+  //                     //filter: ['in', 'COUNTY', feature.properties.COUNTY]
+  //                 });
+  //
+  //         console.log(relatedFeatures);
+  //         zoomToExtent(relatedFeatures);
+  //       }
+  //     });
+  //   }
+  // });
+
+  // map.on('sourcedata', function(e) {
+  //   console.log(e);
+  // });
 
   //console.log(map.getLayer('opened_oil_areas'), map.querySourceFeatures('opened_oil_areas'));
   // https://bl.ocks.org/danswick/83a8ddff7fb9193176a975a02a896792 or https://stackoverflow.com/questions/35673704/how-do-i-get-the-bounding-box-of-a-mapboxgl-geojsonsource-object
   // or: https://github.com/mapbox/geojson-extent
   // Get boudning box of geojson - need to load the file first.
   //var bbox = turf.bbox(geojson);
-
 
   // map.on('sourcedata', function(e) {
   //   console.log(e);
@@ -213,7 +413,149 @@ map.on('load', function() {
       zoomToArea("first", [12.901721434467618,68.71391887946749], 6.54, 0.5, 1.5, 0, 0, [0,0]);
     }, startDelay);
   });
+
+  map.on("mousedown", function(e) {
+    var center = map.getCenter().wrap();
+    var zoom = map.getZoom();
+
+    console.log(center, zoom, e.lngLat, e.point);
+  });
+
+  map.on('zoomend', function(e) {
+    var zoom = map.getZoom();
+    if(zoom < 5.5 || zoom > 7.5) {
+      $(".areas-marker").hide();
+    } else {
+      $(".areas-marker").show();
+    }
+  });
+
+  // map.on("mouseup", function(e) {
+  // });
+  //
+  // map.on("zoomend", function(e) {
+  // });
+
+  // // Change the cursor to a pointer when the mouse is over the places layer.
+  // // Does not work on the dynamically added layers?
+  // map.on('mouseenter', 'lovese', function () {
+  //     map.getCanvas().style.cursor = 'pointer';
+  // });
+  //
+  // // Change it back to a pointer when it leaves.
+  // map.on('mouseleave', 'lovese', function () {
+  //     map.getCanvas().style.cursor = '';
+  // });
+
+  // Functions for flying to a specific part of the map
+  map.on('flystart', function(){
+    flying = true;
+  });
+  map.on('flyend', function(){
+    flying = false;
+  });
+  map.on('moveend', function(e){
+
+    //TODO: Need to implement a check here on the different times we're zooming on the map
+    /*Need:
+      zoom into Norway/the areas
+      zoom out to see all the areas Norway has opened for oil
+      zoom into Værøy / zoom out from Værøy
+      zoom to Johanne / zoom out from Johanne (Napp)
+      zoom to Anne Birgit / zoom out from Anne B. (Flakstad)
+    */
+
+    if(!flying && zoomedToArea){
+      //map.fire(flyend);
+      if(zoomed["first"]) {
+        console.log("First zoom event!");
+        $(".container-full").fadeIn("1500");
+        $(".interactive-pane-text").css({'z-index':1}).show();
+        $(".cd-section").css({'z-index':1}).show();
+
+        // Add marker for each area to the map (Lofoten, Vesterålen and Senja) [the first part of the interactive episode]
+        land_areas_lavbels.features.forEach(function(marker) {
+            // create a DOM element for the marker
+            var el = document.createElement('div');
+            el.className = 'areas-marker';
+
+            el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+            el.style.width = marker.properties.iconSize[0] + 'px';
+            el.style.height = marker.properties.iconSize[1] + 'px';
+
+            // Get the screen x,y representation of the coordinates
+            //var lnglat = new mapboxgl.LngLat(marker.geometry.coordinates);
+            var point = map.project(marker.geometry.coordinates);
+
+            el.addEventListener('click', function() {
+                console.log(marker.properties.message, point);
+            });
+
+            // add marker to map
+            //new mapboxgl.Marker(el)
+            new mapboxgl.Marker(el, { offset: [-100 / 2, -50 / 2] })
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(map);
+        });
+
+        // Show map filters
+        $("#map-filters").show();
+
+        if (countdown) {
+          clearInterval(countdown);
+        }
+        paused = false;
+
+        startTimer(totalTime);
+        startMapFeautures();
+        zoomed["first"] = false; // Not to do this again
+      } else if(zoomed["eldar"]) {
+        // We have zoomed in on the first interview, so update their marker overlay position accordingly
+        add360Icons(); // Should we move this - or even break it down for each person?
+        //updateMarkerOverlayPos();
+
+        // var point = map.project(peopleIcons["eldar"].coordinates);
+        //
+        // $(".cd-modal-action").css({'left':point.x-10, 'top':point.y-10});
+        // $(".cd-section").css({'z-index':1}).show();
+        //
+        // zoomed["second"] = false;
+      }
+
+      zoomedToArea = false; // Always do this
+    }
+
+    // Used to be peopleAdded
+    if(zoomed["eldar"]) {
+      updateMarkerOverlayPos();
+      //
+      // try{
+      //   // Update the overlay if the map moves
+      //   var point = map.project(peopleIcons["eldar"].coordinates);
+      //   $(".cd-modal-action").css({'left':point.x-10, 'top':point.y-10});
+      // }
+      // catch(err) {
+      //     console.log(err);
+      // }
+    }
+  });
 });
+
+function updateMarkerOverlayPos() {
+  $(".cd-modal-action").show();
+  mapIcons.forEach(function(icon) {
+    try{
+      // Update the overlay if the map moves
+      var point = map.project(addedMapIcons[icon].coordinates);
+      console.log("Update overlay for: ", icon, point);
+      $(".cd-modal-action."+ icon +" ").css({'left':point.x-19, 'top':point.y-19});
+      //console.log(point);
+    }
+    catch(err) {
+        console.log(err);
+    }
+  });
+}
 
 // Not currently in use
 // map.on('style.load', function (e) {
@@ -225,23 +567,6 @@ map.on('load', function() {
 //   //setSizes();
 // });
 
-map.on("mousedown", function(e) {
-  var center = map.getCenter().wrap();
-  var zoom = map.getZoom();
-  console.log(center, zoom, e.lngLat, e.point);
-});
-
-// Change the cursor to a pointer when the mouse is over the places layer.
-// Does not work on the dynamically added layers?
-map.on('mouseenter', 'lovese', function () {
-    map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'lovese', function () {
-    map.getCanvas().style.cursor = '';
-});
-
 $("#hover-navigation .arrow").on("click", function() {
   if (app.navigation.state == app.navigation.visible) {
     $(".interactive-pane").css({"bottom":"130px"});
@@ -250,81 +575,7 @@ $("#hover-navigation .arrow").on("click", function() {
   }
 });
 
-// Functions for flying to a specific part of the map
-map.on('flystart', function(){
-  flying = true;
-});
-map.on('flyend', function(){
-  flying = false;
-});
-map.on('moveend', function(e){
-
-  //TODO: Need to implement a check here on the different times we're zooming on the map
-  /*Need:
-    zoom into Norway/the areas
-    zoom out to see all the areas Norway has opened for oil
-    zoom into Værøy / zoom out from Værøy
-    zoom to Johanne / zoom out from Johanne (Napp)
-    zoom to Anne Birgit / zoom out from Anne B. (Flakstad)
-  */
-
-  if(!flying && zoomedToArea){
-    //map.fire(flyend);
-    if(zoomed["first"]) {
-      console.log("First zoom event!");
-      $(".container-full").fadeIn("1500");
-
-      // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
-      areas.features.forEach(function(marker) {
-          // create a DOM element for the marker
-          var el = document.createElement('div');
-          el.className = 'areas-marker';
-
-          el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
-          el.style.width = marker.properties.iconSize[0] + 'px';
-          el.style.height = marker.properties.iconSize[1] + 'px';
-
-          // Get the screen x,y representation of the coordinates
-          //var lnglat = new mapboxgl.LngLat(marker.geometry.coordinates);
-          var point = map.project(marker.geometry.coordinates);
-
-          el.addEventListener('click', function() {
-              console.log(marker.properties.message, point);
-          });
-
-          // add marker to map
-          //new mapboxgl.Marker(el)
-          new mapboxgl.Marker(el, { offset: [-100 / 2, -50 / 2] })
-              .setLngLat(marker.geometry.coordinates)
-              .addTo(map);
-      });
-
-      // Show map filters
-      $("#map-filters").show();
-
-      if (countdown) {
-        clearInterval(countdown);
-      }
-      paused = false;
-
-      startTimer(totalTime);
-      startMapFeautures();
-      zoomed["first"] = false; // Not to do this again
-    } else if(zoomed["second"]) {
-      console.log("finished zooming second");
-
-      var point = map.project(peopleIcons["eldar"].coordinates);
-
-      $(".cd-modal-action").css({'left':point.x, 'top':point.y});
-      $(".cd-section").show();
-
-      zoomed["second"] = false;
-    }
-
-    zoomedToArea = false; // Always do this
-  }
-});
-
+// Map filter
 $("#map-filters ul li").on('click', function () {
   $(this).siblings().each(function(){
      $(this).removeClass("active"); // The button
@@ -340,18 +591,28 @@ $("#map-filters ul li").on('click', function () {
   $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").addClass("active");
 });
 
+// Interviewees pane - move to the area of the person on click
+$(".interview").on('click', function () {
+  $(this).siblings().each(function(){
+     $(this).removeClass("active");
+  });
+  $(this).addClass("active");
+  var person = $(this).attr('data-person');
+  zoomToPerson(person);
+});
+
 // Add a given map layer to the map, except the islands layer - which has no layer
 function showMapLayer(layer){
-  if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "islands") {
+  if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
     if(mapLayers[layer].visible == false) {
-      if(!mapLayers[layer].added && layer !== "islands") {
+      if(!mapLayers[layer].added && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
         map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
-        if(layer === "lovese") {
+        if(layer === "lovese_sea") {
           // Add labels for the different sea areas
           map.addLayer({
             "id": "lovese-labels",
             "type": "symbol",
-            "source": "oil_areas",
+            "source": "oil_areas_labels",
             "layout": {
               "text-field": "{name}",
               "text-font": [
@@ -384,27 +645,34 @@ function showMapLayer(layer){
       //     padding: 20
       // });
 
-      if(layer === "lovese") {
+      if(layer === "lovese_sea") {
         map.setLayoutProperty("lovese-labels", 'visibility', 'visible');
       }
-      if(layer !== "islands") map.setLayoutProperty(layer, 'visibility', 'visible');
-      mapLayers[layer].visible = true;
+      if(layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
+        map.setLayoutProperty(layer, 'visibility', 'visible');
+        mapLayers[layer].visible = true;
+
+        // Fit the map to the bounderies of the specific layer
+        //console.log(layer);
+        map.fitBounds(dataLayerBounds[layer], {padding: 20, linear:false, duration: 2000});
+      }
     }
   }
 
-  if(layer === "islands") {
-    console.log("Adding people");
+  // Stuff to do for ncs (lovese_land is already loaded after the zoom event)
+  if(layer === "people") {
     addPeopleIcons();
   }
+
 }
 
 // Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer){
-  if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "islands") {
-    if(mapLayers[layer].visible == true && layer !== "islands") {
+  if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
+    if(mapLayers[layer].visible == true && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
       //map.removeLayer(layer);
       map.setLayoutProperty(layer, 'visibility', 'none');
-      if(layer === "lovese") {
+      if(layer === "lovese_sea") {
         //map.removeLayer("lovese-labels");
         map.setLayoutProperty("lovese-labels", 'visibility', 'none');
       }
@@ -415,6 +683,7 @@ function removeMapLayer(layer){
 }
 
 function addPeopleIcons() {
+  peopleAdded = true;
   // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
   people.features.forEach(function(marker) {
       // create a DOM element for the marker
@@ -425,44 +694,69 @@ function addPeopleIcons() {
       el.style.width = marker.properties.iconSize[0] + 'px';
       el.style.height = marker.properties.iconSize[1] + 'px';
 
+      //var point = map.project(marker.geometry.coordinates);
+      addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
+
       el.addEventListener('click', function() {
-          //console.log(marker.properties.message, point);
-          var point = map.project(marker.geometry.coordinates);
-          peopleIcons["eldar"].coordinates = marker.geometry.coordinates;
-
-          // Zoom into Værøy
-          // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
-          //console.log(peopleIcons["eldar"]);
-
-          if(peopleIcons["eldar"].zoomedTo == false) {
-              zoomToArea("second", marker.geometry.coordinates, 12.325, 0.5, 1.5, 150, -10, [650,0]);
-              peopleIcons["eldar"].zoomedTo = true;
-              peopleIcons["eldar"].clicked += 1;
-          } else {
-            // 3. If eldar icon is clicked more than once
-            if(peopleIcons["eldar"].clicked >= 1) {
-              console.log("Play the video", point);
-
-              // TODO: Make this work
-              // var actionBtn = $(this),
-          		// 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
-              //
-          		// actionBtn.addClass('to-circle');
-          		// actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-          		// 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-          		// });
-              //
-          		// //if browser doesn't support transitions...
-          		// if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-              //
-              // peopleIcons["eldar"].playedVideo = true;
-            }
-          }
-
-          // 2. Add the 360 icons to the map
-
-
+        // Add reference to function which will handle stuff from here.
+        zoomToPerson(marker.properties.name);
       });
+
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+  });
+}
+
+function zoomToPerson(name) {
+  // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
+
+  //if(addedMapIcons[name].zoomedTo == false) {
+  // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
+  zoomToArea(name, addedMapIcons[name].coordinates, 11, 1, 1, 150, -10, [350,0]);
+  addedMapIcons[name].zoomedTo = true;
+  addedMapIcons[name].clicked += 1;
+  //console.log("this person has: ", addedMapIcons[name].coordinates);
+  // } else {
+  //   // 3. If person icon is clicked more than once
+  //   if(addedMapIcons[name].clicked >= 1) {
+  //     console.log("Play the video of ", name);
+  //
+  //     // TODO: Make this work (popup for watching the video)
+  //     // var actionBtn = $(this),
+  //     // 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+  //     //
+  //     // actionBtn.addClass('to-circle');
+  //     // actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+  //     // 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+  //     // });
+  //     //
+  //     // //if browser doesn't support transitions...
+  //     // if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+  //     //
+  //     // peopleIcons["eldar"].playedVideo = true;
+  //   }
+  // }
+}
+
+function add360Icons() {
+  // 2. Add the 360 icons to the map
+  images360.features.forEach(function(marker) {
+      // create a DOM element for the marker
+      var el = document.createElement('div');
+      el.className = 'marker-360';
+
+      el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_010_EP7_BG/' + marker.properties.imgName + '.png)';
+      el.style.width = marker.properties.iconSize[0] + 'px';
+      el.style.height = marker.properties.iconSize[1] + 'px';
+
+      //var point = map.project(marker.geometry.coordinates);
+      addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
+
+      // el.addEventListener('click', function() {
+      //   // Add reference to function which will handle stuff from here.
+      //   //zoomToPerson(marker);
+      // });
 
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
@@ -586,6 +880,9 @@ function startMapFeautures() {
     if(mapF.last().index() == mapF.index($active)) {
       clearInterval(timer);
       timer = null;
+      // Move to Eldar
+      zoomToPerson("eldar");
+
       // Move to next episode.
     }
   }, sectionTime);
@@ -604,19 +901,68 @@ function startMapFeautures() {
 
 // Open videos and 360s:
 	//trigger the animation - open modal window
-	// $('[data-type="modal-trigger"]').on('click', function(){
-  //   console.log("clicked button");
-	// 	var actionBtn = $(this),
-	// 		scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
-  //
-	// 	actionBtn.addClass('to-circle');
-	// 	actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-	// 		animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-	// 	});
-  //
-	// 	//if browser doesn't support transitions...
-	// 	if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-	// });
+	$('[data-type="modal-trigger"]').on('click', function(e){
+    e.preventDefault();
+    var contentUrl = "";
+
+    https://vimeo.com/200725736
+    if($(this).parent().attr('data-type') == 'person') {
+      switch($(this).parent().attr('data-id')) {
+        case "eldar":
+          console.log("Play eldar");
+          contentUrl = "//player.vimeo.com/video/200725736?byline=0&amp;portrait=0";
+          break;
+        case "anne":
+          console.log("play Anne");
+          contentUrl = "//player.vimeo.com/video/200724627?byline=0&amp;portrait=0";
+          break;
+        case "johanna":
+          console.log("Play Johanna");
+          contentUrl = "//player.vimeo.com/video/199863373?byline=0&amp;portrait=0";
+          break;
+      }
+    } else if($(this).parent().attr('data-type') == 'images360') {
+      switch($(this).parent().attr('data-id')) {
+        case "1":
+          console.log("Værøy 1");
+          contentUrl = "../resources/_360/Veroy.html";
+          break;
+        case "2":
+          console.log("Værøy 2");
+          contentUrl = "../resources/_360/Veroy.html";
+          break;
+        case "3":
+          console.log("Værøy 3");
+          contentUrl = "../resources/_360/Veroy.html";
+          break;
+        case "4":
+          console.log("Værøy 4");
+          contentUrl = "../resources/_360/Veroy.html";
+          break;
+        case "5":
+          console.log("Flakstad");
+          contentUrl = "../resources/_360/Flakstad.html";
+          break;
+        case "6":
+          console.log("Napp");
+          contentUrl = "../resources/_360/Napp.html";
+          break;
+      }
+    }
+    $("#overlayContent").attr("src", contentUrl);
+
+		var actionBtn = $(this),
+			scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+
+		actionBtn.addClass('to-circle');
+		actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+			animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+		});
+
+		//if browser doesn't support transitions...
+		if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+
+	});
 
 	//trigger the animation - close modal window
 	$('.cd-section .cd-modal-close').on('click', function(){
