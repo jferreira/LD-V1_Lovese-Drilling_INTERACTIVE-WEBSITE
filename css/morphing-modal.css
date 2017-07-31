@@ -45,7 +45,7 @@ Main Components
 .cd-modal p {
   color: #ffffff;
   line-height: 1.6;
-  margin: 2em 0;
+  margin: 2.5em 0;
 }
 
 .modal-is-visible .cd-modal {
@@ -81,11 +81,12 @@ Main Components
 .cd-modal-action {
   position: fixed;
   z-index: 10;
+  display: none;
 }
 
 .cd-modal-action .cd-modal-bg {
   display: inline-block;
-  height: 4em;
+  height: 2.5em;
   background-color: #34383c;
 }
 
@@ -93,10 +94,10 @@ Main Components
   display: inline-block;
   background-color: #34383c;
 
-  height: 4em;
-  width: 4em;
-  line-height: 4em;
-  border-radius: 4em;
+  height: 2.5em;
+  width: 2.5em;
+  line-height: 2.5em;
+  border-radius: 2.5em;
   color: #ffffff;
   white-space: nowrap;
   font-weight: 700;
@@ -108,7 +109,7 @@ Main Components
   transition: color 0.2s 0.3s, width 0.3s 0s;
 }
 .cd-modal-action .btn.to-circle {
-  width: 4em;
+  width: 2.5em;
   color: transparent;
   -webkit-transition: color 0.2s 0s, width 0.3s 0.2s;
   -moz-transition: color 0.2s 0s, width 0.3s 0.2s;
@@ -119,7 +120,7 @@ Main Components
   z-index: 11;
   left: 50%;
   top: 0;
-  width: 4em;
+  width: 2.5em;
   border-radius: 50%;
   opacity: 0;
   visibility: hidden;
@@ -128,11 +129,11 @@ Main Components
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transform: translateX(-2em);
-  -moz-transform: translateX(-2em);
-  -ms-transform: translateX(-2em);
-  -o-transform: translateX(-2em);
-  transform: translateX(-2em);
+  -webkit-transform: translateX(-2.5em);
+  -moz-transform: translateX(-2.5em);
+  -ms-transform: translateX(-2.5em);
+  -o-transform: translateX(-2.5em);
+  transform: translateX(-2.5em);
   -webkit-transition: visibility 0s 0.5s;
   -moz-transition: visibility 0s 0.5s;
   transition: visibility 0s 0.5s;

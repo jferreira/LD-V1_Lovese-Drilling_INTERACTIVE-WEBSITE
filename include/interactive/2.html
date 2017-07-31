@@ -13,7 +13,7 @@
 
 <div class="container-fluid container-full">
   <div class="row v-center">
-    <div class="col-md-4 col-lg-3 interactive-pane-text">
+    <div class="col-md-4 col-lg-3 interactive-pane-text" style="display:none; z-index:-99999;">
 
       <div class="map-features-count" style="width: 100%; text-align:center;">
         <p><span class="current"></span> / <span class="total"></span></p>
@@ -105,7 +105,7 @@
 
 <nav id='map-filters' class='filter-ui'>
   <ul>
-    <li class="land-areas" data-id="1" data-layer-name="lovese_land"></li>
+    <li class="land-areas" data-layer-name="lovese_land"></li>
     <li class="sea-areas" data-layer-name="lovese_sea"></li>
     <li class="opened-oil" data-layer-name="opened_oil_areas"></li>
     <li class="ncs" data-layer-name="ncs"></li>
@@ -121,15 +121,27 @@
   -->
 </nav>
 
-<section class="cd-section">
-  <div class="cd-modal-action">
-    <a href="#0" class="btn" data-type="modal-trigger">x</a>
+<section class="cd-section" style="display:none; z-index:-99999;">
+  <div class="cd-modal-action eldar" data-type="person" data-id="eldar">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action anne" data-type="person" data-id="anne">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div> <!-- cd-modal-action -->
+
+  <div class="cd-modal-action johanna" data-type="person" data-id="johanna">
+    <a class="btn" data-type="modal-trigger"></a>
     <span class="cd-modal-bg"></span>
   </div> <!-- cd-modal-action -->
 
   <div class="cd-modal">
     <div class="cd-modal-content" style="overflow:hidden;">
-      <iframe id="eldar" src="" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%;height:100%;"></iframe>
+      <iframe id="overlayContent" src="" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%;height:100%;"></iframe>
+      <!-- <iframe src="//player.vimeo.com/video/11712103?byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%; height:100%;"></iframe> -->
+      <!-- <div class='embed-container'><iframe id="overlayConent" src='https://player.vimeo.com/video/11712103' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div> -->
     </div> <!-- cd-modal-content -->
   </div> <!-- cd-modal -->
 

@@ -41,23 +41,19 @@ mapLayersStyle["oil_prospects"] = {
     opacity : 0.9,
     border_color : "#000"
 }
-
+var persons = ["eldar","anne","johanna"];
+var peopleAdded = false;
 var peopleIcons = new Array(3);
-peopleIcons["eldar"] = {
-  zoomedTo : false,
-  playedVideo : false,
-  clicked : 0,
-  coordinates : []
-}
+peopleIcons["eldar"] = {zoomedTo : false,playedVideo : false,clicked : 0,coordinates : []}
+peopleIcons["anne"] = {zoomedTo : false,playedVideo : false,clicked : 0,coordinates : []}
+peopleIcons["johanna"] = {zoomedTo : false,playedVideo : false,clicked : 0,coordinates : []}
 
 // TODO: Should give these better names
 var zoomed = new Array(5);
 zoomed["first"] = false;
-zoomed["second"] = false;
-zoomed["third"] = false;
-zoomed["fourth"] = false;
-zoomed["fifth"] = false;
-zoomed["sixth"] = false;
+zoomed["eldar"] = false;
+zoomed["anne"] = false;
+zoomed["johanna"] = false;
 
 var paused;
 var countdown;
@@ -165,7 +161,8 @@ var people = {
         {
             "type": "Feature",
             "properties": {
-                "message": "Eldar",
+                "title": "Eldar",
+                "name": "eldar",
                 "iconSize": [42, 42],
                 "imgName" : "_ICN_IMG-INT-01@3x"
             },
@@ -174,6 +171,38 @@ var people = {
                 "coordinates": [
                     12.71917260338634,
                     67.6552201739818
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Anne-Birgit",
+                "name": "anne",
+                "iconSize": [32, 32],
+                "imgName" : "_Plus-Circle@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.241099194372055,
+                    68.09483751373435
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Johanna",
+                "name": "johanna",
+                "iconSize": [32, 32],
+                "imgName" : "_Plus-Circle@3x"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.435388,
+                    68.133261
                 ]
             }
         }
@@ -195,10 +224,20 @@ var map = new mapboxgl.Map({
 map.on('load', function() {
   // Add geojson sources and calculate the bbox for each layer for later use
   dataSources.forEach(function(source) {
-    $.getJSON(source.data, function(data){
-      var bounds = turf.bbox(data);
-      map.addSource(source.name, {type: 'geojson', data : data});
-      dataLayerBounds[source.name] = bounds;
+    $.ajax({
+      beforeSend: function(xhr){
+        if (xhr.overrideMimeType)
+        {
+          xhr.overrideMimeType("application/json");
+        }
+      },
+      dataType: "json",
+      url: source.data,
+      success: function(data){
+        var bounds = turf.bbox(data);
+        map.addSource(source.name, {type: 'geojson', data : data});
+        dataLayerBounds[source.name] = bounds;
+      }
     });
   });
 
@@ -253,6 +292,21 @@ map.on('load', function() {
     console.log(center, zoom, e.lngLat, e.point);
   });
 
+  map.on('zoomend', function(e) {
+    var zoom = map.getZoom();
+    if(zoom < 5.5 || zoom > 7.5) {
+      $(".areas-marker").hide();
+    } else {
+      $(".areas-marker").show();
+    }
+  });
+
+  // map.on("mouseup", function(e) {
+  // });
+  //
+  // map.on("zoomend", function(e) {
+  // });
+
   // // Change the cursor to a pointer when the mouse is over the places layer.
   // // Does not work on the dynamically added layers?
   // map.on('mouseenter', 'lovese', function () {
@@ -287,6 +341,8 @@ map.on('load', function() {
       if(zoomed["first"]) {
         console.log("First zoom event!");
         $(".container-full").fadeIn("1500");
+        $(".interactive-pane-text").css({'z-index':1}).show();
+        $(".cd-section").css({'z-index':1}).show();
 
         // Add marker for each area to the map (Lofoten, Vesterålen and Senja) [the first part of the interactive episode]
         land_areas_lavbels.features.forEach(function(marker) {
@@ -324,21 +380,54 @@ map.on('load', function() {
         startTimer(totalTime);
         startMapFeautures();
         zoomed["first"] = false; // Not to do this again
-      } else if(zoomed["second"]) {
-        console.log("finished zooming second");
+      } else if(zoomed["eldar"] || zoomed["anne"] || zommed["johanna"]) {
+        // We have zoomed in on one of the persons, so update their marker overlay position accordingly
+        updateMarkerOverlayPos();
 
-        var point = map.project(peopleIcons["eldar"].coordinates);
-
-        $(".cd-modal-action").css({'left':point.x, 'top':point.y});
-        $(".cd-section").show();
-
-        zoomed["second"] = false;
+        // var point = map.project(peopleIcons["eldar"].coordinates);
+        //
+        // $(".cd-modal-action").css({'left':point.x-10, 'top':point.y-10});
+        // $(".cd-section").css({'z-index':1}).show();
+        //
+        // zoomed["second"] = false;
       }
 
       zoomedToArea = false; // Always do this
     }
+
+    if(peopleAdded) {
+      console.log("movend---");
+      updateMarkerOverlayPos();
+      //
+      // try{
+      //   // Update the overlay if the map moves
+      //   var point = map.project(peopleIcons["eldar"].coordinates);
+      //   $(".cd-modal-action").css({'left':point.x-10, 'top':point.y-10});
+      // }
+      // catch(err) {
+      //     console.log(err);
+      // }
+    }
   });
 });
+
+function updateMarkerOverlayPos() {
+  console.log("Update and show overlay!");
+  $(".cd-modal-action").show();
+
+  persons.forEach(function(person) {
+    console.log("Update overlay for: ", person);
+    try{
+      // Update the overlay if the map moves
+      var point = map.project(peopleIcons[person].coordinates);
+      $(".cd-modal-action."+ person +" ").css({'left':point.x-20, 'top':point.y-20});
+      console.log(point);
+    }
+    catch(err) {
+        console.log(err);
+    }
+  });
+}
 
 // Not currently in use
 // map.on('style.load', function (e) {
@@ -477,6 +566,7 @@ function removeMapLayer(layer){
 }
 
 function addPeopleIcons() {
+  peopleAdded = true;
   // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
   people.features.forEach(function(marker) {
       // create a DOM element for the marker
@@ -487,48 +577,50 @@ function addPeopleIcons() {
       el.style.width = marker.properties.iconSize[0] + 'px';
       el.style.height = marker.properties.iconSize[1] + 'px';
 
+      var point = map.project(marker.geometry.coordinates);
+      peopleIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
+
       el.addEventListener('click', function() {
-          //console.log(marker.properties.message, point);
-          var point = map.project(marker.geometry.coordinates);
-          peopleIcons["eldar"].coordinates = marker.geometry.coordinates;
-
-          // Zoom into Værøy
-          // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
-          //console.log(peopleIcons["eldar"]);
-
-          if(peopleIcons["eldar"].zoomedTo == false) {
-              zoomToArea("second", marker.geometry.coordinates, 12.325, 0.5, 1.5, 150, -10, [650,0]);
-              peopleIcons["eldar"].zoomedTo = true;
-              peopleIcons["eldar"].clicked += 1;
-          } else {
-            // 3. If eldar icon is clicked more than once
-            if(peopleIcons["eldar"].clicked >= 1) {
-              console.log("Play the video", point);
-
-              // TODO: Make this work (popup for watching the video)
-              // var actionBtn = $(this),
-          		// 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
-              //
-          		// actionBtn.addClass('to-circle');
-          		// actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-          		// 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-          		// });
-              //
-          		// //if browser doesn't support transitions...
-          		// if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-              //
-              // peopleIcons["eldar"].playedVideo = true;
-            }
-          }
-
-          // 2. Add the 360 icons to the map
-
+        // Add reference to function which will handle stuff from here.
+        zoomToPerson(marker);
       });
 
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
         .addTo(map);
   });
+}
+
+function zoomToPerson(marker) {
+  // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
+  if(peopleIcons[marker.properties.name].zoomedTo == false) {
+      // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
+      zoomToArea(marker.properties.name, marker.geometry.coordinates, 11, 1, 1, 150, -10, [350,0]);
+      peopleIcons[marker.properties.name].zoomedTo = true;
+      peopleIcons[marker.properties.name].clicked += 1;
+      console.log("this person has: ", peopleIcons[marker.properties.name].coordinates);
+  } else {
+    // 3. If person icon is clicked more than once
+    if(peopleIcons[marker.properties.name].clicked >= 1) {
+      console.log("Play the video of ", marker.properties.name);
+
+      // TODO: Make this work (popup for watching the video)
+      // var actionBtn = $(this),
+      // 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+      //
+      // actionBtn.addClass('to-circle');
+      // actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+      // 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+      // });
+      //
+      // //if browser doesn't support transitions...
+      // if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+      //
+      // peopleIcons["eldar"].playedVideo = true;
+    }
+  }
+
+  // 2. Add the 360 icons to the map
 }
 
 function setSizes() {
@@ -665,9 +757,40 @@ function startMapFeautures() {
 
 // Open videos and 360s:
 	//trigger the animation - open modal window
-	$('[data-type="modal-trigger"]').on('click', function(){
-    console.log("clicked button");
-    $("#eldar").attr("src", "http://www.romvesen.as/Lofoten/");
+	$('[data-type="modal-trigger"]').on('click', function(e){
+    e.preventDefault();
+    var contentUrl = "";
+
+    https://vimeo.com/200725736
+    if($(this).parent().attr('data-type') == 'person') {
+      switch($(this).parent().attr('data-id')) {
+        case "eldar":
+          console.log("Play eldar");
+          contentUrl = "//player.vimeo.com/video/200725736?byline=0&amp;portrait=0";
+          break;
+        case "anne":
+          console.log("play Anne");
+          contentUrl = "//player.vimeo.com/video/200724627?byline=0&amp;portrait=0";
+          break;
+        case "johanna":
+          console.log("Play Johanna");
+          contentUrl = "//player.vimeo.com/video/199863373?byline=0&amp;portrait=0";
+          break;
+      }
+    } else if($(this).parent().attr('data-type') == '360') {
+      switch($(this).parent().attr('data-id')) {
+        case "1":
+          console.log("Værøy 1");
+          break;
+        case "2":
+          console.log("Værøy 2");
+          break;
+        case "3":
+          console.log("Værøy 3");
+          break;
+      }
+    }
+    $("#overlayContent").attr("src", contentUrl);
 
 		var actionBtn = $(this),
 			scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
