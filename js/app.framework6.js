@@ -345,7 +345,7 @@ var app = {
       $("#content #interactive").empty();
 
       // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
-      $("#content #interactive").load(nav.interactive[id-1].html, function(response, status, xhr) {
+      $("#content #interactive").empty().load(nav.interactive[id-1].html, function(response, status, xhr) {
         if(status == "error") {
           //Something went wrong, have your error fallback code here
         }
