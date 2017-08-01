@@ -376,6 +376,34 @@ function mapControls(disable) {
 }
 
 map.on('load', function() {
+
+
+  map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
+      if (error) throw error;
+      map.addImage('cat', image);
+      map.addLayer({
+          "id": "points",
+          "type": "symbol",
+          "source": {
+              "type": "geojson",
+              "data": {
+                  "type": "FeatureCollection",
+                  "features": [{
+                      "type": "Feature",
+                      "geometry": {
+                          "type": "Point",
+                          "coordinates": [0, 0]
+                      }
+                  }]
+              }
+          },
+          "layout": {
+              "icon-image": "cat",
+              "icon-size": 0.25
+          }
+      });
+  });
+
   // Add geojson sources and calculate the bbox for each layer for later use
   dataSources.forEach(function(source) {
     $.ajax({
@@ -961,7 +989,7 @@ function startMapFeautures() {
       // Move to Eldar
       zoomToPerson("eldar");
 
-      // Move to next episode.
+      // TODO: Move to next episode - How to do this?
     }
   }, sectionTime);
 }
@@ -976,8 +1004,7 @@ function startMapFeautures() {
 // OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
 // https://www.mapbox.com/help/custom-markers-gl-js/
 
-
-// Open videos and 360s:
+  // Open videos and 360s:
 	//trigger the animation - open modal window
 	$('[data-type="modal-trigger"]').on('click', function(e){
     e.preventDefault();
@@ -987,42 +1014,33 @@ function startMapFeautures() {
     if($(this).parent().attr('data-type') == 'person') {
       switch($(this).parent().attr('data-id')) {
         case "eldar":
-          console.log("Play eldar");
           contentUrl = "//player.vimeo.com/video/227892337?byline=0&amp;portrait=0";
           break;
         case "anne":
-          console.log("play Anne");
           contentUrl = "//player.vimeo.com/video/227892426?byline=0&amp;portrait=0";
           break;
         case "johanna":
-          console.log("Play Johanna");
           contentUrl = "//player.vimeo.com/video/227892451?byline=0&amp;portrait=0";
           break;
       }
     } else if($(this).parent().attr('data-type') == 'images360') {
       switch($(this).parent().attr('data-id')) {
         case "1":
-          console.log("Værøy 1");
           contentUrl = "../resources/_360/Veroy.html";
           break;
         case "2":
-          console.log("Værøy 2");
           contentUrl = "../resources/_360/Veroy.html?vr&s=pano71";
           break;
         case "3":
-          console.log("Værøy 3");
           contentUrl = "../resources/_360/Veroy.html?vr&s=pano74";
           break;
         case "4":
-          console.log("Værøy 4");
           contentUrl = "../resources/_360/Veroy.html?vr&s=pano77";
           break;
         case "5":
-          console.log("Flakstad");
           contentUrl = "../resources/_360/Flakstad.html";
           break;
         case "6":
-          console.log("Napp");
           contentUrl = "../resources/_360/Napp.html";
           break;
       }
