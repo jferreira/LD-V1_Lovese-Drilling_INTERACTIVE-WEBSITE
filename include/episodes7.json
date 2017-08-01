@@ -26,11 +26,11 @@ var nav = {
   {
     "id": "3",
     "duration": "3.00",
-    "title": "An oily identity",
+    "title": "Breeding Grounds",
     "subtitle": "Episode 3:",
     "description": "",
-    "poster": "resources/_Images/optimized/E3_Masthead.jpg",
-    "slide": "resources/_Images/optimized/E3_Title_An-Oily-Idenity_CS.png",
+    "poster": "resources/_Images/optimized/E7_Masthead.jpg",
+    "slide": "resources/_Images/optimized/E7_Title_Breeding-Grounds_CS.png",
     "url": "",
     "vid": "",
     "mp4": ""
@@ -38,11 +38,11 @@ var nav = {
   {
     "id": "4",
     "duration": "3.00",
-    "title": "Breeding Grounds",
+    "title": "An oily identity",
     "subtitle": "Episode 4:",
     "description": "",
-    "poster": "resources/_Images/optimized/E7_Masthead.jpg",
-    "slide": "resources/_Images/optimized/E7_Title_Breeding-Grounds_CS.png",
+    "poster": "resources/_Images/optimized/E3_Masthead.jpg",
+    "slide": "resources/_Images/optimized/E3_Title_An-Oily-Idenity_CS.png",
     "url": "",
     "vid": "",
     "mp4": ""
@@ -79,27 +79,27 @@ var nav = {
 },
 {
   "id": "2",
-  "title": "Lofoten, Vesterålen and Senja",
+  "title": "The Lovese Story",
   "html": "include/interactive/2.html"
 },
 {
   "id": "3",
-  "title": "Lofoten, Vesterålen and Senja",
+  "title": "Breeding grounds",
   "html": "include/interactive/3.html"
 },
 {
   "id": "4",
-  "title": "Lofoten, Vesterålen and Senja",
+  "title": "An oily identity",
   "html": "include/interactive/4.html"
 },
 {
   "id": "5",
-  "title": "Lofoten, Vesterålen and Senja",
+  "title": "Livelihoods",
   "html": "include/interactive/5.html"
 },
 {
   "id": "6",
-  "title": "Lofoten, Vesterålen and Senja",
+  "title": "An election",
   "html": "include/interactive/6.html"
 }],
 "textPages": [{
@@ -121,5 +121,9 @@ var nav = {
 {
   "id": "5",
   "html": "include/text/5.html"
+},
+{
+  "id": "6",
+  "html": "include/text/6.html"
 }]
 };

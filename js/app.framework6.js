@@ -36,8 +36,8 @@ var app = {
     app.hashUrlMapEpisodesInteractive[5] = "ep6-interactive";
 
     if(window.location.hash) {
+        // If a hash is present - show the specific episode or interactive part
         var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-        console.log(hash);
         app.navigation.hashNavigation(hash);
     } else {
         app.helpers.updateContent(0);

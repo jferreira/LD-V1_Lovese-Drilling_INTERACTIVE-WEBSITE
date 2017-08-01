@@ -109,8 +109,6 @@ app.navigation = {
 
     // Change what content we see, based on given hash
     hashNavigation: function(hash) {
-      console.log(hash);
-
       switch(hash) {
         case "ep1":
           // Navigate to the first episode
@@ -140,8 +138,14 @@ app.navigation = {
         case "ep5":
           app.helpers.updateContent(4);
           break;
+        case "ep5-interactive":
+          app.helpers.loadInteractiveContent(nav.episodes[4].id);
+          break;
         case "ep6":
           app.helpers.updateContent(5);
+          break;
+        case "ep5-interactive":
+          app.helpers.loadInteractiveContent(nav.episodes[5].id);
           break;
         default:
           //Epiosde 1:
