@@ -79,7 +79,7 @@ app.navigation = {
                     "onClick" : "app.helpers.updateContent(" + i + ")"
                 },
                 html: "<div style='height:100%; float:left; margin-right:5px;'> \
-                    <img src='../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play_Embed@2x' style='float:left; width:32px; height: auto;'> \
+                    <img src='../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play_Embed@2x.png' style='float:left; width:32px; height: auto;'> \
                   </div> \
                   <div style='height:100%; padding-top: 5px;'><h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1></div>",
                 css: {'width': episodeWidth + "%"}
@@ -105,5 +105,48 @@ app.navigation = {
             }
         }
         $("#episodeSelection").css("width" , "100%");
+    },
+
+    // Change what content we see, based on given hash
+    hashNavigation: function(hash) {
+      console.log(hash);
+
+      switch(hash) {
+        case "ep1":
+          // Navigate to the first episode
+          app.helpers.updateContent(0);
+          break;
+        case "ep1-interactive":
+          app.helpers.loadInteractiveContent(nav.episodes[0].id);
+          break;
+        case "ep2":
+          app.helpers.updateContent(1);
+          break;
+        case "ep2-interactive":
+          app.helpers.loadInteractiveContent(nav.episodes[1].id);
+          break;
+        case "ep3":
+          app.helpers.updateContent(2);
+          break;
+        case "ep3-interactive":
+          app.helpers.loadInteractiveContent(nav.episodes[2].id);
+          break;
+        case "ep4":
+          app.helpers.updateContent("3");
+          break;
+        case "ep4-interactive":
+          app.helpers.loadInteractiveContent(nav.episodes[3].id);
+          break;
+        case "ep5":
+          app.helpers.updateContent(4);
+          break;
+        case "ep6":
+          app.helpers.updateContent(5);
+          break;
+        default:
+          //Epiosde 1:
+          app.helpers.updateContent(0);
+          break;
+      }
     }
 };
