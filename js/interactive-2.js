@@ -1,4 +1,4 @@
-var disableMapControls = false;
+var disableMapControls = true;
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
@@ -184,10 +184,10 @@ var people = {
         {
             "type": "Feature",
             "properties": {
-                "title": "Anne-Birgit",
+                "title": "Anne-Birgith",
                 "name": "anne",
-                "iconSize": [32, 32],
-                "imgName" : "_Plus-Circle@3x"
+                "iconSize": [42, 42],
+                "imgName" : "anne_b@3x"
             },
             "geometry": {
                 "type": "Point",
@@ -202,8 +202,8 @@ var people = {
             "properties": {
                 "title": "Johanna",
                 "name": "johanna",
-                "iconSize": [32, 32],
-                "imgName" : "_Plus-Circle@3x"
+                "iconSize": [42, 42],
+                "imgName" : "johanna@3x"
             },
             "geometry": {
                 "type": "Point",
@@ -318,30 +318,30 @@ var images360 = {
     ]
 };
 
-var ncs_slim = {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "LineString",
-                "coordinates": []
-            }
-        }
-    ]
-};
-
-var start = {lat:69.29758634976852, lng:15.99037798982664}
-var end = {lat:69.33415771588025, lng:15.808563486946923}
-var n = 20; // the number of coordinates you want
-
-ncs_coordinates = []
-for(var i = n - 1; i > 0; i--){
-    ncs_coordinates.push( {lat: start.lat*i/n + end.lat*(n-i)/n,
-                       lng: start.lng*i/n + end.lng*(n-i)/n});
-}
-ncs_slim.features[0].geometry.coordinates = ncs_coordinates;
-console.log(ncs_slim);
+// var ncs_slim = {
+//     "type": "FeatureCollection",
+//     "features": [
+//         {
+//             "type": "Feature",
+//             "geometry": {
+//                 "type": "LineString",
+//                 "coordinates": []
+//             }
+//         }
+//     ]
+// };
+//
+// var start = {lat:69.29758634976852, lng:15.99037798982664}
+// var end = {lat:69.33415771588025, lng:15.808563486946923}
+// var n = 20; // the number of coordinates you want
+//
+// ncs_coordinates = []
+// for(var i = n - 1; i > 0; i--){
+//     ncs_coordinates.push( {lat: start.lat*i/n + end.lat*(n-i)/n,
+//                        lng: start.lng*i/n + end.lng*(n-i)/n});
+// }
+// ncs_slim.features[0].geometry.coordinates = ncs_coordinates;
+// console.log(ncs_slim);
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
 
@@ -397,7 +397,8 @@ map.on('load', function() {
 
   // Add labels
   map.addSource('oil_areas_labels', {type: 'geojson', data : oilareas});
-  map.addSource('ncs', { type: 'geojson', data: ncs_slim });
+
+  //map.addSource('ncs', { type: 'geojson', data: ncs_slim });
 
   // Crude way of checking if a layer has been added when the map re-renders
   // Could add all the layers here, and loop through them to check if they have been added
@@ -633,16 +634,34 @@ function showMapLayer(layer){
     if(mapLayers[layer].visible == false) {
       if(!mapLayers[layer].added && layer !== "lovese_land" && layer !== "people") {
         if(layer === "ncs") {
-          map.addLayer({
-              "id": "ncs",
-              "type": "line",
-              "source": "ncs",
-              "paint": {
-                  "line-color": "yellow",
-                  "line-opacity": 0.75,
-                  "line-width": 5
-              }
-          });
+          // Not working properly
+          // map.addLayer({
+          //     "id": "ncs",
+          //     "type": "line",
+          //     "source": "ncs",
+          //     "paint": {
+          //         "line-color": "yellow",
+          //         "line-opacity": 0.75,
+          //         "line-width": 5
+          //     }
+          // });
+        } else if(layer === "corals") {
+          // Not used in this episode, but will be used later.
+          // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
+          // map.addLayer({
+          //   "id": "corals",
+          //   "type": "circle",
+          //   "source": "corals",
+          //   'layout': {
+          //     'visibility': 'visible'
+          //   },
+          //   "paint": {
+          //     'circle-radius': 5,
+          //     'circle-opacity': 0.5,
+          //     'circle-color': 'rgba(172,255,178,1)'
+          //   },
+          //   "filter": ["==", "$type", "Point"],
+          // });
         } else {
           map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
         }
@@ -663,6 +682,8 @@ function showMapLayer(layer){
             "paint": {
               "text-color": "#fff"
             },
+            "maxzoom": 11.5,
+            "minzoom": 5.5
           });
         }
         mapLayers[layer].added = true;
@@ -704,21 +725,21 @@ function showMapLayer(layer){
   }
 
   // https://www.mapbox.com/mapbox-gl-js/example/live-update-feature/
-  // Almost got this working
-  if(layer === "ncs") {
-    // on a regular basis, add more coordinates from the saved list and update the map
-    var i = 0;
-    var timer = window.setInterval(function() {
-        if (i < ncs_coordinates.length) {
-            ncs_slim.features[0].geometry.coordinates.push(ncs_coordinates[i]);
-            map.getSource('ncs').setData(ncs_slim);
-            //map.panTo(ncs_coordinates[i]);
-            i++;
-        } else {
-            window.clearInterval(timer);
-        }
-    }, 100);
-  }
+  // TODO: Almost got this working. Make it work!!
+  // if(layer === "ncs") {
+  //   // on a regular basis, add more coordinates from the saved list and update the map
+  //   var i = 0;
+  //   var timer = window.setInterval(function() {
+  //       if (i < ncs_coordinates.length) {
+  //           ncs_slim.features[0].geometry.coordinates.push(ncs_coordinates[i]);
+  //           map.getSource('ncs').setData(ncs_slim);
+  //           //map.panTo(ncs_coordinates[i]);
+  //           i++;
+  //       } else {
+  //           window.clearInterval(timer);
+  //       }
+  //   }, 100);
+  // }
 
 }
 
@@ -967,15 +988,15 @@ function startMapFeautures() {
       switch($(this).parent().attr('data-id')) {
         case "eldar":
           console.log("Play eldar");
-          contentUrl = "//player.vimeo.com/video/200725736?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/227892337?byline=0&amp;portrait=0";
           break;
         case "anne":
           console.log("play Anne");
-          contentUrl = "//player.vimeo.com/video/200724627?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/227892426?byline=0&amp;portrait=0";
           break;
         case "johanna":
           console.log("Play Johanna");
-          contentUrl = "//player.vimeo.com/video/199863373?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/227892451?byline=0&amp;portrait=0";
           break;
       }
     } else if($(this).parent().attr('data-type') == 'images360') {
@@ -986,15 +1007,15 @@ function startMapFeautures() {
           break;
         case "2":
           console.log("Værøy 2");
-          contentUrl = "../resources/_360/Veroy.html";
+          contentUrl = "../resources/_360/Veroy.html?vr&s=pano71";
           break;
         case "3":
           console.log("Værøy 3");
-          contentUrl = "../resources/_360/Veroy.html";
+          contentUrl = "../resources/_360/Veroy.html?vr&s=pano74";
           break;
         case "4":
           console.log("Værøy 4");
-          contentUrl = "../resources/_360/Veroy.html";
+          contentUrl = "../resources/_360/Veroy.html?vr&s=pano77";
           break;
         case "5":
           console.log("Flakstad");
@@ -1080,6 +1101,7 @@ function startMapFeautures() {
 	}
 
 	function closeModal() {
+    $("#overlayContent").attr("src", "");
 		var section = $('.cd-section.modal-is-visible');
 		section.removeClass('modal-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
 			animateLayer(section.find('.cd-modal-bg'), 1, false);
