@@ -4,9 +4,6 @@ var flying = false;
 var startDelay = 0; //2000
 var totalTime = 30 * 1; // Minutes - should be 60
 
-// Name of layers used in the interface
-//var dataLayers = ['lovese_land', 'lovese_sea', 'opened_oil_areas', 'oil_prospects'];
-
 // GeoJSON data sources for MapBox layers
 var dataSources = [
   {name:'corals', data:'../include/map-layers/corals.geojson'},
@@ -65,56 +62,11 @@ zoomed["johanna"] = false;
 var paused;
 var countdown;
 
-var land_areas_lavbels = {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "properties": {
-                "message": "Lofoten",
-                "iconSize": [200, 32],
-                "imgName" : "_ICN_LABEL_Lofoten-Archipelago@2x"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    14.248825694533252,
-                    68.26400752799873
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "message": "Vesterålen",
-                "iconSize": [200, 32],
-                "imgName" : "_ICN_LABEL_Vesterålen-Archipelago@2x"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    14.908509488458321,
-                    68.72214903472567
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "message": "Senja",
-                "iconSize": [200, 32],
-                "imgName" : "_ICN_LABEL_Senja-Archipelago@2x"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    17.457677872120883,
-                    69.30793670755747
-                ]
-            }
-        }
-    ]
-};
+var land_labels_images = [
+  {name:"lofoten",    coordinates: [14.248825694533252,68.26400752799873],  imgUrl: "_ICN_LABEL_Lofoten-Archipelago@2x.png",    localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/", beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/", live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"},
+  {name:"vesteralen", coordinates: [14.908509488458321, 68.72214903472567], imgUrl: "_ICN_LABEL_Vesterålen-Archipelago@2x.png", localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/", beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/", live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"},
+  {name:"senja",      coordinates: [17.457677872120883,69.30793670755747],  imgUrl: "_ICN_LABEL_Senja-Archipelago@2x.png",      localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/", beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/", live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"}
+];
 
 var oilareas = {
     "type": "FeatureCollection",
@@ -377,31 +329,42 @@ function mapControls(disable) {
 
 map.on('load', function() {
 
-
-  map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
+  land_labels_images.forEach(function(label){
+    map.loadImage(label.localhost + label.imgUrl, function(error, image) {
       if (error) throw error;
-      map.addImage('cat', image);
-      map.addLayer({
-          "id": "points",
-          "type": "symbol",
-          "source": {
-              "type": "geojson",
-              "data": {
-                  "type": "FeatureCollection",
-                  "features": [{
-                      "type": "Feature",
-                      "geometry": {
-                          "type": "Point",
-                          "coordinates": [0, 0]
-                      }
-                  }]
-              }
-          },
-          "layout": {
-              "icon-image": "cat",
-              "icon-size": 0.25
+      map.addImage(label.name, image);
+    });
+
+    map.addLayer({
+        "id": label.name,
+        "type": "symbol",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": label.coordinates
+                    }
+                }]
+            }
+        },
+        "maxzoom": 12,
+        "minzoom": 5,
+        "layout": {
+          "icon-image": label.name,
+          "icon-size": {
+            "stops": [
+                [0, 0],
+                [5, 0.4],
+                [6, 0.5],
+                [11, 0.55]
+            ]
           }
-      });
+        }
+    });
   });
 
   // Add geojson sources and calculate the bbox for each layer for later use
@@ -425,41 +388,6 @@ map.on('load', function() {
 
   // Add labels
   map.addSource('oil_areas_labels', {type: 'geojson', data : oilareas});
-
-  //map.addSource('ncs', { type: 'geojson', data: ncs_slim });
-
-  // Crude way of checking if a layer has been added when the map re-renders
-  // Could add all the layers here, and loop through them to check if they have been added
-  // map.on("render", function() {
-  //   if(map.loaded()) {
-  //     dataLayers.forEach(function(layer) {
-  //       if(map.getLayer(layer)) {
-  //         //var features = map.queryRenderedFeatures({layers:[layer]});
-  //         var relatedFeatures = map.querySourceFeatures(layer, {
-  //                     sourceLayer: layer
-  //                     //filter: ['in', 'COUNTY', feature.properties.COUNTY]
-  //                 });
-  //
-  //         console.log(relatedFeatures);
-  //         zoomToExtent(relatedFeatures);
-  //       }
-  //     });
-  //   }
-  // });
-
-  // map.on('sourcedata', function(e) {
-  //   console.log(e);
-  // });
-
-  //console.log(map.getLayer('opened_oil_areas'), map.querySourceFeatures('opened_oil_areas'));
-  // https://bl.ocks.org/danswick/83a8ddff7fb9193176a975a02a896792 or https://stackoverflow.com/questions/35673704/how-do-i-get-the-bounding-box-of-a-mapboxgl-geojsonsource-object
-  // or: https://github.com/mapbox/geojson-extent
-  // Get boudning box of geojson - need to load the file first.
-  //var bbox = turf.bbox(geojson);
-
-  // map.on('sourcedata', function(e) {
-  //   console.log(e);
-  // });
 
   map.resize();
   $(".loading").fadeOut(1500).promise().done(function() {
@@ -510,16 +438,6 @@ map.on('load', function() {
     flying = false;
   });
   map.on('moveend', function(e){
-
-    //TODO: Need to implement a check here on the different times we're zooming on the map
-    /*Need:
-      zoom into Norway/the areas
-      zoom out to see all the areas Norway has opened for oil
-      zoom into Værøy / zoom out from Værøy
-      zoom to Johanne / zoom out from Johanne (Napp)
-      zoom to Anne Birgit / zoom out from Anne B. (Flakstad)
-    */
-
     if(!flying && zoomedToArea){
       //map.fire(flyend);
       if(zoomed["first"]) {
@@ -527,31 +445,6 @@ map.on('load', function() {
         $(".container-full").fadeIn("1500");
         $(".interactive-pane-text").css({'z-index':1}).show();
         $(".cd-section").css({'z-index':1}).show();
-
-        // Add marker for each area to the map (Lofoten, Vesterålen and Senja) [the first part of the interactive episode]
-        land_areas_lavbels.features.forEach(function(marker) {
-            // create a DOM element for the marker
-            var el = document.createElement('div');
-            el.className = 'areas-marker';
-
-            el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
-            el.style.width = marker.properties.iconSize[0] + 'px';
-            el.style.height = marker.properties.iconSize[1] + 'px';
-
-            // Get the screen x,y representation of the coordinates
-            //var lnglat = new mapboxgl.LngLat(marker.geometry.coordinates);
-            var point = map.project(marker.geometry.coordinates);
-
-            el.addEventListener('click', function() {
-                console.log(marker.properties.message, point);
-            });
-
-            // add marker to map
-            //new mapboxgl.Marker(el)
-            new mapboxgl.Marker(el, { offset: [-100 / 2, -50 / 2] })
-                .setLngLat(marker.geometry.coordinates)
-                .addTo(map);
-        });
 
         // Show map filters
         $("#map-filters").show();
@@ -567,31 +460,13 @@ map.on('load', function() {
       } else if(zoomed["eldar"]) {
         // We have zoomed in on the first interview, so update their marker overlay position accordingly
         add360Icons(); // Should we move this - or even break it down for each person?
-        //updateMarkerOverlayPos();
-
-        // var point = map.project(peopleIcons["eldar"].coordinates);
-        //
-        // $(".cd-modal-action").css({'left':point.x-10, 'top':point.y-10});
-        // $(".cd-section").css({'z-index':1}).show();
-        //
-        // zoomed["second"] = false;
       }
-
       zoomedToArea = false; // Always do this
     }
 
     // Used to be peopleAdded
     if(zoomed["eldar"]) {
       updateMarkerOverlayPos();
-      //
-      // try{
-      //   // Update the overlay if the map moves
-      //   var point = map.project(peopleIcons["eldar"].coordinates);
-      //   $(".cd-modal-action").css({'left':point.x-10, 'top':point.y-10});
-      // }
-      // catch(err) {
-      //     console.log(err);
-      // }
     }
   });
 });
@@ -602,9 +477,7 @@ function updateMarkerOverlayPos() {
     try{
       // Update the overlay if the map moves
       var point = map.project(addedMapIcons[icon].coordinates);
-      console.log("Update overlay for: ", icon, point);
       $(".cd-modal-action."+ icon +" ").css({'left':point.x-19, 'top':point.y-19});
-      //console.log(point);
     }
     catch(err) {
         console.log(err);
@@ -691,7 +564,7 @@ function showMapLayer(layer){
           //   "filter": ["==", "$type", "Point"],
           // });
         } else {
-          map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}});
+          map.addLayer({"id":layer,"source":layer,"type":"fill","paint": {"fill-opacity":mapLayersStyle[layer].opacity, "fill-color":mapLayersStyle[layer].color,"fill-outline-color":mapLayersStyle[layer].border_color}}, 'lofoten');
         }
         if(layer === "lovese_sea") {
           // Add labels for the different sea areas
@@ -710,28 +583,12 @@ function showMapLayer(layer){
             "paint": {
               "text-color": "#fff"
             },
-            "maxzoom": 11.5,
-            "minzoom": 5.5
+            "maxzoom": 12,
+            "minzoom": 5
           });
         }
         mapLayers[layer].added = true;
       }
-
-      // // Geographic coordinates of the LineString
-      // var coordinates = geojson.features[0].geometry.coordinates;
-      //
-      // // Pass the first coordinates in the LineString to `lngLatBounds` &
-      // // wrap each coordinate pair in `extend` to include them in the bounds
-      // // result. A variation of this technique could be applied to zooming
-      // // to the bounds of multiple Points or Polygon geomteries - it just
-      // // requires wrapping all the coordinates with the extend method.
-      // var bounds = coordinates.reduce(function(bounds, coord) {
-      //     return bounds.extend(coord);
-      // }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
-      //
-      // map.fitBounds(bounds, {
-      //     padding: 20
-      // });
 
       if(layer === "lovese_sea") {
         map.setLayoutProperty("lovese-labels", 'visibility', 'visible');
@@ -741,7 +598,6 @@ function showMapLayer(layer){
         mapLayers[layer].visible = true;
 
         // Fit the map to the bounderies of the specific layer
-        //console.log(layer);
         map.fitBounds(dataLayerBounds[layer], {padding: 20, linear:false, duration: 2000});
       }
     }
@@ -775,13 +631,10 @@ function showMapLayer(layer){
 function removeMapLayer(layer){
   if(layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_sea" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
     if(mapLayers[layer].visible == true && layer !== "lovese_sea" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
-      //map.removeLayer(layer);
       map.setLayoutProperty(layer, 'visibility', 'none');
       if(layer === "lovese_sea") {
-        //map.removeLayer("lovese-labels");
         map.setLayoutProperty("lovese-labels", 'visibility', 'none');
       }
-      //mapLayers[layer] = false;
       mapLayers[layer].visible = false;
     }
   }
@@ -816,35 +669,13 @@ function addPeopleIcons() {
 function zoomToPerson(name) {
   // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
 
-  //if(addedMapIcons[name].zoomedTo == false) {
   // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
   zoomToArea(name, addedMapIcons[name].coordinates, 11.5, 1, 1, 150, -10, [350,0]);
   addedMapIcons[name].zoomedTo = true;
   addedMapIcons[name].clicked += 1;
-  //console.log("this person has: ", addedMapIcons[name].coordinates);
-  // } else {
-  //   // 3. If person icon is clicked more than once
-  //   if(addedMapIcons[name].clicked >= 1) {
-  //     console.log("Play the video of ", name);
-  //
-  //     // TODO: Make this work (popup for watching the video)
-  //     // var actionBtn = $(this),
-  //     // 	scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
-  //     //
-  //     // actionBtn.addClass('to-circle');
-  //     // actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-  //     // 	animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-  //     // });
-  //     //
-  //     // //if browser doesn't support transitions...
-  //     // if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-  //     //
-  //     // peopleIcons["eldar"].playedVideo = true;
-  //   }
-  // }
 }
 
-// Should be able to mere this one with the addPeopleIcons() function
+// TODO: Should be able to mere this one with the addPeopleIcons() function
 function add360Icons() {
   // 2. Add the 360 icons to the map
   images360.features.forEach(function(marker) {
@@ -856,13 +687,7 @@ function add360Icons() {
       el.style.width = marker.properties.iconSize[0] + 'px';
       el.style.height = marker.properties.iconSize[1] + 'px';
 
-      //var point = map.project(marker.geometry.coordinates);
       addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
-
-      // el.addEventListener('click', function() {
-      //   // Add reference to function which will handle stuff from here.
-      //   //zoomToPerson(marker);
-      // });
 
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
