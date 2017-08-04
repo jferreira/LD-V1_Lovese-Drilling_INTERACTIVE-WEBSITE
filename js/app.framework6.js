@@ -35,12 +35,12 @@ var app = {
     app.hashUrlMapEpisodesInteractive[4] = "ep5-interactive";
     app.hashUrlMapEpisodesInteractive[5] = "ep6-interactive";
 
-    if(window.location.hash) {
-        // If a hash is present - show the specific episode or interactive part
-        var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-        app.navigation.hashNavigation(hash);
+    if (window.location.hash) {
+      // If a hash is present - show the specific episode or interactive part
+      var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+      app.navigation.hashNavigation(hash);
     } else {
-        app.helpers.updateContent(0);
+      app.helpers.updateContent(0);
     }
     app.helpers.preload();
   },
@@ -52,7 +52,7 @@ var app = {
 
     // Video control
     $(".video-controls").on("click", app.video.start);
-    $("video").on("click",           app.video.toggle);
+    $("video").on("click", app.video.toggle);
     //$('#btn-play-pause').on("click", app.video.toggle);
     $('.play_pause_button').on("click", app.video.toggle);
 
@@ -75,23 +75,23 @@ var app = {
     // Shortcuts
     $("body").on('keydown', function(event) {
       if (event.keyCode == 32) // Spacebar
-      app.video.toggle();
+        app.video.toggle();
 
       if (event.keyCode == 37) // Left
-      app.toPrevious();
+        app.toPrevious();
 
       if (event.keyCode == 39) // Right
-      app.toNext();
+        app.toNext();
 
-      if(event.keyCode == 38 || event.keyCode == 40) // up / down
-      app.navigation.toggle();
+      if (event.keyCode == 38 || event.keyCode == 40) // up / down
+        app.navigation.toggle();
     });
 
     //$("#navPrev").on("click", app.toPrevious);
     //$("#navNext").on("click", app.toNext);
 
-    $("#mute-video").click( function (){
-      if( $("video").prop('muted') ) {
+    $("#mute-video").click(function() {
+      if ($("video").prop('muted')) {
         $("video").prop('muted', false);
       } else {
         $("video").prop('muted', true);
@@ -133,14 +133,14 @@ var app = {
       app.navigation.hide();
 
       $("#video").css({
-        "background-image":"none",
+        "background-image": "none",
         "background-color": "#000"
       });
       $("#titles").fadeOut(1000);
       $(".nav-holder *").fadeOut(1000);
 
       $('.play_pause_button').removeClass('play').addClass('pause');
-      $('video').css("z-index","1");
+      $('video').css("z-index", "1");
     });
     app.video.callbacks.prePause.push(function() {
       app.navigation.show();
@@ -148,16 +148,18 @@ var app = {
       $(".nav-holder *").fadeIn(1000);
       $("#titles, .video-controls").fadeIn(1000);
 
-      $(".slide-container").css({"background-image": 'none'}); // Remove the title slide when video is paused
+      $(".slide-container").css({
+        "background-image": 'none'
+      }); // Remove the title slide when video is paused
 
       $('.play_pause_button').removeClass('pause').addClass('play');
-      $('video').css("z-index","0");
+      $('video').css("z-index", "0");
     });
   },
   /**
-  * TODO: These two new functions which would include interactive parts
-  * Navigate to the previous episode or interactive part.
-  */
+   * TODO: These two new functions which would include interactive parts
+   * Navigate to the previous episode or interactive part.
+   */
   /*
   toPrevious: function() {
     if (app.currEpisode > 0) {
@@ -174,9 +176,9 @@ var app = {
   },
   */
   /**
-  * Navigate to the next episode or interactive part.
-  * If we are at last viewable content, show prompt to subscribe to newsletter.
-  */
+   * Navigate to the next episode or interactive part.
+   * If we are at last viewable content, show prompt to subscribe to newsletter.
+   */
   /*
   toNext: function() {
     if (app.currEpisode <= nav.episodes.length-2) {
@@ -199,13 +201,13 @@ var app = {
     }
   },
   toNext: function() {
-    if (app.currEpisode <= nav.episodes.length-2) {
+    if (app.currEpisode <= nav.episodes.length - 2) {
       app.currEpisode++;
       app.helpers.updateContent();
     }
   },
   updateTime: function() {
-    if(this.readyState > 0) {
+    if (this.readyState > 0) {
       var value = (100 / this.duration) * this.currentTime;
 
       var minutes = parseInt((this.duration - this.currentTime) / 60, 10);
@@ -215,7 +217,9 @@ var app = {
       $(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
 
       var d = 100 * this.currentTime / this.duration;
-      $(".avancee").css({width:d+"%"});
+      $(".avancee").css({
+        width: d + "%"
+      });
 
       $("#seek-bar").val(value);
     }
@@ -223,9 +227,9 @@ var app = {
   handleProgressClick: function(event) {
     // Ignore clicks on other elements in the progress bar
     if ($(event.target).is('button'))
-    return;
+      return;
 
-    var x       = event.pageX - $(this).offset().left;
+    var x = event.pageX - $(this).offset().left;
     var percent = x / $(this).width();
 
     app.video.setTo(percent);
@@ -233,7 +237,13 @@ var app = {
   videoEnded: function() {
     // Hide the video
     // Overlay sharing possibility
-    app.helpers.loadTextPage(4);
+
+    //app.helpers.loadTextPage(4);
+    console.log(app.currEpisode);
+    //setTimeout(app.helpers.loadInteractiveContent(nav.episodes[app.currEpisode].id), 5000);
+    app.helpers.loadInteractiveContent(nav.episodes[app.currEpisode].id);
+    // Animate the interactive icon of this episode - but the navigation bar isn't showing, so doesn't help
+    //$('.interactive[data-id="' + app.currEpisode + '"]').addClass('animated bounceIn');
   },
   videoChange: function() {
     var time = app.video.element.duration * ($("#seek-bar").val() / 100);
@@ -243,9 +253,9 @@ var app = {
   },
   helpers: {
     preload: function() {
-      for(var i = 1; i < nav.episodes.length; i++) {
-        $('<img />').attr('src', nav.episodes[i].poster).appendTo('#preload').css('display','none');
-        $('<img />').attr('src', nav.episodes[i].slide).appendTo('#preload').css('display','none');
+      for (var i = 1; i < nav.episodes.length; i++) {
+        $('<img />').attr('src', nav.episodes[i].poster).appendTo('#preload').css('display', 'none');
+        $('<img />').attr('src', nav.episodes[i].slide).appendTo('#preload').css('display', 'none');
       }
     },
     twoDigits: function(n) {
@@ -253,16 +263,16 @@ var app = {
     },
     setHashUrl: function(type, content) {
       var hashString = '#';
-      if(type == 0) {
+      if (type == 0) {
         hashString += app.hashUrlMapEpisodes[content];
-      } else if(type == 1) {
+      } else if (type == 1) {
         hashString += app.hashUrlMapEpisodesInteractive[content];
       }
       window.location.hash = hashString;
     },
     updateContent: function(episode) {
       var episodeId;
-      if(episode === undefined || episode === null) {
+      if (episode === undefined || episode === null) {
         episodeId = app.currEpisode;
       } else {
         episodeId = episode;
@@ -271,12 +281,18 @@ var app = {
 
       app.helpers.setHashUrl(0, episodeId);
 
-      if(episodeId > 0) {
-        $("img.video-controls").css({"width": 0, "height" : 0});
+      if (episodeId > 1) {
+        $("img.video-controls").css({
+          "width": 0,
+          "height": 0
+        });
         //$("button.play").attr("disabled", true);
         $(".play_pause_button").hide();
       } else {
-        $("img.video-controls").css({"width": "50px", "height" : "auto"});
+        $("img.video-controls").css({
+          "width": "50px",
+          "height": "auto"
+        });
         //$("button.play").attr("disabled", false);
         $(".play_pause_button").show();
       }
@@ -285,15 +301,15 @@ var app = {
       app.textPageState = false;
 
       app.video.pause();
-      $('video').css("z-index","-1");
+      $('video').css("z-index", "-1");
       $(".nav-holder *").fadeIn(500);
 
       // Remove interactive content if it's present
       if ($("#content #interactive *").is(":visible"))
-      $("#content #interactive").empty();
+        $("#content #interactive").empty();
 
       if ($('#episodeProgress *').is(":hidden"))
-      $('#episodeProgress *').show();
+        $('#episodeProgress *').show();
 
       $("#video").css({
         "background": 'url("' + nav.episodes[app.currEpisode].poster + '") no-repeat',
@@ -309,7 +325,7 @@ var app = {
       }).hide(); //hack to fix the load of video before image issue
 
       $(".slide-container").css({
-        "background": 'url("'+nav.episodes[app.currEpisode].slide+'") no-repeat',
+        "background": 'url("' + nav.episodes[app.currEpisode].slide + '") no-repeat',
         "background-size": 'cover',
         "background-position": 'center center'
       });
@@ -320,7 +336,9 @@ var app = {
       $("#content *, #titles").fadeIn(1000);
       $(".timeRemaining").text("0:00");
       $('.play_pause_button').removeClass('pause').addClass('play');
-      $(".avancee").css({width:"0%"});
+      $(".avancee").css({
+        width: "0%"
+      });
     },
 
     loadInteractiveContent: function(id) {
@@ -330,11 +348,15 @@ var app = {
       // Concider removing the whole player layer?
       // app.navigation.hide();
 
-      app.helpers.setHashUrl(1, id-1);
+      app.helpers.setHashUrl(1, id - 1);
 
-      $("#video video").attr({"src": ""});
+      $("#video video").attr({
+        "src": ""
+      });
       $(".timeRemaining").text("");
-      $(".avancee").css({width:"0%"});
+      $(".avancee").css({
+        width: "0%"
+      });
       $('.play_pause_button').removeClass('pause').addClass('play');
 
       //$(".nav-holder *").fadeOut(1000);
@@ -345,8 +367,8 @@ var app = {
       $("#content #interactive").empty();
 
       // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
-      $("#content #interactive").empty().load(nav.interactive[id-1].html, function(response, status, xhr) {
-        if(status == "error") {
+      $("#content #interactive").empty().load(nav.interactive[id - 1].html, function(response, status, xhr) {
+        if (status == "error") {
           //Something went wrong, have your error fallback code here
         }
       });
@@ -361,9 +383,13 @@ var app = {
       app.navigation.hide();
 
       // Copied from loadInteractiveContent
-      $("#video video").attr({"src": ""});
+      $("#video video").attr({
+        "src": ""
+      });
       $(".timeRemaining").text("");
-      $(".avancee").css({width:"0%"});
+      $(".avancee").css({
+        width: "0%"
+      });
       $('.play_pause_button').removeClass('pause').addClass('play');
 
       //$(".nav-holder *").fadeOut(1000);
@@ -373,8 +399,8 @@ var app = {
       $("#content #interactive").empty();
 
       // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
-      $("#content #interactive").load(nav.textPages[id-1].html, function(response, status, xhr) {
-        if(status == "error") {
+      $("#content #interactive").load(nav.textPages[id - 1].html, function(response, status, xhr) {
+        if (status == "error") {
           //Something went wrong, have your error fallback code here
         }
       });
