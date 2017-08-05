@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns#">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +12,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="http://www.lovese.org/" />
   <meta property="og:title" content="Lovese Drilling - A Carbon Battleground Story" />
-  <meta property="og:description" content="An interactive documentary about Norway's most important carbon battleground. Across the world, local communities are fighting to stop new coal, oil and gas projects. This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017." />
+  <meta property="og:description" content="An interactive documentary about Norway's most important carbon battleground. Across the world, local communities are fighting to stop new coal, oil and gas projects. This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017."
+  />
   <meta property="og:site_name" content="Lovese Drilling" />
 
   <meta property="og:type" content="website" />
@@ -22,11 +24,13 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Lovese Drilling - A Carbon Battleground Story" />
-  <meta name="twitter:description" content="An interactive documentary about Norway's most important carbon battleground. Across the world, local communities are fighting to stop new coal, oil and gas projects. This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017." />
+  <meta name="twitter:description" content="An interactive documentary about Norway's most important carbon battleground. Across the world, local communities are fighting to stop new coal, oil and gas projects. This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017."
+  />
   <meta name="twitter:image" content="http://www.lovese.org/img/social/_LD3.jpg" />
 
   <meta itemprop="name" content="Lovese Drilling - A Carbon Battleground Story" />
-  <meta itemprop="description" content="An interactive documentary about Norway's most important carbon battleground. Across the world, local communities are fighting to stop new coal, oil and gas projects. This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017." />
+  <meta itemprop="description" content="An interactive documentary about Norway's most important carbon battleground. Across the world, local communities are fighting to stop new coal, oil and gas projects. This interactive documentary explores how one of the most vulnerable and productive ecosystems in the world could be handed over to the oil and gas industry in 2017."
+  />
   <meta itemprop="image" content="http://www.lovese.org/img/social/_LD3.jpg" />
 
   <title>Lovese Drilling - Interactive Documentary</title>
@@ -39,11 +43,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
 
   <link rel="stylesheet" href="css/framework6.css" media="screen" />
   <link rel="stylesheet" href="css/animate.css" media="screen" />
   <link rel="stylesheet" href="css/intro.css" media="screen" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link href="resources/favicon.ico" rel="icon" type="image/x-icon" />
 </head>
 
@@ -52,11 +59,11 @@
     <div class="nav-holder">
       <nav class="nav">
         <ul class="nav-list">
-          <li class="nav-item"><a href="#" onClick="app.layover.showSpecificScreen(4)">Home</a></li>
+          <li class="nav-item"><a href="#" onClick="app.helpers.updateContent(0)">Home</a></li>
           <li class="nav-item"><a href="#" onClick="app.helpers.loadTextPage(1)">About</a></li>
-          <li class="nav-item"><a href="#" onClick="app.helpers.loadTextPage(3)">Updates</a></li>
+          <li class="nav-item"><a href="#" onClick="app.helpers.loadTextPage(3)">Newsletter</a></li>
           <li class="nav-item"><a href="#" onClick="app.helpers.loadTextPage(5)">Share</a></li>
-          <li class="nav-item"><a data-remodal-target="Support" href="http://www.patreon.com/lovese" target="_blank">Support</a></li>
+          <!-- <li class="nav-item"><a data-remodal-target="Support" href="http://www.patreon.com/lovese" target="_blank">Support</a></li> -->
         </ul>
       </nav>
     </div>
@@ -66,38 +73,38 @@
         <img class="video-controls" src="resources/_Images/_Icons/_Play_x3.png" />
       </div>
     </div>
-    
+
     <div id="content">
       <div id="video" class="pauseTransition">
         <video poster="" id="v">
           <source type="video/mp4" src="">
             Video not supported on your device.
           </video>
-        </div>
-
-        <div id="interactive"></div>
       </div>
 
-      <div id="navigation" class="transition visible">
-        <div id="navigation-interaction">
-          <div id="hover-navigation">
-            <div class="navigation-elements">
-              <div class="play_pause">
-                <div class="play_pause_button play"></div>
-                <!-- <button class="play" id="btn-play-pause"></button> -->
-              </div>
-              <div class="arrows">
-                <div class="arrow arrow_left"></div>
-                <div class="arrow arrow_show_hide"></div>
-                <div class="arrow arrow_right"></div>
-              </div>
+      <div id="interactive"></div>
+    </div>
+
+    <div id="navigation" class="transition visible">
+      <div id="navigation-interaction">
+        <div id="hover-navigation">
+          <div class="navigation-elements">
+            <div class="play_pause">
+              <div class="play_pause_button play"></div>
+              <!-- <button class="play" id="btn-play-pause"></button> -->
+            </div>
+            <div class="arrows">
+              <div class="arrow arrow_left"></div>
+              <div class="arrow arrow_show_hide"></div>
+              <div class="arrow arrow_right"></div>
             </div>
           </div>
-          <div id="episodeProgress">
-            <div class="avancee" style="width: 0%;">&nbsp;</div>
-            <div class="txt">
-              <div>
-                <!--
+        </div>
+        <div id="episodeProgress">
+          <div class="avancee" style="width: 0%;">&nbsp;</div>
+          <div class="txt">
+            <div>
+              <!--
                 <button id="mute-video">Toggle Mute</button>
                 <button id="navPrev">Prev</button>
                 <button id="navNext">Next</button>
@@ -152,7 +159,7 @@
       <br />
       <img class="intro-flow-1" src="resources/_Graphics/_GFX_002_Intro-Flow/_Flow_Diagram_02.1_Welcome_All@1x.png">
     </div>
-    
+
     <div class="content content-first">
       <br />
       <br />
@@ -160,7 +167,7 @@
       <br />
       <br />
       <br />
-      
+
       <p>Loading 75%</p>
       <br />
       <br />
@@ -196,8 +203,7 @@
       <br />
       <br />
       <p>Welcome to this interactive documentary about a continuous offshore oil and gas drilling issue in Norway. <br />
-        <br />
-        Told over 10 chapters, The ‘Lovese’ is the acronym of names of the three areas of Lofoten, Vesterålen and Senja.
+        <br /> Told over 10 chapters, The ‘Lovese’ is the acronym of names of the three areas of Lofoten, Vesterålen and Senja.
       </p>
       <br />
       <br />
@@ -228,30 +234,37 @@
   <div class="content"></div>
 </div>
 -->
-<div id="preload"></div>
+  <div id="preload"></div>
 
-<!-- Scripts -->
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Scripts -->
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
-<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+  <script type="text/javascript" src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
+  <script type="text/javascript" src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
 
-<script type="text/javascript" src="include/episodes7.json"></script>
-<script type="text/javascript" src="js/app.framework6.js"></script>
-<script type="text/javascript" src="js/app.video.js"></script>
-<script type="text/javascript" src="js/app.navigation.js"></script>
-<script type="text/javascript" src="js/app.layover.js"></script>
+  <script type="text/javascript" src="include/episodes7.json"></script>
+  <script type="text/javascript" src="js/app.framework6.js"></script>
+  <script type="text/javascript" src="js/app.video.js"></script>
+  <script type="text/javascript" src="js/app.navigation.js"></script>
+  <script type="text/javascript" src="js/app.layover.js"></script>
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-ga('create', 'UA-79361659-1', 'auto');
-ga('send', 'pageview');
-
-</script>
+    ga('create', 'UA-79361659-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
+
 </html>

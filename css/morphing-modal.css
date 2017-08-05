@@ -87,7 +87,7 @@ Main Components
 .cd-modal-action .cd-modal-bg {
   display: inline-block;
   height: 2.5em;
-  background-color: #34383c;
+  background-color: #344650;
 }
 
 .cd-modal-action .btn {
@@ -107,6 +107,8 @@ Main Components
   -webkit-transition: color 0.2s 0.3s, width 0.3s 0s;
   -moz-transition: color 0.2s 0.3s, width 0.3s 0s;
   transition: color 0.2s 0.3s, width 0.3s 0s;
+
+  cursor: pointer;
 }
 .cd-modal-action .btn.to-circle {
   width: 2.5em;

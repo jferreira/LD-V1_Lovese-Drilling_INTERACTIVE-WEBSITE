@@ -4,21 +4,32 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,1);
   margin: 0;
-  padding: 0;
+  padding-top: 0;
   z-index: 3;
 }
 
 .loading .interactive-content {
+  width: 100%;
+  height: 100%;
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-
-  width: 100%;
-  height: 50%;
   color: #fff!important;
   text-align: center;
+  background: rgba(0,0,0,1);
+}
+
+.interactive-content-explanation {
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  top: 25%; left: 0; bottom: 0; right: 0;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+  z-index: 5;
 }
 
 .container-full {
@@ -44,7 +55,7 @@
 .interactive-pane {
   position: absolute;
   height: 100%;
-  background: rgba(1, 1, 1, .3);
+  background: rgba(1, 1, 1, .5);
   bottom: 30px;
   pointer-events:auto;
   color: #fff;
@@ -102,21 +113,21 @@
 
 #map-filters ul li.sea-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area@2x.png");}
 #map-filters ul li.sea-areas:hover {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
-#map-filters ul li.opened-oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
-#map-filters ul li.opened-oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+#map-filters ul li.opened-oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig@3x.png");}
+#map-filters ul li.opened-oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
 #map-filters ul li.ncs {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf@2x.png");}
 #map-filters ul li.ncs:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
 #map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
 #map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
-#map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
-#map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_People@3x.png");}
+#map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_People_Inverted@3x.png");}
 
 #map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
 #map-filters ul li.sea-areas.active {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
-#map-filters ul li.opened-oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+#map-filters ul li.opened-oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
 #map-filters ul li.ncs.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
 #map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
-#map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_People_Inverted@3x.png");}
 
 
 #map-filters img {
@@ -141,6 +152,10 @@
   -o-background-size: cover;      /* Opera*/
   background-size: cover;         /* Generic*/
   cursor: pointer;
+}
+
+.marker-360:hover {
+  background-image: url('../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_360_Inverted@3x.png');
 }
 
 section {
@@ -180,8 +195,8 @@ section.hide {
 
 .interview p {
   color: #fff;
-  font-size: 15px;
-  margin-bottom: 20px;
+  font-size: 14px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 

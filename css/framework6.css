@@ -112,8 +112,15 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 35px;
   text-transform: uppercase;
-  font-family: 'oswaldregular';
   letter-spacing: 1px;
+}
+
+h1 {
+  font-family: 'oswaldregular';
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'DINPro-Light';
 }
 
 p, span, a, input, textarea, ul, li {
@@ -344,7 +351,7 @@ opacity: 0.9;
 #navigation .txt div a{float:left;font-family:ss-standard;font-size:12px;text-decoration:none;color:#fff;margin:-2px 10px 0 0;padding-top:4px}
 #navigation .txt div.border{background:red;content:'';border-bottom:1px solid #fff}
 
-#navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;margin-top:-18px;}
+#navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;margin-top:-2px;}
 
 .episode {
   height:100%;
@@ -459,7 +466,7 @@ opacity: 0.9;
   position: relative;
   width: 50px;
   height: auto;
-  top: 60%;
+  top: 56%;
   cursor: pointer;
 }
 
