@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "name": "Test",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": []
+        ,
+        "type": "MultiPolygon"
+      },
+      "properties": {
+        "fill": "#58b14d",
+        "fill-opacity": 0.6,
+        "stroke": "#58b14d",
+        "stroke-opacity": 1,
+        "stroke-width": 3,
+        "title" : "Test"
+      },
+      "type": "Feature"
+    }
+  ]
+}

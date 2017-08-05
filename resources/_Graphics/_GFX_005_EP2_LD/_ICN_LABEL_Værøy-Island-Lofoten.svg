@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200px" height="32px" viewBox="0 0 200 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>_ICN_LABEL_Værøy-Island-Lofoten</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="_Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_ICN_LABEL_Værøy-Island-Lofoten">
+            <polygon id="Fill-55" fill="#FEFEFE" points="0 32 149.5 32 149.5 0 0 0"></polygon>
+            <text id="Værøy-Island,-Lofote" font-family="DINPro-Regular, DINPro" font-size="12.2894" font-weight="normal" letter-spacing="-0.491576" fill="#061819">
+                <tspan x="16.7792969" y="21">Værøy Island, Lofoten</tspan>
+            </text>
+            <path d="M133.746154,16 C133.746154,7.17824 140.92337,1.13686838e-13 149.746154,1.13686838e-13 C158.568938,1.13686838e-13 165.746154,7.17824 165.746154,16 C165.746154,24.82176 158.568938,32 149.746154,32 C140.92337,32 133.746154,24.82176 133.746154,16 Z" id="Fill-10-Copy-9" stroke="#FFFFFF" stroke-width="0.5" fill="#354651"></path>
+            <path d="M154.228943,20.2482785 C152.858547,21.6739016 150.940698,22.5577879 148.817997,22.5577879 C145.97831,22.5577879 143.505945,20.9753463 142.22738,18.6337604 C142.167337,18.5304027 142.114358,18.4270451 142.06491,18.3236874 L145.974778,12.2897377 L147.525304,9.89825495 L148.775614,11.8299742 L153.183486,18.6337604 L154.228943,20.2482785 L154.228943,20.2482785 Z" id="Stroke-1" stroke="#FFFFFF" stroke-width="0.5"></path>
+            <path d="M155.415642,18.6337604 C155.412111,18.6408885 155.408579,18.6444526 155.405047,18.6515807 C155.083639,19.2360862 154.688061,19.7706948 154.228908,20.2482785 L150.499169,14.4780691 L151.438668,14.5564784 L152.812596,12.9669086 L154.931765,15.5508505 L156.326885,15.6114395 C156.235055,16.7020411 155.913647,17.7249257 155.415642,18.6337604 Z" id="Stroke-3" stroke="#FFFFFF" stroke-width="0.5"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>_ICN_Arrow_Volume-Up</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="_Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="_ICN_Arrow_Volume-Up" stroke="#FFFFFF">
+            <g id="Group-51" transform="translate(5.000000, 7.500000)">
+                <g id="Group-12" transform="translate(0.750000, 0.334961)">
+                    <g id="Group-6">
+                        <path d="M20.5,0.683646073 L20.5,15.8415408" id="Line" transform="translate(20.500000, 8.262593) scale(-1, -1) translate(-20.500000, -8.262593) "></path>
+                        <path d="M13.5,4.05206713 L13.5,15.8415408" id="Line-Copy-3" transform="translate(13.500000, 9.946804) scale(-1, -1) translate(-13.500000, -9.946804) "></path>
+                        <path d="M6.5,7.42048818 L6.5,15.8415408" id="Line-Copy-4" transform="translate(6.500000, 11.631014) scale(-1, -1) translate(-6.500000, -11.631014) "></path>
+                        <path d="M0.5,10.7889092 L0.5,15.8415408" id="Line-Copy-5" transform="translate(0.500000, 13.315225) scale(-1, -1) translate(-0.500000, -13.315225) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

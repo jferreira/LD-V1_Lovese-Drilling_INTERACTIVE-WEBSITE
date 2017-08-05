@@ -1,0 +1,131 @@
+var nav = {
+  "episodes": [{
+      "id": "1",
+      "duration": "3.27",
+      "title": "Carbon Battlegrounds",
+      "subtitle": "Episode 1:",
+      "description": "",
+      "poster": "resources/_Images/optimized/new/E1_Masthead.jpg",
+      "slide": "resources/_Images/optimized/new/Title_EP1.png",
+      "url": "https://player.vimeo.com/video/199863373",
+      "vid": "199863373",
+      "mp4": "https://player.vimeo.com/external/199863373.hd.mp4?s=8083e556c6ea57cbfef55b02820924b10f70722b&profile_id=119"
+    },
+    {
+      "id": "2",
+      "duration": "3.00",
+      "title": "The Lovese Story",
+      "subtitle": "Episode 2:",
+      "description": "",
+      "poster": "resources/_Images/optimized/new/E2_Masthead.jpg",
+      "slide": "resources/_Images/optimized/new/Title_EP2.png",
+      "url": "https://vimeo.com/228282253",
+      "vid": "228282253",
+      "mp4": "https://player.vimeo.com/external/228282253.hd.mp4?s=952f438a665b5b999e11865c01895c1be112e006&profile_id=175"
+    },
+    {
+      "id": "3",
+      "duration": "3.00",
+      "title": "Breeding Grounds",
+      "subtitle": "Episode 3:",
+      "description": "",
+      "poster": "resources/_Images/optimized/new/E3_Masthead.jpg",
+      "slide": "resources/_Images/optimized/new/Title_EP3_TITLE.png",
+      "url": "",
+      "vid": "",
+      "mp4": ""
+    },
+    {
+      "id": "4",
+      "duration": "3.00",
+      "title": "An oily identity",
+      "subtitle": "Episode 4:",
+      "description": "",
+      "poster": "resources/_Images/optimized/new/E4_Masthead.jpg",
+      "slide": "resources/_Images/optimized/new/Title_EP4_TITLE.png",
+      "url": "",
+      "vid": "",
+      "mp4": ""
+    },
+    {
+      "id": "5",
+      "duration": "3.00",
+      "title": "Livelihoods",
+      "subtitle": "Episode 5:",
+      "description": "",
+      "poster": "resources/_Images/optimized/new/E5_Masthead.jpg",
+      "slide": "resources/_Images/optimized/new/Title_EP5_TITLE.png",
+      "url": "",
+      "vid": "",
+      "mp4": ""
+    },
+    {
+      "id": "6",
+      "duration": "3.00",
+      "title": "An Election",
+      "subtitle": "Episode 6:",
+      "description": "",
+      "poster": "resources/_Images/optimized/new/E6_Masthead.jpg",
+      "slide": "resources/_Images/optimized/new/Title_EP6_TITLE.png",
+      "url": "",
+      "vid": "",
+      "mp4": ""
+    }
+  ],
+  "interactive": [{
+      "id": "1",
+      "title": "Carbon Battlegrounds",
+      "html": "include/interactive/1.html"
+    },
+    {
+      "id": "2",
+      "title": "The Lovese Story",
+      "html": "include/interactive/2.html"
+    },
+    {
+      "id": "3",
+      "title": "Breeding grounds",
+      "html": "include/interactive/3.html"
+    },
+    {
+      "id": "4",
+      "title": "An oily identity",
+      "html": "include/interactive/4.html"
+    },
+    {
+      "id": "5",
+      "title": "Livelihoods",
+      "html": "include/interactive/5.html"
+    },
+    {
+      "id": "6",
+      "title": "An election",
+      "html": "include/interactive/6.html"
+    }
+  ],
+  "textPages": [{
+      "id": "1",
+      "html": "include/text/1.html"
+    },
+    {
+      "id": "2",
+      "html": "include/text/2.html"
+    },
+    {
+      "id": "3",
+      "html": "include/text/3.html"
+    },
+    {
+      "id": "4",
+      "html": "include/text/4.html"
+    },
+    {
+      "id": "5",
+      "html": "include/text/5.html"
+    },
+    {
+      "id": "6",
+      "html": "include/text/6.html"
+    }
+  ]
+};

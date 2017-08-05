@@ -1,4 +1,4 @@
-#map {
+#map-1 {
   z-index: 0;
   position:absolute;
   top:0;
@@ -7,7 +7,7 @@
   height:100%;
 }
 
-#map > div.mapboxgl-control-container > div > div {
+#map-1 > div.mapboxgl-control-container > div > div {
   font-size: 8px;
   color:#eee;#000
   display:none;

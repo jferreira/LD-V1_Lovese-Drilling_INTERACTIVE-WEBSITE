@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[Veroy]]></data>
+
+
+
+  <data name="en_pano331_title"><![CDATA[Værøy]]></data>
+  <data name="en_spotpoint1412_tooltip"><![CDATA[Sørlandsvågen]]></data>
+  <data name="en_spotpoint1439_tooltip"><![CDATA[Nordland]]></data>
+
+
+  <data name="en_pano74_title"><![CDATA[Værøy / Nordland]]></data>
+  <data name="en_spotpoint1424_tooltip"><![CDATA[Verøy]]></data>
+  <data name="en_spotpoint1425_tooltip"><![CDATA[The Town]]></data>
+
+
+  <data name="en_pano71_title"><![CDATA[Værøy / Sørlandsvågen]]></data>
+  <data name="en_spotpoint1430_tooltip"><![CDATA[Værøy]]></data>
+  <data name="en_spotpoint1431_tooltip"><![CDATA[The Town]]></data>
+  <data name="en_spotpoint1433_tooltip"><![CDATA[Nordland]]></data>
+
+
+  <data name="en_pano77_title"><![CDATA[Værøy / The Town]]></data>
+  <data name="en_spotpoint1427_tooltip"><![CDATA[Sørlandsvågen]]></data>
+  <data name="en_spotpoint1428_tooltip"><![CDATA[Nordland]]></data>
+  <data name="en_spotpoint1429_tooltip"><![CDATA[Værøy]]></data>
+
+
+	<data name="en_spotmap1067_tooltip"><![CDATA[Værøy]]></data>
+	<data name="en_spotmap1095_tooltip"><![CDATA[Værøy / Nordland]]></data>
+	<data name="en_spotmap1088_tooltip"><![CDATA[Værøy / Sørlandsvågen]]></data>
+	<data name="en_spotmap1090_tooltip"><![CDATA[Værøy / The Town]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>

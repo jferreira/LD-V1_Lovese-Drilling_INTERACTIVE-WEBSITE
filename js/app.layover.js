@@ -15,6 +15,8 @@ app.layover = {
     callbacks: {
         'preShow':  [],
         'postShow': [],
+        'preCycle':  [],
+        'postCycle': [],
         'preContent': [],
         'postContent': [],
         'preHide': [],
@@ -23,7 +25,7 @@ app.layover = {
 
     init: function() {
         app.layover.state   = app.layover.visible;
-        app.layover.element = $('#layover');
+        app.layover.element = $('#intro');
     },
     call: function(eventType) {
         if (! $.inArray(eventType, app.layover.callbacks))
@@ -33,7 +35,32 @@ app.layover = {
             eventFunction();
         });
     },
+    cycleIntroContent: function(totalTime, elements) {
+      app.layover.call('preCycle');
+      var elementsLength = $(app.layover.element).children(elements).length;
+      var sectionTime = (totalTime * 1000) / elementsLength;
+      var mapF = $(app.layover.element).children(elements);
+      var $active = mapF.eq(0);
+      $active.addClass("active");
 
+      var $next = $active.next();
+      var timer = setInterval(function() {
+        $next.addClass("active");
+        $active.removeClass("active");
+        $active = $next;
+
+        // Do map operations
+        $next = (elementsLength == mapF.index($active)) ? $next = mapF.eq(0): $active.next();
+        // console.log(elementsLength, mapF.last().index(), mapF.index($active));
+        if((elementsLength -1) == mapF.index($active)) {
+          // console.log("finished!!");
+          clearInterval(timer);
+          timer = null;
+        }
+      }, sectionTime);
+
+      app.layover.call('postCycle');
+    },
     updateContent: function(content) {
         app.layover.call('preContent');
 
@@ -43,6 +70,12 @@ app.layover = {
     },
     setClass: function(className) {
         app.layover.element.attr('class', className);
+    },
+    showSpecificScreen: function(screenIndex) {
+        var index = $(app.layover.element).children();
+        var $active = index.eq(screenIndex);
+        $active.addClass("active").siblings().removeClass("active");
+        app.layover.show();
     },
     show: function() {
         app.layover.call('preShow');
