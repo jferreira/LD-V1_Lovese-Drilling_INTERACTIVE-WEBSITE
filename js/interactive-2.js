@@ -1001,13 +1001,13 @@ $('[data-type="modal-trigger"]').on('click', function(e) {
     if ($(this).parent().attr('data-type') == 'person') {
       switch ($(this).parent().attr('data-id')) {
         case "eldar":
-          contentUrl = "//player.vimeo.com/video/227892337?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/228447528?byline=0&amp;portrait=0";
           break;
         case "anne":
-          contentUrl = "//player.vimeo.com/video/227892426?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/228451663?byline=0&amp;portrait=0";
           break;
         case "johanna":
-          contentUrl = "//player.vimeo.com/video/227892451?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/228453330?byline=0&amp;portrait=0";
           break;
       }
     } else
