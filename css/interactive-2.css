@@ -23,13 +23,29 @@
 .interactive-content-explanation {
   position: absolute;
   background: rgba(0,0,0,0.8);
-  top: 25%; left: 0; bottom: 0; right: 0;
-  width: 50%;
+  top: 15%; left: 0; bottom: 0; right: 0;
+  width: 80%;
   height: 50%;
   margin: 0 auto;
   padding: 30px;
   text-align: center;
   z-index: 5;
+}
+
+@media(min-width:768px) {
+  .interactive-content-explanation {
+    top: 25%; left: 0; bottom: 0; right: 0;
+    width: 70%;
+    height: 50%;
+  }
+}
+
+@media(min-width:1170px) {
+  .interactive-content-explanation {
+    top: 25%; left: 0; bottom: 0; right: 0;
+    width: 50%;
+    height: 50%;
+  }
 }
 
 .container-full {
@@ -78,6 +94,23 @@
   pointer-events:auto;
 }
 
+.map-features-count {
+  width: 100%;
+  text-align:center;
+}
+
+.title-holder {
+  padding: 10px; margin-bottom: 10px; height: auto;
+}
+
+.title-holder img {
+  width: 94px; height: 94px; float:left;
+}
+
+.title-description {
+  clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px;
+}
+
 /*
 *   Map filter to the right on the map
 */
@@ -107,7 +140,6 @@
   height: 64px;
 }
 
-
 #map-filters ul li.land-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
 #map-filters ul li.land-areas:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
 
@@ -119,16 +151,15 @@
 #map-filters ul li.ncs:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
 #map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
 #map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
-#map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_People@3x.png");}
-#map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_People_Inverted@3x.png");}
+#map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople@3x.png");}
+#map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
 
 #map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
 #map-filters ul li.sea-areas.active {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
 #map-filters ul li.opened-oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
 #map-filters ul li.ncs.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
 #map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
-#map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_People_Inverted@3x.png");}
-
+#map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
 
 #map-filters img {
   cursor: pointer;
@@ -156,6 +187,33 @@
 
 .marker-360:hover {
   background-image: url('../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_360_Inverted@3x.png');
+}
+
+.interactive-content-explanation h2 {
+  font-size: 15px;
+}
+
+.interactive-content-explanation p {
+  font-size: 12px;
+}
+
+@media(min-width:768px) {
+  .interactive-content-explanation h2 {
+    font-size: 20px;
+  }
+  .interactive-content-explanation p {
+    font-size: 16px;
+  }
+}
+
+@media(min-width:1170px) {
+  .interactive-content-explanation h2 {
+    font-size: 25px;
+    line-height:1.5em;
+  }
+  .interactive-content-explanation p {
+    line-height:1.3em;
+  }
 }
 
 section {
@@ -214,14 +272,14 @@ section.hide {
 
 h1.episode-title {
   text-transform: uppercase;
-  font-size: 50px;
+  font-size: 30px;
   color: #fff;
   word-break: break-all;
 }
 
 h1.title {
   color: #fff;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 h2.title {
@@ -241,6 +299,10 @@ p.text {
 }
 
 @media(min-width:768px) {
+  h1.episode-title {
+    font-size: 50px;
+  }
+
   h1.title {
     font-size: 40px;
   }
@@ -251,6 +313,9 @@ p.text {
 }
 
 @media(min-width:1170px) {
+  h1.episode-title {
+    font-size: 60px;
+  }
   h1.title {
     font-size: 50px;
   }

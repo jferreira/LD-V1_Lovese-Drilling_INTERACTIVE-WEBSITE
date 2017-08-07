@@ -3,7 +3,7 @@
 var app = {
   currEpisode: 0,
   currInteractive: 0,
-  liveEpisodes: 1, // 0=1,1=2,2=3 etc. Second episode is live
+  liveEpisodes: 2, // 0=1,1=2,2=3 etc. Second episode is live
   interactiveState: false,
   textPageState: false,
   introSequence1Time: 10,
@@ -281,7 +281,8 @@ var app = {
 
       app.helpers.setHashUrl(0, episodeId);
 
-      if (episodeId > 1) {
+      // Show/hide play button
+      if (episodeId > app.liveEpisodes) {
         $("img.video-controls").css({
           "width": 0,
           "height": 0
