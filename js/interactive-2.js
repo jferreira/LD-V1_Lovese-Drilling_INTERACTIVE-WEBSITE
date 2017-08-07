@@ -2,7 +2,7 @@ var disableMapControls = true;
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
-var totalTime = 60 * 2; // Minutes - should be 60
+var totalTime = 60 * 1.5; // Minutes - should be 60
 var mapFiltersLocked = true;
 
 // GeoJSON data sources for MapBox layers
