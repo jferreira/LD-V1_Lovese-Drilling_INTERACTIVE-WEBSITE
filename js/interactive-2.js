@@ -138,24 +138,24 @@ var dataSources = [
         coordinates: [14.248825694533252, 68.26400752799873],
         imgUrl: "_ICN_LABEL_Lofoten-Archipelago@2x.png",
         localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/",
-        beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/",
-        live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"
+        beta: "https://beta.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/",
+        live: "https://www.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/"
       },
       {
         name: "vesteralen",
         coordinates: [14.908509488458321, 68.72214903472567],
         imgUrl: "_ICN_LABEL_Vesterålen-Archipelago@2x.png",
         localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/",
-        beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/",
-        live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"
+        beta: "https://beta.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/",
+        live: "https://www.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/"
       },
       {
         name: "senja",
         coordinates: [17.457677872120883, 69.30793670755747],
         imgUrl: "_ICN_LABEL_Senja-Archipelago@2x.png",
         localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/",
-        beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/",
-        live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"
+        beta: "https://beta.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/",
+        live: "https://www.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/"
       }
     ];
 
