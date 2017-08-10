@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[Henningsvær]]></data>
+
+
+
+  <data name="en_pano1472_title"><![CDATA[Henningsvor 4]]></data>
+  <data name="en_spotpoint1479_tooltip"><![CDATA[Festvågtind]]></data>
+
+
+  <data name="en_pano1473_title"><![CDATA[Henningsvor]]></data>
+  <data name="en_spotpoint1478_tooltip"><![CDATA[Henningsvær]]></data>
+
+
+	<data name="en_spotmap1476_tooltip"><![CDATA[Henningsvor 4]]></data>
+	<data name="en_spotmap1477_tooltip"><![CDATA[Henningsvor]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>
