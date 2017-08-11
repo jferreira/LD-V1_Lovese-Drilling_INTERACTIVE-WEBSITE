@@ -1,20 +1,37 @@
-var disableMapControls = true;
+var disableMapControls = false;
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
-var totalTime = 60 * 1.5; // Minutes - should be 60
-var mapFiltersLocked = true;
+var totalTime = 60 * 1; // Minutes - should be 60
+var mapFiltersLocked = false;
 
 // GeoJSON data sources for MapBox layer
 // Get more data layers here: http://maps.imr.no/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
 
-var dataSources = [{
-    name: 'corals',
-    data: '../include/map-layers/corals.geojson'
+var dataSources = [
+  {
+    name: 'fish',
+    data: '../include/map-layers/cod.geojson'
   },
   {
-    name: 'cod',
-    data: '../include/map-layers/cod.geojson'
+    name: 'saith',
+    data: '../include/map-layers/sei_gyte.geojson'
+  },
+  {
+    name: 'haddock',
+    data: '../include/map-layers/hyse_gyte.geojson'
+  },
+  {
+    name: 'herring',
+    data: '../include/map-layers/nvg_sild_gyte.geojson'
+  },
+  {
+    name: 'hallibut',
+    data: '../include/map-layers/blaakveite_gyte.geojson'
+  },
+  {
+    name: 'corals',
+    data: '../include/map-layers/corals.geojson'
   },
   {
     name: 'lovese_sea',
@@ -33,19 +50,31 @@ mapLayers["lovese_land"] = {
   added: false,
   visible: false
 }
-mapLayers["lovese_sea"] = {
+mapLayers["fish"] = {
   added: false,
   visible: false
 }
-mapLayers["opened_oil_areas"] = {
+mapLayers["saith"] = {
   added: false,
   visible: false
 }
-mapLayers["ncs"] = {
+mapLayers["haddock"] = {
   added: false,
   visible: false
 }
-mapLayers["oil_prospects"] = {
+mapLayers["herring"] = {
+  added: false,
+  visible: false
+}
+mapLayers["hallibut"] = {
+  added: false,
+  visible: false
+}
+mapLayers["birds"] = {
+  added: false,
+  visible: false
+}
+mapLayers["corals"] = {
   added: false,
   visible: false
 }
@@ -53,40 +82,65 @@ mapLayers["people"] = {
   added: false,
   visible: false
 }
+mapLayers["oil_prospects"] = {
+  added: false,
+  visible: false
+}
+
 
 var mapLayersStyle = new Array(3);
-mapLayersStyle["lovese_sea"] = {
+mapLayersStyle["fish"] = {
   color: "#fff",
   opacity: 0.5,
   border_color: "#fff"
 }
-mapLayersStyle["opened_oil_areas"] = {
-  color: "#E7A930",
-  opacity: 1,
+mapLayersStyle["saith"] = {
+  color: "#fff",
+  opacity: 0.5,
   border_color: "#fff"
 }
+mapLayersStyle["haddock"] = {
+  color: "#fff",
+  opacity: 0.5,
+  border_color: "#fff"
+}
+mapLayersStyle["herring"] = {
+  color: "#fff",
+  opacity: 0.5,
+  border_color: "#fff"
+}
+mapLayersStyle["hallibut"] = {
+  color: "#fff",
+  opacity: 0.5,
+  border_color: "#fff"
+}
+// mapLayersStyle["corals"] = {
+//   color: "#000",
+//   opacity: 0.9,
+//   border_color: "#000"
+// }
 mapLayersStyle["oil_prospects"] = {
   color: "#000",
-  opacity: 0.9,
+  opacity: 0.8,
   border_color: "#000"
 }
-var mapIcons = ["eldar", "anne", "johanna", "image360_1", "image360_2", "image360_3", "image360_4", "image360_5", "image360_6"];
+var mapIcons = ["sven", "martin", "heike", "image360_1", "image360_2", "image360_3", "image360_4", "image360_5", "image360_6", "image360_7"];
 var peopleAdded = false;
 
 var addedMapIcons = new Array(6);
-addedMapIcons["eldar"] = {
+addedMapIcons["sven"] = {
   zoomedTo: false,
   playedVideo: false,
   clicked: 0,
   coordinates: []
 }
-addedMapIcons["anne"] = {
+addedMapIcons["martin"] = {
   zoomedTo: false,
   playedVideo: false,
   clicked: 0,
   coordinates: []
 }
-addedMapIcons["johanna"] = {
+addedMapIcons["heike"] = {
   zoomedTo: false,
   playedVideo: false,
   clicked: 0,
@@ -128,12 +182,18 @@ addedMapIcons["image360_6"] = {
   clicked: 0,
   coordinates: []
 }
+addedMapIcons["image360_7"] = {
+  zoomedTo: false,
+  playedVideo: false,
+  clicked: 0,
+  coordinates: []
+}
 
 var zoomed = new Array(4);
 zoomed["first"] = false;
-zoomed["eldar"] = false;
-zoomed["anne"] = false;
-zoomed["johanna"] = false;
+zoomed["sven"] = false;
+zoomed["martin"] = false;
+zoomed["heike"] = false;
 
 var paused;
 var countdown;
@@ -143,81 +203,36 @@ var land_labels_images = [{
     coordinates: [14.248825694533252, 68.26400752799873],
     imgUrl: "_ICN_LABEL_Lofoten-Archipelago@2x.png",
     localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/",
-    beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/",
-    live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"
+    beta: "https://beta.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/",
+    live: "https://www.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/"
   },
   {
     name: "vesteralen",
     coordinates: [14.908509488458321, 68.72214903472567],
     imgUrl: "_ICN_LABEL_Vesterålen-Archipelago@2x.png",
     localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/",
-    beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/",
-    live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"
+    beta: "https://beta.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/",
+    live: "https://www.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/"
   },
   {
     name: "senja",
     coordinates: [17.457677872120883, 69.30793670755747],
     imgUrl: "_ICN_LABEL_Senja-Archipelago@2x.png",
     localhost: "http://lovese.dev/resources/_Graphics/_GFX_005_EP2_LD/",
-    beta: "https://beta.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/",
-    live: "https://www.lovese.org/resources/_Graphics/_GFX_005_EP2_LD/"
+    beta: "https://beta.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/",
+    live: "https://www.lovese.no/resources/_Graphics/_GFX_005_EP2_LD/"
   }
 ];
-
-var oilareas = {
-  "type": "FeatureCollection",
-  "features": [{
-      "type": "Feature",
-      "properties": {
-        "name": "TROMS II"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [16.89656278272045, 69.99959900300283]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NORDLAND VII"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [12.54395051590086, 68.67553211914631]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NORDLAND VI",
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [9.682141227345937, 67.69129025619176]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NORDLAND V",
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [11.62876179579601, 66.77177798313087]
-      }
-    }
-  ]
-};
 
 var people = {
   "type": "FeatureCollection",
   "features": [{
       "type": "Feature",
       "properties": {
-        "title": "Eldar",
-        "name": "eldar",
+        "title": "Sven Tommy",
+        "name": "sven",
         "iconSize": [42, 42],
-        "imgName": "_ICN_IMG-INT-01@3x"
+        "imgName": "sven@3x"
       },
       "geometry": {
         "type": "Point",
@@ -230,10 +245,10 @@ var people = {
     {
       "type": "Feature",
       "properties": {
-        "title": "Anne-Birgith",
-        "name": "anne",
+        "title": "Martin",
+        "name": "martin",
         "iconSize": [42, 42],
-        "imgName": "anne_b@3x"
+        "imgName": "martin@3x"
       },
       "geometry": {
         "type": "Point",
@@ -246,16 +261,16 @@ var people = {
     {
       "type": "Feature",
       "properties": {
-        "title": "Johanna",
-        "name": "johanna",
+        "title": "Heike",
+        "name": "heike",
         "iconSize": [42, 42],
-        "imgName": "johanna@3x"
+        "imgName": "heike@3x"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          13.435388,
-          68.133261
+          14.22199493102596,
+          68.1608805347768
         ]
       }
     }
@@ -331,7 +346,7 @@ var images360 = {
     {
       "type": "Feature",
       "properties": {
-        "title": "Flakstad",
+        "title": "Ramberg",
         "name": "image360_5",
         "iconSize": [42, 42],
         "imgName": "_ICN_BTN_360@3x"
@@ -347,7 +362,7 @@ var images360 = {
     {
       "type": "Feature",
       "properties": {
-        "title": "Napp",
+        "title": "Festvågtind",
         "name": "image360_6",
         "iconSize": [42, 42],
         "imgName": "_ICN_BTN_360@3x"
@@ -355,46 +370,37 @@ var images360 = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          13.471063888889,
-          68.126827777778
+          14.227638888889,
+          68.172030555556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Henningsvær",
+        "name": "image360_7",
+        "iconSize": [42, 42],
+        "imgName": "_ICN_BTN_360@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.214352777778,
+          68.147161111111
         ]
       }
     }
   ]
 };
 
-// var ncs_slim = {
-//     "type": "FeatureCollection",
-//     "features": [
-//         {
-//             "type": "Feature",
-//             "geometry": {
-//                 "type": "LineString",
-//                 "coordinates": []
-//             }
-//         }
-//     ]
-// };
-//
-// var start = {lat:69.29758634976852, lng:15.99037798982664}
-// var end = {lat:69.33415771588025, lng:15.808563486946923}
-// var n = 20; // the number of coordinates you want
-//
-// ncs_coordinates = []
-// for(var i = n - 1; i > 0; i--){
-//     ncs_coordinates.push( {lat: start.lat*i/n + end.lat*(n-i)/n,
-//                        lng: start.lng*i/n + end.lng*(n-i)/n});
-// }
-// ncs_slim.features[0].geometry.coordinates = ncs_coordinates;
-// console.log(ncs_slim);
-
 mapboxgl.accessToken = 'pk.eyJ1IjoibG92ZXNlIiwiYSI6ImNpeTF0NTIxdzAwODMycWx4anRuc2dteGoifQ.h_sW40YOKtU1XOVyrJlqaw';
 
 var map = new mapboxgl.Map({
   container: 'map', // container id
   style: 'mapbox://styles/lovese/ciy1xowr100e22rqlyky3qgcg', //hosted style id
-  center: [-8., 55.9], // starting position: lng/lat
-  zoom: 3, // starting zoom,
+  center: [12.9, 68.7], // starting position: lng/lat
+  zoom: 6, // starting zoom,
   pitch: 0, // pitch in degrees
   bearing: 0, // bearing in degrees
   attributionControl: false
@@ -422,6 +428,7 @@ function mapControls(disable) {
 
 map.on('load', function() {
 
+  // Add labels for the land areas (LoVeSe)
   land_labels_images.forEach(function(label) {
     map.loadImage(label.localhost + label.imgUrl, function(error, image) {
       if (error) throw error;
@@ -481,12 +488,6 @@ map.on('load', function() {
     });
   });
 
-  // Add labels
-  map.addSource('oil_areas_labels', {
-    type: 'geojson',
-    data: oilareas
-  });
-
   map.resize();
   $(".interactive-content").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (set in top of script)
@@ -500,30 +501,14 @@ map.on('load', function() {
     console.log(center, zoom, e.lngLat, e.point);
   });
 
-  map.on('zoomend', function(e) {
-    var zoom = map.getZoom();
-    if (zoom < 5.5 || zoom > 7.5) {
-      $(".areas-marker").hide();
-    } else {
-      $(".areas-marker").show();
-    }
-  });
-
-  // map.on("mouseup", function(e) {
-  // });
-  //
-  // map.on("zoomend", function(e) {
-  // });
-
-  // // Change the cursor to a pointer when the mouse is over the places layer.
-  // // Does not work on the dynamically added layers?
-  // map.on('mouseenter', 'lovese', function () {
-  //     map.getCanvas().style.cursor = 'pointer';
-  // });
-  //
-  // // Change it back to a pointer when it leaves.
-  // map.on('mouseleave', 'lovese', function () {
-  //     map.getCanvas().style.cursor = '';
+  // Need this? 
+  // map.on('zoomend', function(e) {
+  //   var zoom = map.getZoom();
+  //   if (zoom < 5.5 || zoom > 7.5) {
+  //     $(".areas-marker").hide();
+  //   } else {
+  //     $(".areas-marker").show();
+  //   }
   // });
 
   // Functions for flying to a specific part of the map
@@ -536,30 +521,11 @@ map.on('load', function() {
   map.on('moveend', function(e) {
     if (!flying && zoomedToArea) {
       //map.fire(flyend);
-      if (zoomed["first"]) {
-        console.log("First zoom event!");
-        $(".container-full").fadeIn("1500");
-        $(".interactive-pane-text").css({
-          'z-index': 1
-        }).show();
-        $(".cd-section").css({
-          'z-index': 1
-        }).show();
-
-        // Show map filters
-        $("#map-filters").show();
-
-        if (countdown) {
-          clearInterval(countdown);
-        }
-        paused = false;
-
-        startTimer(totalTime);
-        startMapFeautures();
-        zoomed["first"] = false; // Not to do this again
-      } else if (zoomed["eldar"]) {
+      if (zoomed["sven"]) {
         // We have zoomed in on the first interview, so update their marker overlay position accordingly
         add360Icons(); // Should we move this - or even break it down for each person?
+
+        // Enable map filters and map controls
         mapFiltersLocked = false;
         mapControls(false);
       }
@@ -567,7 +533,7 @@ map.on('load', function() {
     }
 
     // Used to be peopleAdded
-    if (zoomed["eldar"]) {
+    if (zoomed["sven"]) {
       updateMarkerOverlayPos();
     }
   });
@@ -589,15 +555,16 @@ function updateMarkerOverlayPos() {
   });
 }
 
-// Not currently in use
-// map.on('style.load', function (e) {
-//   console.log("loaded style")
-// });
-
-// Not currently in use
-// $(window).resize(function() {
-//   //setSizes();
-// });
+// Turn on off fish stock layers
+$('input[name="fish_stocks"]').on('click', function () {
+    if ($(this).is(':checked')) {
+        console.log($(this).attr('data-layer-name'));
+        showMapLayer($(this).attr('data-layer-name'));
+    } else {
+        console.log($(this).attr('data-layer-name'));
+        removeMapLayer($(this).attr('data-layer-name'));
+    }
+});
 
 $("#hover-navigation .arrow").on("click", function() {
   if (app.navigation.state == app.navigation.visible) {
@@ -614,9 +581,25 @@ $("#hover-navigation .arrow").on("click", function() {
 $("#start-interactive-tour").on("click", function(e) {
   e.preventDefault();
   $(".loading").fadeOut(500);
-  setTimeout(function() {
-    zoomToArea("first", [12.901721434467618, 68.71391887946749], 6.54, 0.5, 1.5, 0, 0, [0, 0]);
-  }, startDelay);
+
+  $(".container-full").fadeIn("1500");
+  $(".interactive-pane-text").css({
+    'z-index': 1
+  }).show();
+  $(".cd-section").css({
+    'z-index': 1
+  }).show();
+
+  // Show map filters
+  $("#map-filters").show();
+
+  // if (countdown) {
+  //   clearInterval(countdown);
+  // }
+  // paused = false;
+  //
+  // startTimer(totalTime);
+  // startMapFeautures();
 });
 
 // Map filter
@@ -659,38 +642,25 @@ $('[data-type="modal-trigger"]').hover(function() {
 
 // Add a given map layer to the map, except the islands layer - which has no layer
 function showMapLayer(layer) {
-  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "people") {
+  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
     if (mapLayers[layer].visible == false) {
-      if (!mapLayers[layer].added && layer !== "lovese_land" && layer !== "people") {
-        if (layer === "ncs") {
-          // Not working properly
-          // map.addLayer({
-          //     "id": "ncs",
-          //     "type": "line",
-          //     "source": "ncs",
-          //     "paint": {
-          //         "line-color": "yellow",
-          //         "line-opacity": 0.75,
-          //         "line-width": 5
-          //     }
-          // });
-        } else if (layer === "corals") {
-          // Not used in this episode, but will be used later.
+      if (!mapLayers[layer].added && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
+        if (layer === "corals") {
           // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
-          // map.addLayer({
-          //   "id": "corals",
-          //   "type": "circle",
-          //   "source": "corals",
-          //   'layout': {
-          //     'visibility': 'visible'
-          //   },
-          //   "paint": {
-          //     'circle-radius': 5,
-          //     'circle-opacity': 0.5,
-          //     'circle-color': 'rgba(172,255,178,1)'
-          //   },
-          //   "filter": ["==", "$type", "Point"],
-          // });
+          map.addLayer({
+            "id": "corals",
+            "type": "circle",
+            "source": "corals",
+            'layout': {
+              'visibility': 'visible'
+            },
+            "paint": {
+              'circle-radius': 3,
+              'circle-opacity': 0.5,
+              'circle-color': 'rgba(172,255,178,1)'
+            },
+            "filter": ["==", "$type", "Point"],
+          });
         } else {
           map.addLayer({
             "id": layer,
@@ -701,45 +671,12 @@ function showMapLayer(layer) {
               "fill-color": mapLayersStyle[layer].color,
               "fill-outline-color": mapLayersStyle[layer].border_color
             }
-          }, 'lofoten');
-        }
-        if (layer === "lovese_sea") {
-          // Add labels for the different sea areas
-          map.addLayer({
-            "id": "lovese-labels",
-            "type": "symbol",
-            "source": "oil_areas_labels",
-            "layout": {
-              "text-field": "{name}",
-              "text-font": [
-                "DIN Offc Pro Medium",
-                "Arial Unicode MS Bold"
-              ],
-              "text-size": {
-                "stops": [
-                  [0, 0],
-                  [3, 0],
-                  [4, 10],
-                  [5, 11],
-                  [10, 15]
-                ]
-              }
-            },
-            "paint": {
-              "text-color": "#fff",
-              "text-opacity": 1
-            },
-            "maxzoom": 12,
-            "minzoom": 5
-          });
+          }, 'oil_prospects'); // Add it before the oil prospects
         }
         mapLayers[layer].added = true;
       }
 
-      if (layer === "lovese_sea") {
-        map.setLayoutProperty("lovese-labels", 'visibility', 'visible');
-      }
-      if (layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
+      if (layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
         map.setLayoutProperty(layer, 'visibility', 'visible');
         mapLayers[layer].visible = true;
 
@@ -757,29 +694,11 @@ function showMapLayer(layer) {
   if (layer === "people") {
     addPeopleIcons();
   }
-  if (layer === "ncs") {
-    console.log("ncs");
+  if (layer === "birds") {
+    console.log("birds - røst");
     // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
-    zoomToArea("ncs", [15.822920370519341, 69.30319998292396], 9, 0.5, 1.5, 0, 0, [0, 0]);
+    zoomToArea("birds", [11.937078079160585, 67.46127758453957], 9, 0.5, 1.5, 0, 0, [0, 0]);
   }
-
-  // https://www.mapbox.com/mapbox-gl-js/example/live-update-feature/
-  // TODO: Almost got this working. Make it work!!
-  // if(layer === "ncs") {
-  //   // on a regular basis, add more coordinates from the saved list and update the map
-  //   var i = 0;
-  //   var timer = window.setInterval(function() {
-  //       if (i < ncs_coordinates.length) {
-  //           ncs_slim.features[0].geometry.coordinates.push(ncs_coordinates[i]);
-  //           map.getSource('ncs').setData(ncs_slim);
-  //           //map.panTo(ncs_coordinates[i]);
-  //           i++;
-  //       } else {
-  //           window.clearInterval(timer);
-  //       }
-  //   }, 100);
-  // }
-
 }
 
 // Remove a given map layer, except the islands layer - which has no layer
@@ -803,7 +722,7 @@ function addPeopleIcons() {
     var el = document.createElement('div');
     el.className = 'people-marker';
 
-    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_006_EP3_BG/' + marker.properties.imgName + '.png)';
     el.style.width = marker.properties.iconSize[0] + 'px';
     el.style.height = marker.properties.iconSize[1] + 'px';
 
@@ -839,7 +758,7 @@ function add360Icons() {
     el.className = 'marker-360';
     el.setAttribute("data-name", marker.properties.name);
 
-    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_005_EP2_LD/' + marker.properties.imgName + '.png)';
+    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_006_EP3_BG/' + marker.properties.imgName + '.png)';
     el.style.width = marker.properties.iconSize[0] + 'px';
     el.style.height = marker.properties.iconSize[1] + 'px';
 
@@ -971,8 +890,8 @@ function startMapFeautures() {
     if (mapF.last().index() == mapF.index($active)) {
       clearInterval(timer);
       timer = null;
-      // Move to Eldar
-      zoomToPerson("eldar");
+      // Move to sven
+      zoomToPerson("sven");
 
       // TODO: Move to next episode - How to do this?
     }
@@ -998,13 +917,13 @@ $('[data-type="modal-trigger"]').on('click', function(e) {
   https: //vimeo.com/200725736
     if ($(this).parent().attr('data-type') == 'person') {
       switch ($(this).parent().attr('data-id')) {
-        case "eldar":
+        case "sven":
           contentUrl = "//player.vimeo.com/video/228447528?byline=0&amp;portrait=0";
           break;
-        case "anne":
+        case "martin":
           contentUrl = "//player.vimeo.com/video/228451663?byline=0&amp;portrait=0";
           break;
-        case "johanna":
+        case "heike":
           contentUrl = "//player.vimeo.com/video/228453330?byline=0&amp;portrait=0";
           break;
       }
@@ -1027,7 +946,10 @@ $('[data-type="modal-trigger"]').on('click', function(e) {
         contentUrl = "../resources/_360/Flakstad.html";
         break;
       case "6":
-        contentUrl = "../resources/_360/Napp.html";
+        contentUrl = "../resources/_360/Henningsver.html?vr&s=pano1473";
+        break;
+      case "7":
+        contentUrl = "../resources/_360/Henningsver.html?vr&s=pano1472";
         break;
     }
   }
