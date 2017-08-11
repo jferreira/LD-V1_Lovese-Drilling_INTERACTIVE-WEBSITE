@@ -142,24 +142,32 @@
 
 #map-filters ul li.land-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
 #map-filters ul li.land-areas:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
 
-#map-filters ul li.sea-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area@2x.png");}
-#map-filters ul li.sea-areas:hover {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
-#map-filters ul li.opened-oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig@3x.png");}
-#map-filters ul li.opened-oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
-#map-filters ul li.ncs {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf@2x.png");}
-#map-filters ul li.ncs:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
-#map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
-#map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+#map-filters ul li.fish {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish@2x.png");}
+#map-filters ul li.fish:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@2x.png");}
+#map-filters ul li.fish.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@2x.png");}
+
+#map-filters ul li.birds {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds@2x.png");}
+#map-filters ul li.birds:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@2x.png");}
+#map-filters ul li.birds.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@2x.png");}
+
+#map-filters ul li.whales {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+#map-filters ul li.whales:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+#map-filters ul li.whales.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+
+#map-filters ul li.corals {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral@2x.png");}
+#map-filters ul li.corals:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@2x.png");}
+#map-filters ul li.corals.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@2x.png");}
+
 #map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople@3x.png");}
 #map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
-
-#map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
-#map-filters ul li.sea-areas.active {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
-#map-filters ul li.opened-oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
-#map-filters ul li.ncs.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
-#map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 #map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
+
+/* Might use this to overlay over fish grounds */
+#map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
+#map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+#map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 
 #map-filters img {
   cursor: pointer;
@@ -186,7 +194,7 @@
 }
 
 .marker-360:hover {
-  background-image: url('../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_360_Inverted@3x.png');
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png');
 }
 
 .interactive-content-explanation h2 {
