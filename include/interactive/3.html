@@ -53,27 +53,42 @@
             <p class="text">
               For thousands of years fish stocks like the Norh Atlantic cod has migrated to the sea areas outside of Lofoten, Vesterålen and Senja to spawn.
             </p>
-            <div class="checkbox">
-              <label><input type="checkbox" name="fish_stocks" value="cod" data-layer-name="cod" checked>Cod</label>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="checkboxes">
+                  <label class="layers" for="cod"><input type="checkbox" id="cod" name="fish_stocks" data-layer-name="fish" checked><span>Cod</span></label>
+                </div>
+                <div class="checkboxes">
+                  <label class="layers" for="saith"><input type="checkbox" id="saith" name="fish_stocks" data-layer-name="saith"><span>Saith</span></label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="checkboxes">
+                  <label class="layers" for="haddock"><input type="checkbox" id="haddock" name="fish_stocks" data-layer-name="haddock"><span>Haddock</span></label>
+                </div>
+                <div class="checkboxes">
+                  <label class="layers" for="herring"><input type="checkbox" id="herring" name="fish_stocks" data-layer-name="herring"><span>Herring</span></label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="checkboxes">
+                  <label class="layers" for="hallibut"><input type="checkbox" id="hallibut" name="fish_stocks" data-layer-name="hallibut"><span>Hallibut</span></label>
+                </div>
+              </div>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" name="fish_stocks" value="saith" data-layer-name="saith">Saith</label>
+
+            <p class="text">See how the potential oil and gas resources conflict with the spawning grounds:</p>
+            <div class="checkboxes">
+              <label class="layers" for="oil_p_f"><input type="checkbox" id="oil_p_f" name="fish_stocks" data-layer-name="oil_prospects"><span>Oil prospects</span></label>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" name="fish_stocks" value="haddock" data-layer-name="haddock">Haddock</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" name="fish_stocks" value="herring" data-layer-name="herring">Herring</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" name="fish_stocks" value="hallibut" data-layer-name="hallibut">Hallibut</label>
-            </div>
+
           </div>
         </section>
 
         <section class="map-details" data-layer-name="birds">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@3x.png">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_birds_Inverted@3x.png">
             <h2 class="title">Bird colonies</h2>
           </div>
 
@@ -102,22 +117,26 @@
 
         <section class="map-details" data-layer-name="corals">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@3x.png">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_corals_Inverted@3x.png">
             <h2 class="title">Coral reefs</h2>
           </div>
 
           <div class="title-description">
             <p class="text"></p>
+
+            <div class="checkbox">
+              <label><input type="checkbox" name="fish_stocks" data-layer-name="oil_prospects">Oil prospects</label>
+            </div>
           </div>
         </section>
 
         <section class="map-details" data-layer-name="people">
           <div class="title-holder" style="padding: 10px 10px 0px 10px; margin-bottom: 0px; height: auto;">
             <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_MPeople_Inverted@3x.png">
-            <h2 class="title">People of Lofoten</h2>
+            <h2 class="title">Experts</h2>
 
             <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
-              <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what members of the local community think about the issue by clicking their icons on the map.</p>
+              <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what a few experts has to say about the importance of the area for fish, birds and sea mammals.</p>
             </div>
           </div>
 
@@ -174,12 +193,8 @@
     <li class="land-areas" data-layer-name="lovese_land"></li>
     <li class="fish" data-layer-name="fish"></li>
     <li class="birds" data-layer-name="birds"></li>
-    <!-- <li class="whales" data-layer-name="whales"></li> -->
     <li class="corals" data-layer-name="corals"></li>
-    <!-- <li class="sea-areas" data-layer-name="lovese_sea"></li> -->
-    <!-- <li class="opened-oil" data-layer-name="opened_oil_areas"></li> -->
-    <!-- <li class="ncs" data-layer-name="ncs"></li> -->
-    <li class="oil" data-layer-name="oil_prospects"></li>
+    <!-- <li class="oil" data-layer-name="oil_prospects"></li> -->
     <li class="people" data-layer-name="people"></li>
   </ul>
 </nav>
@@ -256,7 +271,7 @@
   </div>
   <!-- cd-modal -->
 
-  <a href="#0" class="cd-modal-close">Close</a>
+  <a href="#ep3-interactive" class="cd-modal-close">Close</a>
 </section>
 <!-- .cd-section -->
 
@@ -267,4 +282,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
 <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+<!-- <script type="text/javascript" src="/js/chroma.min.js"></script> -->
 <script type="text/javascript" src="/js/interactive-3.js"></script>

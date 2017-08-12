@@ -174,27 +174,13 @@
 }
 
 /* Markers on the map */
-.areas-marker {
-  width: 200px;
-  height: 30px;
-  -webkit-background-size: cover; /* For WebKit*/
-  -moz-background-size: cover;    /* Mozilla*/
-  -o-background-size: cover;      /* Opera*/
-  background-size: cover;         /* Generic*/
-  cursor: pointer;
-}
-
-.people-marker, .marker-360 {
+.marker-people, .marker-360, .marker-birds, .marker-corals {
   border-radius: 50%;
   -webkit-background-size: cover; /* For WebKit*/
   -moz-background-size: cover;    /* Mozilla*/
   -o-background-size: cover;      /* Opera*/
   background-size: cover;         /* Generic*/
   cursor: pointer;
-}
-
-.marker-360:hover {
-  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png');
 }
 
 .interactive-content-explanation h2 {
@@ -306,29 +292,59 @@ p.text {
   cursor: auto;
 }
 
+.checkboxes label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.checkboxes input {
+  vertical-align: middle;
+  cursor: pointer;
+}
+.checkboxes label span {
+  vertical-align: middle;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+label.layers {
+  color: #fff;
+  font-size: 12px;
+}
+
 @media(min-width:768px) {
   h1.episode-title {
-    font-size: 50px;
-  }
-
-  h1.title {
     font-size: 40px;
   }
 
+  h1.title {
+    font-size: 30px;
+  }
+
   p.text {
-    font-size: 18px;
+    font-size: 16px;
+  }
+  label.layers {
+    color: #fff;
+    font-size: 13px;
   }
 }
 
 @media(min-width:1170px) {
   h1.episode-title {
-    font-size: 60px;
-  }
-  h1.title {
     font-size: 50px;
   }
+  h1.title {
+    font-size: 40px;
+  }
   p {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  label.layers {
+    color: #fff;
+    font-size: 15px;
   }
 }
 

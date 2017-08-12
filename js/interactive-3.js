@@ -5,10 +5,25 @@ var startDelay = 0; //2000
 var totalTime = 60 * 1; // Minutes - should be 60
 var mapFiltersLocked = false;
 
+// Bounding boxes for specific layers
+var bbox_area   = [[9.0088,67.3314],[18.0505,69.7181]];
+var bbox_roest  = [[11.814423,67.402211],[12.204437,67.542167]];
+var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
+
+// Color picking for layers
+//var colors = chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(5);
+// var colors2 = chroma.scale('YlGnBu').colors(5);
+// var colors3 = chroma.scale(['yellow', '008ae5']).mode('lch').colors(5);
+// console.log(colors2)
+
 // GeoJSON data sources for MapBox layer
 // Get more data layers here: http://maps.imr.no/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
 
 var dataSources = [
+  {
+    name: 'lovese_sea',
+    data: '../include/map-layers/lovese_blocks.geojson'
+  },
   {
     name: 'fish',
     data: '../include/map-layers/cod.geojson'
@@ -30,164 +45,62 @@ var dataSources = [
     data: '../include/map-layers/blaakveite_gyte.geojson'
   },
   {
-    name: 'corals',
-    data: '../include/map-layers/corals.geojson'
-  },
-  {
-    name: 'lovese_sea',
-    data: '../include/map-layers/lovese_blocks.geojson'
-  },
-  {
     name: 'oil_prospects',
     data: '../include/map-layers/prospekter_union.geojson'
   },
+  {
+    name: 'corals',
+    data: '../include/map-layers/corals.geojson'
+  }
 ];
 
 var dataLayerBounds = new Array(dataSources.length);
 
 var mapLayers = new Array(6);
-mapLayers["lovese_land"] = {
-  added: false,
-  visible: false
-}
-mapLayers["fish"] = {
-  added: false,
-  visible: false
-}
-mapLayers["saith"] = {
-  added: false,
-  visible: false
-}
-mapLayers["haddock"] = {
-  added: false,
-  visible: false
-}
-mapLayers["herring"] = {
-  added: false,
-  visible: false
-}
-mapLayers["hallibut"] = {
-  added: false,
-  visible: false
-}
-mapLayers["birds"] = {
-  added: false,
-  visible: false
-}
-mapLayers["corals"] = {
-  added: false,
-  visible: false
-}
-mapLayers["people"] = {
-  added: false,
-  visible: false
-}
-mapLayers["oil_prospects"] = {
-  added: false,
-  visible: false
-}
+mapLayers["lovese_land"] = {added: false,visible: false}
+mapLayers["fish"] = {added: false,visible: false}
+mapLayers["saith"] = {added: false,visible: false}
+mapLayers["haddock"] = {added: false,visible: false}
+mapLayers["herring"] = {added: false,visible: false}
+mapLayers["hallibut"] = {added: false,visible: false}
+mapLayers["birds"] = {added: false,visible: false}
+mapLayers["corals"] = {added: false,visible: false}
+mapLayers["people"] = {added: false,visible: false}
+mapLayers["oil_prospects"] = {added: false,visible: false}
 
-
+// ["#fafa6e", "#86d780", "#23aa8f", "#007882", "#2a4858"]
+// ["#ffffd9", "#c7e9b4", "#41b6c4", "#225ea8", "#081d58"]
 var mapLayersStyle = new Array(3);
-mapLayersStyle["fish"] = {
-  color: "#fff",
-  opacity: 0.5,
-  border_color: "#fff"
-}
-mapLayersStyle["saith"] = {
-  color: "#fff",
-  opacity: 0.5,
-  border_color: "#fff"
-}
-mapLayersStyle["haddock"] = {
-  color: "#fff",
-  opacity: 0.5,
-  border_color: "#fff"
-}
-mapLayersStyle["herring"] = {
-  color: "#fff",
-  opacity: 0.5,
-  border_color: "#fff"
-}
-mapLayersStyle["hallibut"] = {
-  color: "#fff",
-  opacity: 0.5,
-  border_color: "#fff"
-}
-// mapLayersStyle["corals"] = {
-//   color: "#000",
-//   opacity: 0.9,
-//   border_color: "#000"
-// }
-mapLayersStyle["oil_prospects"] = {
-  color: "#000",
-  opacity: 0.8,
-  border_color: "#000"
-}
+mapLayersStyle["fish"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
+mapLayersStyle["saith"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
+mapLayersStyle["haddock"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
+mapLayersStyle["herring"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
+mapLayersStyle["hallibut"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
+mapLayersStyle["oil_prospects"] = {color: "#000",opacity: 0.8,border_color: "#000"}
+
 var mapIcons = ["sven", "martin", "heike", "image360_1", "image360_2", "image360_3", "image360_4", "image360_5", "image360_6", "image360_7"];
-var peopleAdded = false;
+var addedPeople = false;
+var added360Markers = false;
 
 var addedMapIcons = new Array(6);
-addedMapIcons["sven"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["martin"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["heike"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_1"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_2"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_3"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_4"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_5"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_6"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
-addedMapIcons["image360_7"] = {
-  zoomedTo: false,
-  playedVideo: false,
-  clicked: 0,
-  coordinates: []
-}
+addedMapIcons["sven"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["martin"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["heike"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_1"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_2"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_3"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_4"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_5"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_6"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["image360_7"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["bird_island_1"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["bird_island_2"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["bird_island_3"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["bird_island_4"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["bird_island_5"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["corals_1"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["corals_2"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
+addedMapIcons["corals_3"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
 
 var zoomed = new Array(4);
 zoomed["first"] = false;
@@ -232,6 +145,7 @@ var people = {
         "title": "Sven Tommy",
         "name": "sven",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "sven@3x"
       },
       "geometry": {
@@ -248,6 +162,7 @@ var people = {
         "title": "Martin",
         "name": "martin",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "martin@3x"
       },
       "geometry": {
@@ -264,6 +179,7 @@ var people = {
         "title": "Heike",
         "name": "heike",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "heike@3x"
       },
       "geometry": {
@@ -285,6 +201,7 @@ var images360 = {
         "title": "Verøy",
         "name": "image360_1",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -301,6 +218,7 @@ var images360 = {
         "title": "Sørlandsvågen",
         "name": "image360_2",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -317,6 +235,7 @@ var images360 = {
         "title": "Nordland",
         "name": "image360_3",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -333,6 +252,7 @@ var images360 = {
         "title": "Værøy",
         "name": "image360_4",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -349,6 +269,7 @@ var images360 = {
         "title": "Ramberg",
         "name": "image360_5",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -365,6 +286,7 @@ var images360 = {
         "title": "Festvågtind",
         "name": "image360_6",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -381,6 +303,7 @@ var images360 = {
         "title": "Henningsvær",
         "name": "image360_7",
         "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_360@3x"
       },
       "geometry": {
@@ -388,6 +311,149 @@ var images360 = {
         "coordinates": [
           14.214352777778,
           68.147161111111
+        ]
+      }
+    }
+  ]
+};
+
+var bird_islands = {
+  "type": "FeatureCollection",
+  "features": [{
+      "type": "Feature",
+      "properties": {
+        "title": "Vedøya",
+        "name": "bird_island_1",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_birds@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.018116196083497,
+          67.48001667342737
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Storfjellet",
+        "name": "bird_island_2",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_birds@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.937251472179213,
+          67.46210208044724
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Ellefsnyken",
+        "name": "bird_island_3",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_birds@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.912297356460783,
+          67.4473372411731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Trenyken",
+        "name": "bird_island_4",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_birds@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.891550507512648,
+          67.43628541535423
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Hernyken:",
+        "name": "bird_island_4",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_birds@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.880073225904368,
+          67.4268137592164
+        ]
+      }
+    },
+  ]
+};
+
+var corals = {
+  "type": "FeatureCollection",
+  "features": [{
+      "type": "Feature",
+      "properties": {
+        "title": "Træna reef",
+        "name": "corals_1",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_corals@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.039713114483305, 66.94196228799836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Røst reef",
+        "name": "corals_2",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_corals@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+            9.378126177649193, 67.48767541331077
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Hola reef",
+        "name": "corals_3",
+        "iconSize": [42, 42],
+        "imgPath": "_GFX_006_EP3_BG/",
+        "imgName": "_ICN_BTN_corals@3x"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.38328982835074, 68.92608088745928
         ]
       }
     }
@@ -478,12 +544,17 @@ map.on('load', function() {
       dataType: "json",
       url: source.data,
       success: function(data) {
-        var bounds = turf.bbox(data);
+        //var bounds = turf.bbox(data);
         map.addSource(source.name, {
           type: 'geojson',
           data: data
         });
-        dataLayerBounds[source.name] = bounds;
+
+        if(source.name === 'corals') {
+          dataLayerBounds[source.name] = bbox_corals;
+        } else {
+          dataLayerBounds[source.name] = bbox_area;
+        }
       }
     });
   });
@@ -501,15 +572,15 @@ map.on('load', function() {
     console.log(center, zoom, e.lngLat, e.point);
   });
 
-  // Need this? 
-  // map.on('zoomend', function(e) {
-  //   var zoom = map.getZoom();
-  //   if (zoom < 5.5 || zoom > 7.5) {
-  //     $(".areas-marker").hide();
-  //   } else {
-  //     $(".areas-marker").show();
-  //   }
-  // });
+  // Need this?
+  map.on('zoomend', function(e) {
+    var zoom = map.getZoom();
+    if (zoom <= 6.5) {
+      $(".marker-360").hide();
+    } else {
+      $(".marker-360").show();
+    }
+  });
 
   // Functions for flying to a specific part of the map
   map.on('flystart', function() {
@@ -521,19 +592,22 @@ map.on('load', function() {
   map.on('moveend', function(e) {
     if (!flying && zoomedToArea) {
       //map.fire(flyend);
-      if (zoomed["sven"]) {
+      if (zoomed["sven"] || zoomed["martin"] || zoomed["heike"]) {
         // We have zoomed in on the first interview, so update their marker overlay position accordingly
-        add360Icons(); // Should we move this - or even break it down for each person?
+        //add360Icons(); // Should we move this - or even break it down for each person?
+        if(!added360Markers) {
+            addMarkers("360", images360);
+        }
 
-        // Enable map filters and map controls
-        mapFiltersLocked = false;
-        mapControls(false);
+        // // Enable map filters and map controls
+        // mapFiltersLocked = false;
+        // mapControls(false);
       }
       zoomedToArea = false; // Always do this
     }
 
     // Used to be peopleAdded
-    if (zoomed["sven"]) {
+    if (zoomed["sven"] || zoomed["martin"] || zoomed["heike"]) {
       updateMarkerOverlayPos();
     }
   });
@@ -558,10 +632,8 @@ function updateMarkerOverlayPos() {
 // Turn on off fish stock layers
 $('input[name="fish_stocks"]').on('click', function () {
     if ($(this).is(':checked')) {
-        console.log($(this).attr('data-layer-name'));
         showMapLayer($(this).attr('data-layer-name'));
     } else {
-        console.log($(this).attr('data-layer-name'));
         removeMapLayer($(this).attr('data-layer-name'));
     }
 });
@@ -580,6 +652,7 @@ $("#hover-navigation .arrow").on("click", function() {
 
 $("#start-interactive-tour").on("click", function(e) {
   e.preventDefault();
+  // TODO: Should move this into it's own function
   $(".loading").fadeOut(500);
 
   $(".container-full").fadeIn("1500");
@@ -630,14 +703,15 @@ $(".interview").on('click', function() {
   zoomToPerson(person);
 });
 
+// Hover function for 360 images
 $('[data-type="modal-trigger"]').hover(function() {
   var currMarker = "image360_" + $(this).parent().attr('data-id');
-  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_360_Inverted@3x.png)");
+  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png)");
   // .addClass('animated bounceIn') // Animation of the marker resets it's position (does the element need to be inline or just add display:block?)
 }, function(e) {
   // on mouseout, reset the background
   var currMarker = "image360_" + $(this).parent().attr('data-id');
-  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_360@3x.png)");
+  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360@3x.png)");
 });
 
 // Add a given map layer to the map, except the islands layer - which has no layer
@@ -655,12 +729,13 @@ function showMapLayer(layer) {
               'visibility': 'visible'
             },
             "paint": {
-              'circle-radius': 3,
+              'circle-radius': 5,
               'circle-opacity': 0.5,
               'circle-color': 'rgba(172,255,178,1)'
             },
             "filter": ["==", "$type", "Point"],
           });
+        // else if(layer === 'fish' || layer === 'haddock' || layer === 'hallibut' || layer === 'saith' || layer === 'herring') {}
         } else {
           map.addLayer({
             "id": layer,
@@ -671,7 +746,7 @@ function showMapLayer(layer) {
               "fill-color": mapLayersStyle[layer].color,
               "fill-outline-color": mapLayersStyle[layer].border_color
             }
-          }, 'oil_prospects'); // Add it before the oil prospects
+          }, 'lofoten'); // Add it before the oil prospects
         }
         mapLayers[layer].added = true;
       }
@@ -682,22 +757,38 @@ function showMapLayer(layer) {
 
         // Fit the map to the bounderies of the specific layer
         map.fitBounds(dataLayerBounds[layer], {
-          padding: 20,
+          padding: 30,
           linear: false,
-          duration: 2000
+          duration: 2000,
+          offset: [200,0]
         });
+      }
+      if(layer === "corals") {
+          addMarkers("corals",corals);
       }
     }
   }
 
   // Stuff to do for ncs (lovese_land is already loaded after the zoom event)
   if (layer === "people") {
-    addPeopleIcons();
+    //addPeopleIcons();
+    addMarkers("people",people);
   }
   if (layer === "birds") {
     console.log("birds - røst");
+
     // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
-    zoomToArea("birds", [11.937078079160585, 67.46127758453957], 9, 0.5, 1.5, 0, 0, [0, 0]);
+    //zoomToArea("birds", [11.937078079160585, 67.46127758453957], 9, 0.5, 1.5, 0, 0, [0, 0]);
+    map.fitBounds(bbox_roest, {
+      padding: 30,
+      linear: false,
+      duration: 2000,
+      offset: [200,0]
+    });
+
+    addMarkers("birds",bird_islands);
+
+    // TODO: Add markers to the different islands of Røst with popup info?
   }
 }
 
@@ -714,25 +805,40 @@ function removeMapLayer(layer) {
   }
 }
 
-function addPeopleIcons() {
-  peopleAdded = true;
-  // Add marker for each area to the map (Lofoten, Vesterålen and Senja)
-  people.features.forEach(function(marker) {
+function addMarkers(name, markers) {
+  markers.features.forEach(function(marker) {
     // create a DOM element for the marker
     var el = document.createElement('div');
-    el.className = 'people-marker';
+    el.className = 'marker-' + name;
 
-    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_006_EP3_BG/' + marker.properties.imgName + '.png)';
+    el.style.backgroundImage = 'url(../resources/_Graphics/' + marker.properties.imgPath + marker.properties.imgName + '.png)';
     el.style.width = marker.properties.iconSize[0] + 'px';
     el.style.height = marker.properties.iconSize[1] + 'px';
 
     //var point = map.project(marker.geometry.coordinates);
     addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
 
-    el.addEventListener('click', function() {
-      // Add reference to function which will handle stuff from here.
-      zoomToPerson(marker.properties.name);
-    });
+    if(name === "people") {
+      addedPeople = true;
+      el.addEventListener('click', function() {
+        zoomToPerson(marker.properties.name);
+      });
+    } else if (name === "birds" || name === "corals") {
+      el.addEventListener('click', function() {
+        // Add reference to function which will handle stuff from here.
+        // Add popup handler here.
+      });
+      el.addEventListener('mouseover', function (e) {
+          console.log("mouseover!!");
+          $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"_Inverted@3x.png)");
+      });
+      el.addEventListener('mouseout', function (e) {
+          console.log("mouseover!!");
+          $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"@3x.png)");
+      });
+    } else if (name === '360') {
+      added360Markers = true;
+    }
 
     new mapboxgl.Marker(el)
       .setLngLat(marker.geometry.coordinates)
@@ -741,40 +847,18 @@ function addPeopleIcons() {
 }
 
 function zoomToPerson(name) {
-  // TODO: Research if it's possible to zoom in to the extent of Værøya (create a bounding box?)
-
   // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
   zoomToArea(name, addedMapIcons[name].coordinates, 11.5, 1, 1, 150, -10, [350, 0]);
   addedMapIcons[name].zoomedTo = true;
   addedMapIcons[name].clicked += 1;
 }
 
-// TODO: Should be able to mere this one with the addPeopleIcons() function
-function add360Icons() {
-  // 2. Add the 360 icons to the map
-  images360.features.forEach(function(marker) {
-    // create a DOM element for the marker
-    var el = document.createElement('div');
-    el.className = 'marker-360';
-    el.setAttribute("data-name", marker.properties.name);
-
-    el.style.backgroundImage = 'url(../resources/_Graphics/_GFX_006_EP3_BG/' + marker.properties.imgName + '.png)';
-    el.style.width = marker.properties.iconSize[0] + 'px';
-    el.style.height = marker.properties.iconSize[1] + 'px';
-
-    addedMapIcons[marker.properties.name].coordinates = marker.geometry.coordinates;
-
-    new mapboxgl.Marker(el)
-      .setLngLat(marker.geometry.coordinates)
-      .addTo(map);
-  });
-}
-
-function setSizes() {
-  // Currently not in use
-  var containerHeight = $(".interactive-pane").height();
-  $(".interactive-pane").height(containerHeight - 130);
-}
+// Not in use
+// function setSizes() {
+//   // Currently not in use
+//   var containerHeight = $(".interactive-pane").height();
+//   $(".interactive-pane").height(containerHeight - 130);
+// }
 
 function zoomToArea(zoomElement, center, zoom, speed, curve, pitch, bearing, offset) {
   if (app.navigation.state == app.navigation.visible) {
@@ -898,18 +982,7 @@ function startMapFeautures() {
   }, sectionTime);
 }
 
-// NOTES
-
-// https://stackoverflow.com/questions/35452705/mapbox-leaflet-increase-marker-size-on-zoom
-// Show/hide on specific zoom level: https://www.mapbox.com/mapbox-gl-js/example/updating-choropleth/
-// Use layers instead of markers? https://stackoverflow.com/questions/40153538/how-to-hide-point-labels-at-certain-zoom-levels-in-mapbox-gl-js
-// min zoom or stops: http://android.wekeepcoding.com/article/11539332/How+to+hide+point+labels+at+certain+zoom+levels+in+mapbox-gl-js%3F
-// https://www.mapbox.com/mapbox-gl-js/example/add-image/
-// OR: https://www.mapbox.com/mapbox-gl-js/example/animate-images/
-// https://www.mapbox.com/help/custom-markers-gl-js/
-
 // Open videos and 360s:
-//trigger the animation - open modal window
 $('[data-type="modal-trigger"]').on('click', function(e) {
   e.preventDefault();
   var contentUrl = "";
