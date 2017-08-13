@@ -502,10 +502,8 @@ function mapControls(disable) {
 }
 
 map.on('load', function() {
-
   // Add labels for the land areas (LoVeSe)
   land_labels_images.forEach(function(label) {
-    //map.loadImage(label.localhost + label.imgUrl, function(error, image) {
     map.loadImage(label.live + label.imgUrl, function(error, image) {
       if (error) throw error;
       map.addImage(label.name, image);
@@ -803,13 +801,10 @@ function showMapLayer(layer) {
         map.setLayoutProperty(layer, 'visibility', 'visible');
         mapLayers[layer].visible = true;
         if(mapLayers["birds"].visible) {
-          console.log("Bird is visible - change bbox");
           map.fitBounds(bbox_roest_and_oil, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
         } else if(mapLayers["corals"].visible) {
-          console.log("Corals is visible - change bbox");
           map.fitBounds(bbox_corals, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
         } else {
-          console.log("This should be the fish layer calling oil");
           map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
         }
       }
@@ -977,7 +972,7 @@ function startTimer(duration) {
 
 // Pause/Unpause timer
 $('#btn-play-pause').on('click', '#countdown-timer', function() {
-  console.log("clicked");
+  // console.log("clicked");
   if (paused) {
     var timer = $(".timeRemaining").text().split(':');
     startTimer(Number(timer[0] * 60) + Number(timer[1]));
