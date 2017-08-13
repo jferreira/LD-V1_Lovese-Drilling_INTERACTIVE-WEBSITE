@@ -90,7 +90,7 @@ app.navigation = {
                 class: 'interactive',
                 attr: {
                     "data-id" : nav.episodes[i].id,
-                    "onClick" : "app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")"
+                    "onClick" : "app.loadInteractiveContent(" + nav.episodes[i].id + ")"
                 },
                 html: "<span></span>",
                 css: {'width': interactiveWidth + "%"}
@@ -115,37 +115,37 @@ app.navigation = {
           app.helpers.updateContent(0);
           break;
         case "ep1-interactive":
-          app.helpers.loadInteractiveContent(nav.episodes[0].id);
+          app.loadInteractiveContent(nav.episodes[0].id);
           break;
         case "ep2":
           app.helpers.updateContent(1);
           break;
         case "ep2-interactive":
-          app.helpers.loadInteractiveContent(nav.episodes[1].id);
+          app.loadInteractiveContent(nav.episodes[1].id);
           break;
         case "ep3":
           app.helpers.updateContent(2);
           break;
         case "ep3-interactive":
-          app.helpers.loadInteractiveContent(nav.episodes[2].id);
+          app.loadInteractiveContent(nav.episodes[2].id);
           break;
         case "ep4":
           app.helpers.updateContent("3");
           break;
         case "ep4-interactive":
-          app.helpers.loadInteractiveContent(nav.episodes[3].id);
+          app.loadInteractiveContent(nav.episodes[3].id);
           break;
         case "ep5":
           app.helpers.updateContent(4);
           break;
         case "ep5-interactive":
-          app.helpers.loadInteractiveContent(nav.episodes[4].id);
+          app.loadInteractiveContent(nav.episodes[4].id);
           break;
         case "ep6":
           app.helpers.updateContent(5);
           break;
         case "ep5-interactive":
-          app.helpers.loadInteractiveContent(nav.episodes[5].id);
+          app.loadInteractiveContent(nav.episodes[5].id);
           break;
         default:
           //Epiosde 1:

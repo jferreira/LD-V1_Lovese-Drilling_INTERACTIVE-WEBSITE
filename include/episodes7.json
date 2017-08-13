@@ -85,7 +85,15 @@ var nav = {
     {
       "id": "3",
       "title": "Breeding grounds",
-      "html": "include/interactive/3.html"
+      "html": "include/interactive/3.html",
+      "parts": {
+        "intro":        { "time":  6, "call": "interactive3.intro"},
+        "richoceans":   { "time": 10, "call": "interactive3.richoceans"},
+        "fishstocks":   { "time": 10, "call": "interactive3.fishstocks"},
+        "birdcolonies": { "time": 10, "call": "interactive3.birdcolonies"},
+        "coralreefs":   { "time": 10, "call": "interactive3.coralreefs"},
+        "experts":      { "time": 10, "call": "interactive3.experts"},
+      }
     },
     {
       "id": "4",

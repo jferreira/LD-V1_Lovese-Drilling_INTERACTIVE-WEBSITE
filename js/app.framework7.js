@@ -1,15 +1,23 @@
 "use strict";
 
 var app = {
-  currEpisode: 0,
-  currInteractive: 0,
-  liveEpisodes: 2, // 0=1,1=2,2=3 etc. Second episode is live
-  interactiveState: false,
-  textPageState: false,
+  currEpisode: 0,                // Current episode
+  currInteractive: 0,            // Current interaction
+  liveEpisodes: 2,               // 0=1,1=2,2=3 etc. Second episode is live
+  interactiveState: false,       // True/false are we in an interactive state
+  interactiveAutoplay: null,     // null (unknown) / yes / no - are we autoplaying the interaction
+  interactiveTimer: null,        // Timer for items in the interaction
+  interactiveCurrentParts: null, // Current interaction parts
+  interactiveCurrentItem: null,  // Current interaction item
+  textPageState: false,          // True/false are we in an text page state
   introSequence1Time: 10,
   introSequence2Time: 10,
-  hashUrlMapEpisodes: Array(6),
-  hashUrlMapEpisodesInteractive: Array(6),
+  hashUrlMapEpisodes: [
+    "ep1", "ep2", "ep3", "ep4", "ep5", "ep6"
+  ],
+  hashUrlMapEpisodesInteractive: [
+    "ep1-interactive", "ep2-interactive", "ep3-interactive", "ep4-interactive", "ep5-interactive", "ep6-interactive"
+  ],
 
   init: function() {
     app.layover.init();
@@ -20,20 +28,6 @@ var app = {
 
     app.attachObservers();
     app.attachScripts();
-
-    // Better way to do this?
-    app.hashUrlMapEpisodes[0] = "ep1";
-    app.hashUrlMapEpisodes[1] = "ep2";
-    app.hashUrlMapEpisodes[2] = "ep3";
-    app.hashUrlMapEpisodes[3] = "ep4";
-    app.hashUrlMapEpisodes[4] = "ep5";
-    app.hashUrlMapEpisodes[5] = "ep6";
-    app.hashUrlMapEpisodesInteractive[0] = "ep1-interactive";
-    app.hashUrlMapEpisodesInteractive[1] = "ep2-interactive";
-    app.hashUrlMapEpisodesInteractive[2] = "ep3-interactive";
-    app.hashUrlMapEpisodesInteractive[3] = "ep4-interactive";
-    app.hashUrlMapEpisodesInteractive[4] = "ep5-interactive";
-    app.hashUrlMapEpisodesInteractive[5] = "ep6-interactive";
 
     if (window.location.hash) {
       // If a hash is present - show the specific episode or interactive part
@@ -228,13 +222,7 @@ var app = {
     app.video.setTo(percent);
   },
   videoEnded: function() {
-    // Hide the video
-    // Overlay sharing possibility
-
-    //app.helpers.loadTextPage(4);
-    console.log(app.currEpisode);
-    //setTimeout(app.helpers.loadInteractiveContent(nav.episodes[app.currEpisode].id), 5000);
-    app.helpers.loadInteractiveContent(nav.episodes[app.currEpisode].id);
+    app.loadInteractiveContent(nav.episodes[app.currEpisode].id);
     // Animate the interactive icon of this episode - but the navigation bar isn't showing, so doesn't help
     //$('.interactive[data-id="' + app.currEpisode + '"]').addClass('animated bounceIn');
   },
@@ -334,44 +322,6 @@ var app = {
         width: "0%"
       });
     },
-
-    loadInteractiveContent: function(id) {
-      app.interactiveState = true;
-      app.textPageState = false;
-      // Remove anything related to the video player
-      // Concider removing the whole player layer?
-      // app.navigation.hide();
-
-      app.helpers.setHashUrl(1, id - 1);
-
-      $("#video video").attr({
-        "src": ""
-      });
-      $(".timeRemaining").text("");
-      $(".avancee").css({
-        width: "0%"
-      });
-      $('.play_pause_button').removeClass('pause').addClass('play');
-
-      //$(".nav-holder *").fadeOut(1000);
-      //$('#episodeProgress *').hide();
-      $('.play_pause_button').hide();
-
-      $("#content #video, #titles").hide();
-      $("#content #interactive").empty();
-
-      // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
-      $("#content #interactive").empty().load(nav.interactive[id - 1].html, function(response, status, xhr) {
-        if (status == "error") {
-          //Something went wrong, have your error fallback code here
-        }
-      });
-
-      if (app.navigation.state == app.navigation.visible) {
-        app.navigation.state = app.navigation.hidden;
-        app.navigation.hide();
-      }
-    },
     loadTextPage: function(id) {
       app.textPageState = true;
       app.navigation.hide();
@@ -398,6 +348,81 @@ var app = {
           //Something went wrong, have your error fallback code here
         }
       });
+    },
+    resetVideo: function() {
+      $("#video video").attr({"src": ""});
+    },
+    resetTimer: function() {
+      $(".timeRemaining").text("");
+      $(".avancee").css({"width": "0%"});
+    },
+    resetInteractiveContainer: function() {
+      $("#content #interactive").empty();
+    },
+    hidePlayButton: function() {
+      $('.play_pause_button').removeClass('pause').addClass('play').hide();
+    },
+    startInteractionPart: function(parts, partNo) {
+      var partName = Object.keys(parts)[partNo];
+      var part     = parts[partName];
+      
+      app.interactionCurrentParts = parts;
+      app.interactionCurrentItem  = partNo;
+
+      // Call the function
+      eval(part.call)();
+
+      var timeToNext = part.time * 1000;
+
+      // And start the timer for the next interaction
+      // if this one is not the last one
+      if (partNo != Object.keys(app.interactionCurrentParts).length - 1) {
+        app.interactionTimer = setTimeout(function() {
+          if (app.interactiveAutoplay !== true)
+            return; // Do nothing
+
+          // start the next part
+          app.helpers.startInteractionPart(
+            app.interactionCurrentParts,
+            app.interactionCurrentItem + 1
+          );
+        }, timeToNext);
+      }
+    }
+  },
+  loadInteractiveContent: function(id) {
+    app.currInteractive  = id;
+    app.interactiveState = true;
+    app.textPageState    = false;
+
+    app.helpers.setHashUrl(1, id - 1);
+    app.helpers.resetVideo();
+    app.helpers.hidePlayButton();
+    app.helpers.resetInteractiveContainer();
+
+    $("#content #video, #titles").hide();
+
+    // Fetch the external resources. Maybe use the whole ajax method to be able to do a loading bar before the map is finished.
+    // TODO: Handle error callback
+    $("#content #interactive").empty().load(nav.interactive[id - 1].html);
+
+    if (app.navigation.state == app.navigation.visible) {
+      app.navigation.state = app.navigation.hidden;
+      app.navigation.hide();
+    }
+
+  },
+  startInteractiveTimers: function() {
+    var currentInteraction = nav.interactive[app.currInteractive - 1];
+
+    // Timings of the episode
+    if ("parts" in currentInteraction) {
+      var parts = currentInteraction.parts;
+
+      app.interactiveAutoplay = true;
+
+      // Start the first timer
+      app.helpers.startInteractionPart(parts, 0);
     }
   },
   // showIntroScreen1: function() {

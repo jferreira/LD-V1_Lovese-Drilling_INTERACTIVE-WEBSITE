@@ -25,6 +25,36 @@ $(".map-features-count p span.total").text($('.map-details').length);
 // var colors3 = chroma.scale(['yellow', '008ae5']).mode('lch').colors(5);
 // console.log(colors2)
 
+var interactive3 = {
+  intro: function() {
+    // The intro only counts down from 5 to 0
+    var i = 5;
+    $('#autoplayer-countdown').text(i);
+    var interval = setInterval(function() {
+      if (i-- == 1)
+        clearInterval(interval);
+
+      $('#autoplayer-countdown').text(i);
+    }, 1000);
+  },
+  richoceans: function() {
+    // Start the tour
+    $("#start-interactive-tour").click();
+  },
+  fishstocks: function() {
+    $('#map-filters .fish').click();
+  },
+  birdcolonies: function() {
+    $('#map-filters .birds').click();
+  },
+  coralreefs: function() {
+    $('#map-filters .corals').click();
+  },
+  experts: function() {
+    $('#map-filters .people').click();
+  }
+};
+
 // GeoJSON data sources for MapBox layer
 // Get more data layers here: http://maps.imr.no/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
 
@@ -571,7 +601,9 @@ map.on('load', function() {
   $(".interactive-content").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (set in top of script)
     $("span.loading-text").hide();
+    $("#interactive-autoplayer").show();
     $("#start-interactive-tour").show();
+    app.startInteractiveTimers();
   });
 
   map.on("mousedown", function(e) {
