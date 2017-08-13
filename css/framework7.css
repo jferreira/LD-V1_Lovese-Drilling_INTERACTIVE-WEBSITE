@@ -157,6 +157,19 @@ p, span, a, input, textarea, ul, li {
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  display: none!important;
+}
+
+@media(min-width:768px) {
+  .nav-holder {
+    display: block!important;;
+  }
+}
+
+@media(min-width:1170px) {
+  .nav-holder {
+    display: block!important;;
+  }
 }
 
 .nav {

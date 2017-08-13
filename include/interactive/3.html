@@ -7,7 +7,7 @@
 
 <div class="loading">
   <div class="interactive-content"></div>
-  <div class="interactive-content-explanation">
+  <div class="interactive-content-explanation" style="display: inline-block;">
     <h2>Explore the breeding grounds</h2>
     <p style="line-height: 1.5em;">
       The areas of Lofoten, Vesterålen and Senja have a fantastic natural environment and invaluable ecosystems. Here, the world's last large stock of cod spawns and one of Europe’s biggest nesting sites caters for a wide array of seabirds.<br /><br />
@@ -22,8 +22,8 @@
 </div>
 
 <div class="container-fluid container-full">
-  <div class="full-row row v-center">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3 interactive-pane-text" style="display:none; z-index:-99999;">
+  <div class="full-row row">
+    <div class="col col-sm-5 col-md-5 col-lg-4 col-xl-3 interactive-pane-text" style="display:none; z-index:-99999;">
 
       <div class="map-features-count">
         <p><span class="current">1</span> / <span class="total"></span></p>
@@ -144,6 +144,16 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-md-12">
+                <div class="checkboxes">
+                  <label class="layers" for="measure"><input type="checkbox" name="measure" id="measure"><span>Turn on measurement</span></label>
+                </div>
+                <br />
+                <div id='distance' class='distance-container'></div>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -164,9 +174,9 @@
 
                 <div class="row interview active sven" data-person="sven">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/sven@3x.png" style="width: 80px; height: auto; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/sven@3x.png" />
                   </div>
-                  <div class="col-md-8 col-lg-9" style="padding-left:20px;">
+                  <div class="col-md-8 col-lg-9">
                     <h2>Sven Tommy</h2>
                     <p>Sven Tommy has been fishing off the coast of Lofoten his whole life.</p>
                   </div>
@@ -174,9 +184,9 @@
 
                 <div class="row interview martin" data-person="martin">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/martin@3x.png" style="width: 80px; height: auto; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/martin@3x.png" />
                   </div>
-                  <div class="col-md-8 col-lg-9" style="padding-left:20px;">
+                  <div class="col-md-8 col-lg-9">
                     <h2>Martin</h2>
                     <p>Martin has been observing birds and working for their protection for decades.</p>
                   </div>
@@ -184,9 +194,9 @@
 
                 <div class="row interview heike" data-person="heike">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/heike@3x.png" style="width: 80px; height: auto; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/heike@3x.png" />
                   </div>
-                  <div class="col-md-8 col-lg-9" style="padding-left:20px;">
+                  <div class="col-md-8 col-lg-9">
                     <h2>Heike</h2>
                     <p>Heike has been observering and researching marine mammals in the areas since 2006.</p>
                   </div>
@@ -200,7 +210,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3 interactive-pane transition"></div>
+    <div class="col col-sm-5 col-md-5 col-lg-4 col-xl-3 interactive-pane transition"></div>
   </div>
 </div>
 
@@ -298,5 +308,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
 <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+<!-- <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script> -->
 <!-- <script type="text/javascript" src="/js/chroma.min.js"></script> -->
 <script type="text/javascript" src="/js/interactive-3.js?version=1"></script>
