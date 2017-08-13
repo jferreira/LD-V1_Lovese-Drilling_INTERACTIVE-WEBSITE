@@ -31,9 +31,9 @@ var nav = {
       "description": "",
       "poster": "resources/_Images/optimized/new/E3_Masthead_s.jpg",
       "slide": "resources/_Images/optimized/new/Title_EP3_TITLE.png",
-      "url": "",
-      "vid": "",
-      "mp4": ""
+      "url": "https://vimeo.com/229464326",
+      "vid": "229464326",
+      "mp4": "https://player.vimeo.com/external/229464326.hd.mp4?s=bb6fcf52b9eb8d5efd7fc38491d4378cb8e401e1&profile_id=174"
     },
     {
       "id": "4",

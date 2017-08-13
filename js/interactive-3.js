@@ -1,3 +1,8 @@
+"use strict";
+
+// Make sure the app variable exist. It should exist, from app.framework6.js
+//var app = app || {};
+
 var disableMapControls = false;
 var zoomedToArea = false;
 var flying = false;
@@ -9,6 +14,10 @@ var mapFiltersLocked = false;
 var bbox_area   = [[9.0088,67.3314],[18.0505,69.7181]];
 var bbox_roest  = [[11.814423,67.402211],[12.204437,67.542167]];
 var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
+var bbox_roest_and_oil = [[10.7865,67.351],[12.2298,67.64]];
+
+// Set the number of interactive sections - should move it somewhere else
+$(".map-features-count p span.total").text($('.map-details').length);
 
 // Color picking for layers
 //var colors = chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(5);
@@ -56,7 +65,7 @@ var dataSources = [
 
 var dataLayerBounds = new Array(dataSources.length);
 
-var mapLayers = new Array(6);
+var mapLayers = new Array(10);
 mapLayers["lovese_land"] = {added: false,visible: false}
 mapLayers["fish"] = {added: false,visible: false}
 mapLayers["saith"] = {added: false,visible: false}
@@ -70,7 +79,7 @@ mapLayers["oil_prospects"] = {added: false,visible: false}
 
 // ["#fafa6e", "#86d780", "#23aa8f", "#007882", "#2a4858"]
 // ["#ffffd9", "#c7e9b4", "#41b6c4", "#225ea8", "#081d58"]
-var mapLayersStyle = new Array(3);
+var mapLayersStyle = new Array(6);
 mapLayersStyle["fish"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
 mapLayersStyle["saith"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
 mapLayersStyle["haddock"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
@@ -82,7 +91,7 @@ var mapIcons = ["sven", "martin", "heike", "image360_1", "image360_2", "image360
 var addedPeople = false;
 var added360Markers = false;
 
-var addedMapIcons = new Array(6);
+var addedMapIcons = new Array(18);
 addedMapIcons["sven"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
 addedMapIcons["martin"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
 addedMapIcons["heike"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
@@ -323,6 +332,8 @@ var bird_islands = {
       "type": "Feature",
       "properties": {
         "title": "Vedøya",
+        "description": "One of the five islands with bird colony mountains.",
+        "imgProfile": "https://gfx.nrk.no/j3aqq6gnGPOAADw9d2EdqgHVi2v61F9C4FO7z2g3nisg",
         "name": "bird_island_1",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -330,16 +341,14 @@ var bird_islands = {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          12.018116196083497,
-          67.48001667342737
-        ]
+        "coordinates": [12.018116196083497, 67.48001667342737]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "title": "Storfjellet",
+        "description": "One of the five islands with bird colony mountains.",
         "name": "bird_island_2",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -357,6 +366,7 @@ var bird_islands = {
       "type": "Feature",
       "properties": {
         "title": "Ellefsnyken",
+        "description": "One of the five islands with bird colony mountains.",
         "name": "bird_island_3",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -364,16 +374,14 @@ var bird_islands = {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          11.912297356460783,
-          67.4473372411731
-        ]
+        "coordinates": [11.912297356460783,67.4473372411731]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "title": "Trenyken",
+        "description": "One of the five islands with bird colony mountains.",
         "name": "bird_island_4",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -381,10 +389,7 @@ var bird_islands = {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          11.891550507512648,
-          67.43628541535423
-        ]
+        "coordinates": [11.891550507512648,67.43628541535423]
       }
     },
     {
@@ -392,16 +397,14 @@ var bird_islands = {
       "properties": {
         "title": "Hernyken:",
         "name": "bird_island_4",
+        "description": "One of the five islands with bird colony mountains.",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_birds@3x"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          11.880073225904368,
-          67.4268137592164
-        ]
+        "coordinates": [11.880073225904368,67.4268137592164]
       }
     },
   ]
@@ -413,6 +416,8 @@ var corals = {
       "type": "Feature",
       "properties": {
         "title": "Træna reef",
+        "description": "The Træna reef became a marine protected area in 2012, but the protection is only against fishing equipment. The ovaral area which is protected is 440 km2.",
+        "moreInfo": ["http://mpa.ospar.org/home_ospar/mpa_datasheets/an_mpa_datasheet_en?wdpaid=555557208&gid=1956&lg=0", "https://www.protectedplanet.net/traenarevet-marine-protected-area-ospar", "https://www.regjeringen.no/no/aktuelt/verner-ti-korallrev/id2469789/"],
         "name": "corals_1",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -430,6 +435,8 @@ var corals = {
       "properties": {
         "title": "Røst reef",
         "name": "corals_2",
+        "description" : "The world's largest known deep-water coral reef is located between 300-400 meters below the surface. <br /><br /> It became a marine protected area in 2005, but the protection is only against fishing equipment. The ovaral area which is protected is 305 km2.",
+        "moreInfo" : ["http://mpa.ospar.org/home_ospar/mpa_datasheets/an_mpa_datasheet_en?wdpaid=555557142&gid=1824", "https://www.protectedplanet.net/555557142", "https://www.regjeringen.no/no/aktuelt/verner-ti-korallrev/id2469789/"],
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_corals@3x"
@@ -446,6 +453,8 @@ var corals = {
       "properties": {
         "title": "Hola reef",
         "name": "corals_3",
+        "description" : "The Hola reef consists of more than 350 single coral reefs, down to 300 meters below the surface. These can be up to 35 meters tall and one km long.",
+        "moreInfo" : "",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_corals@3x"
@@ -493,10 +502,9 @@ function mapControls(disable) {
 }
 
 map.on('load', function() {
-
   // Add labels for the land areas (LoVeSe)
   land_labels_images.forEach(function(label) {
-    map.loadImage(label.localhost + label.imgUrl, function(error, image) {
+    map.loadImage(label.live + label.imgUrl, function(error, image) {
       if (error) throw error;
       map.addImage(label.name, image);
     });
@@ -562,6 +570,7 @@ map.on('load', function() {
   map.resize();
   $(".interactive-content").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (set in top of script)
+    $("span.loading-text").hide();
     $("#start-interactive-tour").show();
   });
 
@@ -575,10 +584,16 @@ map.on('load', function() {
   // Need this?
   map.on('zoomend', function(e) {
     var zoom = map.getZoom();
-    if (zoom <= 6.5) {
-      $(".marker-360").hide();
+    if (zoom <= 7) {
+      $(".marker-360, .marker-birds").hide();
     } else {
-      $(".marker-360").show();
+      $(".marker-360, .marker-birds").show();
+    }
+
+    if (zoom < 5) {
+      $(".marker-corals").hide();
+    } else {
+      $(".marker-corals").show();
     }
   });
 
@@ -630,7 +645,7 @@ function updateMarkerOverlayPos() {
 }
 
 // Turn on off fish stock layers
-$('input[name="fish_stocks"]').on('click', function () {
+$('input[name="fish_stocks"], input[name="oil_prospects"]').on('click', function () {
     if ($(this).is(':checked')) {
         showMapLayer($(this).attr('data-layer-name'));
     } else {
@@ -666,6 +681,10 @@ $("#start-interactive-tour").on("click", function(e) {
   // Show map filters
   $("#map-filters").show();
 
+  // If not running the tour on start:
+  showMapLayer("lovese_land");
+  $("#map-filters ul li.land-areas").addClass("active");
+
   // if (countdown) {
   //   clearInterval(countdown);
   // }
@@ -680,12 +699,28 @@ $("#map-filters ul li").on('click', function() {
   if (!mapFiltersLocked) {
     $(this).siblings().each(function() {
       $(this).removeClass("active"); // The button
-      // Turn off any visible layers
-      removeMapLayer($(this).attr('data-layer-name'));
+
       // remove any previously set info panes
       $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").removeClass("active"); // The info pane
     });
+
+    // Remove any visible layers
+    for (var prop in mapLayers) {
+      if (Object.prototype.hasOwnProperty.call(mapLayers,prop)){
+        if(prop !== $(this).attr('data-layer-name') && mapLayers[prop].visible){
+            removeMapLayer(prop);
+            mapLayers[prop].visible = false;
+            // Uncheck all checkboxes, except the cod checkbox
+            $("input[type='checkbox']").prop( "checked", false );
+            $("input[type='checkbox']#cod").prop( "checked", true );
+        }
+      }
+    }
+
     $(this).addClass("active");
+    // Set the current info pane number based on index of the section
+    $(".map-features-count p span.current").text($(this).index() + 1);
+
     // Turn on this map layer
     showMapLayer($(this).attr('data-layer-name'));
     // Update the info pane which corresponds to the button
@@ -703,7 +738,7 @@ $(".interview").on('click', function() {
   zoomToPerson(person);
 });
 
-// Hover function for 360 images
+// Hover function for 360 images - not working??
 $('[data-type="modal-trigger"]').hover(function() {
   var currMarker = "image360_" + $(this).parent().attr('data-id');
   $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png)");
@@ -735,7 +770,6 @@ function showMapLayer(layer) {
             },
             "filter": ["==", "$type", "Point"],
           });
-        // else if(layer === 'fish' || layer === 'haddock' || layer === 'hallibut' || layer === 'saith' || layer === 'herring') {}
         } else {
           map.addLayer({
             "id": layer,
@@ -751,60 +785,61 @@ function showMapLayer(layer) {
         mapLayers[layer].added = true;
       }
 
-      if (layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
+      if (layer !== "lovese_land" && layer !== "birds" && layer !== "people" && layer !== "oil_prospects") {
         map.setLayoutProperty(layer, 'visibility', 'visible');
         mapLayers[layer].visible = true;
 
         // Fit the map to the bounderies of the specific layer
-        map.fitBounds(dataLayerBounds[layer], {
-          padding: 30,
-          linear: false,
-          duration: 2000,
-          offset: [200,0]
-        });
+        map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
       }
+
       if(layer === "corals") {
-          addMarkers("corals",corals);
+          addMarkers("corals", corals);
+      }
+
+      if(layer === "oil_prospects") {
+        map.setLayoutProperty(layer, 'visibility', 'visible');
+        mapLayers[layer].visible = true;
+        if(mapLayers["birds"].visible) {
+          map.fitBounds(bbox_roest_and_oil, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+        } else if(mapLayers["corals"].visible) {
+          map.fitBounds(bbox_corals, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+        } else {
+          map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+        }
       }
     }
   }
-
-  // Stuff to do for ncs (lovese_land is already loaded after the zoom event)
+  if(layer === "lovese_land") {
+    map.fitBounds(bbox_area, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+  }
   if (layer === "people") {
-    //addPeopleIcons();
-    addMarkers("people",people);
+    addMarkers("people", people);
   }
   if (layer === "birds") {
-    console.log("birds - røst");
-
-    // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
-    //zoomToArea("birds", [11.937078079160585, 67.46127758453957], 9, 0.5, 1.5, 0, 0, [0, 0]);
-    map.fitBounds(bbox_roest, {
-      padding: 30,
-      linear: false,
-      duration: 2000,
-      offset: [200,0]
-    });
-
-    addMarkers("birds",bird_islands);
-
-    // TODO: Add markers to the different islands of Røst with popup info?
+    mapLayers[layer].visible = true; // No layer has been added, but we need this to be able to select correct bounding box for oil prospects
+    map.fitBounds(bbox_roest, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+    addMarkers("birds", bird_islands);
   }
 }
 
 // Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer) {
-  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_sea" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
-    if (mapLayers[layer].visible == true && layer !== "lovese_sea" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
+  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
+    if (mapLayers[layer].visible == true && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
       map.setLayoutProperty(layer, 'visibility', 'none');
-      if (layer === "lovese_sea") {
-        map.setLayoutProperty("lovese-labels", 'visibility', 'none');
-      }
+      // if (layer === "lovese_sea") {
+      //   map.setLayoutProperty("lovese-labels", 'visibility', 'none');
+      // }
       mapLayers[layer].visible = false;
     }
   }
+  if(layer === "birds") {
+    mapLayers[layer].visible = false;
+  }
 }
 
+// Add markers to the map
 function addMarkers(name, markers) {
   markers.features.forEach(function(marker) {
     // create a DOM element for the marker
@@ -829,23 +864,30 @@ function addMarkers(name, markers) {
         // Add popup handler here.
       });
       el.addEventListener('mouseover', function (e) {
-          console.log("mouseover!!");
-          $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"_Inverted@3x.png)");
+        $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"_Inverted@3x.png)");
       });
       el.addEventListener('mouseout', function (e) {
-          console.log("mouseover!!");
-          $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"@3x.png)");
+        $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"@3x.png)");
       });
     } else if (name === '360') {
       added360Markers = true;
     }
 
-    new mapboxgl.Marker(el)
-      .setLngLat(marker.geometry.coordinates)
-      .addTo(map);
+    if(name === "birds" || name === "corals") {
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .addTo(map);
+    } else {
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+    }
   });
 }
 
+// Zoom the map to a given person
 function zoomToPerson(name) {
   // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
   zoomToArea(name, addedMapIcons[name].coordinates, 11.5, 1, 1, 150, -10, [350, 0]);
@@ -860,6 +902,7 @@ function zoomToPerson(name) {
 //   $(".interactive-pane").height(containerHeight - 130);
 // }
 
+// Zoom to a given area
 function zoomToArea(zoomElement, center, zoom, speed, curve, pitch, bearing, offset) {
   if (app.navigation.state == app.navigation.visible) {
     $(".interactive-pane").css({
@@ -929,7 +972,7 @@ function startTimer(duration) {
 
 // Pause/Unpause timer
 $('#btn-play-pause').on('click', '#countdown-timer', function() {
-  console.log("clicked");
+  // console.log("clicked");
   if (paused) {
     var timer = $(".timeRemaining").text().split(':');
     startTimer(Number(timer[0] * 60) + Number(timer[1]));
@@ -944,7 +987,7 @@ function startMapFeautures() {
   var sectionTime = (totalTime * 1000) / $('.map-details').length;
   //sectionTime = 1000;
   $(".map-features-count p span.current").text(1);
-  $(".map-features-count p span.total").text($('.map-details').length);
+  //$(".map-features-count p span.total").text($('.map-details').length);
 
   var mapF = $('.map-features .map-details');
   var $active = mapF.eq(0);
@@ -991,13 +1034,13 @@ $('[data-type="modal-trigger"]').on('click', function(e) {
     if ($(this).parent().attr('data-type') == 'person') {
       switch ($(this).parent().attr('data-id')) {
         case "sven":
-          contentUrl = "//player.vimeo.com/video/228447528?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/229464407?byline=0&amp;portrait=0";
           break;
         case "martin":
-          contentUrl = "//player.vimeo.com/video/228451663?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/229463933?byline=0&amp;portrait=0";
           break;
         case "heike":
-          contentUrl = "//player.vimeo.com/video/228453330?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/229463490?byline=0&amp;portrait=0";
           break;
       }
     } else

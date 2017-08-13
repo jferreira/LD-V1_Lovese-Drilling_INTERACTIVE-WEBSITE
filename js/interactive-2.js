@@ -1,9 +1,17 @@
-var disableMapControls = true;
+"use strict";
+
+var disableMapControls = false;
 var zoomedToArea = false;
 var flying = false;
 var startDelay = 0; //2000
 var totalTime = 60 * 1; // Minutes - should be 60
-var mapFiltersLocked = true;
+var mapFiltersLocked = false;
+
+// Bounding boxes for specific layers
+var bbox_area   = [[9.0088,67.3314],[18.0505,69.7181]];
+
+// Set the number of interactive sections - should move it somewhere else
+$(".map-features-count p span.total").text($('.map-details').length);
 
 // GeoJSON data sources for MapBox layers
 var dataSources = [
@@ -416,7 +424,7 @@ var dataSources = [
     }
 
     map.on('load', function() {
-
+      // Add labels for the land areas (LoVeSe)
       land_labels_images.forEach(function(label) {
         map.loadImage(label.live + label.imgUrl, function(error, image) {
           if (error) throw error;
@@ -485,6 +493,7 @@ var dataSources = [
       map.resize();
       $(".interactive-content").fadeOut(1500).promise().done(function() {
         // Fadeout done, start the timer for going through the map (set in top of script)
+        $("span.loading-text").hide();
         $("#start-interactive-tour").show();
       });
 
@@ -531,38 +540,17 @@ var dataSources = [
       map.on('moveend', function(e) {
         if (!flying && zoomedToArea) {
           //map.fire(flyend);
-          if (zoomed["first"]) {
-            console.log("First zoom event!");
-            $(".container-full").fadeIn("1500");
-            $(".interactive-pane-text").css({
-              'z-index': 1
-            }).show();
-            $(".cd-section").css({
-              'z-index': 1
-            }).show();
-
-            // Show map filters
-            $("#map-filters").show();
-
-            if (countdown) {
-              clearInterval(countdown);
-            }
-            paused = false;
-
-            startTimer(totalTime);
-            startMapFeautures();
-            zoomed["first"] = false; // Not to do this again
-          } else if (zoomed["eldar"]) {
+          if (zoomed["eldar"] || zoomed["anne"] || zoomed["johanna"]) {
             // We have zoomed in on the first interview, so update their marker overlay position accordingly
             add360Icons(); // Should we move this - or even break it down for each person?
-            mapFiltersLocked = false;
-            mapControls(false);
+            // mapFiltersLocked = false;
+            // mapControls(false);
           }
           zoomedToArea = false; // Always do this
         }
 
         // Used to be peopleAdded
-        if (zoomed["eldar"]) {
+        if (zoomed["eldar"] || zoomed["anne"] || zoomed["johanna"]) {
           updateMarkerOverlayPos();
         }
       });
@@ -608,10 +596,33 @@ var dataSources = [
 
     $("#start-interactive-tour").on("click", function(e) {
       e.preventDefault();
+      // TODO: Should move this into it's own function
       $(".loading").fadeOut(500);
-      setTimeout(function() {
-        zoomToArea("first", [12.901721434467618, 68.71391887946749], 6.54, 0.5, 1.5, 0, 0, [0, 0]);
-      }, startDelay);
+
+      $(".container-full").fadeIn("1500");
+      $(".interactive-pane-text").css({'z-index': 1}).show();
+      $(".cd-section").css({'z-index': 1}).show();
+
+      // Show map filters
+      $("#map-filters").show();
+
+      // Zoom into the first view
+      zoomToArea("first", [12.901721434467618, 68.71391887946749], 6.54, 0.5, 1.5, 0, 0, [0, 0]);
+      $("#map-filters ul li.land-areas").addClass("active");
+
+      // if (countdown) {
+      //   clearInterval(countdown);
+      // }
+      // paused = false;
+      //
+      // startTimer(totalTime);
+      // startMapFeautures();
+      // zoomed["first"] = false; // Not to do this again
+
+      // $(".loading").fadeOut(500);
+      // setTimeout(function() {
+      //   zoomToArea("first", [12.901721434467618, 68.71391887946749], 6.54, 0.5, 1.5, 0, 0, [0, 0]);
+      // }, startDelay);
     });
 
     // Map filter
@@ -668,23 +679,6 @@ var dataSources = [
               //         "line-opacity": 0.75,
               //         "line-width": 5
               //     }
-              // });
-            } else if (layer === "corals") {
-              // Not used in this episode, but will be used later.
-              // Style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
-              // map.addLayer({
-              //   "id": "corals",
-              //   "type": "circle",
-              //   "source": "corals",
-              //   'layout': {
-              //     'visibility': 'visible'
-              //   },
-              //   "paint": {
-              //     'circle-radius': 5,
-              //     'circle-opacity': 0.5,
-              //     'circle-color': 'rgba(172,255,178,1)'
-              //   },
-              //   "filter": ["==", "$type", "Point"],
               // });
             } else {
               map.addLayer({
@@ -753,9 +747,12 @@ var dataSources = [
         addPeopleIcons();
       }
       if (layer === "ncs") {
-        console.log("ncs");
         // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
         zoomToArea("ncs", [15.822920370519341, 69.30319998292396], 9, 0.5, 1.5, 0, 0, [0, 0]);
+      }
+
+      if(layer === "lovese_land") {
+        map.fitBounds(bbox_area, {padding: 30, linear: false, duration: 2000, offset: [0,0]});
       }
 
       // https://www.mapbox.com/mapbox-gl-js/example/live-update-feature/
@@ -921,7 +918,7 @@ var dataSources = [
 
     // Pause/Unpause timer
     $('#btn-play-pause').on('click', '#countdown-timer', function() {
-      console.log("clicked");
+      //console.log("clicked");
       if (paused) {
         var timer = $(".timeRemaining").text().split(':');
         startTimer(Number(timer[0] * 60) + Number(timer[1]));
