@@ -392,3 +392,26 @@ label.layers {
    padding: 0 !important;
    margin: 0 !important;
 }
+
+.mapboxgl-popup {
+  max-width: 300px;
+  color: #000;
+}
+
+.mapboxgl-popup-content {
+  text-align: left;
+}
+
+.mapboxgl-popup-content h3 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.mapboxgl-popup-content p {
+  font-size: 13px;
+}
+
+.mapboxgl-popup-content img {
+  width: 280px;
+  height: auto;
+}

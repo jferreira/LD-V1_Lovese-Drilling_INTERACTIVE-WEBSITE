@@ -330,6 +330,8 @@ var bird_islands = {
       "type": "Feature",
       "properties": {
         "title": "Vedøya",
+        "description": "One of the five islands with bird colony mountains.",
+        "imgProfile": "https://gfx.nrk.no/j3aqq6gnGPOAADw9d2EdqgHVi2v61F9C4FO7z2g3nisg",
         "name": "bird_island_1",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -337,16 +339,14 @@ var bird_islands = {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          12.018116196083497,
-          67.48001667342737
-        ]
+        "coordinates": [12.018116196083497, 67.48001667342737]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "title": "Storfjellet",
+        "description": "One of the five islands with bird colony mountains.",
         "name": "bird_island_2",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -364,6 +364,7 @@ var bird_islands = {
       "type": "Feature",
       "properties": {
         "title": "Ellefsnyken",
+        "description": "One of the five islands with bird colony mountains.",
         "name": "bird_island_3",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -371,16 +372,14 @@ var bird_islands = {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          11.912297356460783,
-          67.4473372411731
-        ]
+        "coordinates": [11.912297356460783,67.4473372411731]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "title": "Trenyken",
+        "description": "One of the five islands with bird colony mountains.",
         "name": "bird_island_4",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -388,10 +387,7 @@ var bird_islands = {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          11.891550507512648,
-          67.43628541535423
-        ]
+        "coordinates": [11.891550507512648,67.43628541535423]
       }
     },
     {
@@ -399,16 +395,14 @@ var bird_islands = {
       "properties": {
         "title": "Hernyken:",
         "name": "bird_island_4",
+        "description": "One of the five islands with bird colony mountains.",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_birds@3x"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          11.880073225904368,
-          67.4268137592164
-        ]
+        "coordinates": [11.880073225904368,67.4268137592164]
       }
     },
   ]
@@ -420,6 +414,8 @@ var corals = {
       "type": "Feature",
       "properties": {
         "title": "Træna reef",
+        "description": "The Træna reef became a marine protected area in 2012, but the protection is only against fishing equipment. The ovaral area which is protected is 440 km2.",
+        "moreInfo": ["http://mpa.ospar.org/home_ospar/mpa_datasheets/an_mpa_datasheet_en?wdpaid=555557208&gid=1956&lg=0", "https://www.protectedplanet.net/traenarevet-marine-protected-area-ospar", "https://www.regjeringen.no/no/aktuelt/verner-ti-korallrev/id2469789/"],
         "name": "corals_1",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
@@ -437,6 +433,8 @@ var corals = {
       "properties": {
         "title": "Røst reef",
         "name": "corals_2",
+        "description" : "The world's largest known deep-water coral reef is located between 300-400 meters below the surface. <br /><br /> It became a marine protected area in 2005, but the protection is only against fishing equipment. The ovaral area which is protected is 305 km2.",
+        "moreInfo" : ["http://mpa.ospar.org/home_ospar/mpa_datasheets/an_mpa_datasheet_en?wdpaid=555557142&gid=1824", "https://www.protectedplanet.net/555557142", "https://www.regjeringen.no/no/aktuelt/verner-ti-korallrev/id2469789/"],
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_corals@3x"
@@ -453,6 +451,8 @@ var corals = {
       "properties": {
         "title": "Hola reef",
         "name": "corals_3",
+        "description" : "The Hola reef consists of more than 350 single coral reefs, down to 300 meters below the surface. These can be up to 35 meters tall and one km long.",
+        "moreInfo" : "",
         "iconSize": [42, 42],
         "imgPath": "_GFX_006_EP3_BG/",
         "imgName": "_ICN_BTN_corals@3x"
@@ -873,9 +873,17 @@ function addMarkers(name, markers) {
       added360Markers = true;
     }
 
-    new mapboxgl.Marker(el)
-      .setLngLat(marker.geometry.coordinates)
-      .addTo(map);
+    if(name === "birds" || name === "corals") {
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .addTo(map);
+    } else {
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+    }
   });
 }
 
