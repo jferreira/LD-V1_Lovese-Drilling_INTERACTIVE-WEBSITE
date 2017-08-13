@@ -23,9 +23,10 @@
 .interactive-content-explanation {
   position: absolute;
   background: rgba(0,0,0,0.8);
-  top: 15%; left: 0; bottom: 0; right: 0;
+  top: 5%; left: 0; bottom: 0; right: 0;
   width: 80%;
-  height: 50%;
+  min-height: 50%;
+  max-height: 80%;
   margin: 0 auto;
   padding: 30px;
   text-align: center;
@@ -34,17 +35,17 @@
 
 @media(min-width:768px) {
   .interactive-content-explanation {
-    top: 25%; left: 0; bottom: 0; right: 0;
+    top: 15%; left: 0; bottom: 0; right: 0;
     width: 70%;
-    height: 50%;
+    height: 60%;
   }
 }
 
 @media(min-width:1170px) {
   .interactive-content-explanation {
-    top: 25%; left: 0; bottom: 0; right: 0;
+    top: 20%; left: 0; bottom: 0; right: 0;
     width: 50%;
-    height: 50%;
+    height: 60%;
   }
 }
 
@@ -105,6 +106,8 @@
 .map-features {
   pointer-events:auto;
   padding: 20px;
+  overflow-y: scroll;
+  max-height: 75%;
 }
 
 .map-features-count {
@@ -120,7 +123,7 @@
 }
 
 .title-holder img {
-  width: 80px; height: auto;
+  width: 50px; height: auto;
 }
 
 .title-holder span {
@@ -133,6 +136,21 @@
 
 .title-description {
   clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px;
+}
+
+@media(min-width:768px) {
+  .title-holder img {
+    width: 60px; height: auto;
+  }
+  .map-features {
+    overflow-y: auto;
+  }
+}
+
+@media(min-width:1170px) {
+  .title-holder img {
+    width: 80px; height: auto;
+  }
 }
 
 /*
@@ -275,19 +293,56 @@ section.hide {
 }
 
 .interview h2 {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 0px!important;
-  font-size: 18px;
+  font-size: 16px;
   text-transform: none!important;
 }
 
 .interview p {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   line-height: normal;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
+
+.interview img {
+  width: 50px;
+  height: auto;
+  float:left;
+}
+
+@media(min-width:768px) {
+  .interview h2 {
+    font-size: 18px;
+  }
+
+  .interview p {
+    font-size: 14px;
+  }
+
+  .interview img {
+    width: 60px;
+  }
+}
+
+@media(min-width:1170px) {
+  .interview h2 {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+
+  .interview p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .interview img {
+    width: 80px;
+  }
+}
+
 
 #map { position:absolute; top:0; left:0; width:100%; height:100%; }
 
@@ -308,15 +363,10 @@ h1.episode-title {
   margin: 0;
 }
 
-h1.title {
-  color: #fff;
-  font-size: 20px;
-}
-
 h2.title {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
   color: #fff;
   cursor: auto;
   text-transform: capitalize!important;
@@ -324,7 +374,7 @@ h2.title {
 
 p.text {
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   margin-bottom: 20px;
   cursor: auto;
 }
@@ -353,19 +403,19 @@ label.layers {
 
 @media(min-width:768px) {
   h1.episode-title {
-    font-size: 40px;
-  }
-
-  h1.title {
     font-size: 30px;
   }
 
+  h2.title {
+    font-size: 20px;
+  }
+
   p.text {
-    font-size: 16px;
+    font-size: 14px;
   }
   label.layers {
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
@@ -373,11 +423,13 @@ label.layers {
   h1.episode-title {
     font-size: 50px;
   }
-  h1.title {
-    font-size: 40px;
+  h2.title {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
-  p {
-    font-size: 18px;
+  p.text {
+    font-size: 16px;
   }
   label.layers {
     color: #fff;
