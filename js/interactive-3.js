@@ -15,6 +15,8 @@ var bbox_area   = [[9.0088,67.3314],[18.0505,69.7181]];
 var bbox_roest  = [[11.814423,67.402211],[12.204437,67.542167]];
 var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
 
+$(".map-features-count p span.total").text($('.map-details').length);
+
 // Color picking for layers
 //var colors = chroma.scale(['#fafa6e','#2A4858']).mode('lch').colors(5);
 // var colors2 = chroma.scale('YlGnBu').colors(5);
@@ -61,7 +63,7 @@ var dataSources = [
 
 var dataLayerBounds = new Array(dataSources.length);
 
-var mapLayers = new Array(6);
+var mapLayers = new Array(10);
 mapLayers["lovese_land"] = {added: false,visible: false}
 mapLayers["fish"] = {added: false,visible: false}
 mapLayers["saith"] = {added: false,visible: false}
@@ -75,7 +77,7 @@ mapLayers["oil_prospects"] = {added: false,visible: false}
 
 // ["#fafa6e", "#86d780", "#23aa8f", "#007882", "#2a4858"]
 // ["#ffffd9", "#c7e9b4", "#41b6c4", "#225ea8", "#081d58"]
-var mapLayersStyle = new Array(3);
+var mapLayersStyle = new Array(6);
 mapLayersStyle["fish"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
 mapLayersStyle["saith"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
 mapLayersStyle["haddock"] = {color: "#fafa6e",opacity: 0.5,border_color: "#fafa6e"}
@@ -87,7 +89,7 @@ var mapIcons = ["sven", "martin", "heike", "image360_1", "image360_2", "image360
 var addedPeople = false;
 var added360Markers = false;
 
-var addedMapIcons = new Array(6);
+var addedMapIcons = new Array(18);
 addedMapIcons["sven"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
 addedMapIcons["martin"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
 addedMapIcons["heike"] = {zoomedTo: false,playedVideo: false,clicked: 0,coordinates: []}
@@ -567,6 +569,7 @@ map.on('load', function() {
   map.resize();
   $(".interactive-content").fadeOut(1500).promise().done(function() {
     // Fadeout done, start the timer for going through the map (set in top of script)
+    $("span.loading-text").hide();
     $("#start-interactive-tour").show();
   });
 
@@ -671,6 +674,10 @@ $("#start-interactive-tour").on("click", function(e) {
   // Show map filters
   $("#map-filters").show();
 
+  // If not running the tour on start:
+  showMapLayer("lovese_land");
+  $("#map-filters ul li.land-areas").addClass("active");
+
   // if (countdown) {
   //   clearInterval(countdown);
   // }
@@ -685,12 +692,26 @@ $("#map-filters ul li").on('click', function() {
   if (!mapFiltersLocked) {
     $(this).siblings().each(function() {
       $(this).removeClass("active"); // The button
-      // Turn off any visible layers
-      removeMapLayer($(this).attr('data-layer-name'));
+
       // remove any previously set info panes
       $("section[data-layer-name='" + $(this).attr('data-layer-name') + "']").removeClass("active"); // The info pane
     });
+
+    // Remove any visible layers
+    for (var prop in mapLayers) {
+      if (Object.prototype.hasOwnProperty.call(mapLayers,prop)){
+        //console.log(prop);
+        //console.log(mapLayers[prop]);
+        if(prop !== $(this).attr('data-layer-name') && mapLayers[prop].visible){
+            removeMapLayer(prop);
+            mapLayers[prop].visible = false;
+        }
+      }
+    }
+
     $(this).addClass("active");
+    $(".map-features-count p span.current").text($(this).index() + 1);
+
     // Turn on this map layer
     showMapLayer($(this).attr('data-layer-name'));
     // Update the info pane which corresponds to the button
@@ -716,6 +737,16 @@ $('[data-type="modal-trigger"]').hover(function() {
 }, function(e) {
   // on mouseout, reset the background
   var currMarker = "image360_" + $(this).parent().attr('data-id');
+  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360@3x.png)");
+});
+
+$('[data-type="images360]').hover(function() {
+  console.log("Hover over 360");
+  var currMarker = "image360_" + $(this).attr('data-id');
+  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png)");
+}, function(e) {
+  // on mouseout, reset the background
+  var currMarker = "image360_" + $(this).attr('data-id');
   $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360@3x.png)");
 });
 
@@ -769,21 +800,22 @@ function showMapLayer(layer) {
         });
       }
       if(layer === "corals") {
-          addMarkers("corals",corals);
+          addMarkers("corals", corals);
       }
     }
   }
-
-  // Stuff to do for ncs (lovese_land is already loaded after the zoom event)
+  if(layer === "lovese_land") {
+    map.fitBounds(bbox_area, {
+      padding: 30,
+      linear: false,
+      duration: 2000,
+      offset: [200,0]
+    });
+  }
   if (layer === "people") {
-    //addPeopleIcons();
-    addMarkers("people",people);
+    addMarkers("people", people);
   }
   if (layer === "birds") {
-    console.log("birds - røst");
-
-    // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
-    //zoomToArea("birds", [11.937078079160585, 67.46127758453957], 9, 0.5, 1.5, 0, 0, [0, 0]);
     map.fitBounds(bbox_roest, {
       padding: 30,
       linear: false,
@@ -791,9 +823,7 @@ function showMapLayer(layer) {
       offset: [200,0]
     });
 
-    addMarkers("birds",bird_islands);
-
-    // TODO: Add markers to the different islands of Røst with popup info?
+    addMarkers("birds", bird_islands);
   }
 }
 
@@ -834,12 +864,10 @@ function addMarkers(name, markers) {
         // Add popup handler here.
       });
       el.addEventListener('mouseover', function (e) {
-          console.log("mouseover!!");
-          $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"_Inverted@3x.png)");
+        $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"_Inverted@3x.png)");
       });
       el.addEventListener('mouseout', function (e) {
-          console.log("mouseover!!");
-          $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"@3x.png)");
+        $(this).css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_"+name+"@3x.png)");
       });
     } else if (name === '360') {
       added360Markers = true;
@@ -949,7 +977,7 @@ function startMapFeautures() {
   var sectionTime = (totalTime * 1000) / $('.map-details').length;
   //sectionTime = 1000;
   $(".map-features-count p span.current").text(1);
-  $(".map-features-count p span.total").text($('.map-details').length);
+  //$(".map-features-count p span.total").text($('.map-details').length);
 
   var mapF = $('.map-features .map-details');
   var $active = mapF.eq(0);

@@ -13,6 +13,7 @@
       With this interactive map, you will get to know the areas in question and see where the oil industry wants to gain access. You will also get to hear what members of the local community think about the issue.
       <br><br> After the short introduction tour is over, you can explore the map on your own.
       <br><br>
+      <span class="loading-text">Loading ...</span>
       <a href="" id="start-interactive-tour" style="display:none;">Start the tour!</a>
     </p>
   </div>
@@ -23,22 +24,22 @@
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3 interactive-pane-text" style="display:none; z-index:-99999;">
 
       <div class="map-features-count">
-        <p><span class="current"></span> / <span class="total"></span></p>
+        <p><span class="current">1</span> / <span class="total"></span></p>
       </div>
 
-      <div class="block-content" style="text-align:center;">
+      <div class="block-content">
         <h1 class="episode-title">Breeding<br /> Grounds</h1>
       </div>
 
-      <div class="map-features block-content">
+      <div class="map-features">
         <section class="map-details active" data-layer-name="lovese_land">
           <div class="title-holder">
             <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@3x.png">
-            <h2 class="title">The Area</h2>
+            <h2 class="title">Rich oceans</h2>
           </div>
 
           <div class="title-description">
-            <p class="text">These are the areas of Lofoten, Vesterålen and Senja - Lovese in short. They are located in the North of Norway, and consists of 15 municipalities with around 62.000 inhabitants. The main industries here are fisheries, agriculture and tourism.
+            <p class="text">The sea areas outside of Lofoten, Vesterålen and Senja are some of the most productive in the world. Due to ocean currents and the slim continental shelf, these nutritious areas caters for an array of fish, birds and sea mammals.
             </p>
           </div>
         </section>
@@ -78,9 +79,14 @@
               </div>
             </div>
 
-            <p class="text">See how the potential oil and gas resources conflict with the spawning grounds:</p>
-            <div class="checkboxes">
-              <label class="layers" for="oil_p_f"><input type="checkbox" id="oil_p_f" name="fish_stocks" data-layer-name="oil_prospects"><span>Oil prospects</span></label>
+            <div class="row">
+              <div class="col-md-12">
+                <br />
+                <p class="text">See how the potential oil and gas resources conflict with the spawning grounds:</p>
+                <div class="checkboxes">
+                  <label class="layers" for="oil_p_f"><input type="checkbox" id="oil_p_f" name="fish_stocks" data-layer-name="oil_prospects"><span>Oil prospects</span></label>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -94,26 +100,23 @@
 
           <div class="title-description">
             <p class="text">
-              The islands of Røst have the largest bird colonies in the European mainland. Here, hundred of thousands of sea birds have their nesting places and during winter time, even more sea birds migrate to these areas.
-              <br /><br />
-              Some of the birds that come here include: puffin, razorbill, black-legged kittiwake, northern fulmar, common murre, common eider, king eider, european shag, great cormorant, great skua, long tailed duck and yellow-billed loon.
+              The islands of Røst have the largest bird colonies in the European mainland. Here, hundred of thousands of sea birds have their nesting places. In the winter time, even more sea birds migrate to these areas.
+              <!-- <br /><br />
+              Some of the birds that come here include: puffin, razorbill, black-legged kittiwake, northern fulmar, common murre, common eider, king eider, european shag, great cormorant, great skua, long tailed duck and yellow-billed loon. -->
               <br /><br />
               Many of the species that migrate here are critically endangered.
             </p>
+
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text">The bird colonies are located very close to a large part of the oil prospects:</p>
+                <div class="checkboxes">
+                  <label class="layers" for="oil_p_c"><input type="checkbox" id="oil_p_c" name="fish_stocks" data-layer-name="oil_prospects"><span>Oil prospects</span></label>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-
-        <!-- <section class="map-details" data-layer-name="whales">
-          <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_006_EP3_BG/whales@3x.png">
-            <h2 class="title">Whales</h2>
-          </div>
-
-          <div class="title-description">
-            <p class="text">
-            </p>
-          </div>
-        </section> -->
 
         <section class="map-details" data-layer-name="corals">
           <div class="title-holder">
@@ -122,57 +125,66 @@
           </div>
 
           <div class="title-description">
-            <p class="text"></p>
+            <p class="text">
+              The areas also contain multiple coral reefs. Coral reefs represent unique habitats with high biodiversity, and are important habitats for a variety of fish species.
+              <br /><br />
+              The Røst reef is the world's largest known deep-water coral reef, extending over 35 km in length and up to 3 km in width. The coral reef extends over some of the oil prospects in question.
+            </p>
 
-            <div class="checkbox">
-              <label><input type="checkbox" name="fish_stocks" data-layer-name="oil_prospects">Oil prospects</label>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text">See how the potential oil and gas resources conflict with the coral reefs:</p>
+                <div class="checkboxes">
+                  <label class="layers" for="oil_p_c"><input type="checkbox" id="oil_p_c" name="fish_stocks" data-layer-name="oil_prospects"><span>Oil prospects</span></label>
+                </div>
+              </div>
             </div>
+
           </div>
         </section>
 
         <section class="map-details" data-layer-name="people">
-          <div class="title-holder" style="padding: 10px 10px 0px 10px; margin-bottom: 0px; height: auto;">
+          <div class="title-holder">
             <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_MPeople_Inverted@3x.png">
             <h2 class="title">Experts</h2>
+          </div>
 
-            <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
-              <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what a few experts has to say about the importance of the area for fish, birds and sea mammals.</p>
-            </div>
+          <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
+            <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what a few experts has to say about the importance of the area for fish, birds and sea mammals.</p>
           </div>
 
           <div style="clear:both; padding-right:10px;">
 
             <div class="row">
-              <div class="col-md-12">
-                <!--  style="height: 200px; overflow-y: scroll;"> -->
+              <div class="col-xs-12">
 
                 <div class="row interview active sven" data-person="sven">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/sven@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/sven@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
                     <h2>Sven Tommy</h2>
-                    <p></p>
+                    <p>Sven Tommy has been fishing off the coast of Lofoten his whole life.</p>
                   </div>
                 </div>
 
                 <div class="row interview martin" data-person="martin">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/martin@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/martin@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
                     <h2>Martin</h2>
-                    <p></p>
+                    <p>Martin has been observing birds for decades.</p>
                   </div>
                 </div>
 
                 <div class="row interview heike" data-person="heike">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/heike@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/heike@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
                     <h2>Heike</h2>
-                    <p></p>
+                    <p>Heike has been observering and researching sea mammals in the areas since 2006.</p>
                   </div>
                 </div>
               </div>
