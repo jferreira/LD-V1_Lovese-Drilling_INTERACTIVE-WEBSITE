@@ -183,6 +183,18 @@
   cursor: pointer;
 }
 
+.marker-360:hover {
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png');
+}
+
+.marker-corals:hover {
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@3x.png');
+}
+
+.marker-birds:hover {
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@3x.png');
+}
+
 .interactive-content-explanation h2 {
   font-size: 15px;
 }

@@ -1,3 +1,8 @@
+"use strict";
+
+// Make sure the app variable exist. It should exist, from app.framework6.js
+var app = app || {};
+
 var disableMapControls = false;
 var zoomedToArea = false;
 var flying = false;
@@ -703,7 +708,7 @@ $(".interview").on('click', function() {
   zoomToPerson(person);
 });
 
-// Hover function for 360 images
+// Hover function for 360 images - not working??
 $('[data-type="modal-trigger"]').hover(function() {
   var currMarker = "image360_" + $(this).parent().attr('data-id');
   $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png)");
