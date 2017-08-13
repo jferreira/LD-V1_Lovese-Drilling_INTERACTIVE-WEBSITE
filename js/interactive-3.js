@@ -521,7 +521,7 @@ function mapControls(disable) {
 map.on('load', function() {
   // Add labels for the land areas (LoVeSe)
   land_labels_images.forEach(function(label) {
-    map.loadImage(label.localhost + label.imgUrl, function(error, image) {
+    map.loadImage(label.live + label.imgUrl, function(error, image) {
       if (error) throw error;
       map.addImage(label.name, image);
     });
