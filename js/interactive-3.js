@@ -14,6 +14,7 @@ var mapFiltersLocked = false;
 var bbox_area   = [[9.0088,67.3314],[18.0505,69.7181]];
 var bbox_roest  = [[11.814423,67.402211],[12.204437,67.542167]];
 var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
+var bbox_roest_and_oil = [[10.7865,67.351],[12.2298,67.64]];
 
 $(".map-features-count p span.total").text($('.map-details').length);
 
@@ -583,10 +584,16 @@ map.on('load', function() {
   // Need this?
   map.on('zoomend', function(e) {
     var zoom = map.getZoom();
-    if (zoom <= 6.5) {
-      $(".marker-360").hide();
+    if (zoom <= 7) {
+      $(".marker-360, .marker-birds").hide();
     } else {
-      $(".marker-360").show();
+      $(".marker-360, .marker-birds").show();
+    }
+
+    if (zoom < 5) {
+      $(".marker-corals").hide();
+    } else {
+      $(".marker-corals").show();
     }
   });
 
@@ -638,7 +645,7 @@ function updateMarkerOverlayPos() {
 }
 
 // Turn on off fish stock layers
-$('input[name="fish_stocks"]').on('click', function () {
+$('input[name="fish_stocks"], input[name="oil_prospects"]').on('click', function () {
     if ($(this).is(':checked')) {
         showMapLayer($(this).attr('data-layer-name'));
     } else {
@@ -700,16 +707,18 @@ $("#map-filters ul li").on('click', function() {
     // Remove any visible layers
     for (var prop in mapLayers) {
       if (Object.prototype.hasOwnProperty.call(mapLayers,prop)){
-        //console.log(prop);
-        //console.log(mapLayers[prop]);
         if(prop !== $(this).attr('data-layer-name') && mapLayers[prop].visible){
             removeMapLayer(prop);
             mapLayers[prop].visible = false;
+            // Uncheck all checkboxes, except the cod checkbox
+            $("input[type='checkbox']").prop( "checked", false );
+            $("input[type='checkbox']#cod").prop( "checked", true );
         }
       }
     }
 
     $(this).addClass("active");
+    // Set the current info pane number based on index of the section
     $(".map-features-count p span.current").text($(this).index() + 1);
 
     // Turn on this map layer
@@ -740,16 +749,6 @@ $('[data-type="modal-trigger"]').hover(function() {
   $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360@3x.png)");
 });
 
-$('[data-type="images360]').hover(function() {
-  console.log("Hover over 360");
-  var currMarker = "image360_" + $(this).attr('data-id');
-  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png)");
-}, function(e) {
-  // on mouseout, reset the background
-  var currMarker = "image360_" + $(this).attr('data-id');
-  $('.marker-360[data-name="' + currMarker + '"]').css("background-image", "url(../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360@3x.png)");
-});
-
 // Add a given map layer to the map, except the islands layer - which has no layer
 function showMapLayer(layer) {
   if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
@@ -771,7 +770,6 @@ function showMapLayer(layer) {
             },
             "filter": ["==", "$type", "Point"],
           });
-        // else if(layer === 'fish' || layer === 'haddock' || layer === 'hallibut' || layer === 'saith' || layer === 'herring') {}
         } else {
           map.addLayer({
             "id": layer,
@@ -787,59 +785,64 @@ function showMapLayer(layer) {
         mapLayers[layer].added = true;
       }
 
-      if (layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
+      if (layer !== "lovese_land" && layer !== "birds" && layer !== "people" && layer !== "oil_prospects") {
         map.setLayoutProperty(layer, 'visibility', 'visible');
         mapLayers[layer].visible = true;
 
         // Fit the map to the bounderies of the specific layer
-        map.fitBounds(dataLayerBounds[layer], {
-          padding: 30,
-          linear: false,
-          duration: 2000,
-          offset: [200,0]
-        });
+        map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
       }
+
       if(layer === "corals") {
           addMarkers("corals", corals);
+      }
+
+      if(layer === "oil_prospects") {
+        map.setLayoutProperty(layer, 'visibility', 'visible');
+        mapLayers[layer].visible = true;
+        if(mapLayers["birds"].visible) {
+          console.log("Bird is visible - change bbox");
+          map.fitBounds(bbox_roest_and_oil, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+        } else if(mapLayers["corals"].visible) {
+          console.log("Corals is visible - change bbox");
+          map.fitBounds(bbox_corals, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+        } else {
+          console.log("This should be the fish layer calling oil");
+          map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+        }
       }
     }
   }
   if(layer === "lovese_land") {
-    map.fitBounds(bbox_area, {
-      padding: 30,
-      linear: false,
-      duration: 2000,
-      offset: [200,0]
-    });
+    map.fitBounds(bbox_area, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
   }
   if (layer === "people") {
     addMarkers("people", people);
   }
   if (layer === "birds") {
-    map.fitBounds(bbox_roest, {
-      padding: 30,
-      linear: false,
-      duration: 2000,
-      offset: [200,0]
-    });
-
+    mapLayers[layer].visible = true; // No layer has been added, but we need this to be able to select correct bounding box for oil prospects
+    map.fitBounds(bbox_roest, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
     addMarkers("birds", bird_islands);
   }
 }
 
 // Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer) {
-  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_sea" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
-    if (mapLayers[layer].visible == true && layer !== "lovese_sea" && layer !== "lovese_land" && layer !== "ncs" && layer !== "people") {
+  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
+    if (mapLayers[layer].visible == true && layer !== "lovese_land" && layer !== "birds" && layer !== "people") {
       map.setLayoutProperty(layer, 'visibility', 'none');
-      if (layer === "lovese_sea") {
-        map.setLayoutProperty("lovese-labels", 'visibility', 'none');
-      }
+      // if (layer === "lovese_sea") {
+      //   map.setLayoutProperty("lovese-labels", 'visibility', 'none');
+      // }
       mapLayers[layer].visible = false;
     }
   }
+  if(layer === "birds") {
+    mapLayers[layer].visible = false;
+  }
 }
 
+// Add markers to the map
 function addMarkers(name, markers) {
   markers.features.forEach(function(marker) {
     // create a DOM element for the marker
@@ -887,6 +890,7 @@ function addMarkers(name, markers) {
   });
 }
 
+// Zoom the map to a given person
 function zoomToPerson(name) {
   // zoomElement, center, zoom, speed, curve, pitch, bearing, offset
   zoomToArea(name, addedMapIcons[name].coordinates, 11.5, 1, 1, 150, -10, [350, 0]);
@@ -901,6 +905,7 @@ function zoomToPerson(name) {
 //   $(".interactive-pane").height(containerHeight - 130);
 // }
 
+// Zoom to a given area
 function zoomToArea(zoomElement, center, zoom, speed, curve, pitch, bearing, offset) {
   if (app.navigation.state == app.navigation.visible) {
     $(".interactive-pane").css({
