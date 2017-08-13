@@ -163,10 +163,9 @@
 .filter-ui {
   position: absolute;
   top: 50%;
-  right: 20px;
+  right: 10px;
   transform: translateY(-50%);
   overflow: visible;
-  width: 70px;
   z-index:10;
 }
 
@@ -178,8 +177,28 @@
   display: block;
   cursor: pointer;
   background-size: cover;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
+}
+
+@media(min-width:768px) {
+  #map-filters ul li {
+    width: 54px;
+    height: 54px;
+  }
+  .filter-ui {
+    right: 15px;
+  }
+}
+
+@media(min-width:1170px) {
+  #map-filters ul li {
+    width: 64px;
+    height: 64px;
+  }
+  .filter-ui {
+    right: 20px;
+  }
 }
 
 #map-filters ul li.land-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
@@ -210,6 +229,12 @@
 #map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
 #map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 #map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+
+#map-filters ul li.measure {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_measure@2x.png");}
+#map-filters ul li.measure:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_measure_Inverted@2x.png");}
+#map-filters ul li.measure.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_measure_Inverted@2x.png");}
+
+#map-filters ul li.empty {height:20px; width: auto;}
 
 #map-filters img {
   cursor: pointer;
@@ -330,11 +355,11 @@ section.hide {
 @media(min-width:1170px) {
   .interview h2 {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .interview p {
-    font-size: 15px;
+    font-size: 14px;
     margin-bottom: 10px;
   }
 
@@ -466,4 +491,22 @@ label.layers {
 .mapboxgl-popup-content img {
   width: 280px;
   height: auto;
+}
+
+.distance-container {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    z-index: 1;
+}
+
+.distance-container > * {
+    background-color: rgba(1, 1, 1, .5);
+    color: #fff;
+    font-size: 12px;
+    line-height: 18px;
+    display: block;
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 3px;
 }
