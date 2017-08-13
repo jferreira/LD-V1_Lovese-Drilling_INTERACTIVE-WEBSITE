@@ -1,7 +1,7 @@
 "use strict";
 
 // Make sure the app variable exist. It should exist, from app.framework6.js
-var app = app || {};
+//var app = app || {};
 
 var disableMapControls = false;
 var zoomedToArea = false;
@@ -16,6 +16,7 @@ var bbox_roest  = [[11.814423,67.402211],[12.204437,67.542167]];
 var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
 var bbox_roest_and_oil = [[10.7865,67.351],[12.2298,67.64]];
 
+// Set the number of interactive sections - should move it somewhere else
 $(".map-features-count p span.total").text($('.map-details').length);
 
 // Color picking for layers
@@ -504,7 +505,8 @@ map.on('load', function() {
 
   // Add labels for the land areas (LoVeSe)
   land_labels_images.forEach(function(label) {
-    map.loadImage(label.localhost + label.imgUrl, function(error, image) {
+    //map.loadImage(label.localhost + label.imgUrl, function(error, image) {
+    map.loadImage(label.live + label.imgUrl, function(error, image) {
       if (error) throw error;
       map.addImage(label.name, image);
     });
@@ -1037,13 +1039,13 @@ $('[data-type="modal-trigger"]').on('click', function(e) {
     if ($(this).parent().attr('data-type') == 'person') {
       switch ($(this).parent().attr('data-id')) {
         case "sven":
-          contentUrl = "//player.vimeo.com/video/228447528?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/229464407?byline=0&amp;portrait=0";
           break;
         case "martin":
-          contentUrl = "//player.vimeo.com/video/228451663?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/229463933?byline=0&amp;portrait=0";
           break;
         case "heike":
-          contentUrl = "//player.vimeo.com/video/228453330?byline=0&amp;portrait=0";
+          contentUrl = "//player.vimeo.com/video/229463490?byline=0&amp;portrait=0";
           break;
       }
     } else
