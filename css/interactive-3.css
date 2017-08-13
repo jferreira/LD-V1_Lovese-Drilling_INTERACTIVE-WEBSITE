@@ -65,7 +65,7 @@
 
 .v-center {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 
 .interactive-pane {
@@ -79,32 +79,56 @@
 }
 
 .interactive-pane-text {
-  margin-top: -130px;
+  /*margin-top: -130px;*/
+  margin-top: 20px;
   pointer-events:auto;
   z-index: 1;
 }
 
+@media(min-width:768px) {
+  .interactive-pane-text {
+    margin-top: 30px;
+  }
+}
+
+@media(min-width:1170px) {
+  .interactive-pane-text {
+    margin-top: 50px;
+  }
+}
+
 .block-content {
-  padding-left: 30px;
-  margin-top: 30px;
+  width: 100%;
+  text-align:center;
 }
 
 .map-features {
-  min-height: 300px;
   pointer-events:auto;
+  padding: 20px;
 }
 
 .map-features-count {
   width: 100%;
   text-align:center;
+  margin-bottom: 15px;
 }
 
 .title-holder {
-  padding: 10px; margin-bottom: 10px; height: auto;
+  margin-bottom: 10px;
+  display:flex;
+  align-items:center;
 }
 
 .title-holder img {
-  width: 94px; height: 94px; float:left;
+  width: 80px; height: auto;
+}
+
+.title-holder span {
+  font-size: 25px;
+  line-height: 1em;
+  color: #fff;
+  cursor: auto;
+  text-transform: capitalize!important;
 }
 
 .title-description {
@@ -142,41 +166,39 @@
 
 #map-filters ul li.land-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands@2x.png");}
 #map-filters ul li.land-areas:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
+#map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
 
-#map-filters ul li.sea-areas {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area@2x.png");}
-#map-filters ul li.sea-areas:hover {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
-#map-filters ul li.opened-oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig@3x.png");}
-#map-filters ul li.opened-oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
-#map-filters ul li.ncs {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf@2x.png");}
-#map-filters ul li.ncs:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
-#map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
-#map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+#map-filters ul li.fish {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish@2x.png");}
+#map-filters ul li.fish:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@2x.png");}
+#map-filters ul li.fish.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@2x.png");}
+
+#map-filters ul li.birds {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds@2x.png");}
+#map-filters ul li.birds:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@2x.png");}
+#map-filters ul li.birds.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@2x.png");}
+
+#map-filters ul li.whales {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+#map-filters ul li.whales:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+#map-filters ul li.whales.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+
+#map-filters ul li.corals {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral@2x.png");}
+#map-filters ul li.corals:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@2x.png");}
+#map-filters ul li.corals.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@2x.png");}
+
 #map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople@3x.png");}
 #map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
-
-#map-filters ul li.land-areas.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@2x.png");}
-#map-filters ul li.sea-areas.active {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@2x.png");}
-#map-filters ul li.opened-oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png");}
-#map-filters ul li.ncs.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@2x.png");}
-#map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 #map-filters ul li.people.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
+
+/* Might use this to overlay over fish grounds */
+#map-filters ul li.oil {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil@2x.png");}
+#map-filters ul li.oil:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
+#map-filters ul li.oil.active { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_04_Oil_Inverted@2x.png");}
 
 #map-filters img {
   cursor: pointer;
 }
 
 /* Markers on the map */
-.areas-marker {
-  width: 200px;
-  height: 30px;
-  -webkit-background-size: cover; /* For WebKit*/
-  -moz-background-size: cover;    /* Mozilla*/
-  -o-background-size: cover;      /* Opera*/
-  background-size: cover;         /* Generic*/
-  cursor: pointer;
-}
-
-.people-marker, .marker-360 {
+.marker-people, .marker-360, .marker-birds, .marker-corals {
   border-radius: 50%;
   -webkit-background-size: cover; /* For WebKit*/
   -moz-background-size: cover;    /* Mozilla*/
@@ -186,7 +208,15 @@
 }
 
 .marker-360:hover {
-  background-image: url('../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_360_Inverted@3x.png');
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png');
+}
+
+.marker-corals:hover {
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@3x.png');
+}
+
+.marker-birds:hover {
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@3x.png');
 }
 
 .interactive-content-explanation h2 {
@@ -254,6 +284,7 @@ section.hide {
 .interview p {
   color: #fff;
   font-size: 14px;
+  line-height: normal;
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -274,7 +305,7 @@ h1.episode-title {
   text-transform: uppercase;
   font-size: 30px;
   color: #fff;
-  word-break: break-all;
+  margin: 0;
 }
 
 h1.title {
@@ -298,31 +329,89 @@ p.text {
   cursor: auto;
 }
 
+.checkboxes label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.checkboxes input {
+  vertical-align: middle;
+  cursor: pointer;
+}
+.checkboxes label span {
+  vertical-align: middle;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+label.layers {
+  color: #fff;
+  font-size: 12px;
+}
+
 @media(min-width:768px) {
   h1.episode-title {
-    font-size: 50px;
-  }
-
-  h1.title {
     font-size: 40px;
   }
 
+  h1.title {
+    font-size: 30px;
+  }
+
   p.text {
-    font-size: 18px;
+    font-size: 16px;
+  }
+  label.layers {
+    color: #fff;
+    font-size: 13px;
   }
 }
 
 @media(min-width:1170px) {
   h1.episode-title {
-    font-size: 60px;
-  }
-  h1.title {
     font-size: 50px;
   }
+  h1.title {
+    font-size: 40px;
+  }
   p {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  label.layers {
+    color: #fff;
+    font-size: 15px;
   }
 }
 
 .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; }
 .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.mapboxgl-popup {
+  max-width: 300px;
+  color: #000;
+}
+
+.mapboxgl-popup-content {
+  text-align: left;
+}
+
+.mapboxgl-popup-content h3 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.mapboxgl-popup-content p {
+  font-size: 13px;
+}
+
+.mapboxgl-popup-content img {
+  width: 280px;
+  height: auto;
+}

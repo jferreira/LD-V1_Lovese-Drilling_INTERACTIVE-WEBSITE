@@ -4,17 +4,21 @@
 <link href='/css/include.css' rel='stylesheet' />
 <link href='/css/interactive-2.css' rel='stylesheet' />
 <link href='/css/morphing-modal.css' rel='stylesheet' />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"> -->
 
 <div class="loading">
   <div class="interactive-content"></div>
   <div class="interactive-content-explanation">
     <h2>Explore the areas of Lofoten,<br /> Vesterålen and Senja</h2>
-    <p>
+    <p style="line-height: 1.5em;">
       With this interactive map, you will get to know the areas in question and see where the oil industry wants to gain access. You will also get to hear what members of the local community think about the issue.
-      <br><br> After the short introduction tour is over, you can explore the map on your own.
       <br><br>
-      <a href="" id="start-interactive-tour" style="display:none;">Start the tour!</a>
+      You can naviagte by using the map icons on the right, and also by panning and zooming the map.
+      <br><br>
+      <!-- After the short introduction tour is over, you can explore the map on your own.
+      <br><br> -->
+      <span class="loading-text">Loading ...</span>
+      <a href="" id="start-interactive-tour" style="display:none;">Start!</a>
     </p>
   </div>
 </div>
@@ -24,14 +28,14 @@
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3 interactive-pane-text" style="display:none; z-index:-99999;">
 
       <div class="map-features-count">
-        <p><span class="current"></span> / <span class="total"></span></p>
+        <p><span class="current">1</span> / <span class="total"></span></p>
       </div>
 
-      <div class="block-content" style="text-align:center;">
+      <div class="block-content">
         <h1 class="episode-title">The Lovese<br /> Story</h1>
       </div>
 
-      <div class="map-features block-content">
+      <div class="map-features">
         <section class="map-details active" data-layer-name="lovese_land">
           <div class="title-holder">
             <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@3x.png">
@@ -93,13 +97,13 @@
         </section>
 
         <section class="map-details" data-layer-name="people">
-          <div class="title-holder" style="padding: 10px 10px 0px 10px; margin-bottom: 0px; height: auto;">
+          <div class="title-holder">
             <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png">
             <h2 class="title">People of Lofoten</h2>
+          </div>
 
-            <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
-              <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what members of the local community think about the issue by clicking their icons on the map.</p>
-            </div>
+          <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
+            <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what members of the local community think about the issue by clicking their icons on the map.</p>
           </div>
 
           <div style="clear:both; padding-right:10px;">
@@ -110,7 +114,7 @@
 
                 <div class="row interview active eldar" data-person="eldar">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_IMG-INT-01@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_IMG-INT-01@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
                     <h2>Eldar</h2>
@@ -120,7 +124,7 @@
 
                 <div class="row interview anne" data-person="anne">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/anne_b@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/anne_b@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
                     <h2>Anne-Birgith</h2>
@@ -130,7 +134,7 @@
 
                 <div class="row interview johanna" data-person="johanna">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/johanna@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/johanna@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
                     <h2>Johanna</h2>
@@ -229,7 +233,7 @@
   </div>
   <!-- cd-modal -->
 
-  <a href="#0" class="cd-modal-close">Close</a>
+  <a href="#ep2-interactive" class="cd-modal-close">Close</a>
 </section>
 <!-- .cd-section -->
 
@@ -241,4 +245,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
 <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
-<script type="text/javascript" src="/js/interactive-2.js"></script>
+<script type="text/javascript" src="/js/interactive-2.js?version=2"></script>

@@ -70,6 +70,17 @@ body {
   font-family: 'DINPro-Light', sans-serif;
 }
 
+body:after
+{
+  content:  url("../resources/_Images/optimized/new/E1_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E2_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E3_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E4_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E5_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E6_Masthead_s.jpg");
+  display: none;
+}
+
 /*
 *    TYPEFACE AND TEXT
 */

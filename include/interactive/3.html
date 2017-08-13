@@ -8,12 +8,15 @@
 <div class="loading">
   <div class="interactive-content"></div>
   <div class="interactive-content-explanation">
-    <h2>Explore the areas of Lofoten,<br /> Vesterålen and Senja</h2>
-    <p>
-      With this interactive map, you will get to know the areas in question and see where the oil industry wants to gain access. You will also get to hear what members of the local community think about the issue.
-      <br><br> After the short introduction tour is over, you can explore the map on your own.
+    <h2>Explore the breeding grounds</h2>
+    <p style="line-height: 1.5em;">
+      The areas of Lofoten, Vesterålen and Senja have a fantastic natural environment and invaluable ecosystems. Here, the world's last large stock of cod spawns and one of Europe’s biggest nesting sites caters for a wide array of seabirds.<br /><br />
+      This same area is home to whales such as orcas, humpback whales and sperm whales and if you dive deep enough you’ll find the world’s largest coldwater coral reef.
       <br><br>
-      <a href="" id="start-interactive-tour" style="display:none;">Start the tour!</a>
+      Explore how it's all connected and hear from experts in the area on fish, birds and marine mammals.
+      <br><br>
+      <span class="loading-text">Loading ...</span>
+      <a href="" id="start-interactive-tour" style="display:none;">Start!</a>
     </p>
   </div>
 </div>
@@ -23,117 +26,169 @@
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3 interactive-pane-text" style="display:none; z-index:-99999;">
 
       <div class="map-features-count">
-        <p><span class="current"></span> / <span class="total"></span></p>
+        <p><span class="current">1</span> / <span class="total"></span></p>
       </div>
 
-      <div class="block-content" style="text-align:center;">
-        <h1 class="episode-title">Breeding Grounds</h1>
+      <div class="block-content">
+        <h1 class="episode-title">Breeding<br /> Grounds</h1>
       </div>
 
-      <div class="map-features block-content">
+      <div class="map-features">
         <section class="map-details active" data-layer-name="lovese_land">
           <div class="title-holder">
             <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_05_Islands_Inverted@3x.png">
-            <h2 class="title">The Area</h2>
+            <h2 class="title">Rich oceans</h2>
           </div>
 
           <div class="title-description">
-            <p class="text">These are the areas of Lofoten, Vesterålen and Senja - Lovese in short. They are located in the North of Norway, and consists of 15 municipalities with around 62.000 inhabitants. The main industries here are fisheries, agriculture and tourism.
+            <p class="text">The sea areas outside of Lofoten, Vesterålen and Senja are some of the most productive in the world.
+              <br /><br/>
+               Due to ocean currents and the slim continental shelf, these nutritious areas caters for an array of fish, birds and marine mammals.
             </p>
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="lovese_sea">
+        <section class="map-details" data-layer-name="fish">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_01_Area_Inverted@3x.png">
-            <h2 class="title">Lovese Drilling Zones</h2>
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@3x.png">
+            <h2 class="title">Fish stocks</h2>
           </div>
 
           <div class="title-description">
-            <p class="text">The body of water off the coast from Lofoten, Vesterålen and Senja is the epicenter of this story. These sea areas has so far remained untouched by the oil- and gas industry, but that could change this year.
+            <p class="text">
+              For thousands of years fish stocks like the Norh Atlantic cod has migrated to the sea areas outside of Lofoten, Vesterålen and Senja to spawn.
             </p>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="checkboxes">
+                  <label class="layers" for="cod"><input type="checkbox" id="cod" name="fish_stocks" data-layer-name="fish" checked><span>Cod</span></label>
+                </div>
+                <div class="checkboxes">
+                  <label class="layers" for="saith"><input type="checkbox" id="saith" name="fish_stocks" data-layer-name="saith"><span>Saith</span></label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="checkboxes">
+                  <label class="layers" for="haddock"><input type="checkbox" id="haddock" name="fish_stocks" data-layer-name="haddock"><span>Haddock</span></label>
+                </div>
+                <div class="checkboxes">
+                  <label class="layers" for="herring"><input type="checkbox" id="herring" name="fish_stocks" data-layer-name="herring"><span>Herring</span></label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="checkboxes">
+                  <label class="layers" for="hallibut"><input type="checkbox" id="hallibut" name="fish_stocks" data-layer-name="hallibut"><span>Hallibut</span></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <br />
+                <p class="text">See how the potential oil and gas resources conflict with the spawning grounds:</p>
+                <div class="checkboxes">
+                  <label class="layers" for="oil_p_f"><input type="checkbox" id="oil_p_f" name="fish_stocks" data-layer-name="oil_prospects"><span>Oil and gas</span></label>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="opened_oil_areas">
+        <section class="map-details" data-layer-name="birds">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_OilRig_Inverted@3x.png">
-            <h2 class="title">A big oil producer</h2>
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_birds_Inverted@3x.png">
+            <h2 class="title">Bird colonies</h2>
           </div>
 
           <div class="title-description">
-            <p class="text">If we zoom out, we see that Norway has opened vast sea areas for oil and gas exploration. The sea areas outside of Lovese are some of the last areas in Norway which has been spared.</p>
-          </div>
-        </section>
-
-        <section class="map-details" data-layer-name="ncs">
-          <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_02_Shelf_Inverted@3x.png">
-            <h2 class="title">A slim continental shelf</h2>
-          </div>
-
-          <div class="title-description">
-            <p class="text">One of the reasons for this, is the continental shelf. In these areas it is at its most narrowest - creating some very favourable conditions for fish, birds and sea mammals. Which again has helped sustain human settlements here for more than
-              6.000 years.
+            <p class="text">
+              The islands of Røst have the largest bird colonies in the European mainland. Here, hundred of thousands of sea birds have their nesting places. In the winter time, even more sea birds migrate to these areas.
+              <!-- <br /><br />
+              Some of the birds that come here include: puffin, razorbill, black-legged kittiwake, northern fulmar, common murre, common eider, king eider, european shag, great cormorant, great skua, long tailed duck and yellow-billed loon. -->
+              <br /><br />
+              Many of the species that migrate here are critically endangered.
             </p>
+
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text">The bird colonies are located very close to a large part of the oil prospects:</p>
+                <div class="checkboxes">
+                  <label class="layers" for="oil_p_c"><input type="checkbox" name="oil_prospects" id="oil_p_c" data-layer-name="oil_prospects"><span>Oil and gas</span></label>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="oil_prospects">
+        <section class="map-details" data-layer-name="corals">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_03_Oil_Inverted@3x.png">
-            <h2 class="title">Oil and gas discoveries</h2>
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_corals_Inverted@3x.png">
+            <h2 class="title">Coral reefs</h2>
           </div>
 
           <div class="title-description">
-            <p class="text">But the same conditions has also created something else. Pockets of oil and gas has been found off the coast. The closest reservoirs are located only 15 km away from shore. These resources have been driving the controversial debate for the
-              last 20 years.</p>
+            <p class="text">
+              The areas also contain multiple coral reefs. Coral reefs represent unique habitats with high biodiversity, and are important habitats for a variety of fish species.
+              <br /><br />
+              The Røst reef is the world's largest known deep-water coral reef, extending over 35 km in length and up to 3 km in width. The coral reef extends over some of the oil prospects in question.
+            </p>
+
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text">See how the potential oil and gas resources conflict with the coral reefs:</p>
+                <div class="checkboxes">
+                  <label class="layers" for="oil_p_c"><input type="checkbox" name="oil_prospects" id="oil_p_c" data-layer-name="oil_prospects"><span>Oil and gas</span></label>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
         <section class="map-details" data-layer-name="people">
-          <div class="title-holder" style="padding: 10px 10px 0px 10px; margin-bottom: 0px; height: auto;">
-            <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png">
-            <h2 class="title">People of Lofoten</h2>
+          <div class="title-holder">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_MPeople_Inverted@3x.png">
+            <h2 class="title">Experts</h2>
+          </div>
 
-            <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
-              <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what members of the local community think about the issue by clicking their icons on the map.</p>
-            </div>
+          <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
+            <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what a few experts has to say about the importance of the area for fish, birds and marine mammals.</p>
           </div>
 
           <div style="clear:both; padding-right:10px;">
 
             <div class="row">
-              <div class="col-md-12">
-                <!--  style="height: 200px; overflow-y: scroll;"> -->
+              <div class="col-xs-12">
 
-                <div class="row interview active eldar" data-person="eldar">
+                <div class="row interview active sven" data-person="sven">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/_ICN_IMG-INT-01@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/sven@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
-                    <h2>Eldar</h2>
-                    <p>Eldar has been a fisher since he finished elementary school.</p>
+                    <h2>Sven Tommy</h2>
+                    <p>Sven Tommy has been fishing off the coast of Lofoten his whole life.</p>
                   </div>
                 </div>
 
-                <div class="row interview anne" data-person="anne">
+                <div class="row interview martin" data-person="martin">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/anne_b@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/martin@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
-                    <h2>Anne-Birgith</h2>
-                    <p>Anne-Birgith recently decided to move back to Lofoten with her family.</p>
+                    <h2>Martin</h2>
+                    <p>Martin has been observing birds and working for their protection for decades.</p>
                   </div>
                 </div>
 
-                <div class="row interview johanna" data-person="johanna">
+                <div class="row interview heike" data-person="heike">
                   <div class="col-md-4 col-lg-3">
-                    <img src="../resources/_Graphics/_GFX_005_EP2_LD/johanna@3x.png" style="width: 94px; height: 94px; float:left;" />
+                    <img src="../resources/_Graphics/_GFX_006_EP3_BG/heike@3x.png" style="width: 80px; height: auto; float:left;" />
                   </div>
                   <div class="col-md-8 col-lg-9" style="padding-left:20px;">
-                    <h2>Johanna</h2>
-                    <p>Johanna grew up in Napp and loves it for the closeness to nature.</p>
+                    <h2>Heike</h2>
+                    <p>Heike has been observering and researching marine mammals in the areas since 2006.</p>
                   </div>
                 </div>
               </div>
@@ -152,29 +207,29 @@
 <nav id='map-filters' class='filter-ui'>
   <ul>
     <li class="land-areas" data-layer-name="lovese_land"></li>
-    <li class="sea-areas" data-layer-name="lovese_sea"></li>
-    <li class="opened-oil" data-layer-name="opened_oil_areas"></li>
-    <li class="ncs" data-layer-name="ncs"></li>
-    <li class="oil" data-layer-name="oil_prospects"></li>
+    <li class="fish" data-layer-name="fish"></li>
+    <li class="birds" data-layer-name="birds"></li>
+    <li class="corals" data-layer-name="corals"></li>
+    <!-- <li class="oil" data-layer-name="oil_prospects"></li> -->
     <li class="people" data-layer-name="people"></li>
   </ul>
 </nav>
 
 <section class="cd-section" style="display:none; z-index:-99999;">
   <!-- Interview overlay triggers -->
-  <div class="cd-modal-action eldar" data-type="person" data-id="eldar">
+  <div class="cd-modal-action sven" data-type="person" data-id="sven">
     <a class="btn" data-type="modal-trigger"></a>
     <span class="cd-modal-bg"></span>
   </div>
   <!-- cd-modal-action -->
 
-  <div class="cd-modal-action anne" data-type="person" data-id="anne">
+  <div class="cd-modal-action martin" data-type="person" data-id="martin">
     <a class="btn" data-type="modal-trigger"></a>
     <span class="cd-modal-bg"></span>
   </div>
   <!-- cd-modal-action -->
 
-  <div class="cd-modal-action johanna" data-type="person" data-id="johanna">
+  <div class="cd-modal-action heike" data-type="person" data-id="heike">
     <a class="btn" data-type="modal-trigger"></a>
     <span class="cd-modal-bg"></span>
   </div>
@@ -217,6 +272,12 @@
   </div>
   <!-- cd-modal-action -->
 
+  <div class="cd-modal-action image360_7" data-type="images360" data-id="7">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
   <!-- Overlay container -->
   <div class="cd-modal">
     <div class="cd-modal-content" style="overflow:hidden;">
@@ -226,7 +287,7 @@
   </div>
   <!-- cd-modal -->
 
-  <a href="#0" class="cd-modal-close">Close</a>
+  <a href="#ep3-interactive" class="cd-modal-close">Close</a>
 </section>
 <!-- .cd-section -->
 
@@ -237,4 +298,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
 <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
-<script type="text/javascript" src="/js/interactive-3.js"></script>
+<!-- <script type="text/javascript" src="/js/chroma.min.js"></script> -->
+<script type="text/javascript" src="/js/interactive-3.js?version=1"></script>

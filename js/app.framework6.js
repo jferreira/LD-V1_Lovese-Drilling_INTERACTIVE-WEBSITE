@@ -3,7 +3,7 @@
 var app = {
   currEpisode: 0,
   currInteractive: 0,
-  liveEpisodes: 1, // 0=1,1=2,2=3 etc. Second episode is live
+  liveEpisodes: 2, // 0=1,1=2,2=3 etc. Second episode is live
   interactiveState: false,
   textPageState: false,
   introSequence1Time: 10,
@@ -42,7 +42,7 @@ var app = {
     } else {
       app.helpers.updateContent(0);
     }
-    app.helpers.preload();
+    //app.helpers.preload(); // Doesn't work
   },
   attachObservers: function() {
     // Navigation
@@ -109,13 +109,6 @@ var app = {
       console.log('Video has ended!');
     });
     */
-
-    // if (location.href.indexOf("#") != -1) {
-    //     // Your code in here accessing the string like this
-    //     // location.href.substr(location.href.indexOf("#"))
-    //     alert("something");
-    // }
-
   },
   attachScripts: function() {
     // Always have the arrow down when navigation is visible
@@ -136,7 +129,7 @@ var app = {
         "background-image": "none",
         "background-color": "#000"
       });
-      $("#titles").fadeOut(1000);
+      $("#titles").hide();
       $(".nav-holder *").fadeOut(1000);
 
       $('.play_pause_button').removeClass('play').addClass('pause');
@@ -146,7 +139,7 @@ var app = {
       app.navigation.show();
 
       $(".nav-holder *").fadeIn(1000);
-      $("#titles, .video-controls").fadeIn(1000);
+      $("#titles, .video-controls").show();
 
       $(".slide-container").css({
         "background-image": 'none'
@@ -334,7 +327,7 @@ var app = {
       // $("#titles h1").text(nav.episodes[episodeId].title);
       // $("#titles span.subtitle").text(nav.episodes[episodeId].subtitle);
       // $("#titles span.description").text(nav.episodes[episodeId].description);
-      $("#content *, #titles").fadeIn(1000);
+      $("#content *, #titles").show();
       $(".timeRemaining").text("0:00");
       $('.play_pause_button').removeClass('pause').addClass('play');
       $(".avancee").css({

@@ -1,0 +1,662 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+*    Global
+*/
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow:hidden;
+}
+
+body {
+  font-size: 100%;
+  font-family: 'DINPro-Light', sans-serif;
+}
+
+body:after
+{
+  content:  url("../resources/_Images/optimized/new/E1_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E2_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E3_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E4_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E5_Masthead_s.jpg")
+            url("../resources/_Images/optimized/new/E6_Masthead_s.jpg");
+  display: none;
+}
+
+/*
+*    TYPEFACE AND TEXT
+*/
+
+@font-face {
+  font-family: 'oswaldbold';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'oswaldlight';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'oswaldregular';
+  src: url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff2') format('woff2'),
+  url('../resources/_Typeface/webfontkit_Oswald/oswald-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'DINPro-Light';
+  src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot'); /* IE9 Compat Modes */
+  src: url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+  url('../resources/_Typeface/DINPro-Light_WEBFONT/DINPro-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 35px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-family: 'oswaldregular';
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'DINPro-Light';
+}
+
+p, span, a, input, textarea, ul, li {
+  font-family: 'DINPro-Light', sans-serif;
+}
+
+#wrapper {
+  width:100%;
+  height:100%;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+**    MENU
+*/
+
+.nav-holder {
+  position:fixed;
+  top: 30px;
+  left: 50%;
+  z-index:11;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.nav {
+  display:inline-block;
+  font-family: 'DINPro-Light', sans-serif;
+}
+
+.nav-list {
+  list-style:none;
+}
+
+.nav-item {
+  float:left;
+  display:inline;
+  text-transform: uppercase;
+  margin-right: 20px;
+}
+
+.nav-item a {
+  display:block;
+  padding:5px 10px;
+  color:#fff;
+  text-decoration: none;
+}
+
+.modal-nav-item a {
+  color:#000;
+}
+
+.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.nav-item a.nav-item-highlight {
+  background-color: #fff;
+  color: #000;
+}
+
+#navigation {
+  position: fixed;
+  width: 100%;
+  height: 160px;
+  bottom: -100px;
+  color: #fff;
+  z-index: 3;
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+#navigation.visible {
+  bottom: 0;
+}
+
+#navigation-interaction {
+  position:fixed;
+  width: 100%;
+  height: 60px;
+}
+
+#hover-navigation {
+  width: 100%;
+  height: 30px;
+}
+
+.navigation-elements {
+  width: 100%;
+  display: flex;                  /* establish flex container */
+}
+
+.play_pause {
+  margin-left: 0;
+}
+
+.play_pause_button {
+  cursor: pointer;
+  width:32px;
+  height:32px;
+  display: block;
+}
+
+.play {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.pause {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Pause@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrows {
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+  width: 500px;
+  margin: 0 auto;
+}
+
+.arrow {
+  cursor: pointer;
+  width:32px;
+  height:32px;
+  display: block;
+  margin-left: -12.5%;
+}
+
+.arrow_show_hide {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Down@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrow_left {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Left@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrow_right {
+  background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Right@2x.png) no-repeat 0 0;
+  background-size: 32px;
+}
+
+.arrow_up {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.arrow_down {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.transition {
+  -webkit-transition: bottom 0.3s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: bottom 0.3s ease-in-out;  /* Firefox 4-15 */
+  -o-transition: bottom 0.3s ease-in-out;  /* Opera 10.50–12.00 */
+  transition: bottom 0.3s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+.show {
+  bottom:-100px !important;
+}
+
+/*
+#navigation:hover {
+opacity: 0.9;
+}
+*/
+
+#episodeProgress {
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  cursor: pointer;
+}
+
+#episodeScroll {
+  padding-top: 60px;
+  width: 100%;
+  height:100%;
+}
+
+/* BOTTOM NAV GREY */
+
+#episodeSelection {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#episodeScrollLeft {
+  height: 100%;
+  width: 5%;
+  position:fixed;
+  left:0;
+  z-index: 10;
+}
+
+#episodeScrollRight {
+  height: 100%;
+  width: 5%;
+  position:fixed;
+  right:0;
+  z-index: 10;
+}
+
+#navigation .top{display:block;height:53px;width:100%;color:#fff;text-align:center}
+#navigation .info{margin-top:52px;height:28px;background:#000}
+
+/* Play Bar */
+#navigation .avancee{display:inline-block;background: rgba(0, 240, 198, 1); width:0;height:30px}
+
+/* Play Bar Background */
+#navigation .txt{color:#fff;position:relative;height:20px;margin-top:-23px;padding:0 20px}
+
+#navigation .txt div{display:block;line-height:20px;vertical-align:middle}
+#navigation .txt div a{float:left;font-family:ss-standard;font-size:12px;text-decoration:none;color:#fff;margin:-2px 10px 0 0;padding-top:4px}
+#navigation .txt div.border{background:red;content:'';border-bottom:1px solid #fff}
+
+#navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;margin-top:-2px;}
+
+.episode {
+  height:100%;
+  text-align: left;
+  letter-spacing: 0.5px;
+  color: #fff;
+  display:inline-block;
+  padding: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  word-wrap: break-word;
+  opacity: 0.35;
+}
+
+.episode.live {
+  opacity: 1;
+}
+
+.color-player-timeline {
+  background-color: #00F0C6;
+}
+
+@media(min-width: 500px) {
+  .episode h1 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+  }
+
+  .episode h3 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+    margin-left: 15px;
+  }
+
+  .episode p {
+    /*font-size: 100%;*/
+  }
+}
+
+@media(min-width: 800px) {
+  .episode h1 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+  }
+
+  .episode h3 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "oswaldLight",sans-serif;
+    display: inline;
+    margin-left: 15px;
+  }
+
+  .episode p {
+    /*font-size: 100%;*/
+  }
+}
+
+.interactive {
+  height:100%;
+  text-align: left;
+  color: #fff;
+  display:inline-block;
+  overflow: hidden;
+  color: #fff;
+  cursor: pointer;
+
+  background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+}
+
+.interactive span {
+  background: url(../resources/_Images/_Icons/_Plus-Circle@2x.png) no-repeat;
+  background-position: top 15px center;
+  display: block;
+  background-size: 20px;
+  height: 100%;
+  opacity: 0.35;
+}
+.interactive.live span {
+  opacity: 1;
+}
+
+#titles {
+  position: absolute;
+  display:block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index:2;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#titles .slide-container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 100%;
+  height: 100%;
+}
+
+#titles .slide-container img.video-controls {
+  position: relative;
+  width: 50px;
+  height: auto;
+  top: 56%;
+  cursor: pointer;
+}
+
+#play {
+  font-size: 150px;
+  color: #fff;
+  cursor:pointer;
+  clear:both;
+  display:block;
+  width: 100px;
+  margin: 0 auto;
+}
+
+#content {
+  width:100%;
+  height:100%;
+  z-index: 1;
+}
+
+/*
+*    VIDEO
+*/
+
+/*
+#video {
+position:absolute;
+height:100%;
+width:100%;
+min-width: 100%;
+min-height: 100%;
+overflow: hidden;
+}
+*/
+
+#video {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  overflow: hidden;
+  height:100%;
+  width:100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#video > video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
+  z-index: -1;
+}
+/* 1. No object-fit support: */
+@media (min-aspect-ratio: 16/9) {
+  #video > video { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  #video > video { width: 300%; left: -100%; }
+}
+/* 2. If supporting object-fit, overriding (1): */
+@supports (object-fit: cover) {
+  #video-bg > video {
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+}
+
+video::-webkit-media-controls {
+  display: none;
+}
+
+/*
+*    INTERACTIVE
+*/
+
+/*
+.play {
+  width: 12px;
+  height: 16px;
+  border-top: 8px solid transparent;
+  border-left: 12px solid #fff;
+  border-bottom: 8px solid transparent;
+  border-right: 0;
+
+  background:none!important;
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+  display: block;
+  outline: 0;
+}
+.pause {
+  width: 12px;
+  height: 16px;
+  border-right: 4px solid #fff;
+  border-left: 4px solid #fff;
+  border-top:0;
+  border-bottom: 0;
+
+  background:none!important;
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+  display: block;
+  outline: 0;
+}
+*/
+
+#seek-bar {
+  width: 100%;
+}
+
+#preload {
+  display: none;
+}
+
+#layover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,1);
+  z-index: 12;
+  display: none;
+  background: url("../resources/_Images/E0_Masthead.jpg") no-repeat center center;
+  background-size: cover;
+}
+#layover.visible {
+  display: block;
+}
+
+#layover .content {
+  background: transparent;
+  width: 50%;
+  height: 200px;
+  margin: 0 auto;
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  top: 25%;
+  position: relative;
+  text-align: center;
+}
+
+#layover .content .brand-heading {
+  margin-top: 15px;
+  color: white;
+  font-size: 35px;
+}
+
+#layover .content .intro-text {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+@media(min-width:768px) {
+  #layover .content .brand-heading {
+    text-align: center;
+    font-size: 65px;
+  }
+
+  #layover .content .intro-text {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+@media(min-width:1170px) {
+  #layover .content .brand-heading {
+    text-align: center;
+    font-size: 85px;
+  }
+  #layover .content .intro-text {
+    text-align: center;
+    font-size: 20px;
+  }
+}
