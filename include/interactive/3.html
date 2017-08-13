@@ -44,6 +44,8 @@
             <p class="text">The sea areas outside of Lofoten, Vesterålen and Senja are some of the most productive in the world.
               <br /><br/>
                Due to ocean currents and the slim continental shelf, these nutritious areas caters for an array of fish, birds and marine mammals.
+               <br /><br />
+               Explore the important areas and compare them with the oil and gas resources with the menu to the right.
             </p>
           </div>
         </section>
@@ -83,7 +85,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-12">
                 <br />
                 <p class="text">See how the potential oil and gas resources conflict with the spawning grounds:</p>
@@ -92,6 +94,7 @@
                 </div>
               </div>
             </div>
+            <br /><br /> -->
 
           </div>
         </section>
@@ -111,7 +114,7 @@
               Many of the species that migrate here are critically endangered.
             </p>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-12">
                 <p class="text">The bird colonies are located very close to a large part of the oil prospects:</p>
                 <div class="checkboxes">
@@ -119,6 +122,8 @@
                 </div>
               </div>
             </div>
+
+            <br /><br /> -->
           </div>
         </section>
 
@@ -135,7 +140,7 @@
               The Røst reef is the world's largest known deep-water coral reef, extending over 35 km in length and up to 3 km in width. The coral reef extends over some of the oil prospects in question.
             </p>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-12">
                 <p class="text">See how the potential oil and gas resources conflict with the coral reefs:</p>
                 <div class="checkboxes">
@@ -143,17 +148,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="checkboxes">
-                  <label class="layers" for="measure"><input type="checkbox" name="measure" id="measure"><span>Turn on measurement</span></label>
-                </div>
-                <br />
-                <div id='distance' class='distance-container'></div>
-              </div>
-            </div>
-
+            <br /> -->
           </div>
         </section>
 
@@ -216,14 +211,18 @@
 
 <nav id='map-filters' class='filter-ui'>
   <ul>
-    <li class="land-areas" data-layer-name="lovese_land"></li>
-    <li class="fish" data-layer-name="fish"></li>
-    <li class="birds" data-layer-name="birds"></li>
-    <li class="corals" data-layer-name="corals"></li>
-    <!-- <li class="oil" data-layer-name="oil_prospects"></li> -->
-    <li class="people" data-layer-name="people"></li>
+    <li class="land-areas" data-layer-name="lovese_land" alt="" title=""></li>
+    <li class="fish" data-layer-name="fish" alt="Spawing sites" title="Spawing sites"></li>
+    <li class="birds" data-layer-name="birds" alt="Bird colonies" title="Bird colonies"></li>
+    <li class="corals" data-layer-name="corals" alt="Coral reefs" title="Coral reefs"></li>
+    <li class="people" data-layer-name="people" alt="Interviews" title="Interviews"></li>
+    <li class="empty"></li>
+    <li class="oil" data-layer-name="oil_prospects" alt="Oil and gas" title="Oil and gas"></li>
+    <li class="measure" data-layer-name="measure" alt="Measure distance" title="Measure distance"></li>
   </ul>
 </nav>
+
+<div id='distance' class='distance-container'></div>
 
 <section class="cd-section" style="display:none; z-index:-99999;">
   <!-- Interview overlay triggers -->
@@ -307,7 +306,7 @@
 <script type="text/javascript" src="/js/velocity.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
-<!-- <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script> -->
+<!-- <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script> -->
+<script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
 <!-- <script type="text/javascript" src="/js/chroma.min.js"></script> -->
 <script type="text/javascript" src="/js/interactive-3.js?version=1"></script>
