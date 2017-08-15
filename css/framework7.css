@@ -318,6 +318,21 @@ opacity: 0.9;
   cursor: pointer;
 }
 
+#episodeProgress .items {
+  margin-top: -26px;
+  width: 100%;
+  cursor: default;
+  position: relative;
+}
+#episodeProgress .item {
+  float: left;
+  height: 30px;
+  border-left: 1px solid black;
+}
+#episodeProgress .item:first-of-type {
+  border-left: 0;
+}
+
 #episodeScroll {
   padding-top: 60px;
   width: 100%;
@@ -353,7 +368,12 @@ opacity: 0.9;
 #navigation .info{margin-top:52px;height:28px;background:#000}
 
 /* Play Bar */
-#navigation .avancee{display:inline-block;background: rgba(0, 240, 198, 1); width:0;height:30px}
+#navigation .avancee {
+  display:inline-block;
+  background: rgba(0, 240, 198, 1);
+  width:0;
+  height:30px;
+}
 
 /* Play Bar Background */
 #navigation .txt{color:#fff;position:relative;height:20px;margin-top:-23px;padding:0 20px}

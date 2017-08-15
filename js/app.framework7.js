@@ -204,7 +204,7 @@ var app = {
       $(".timeRemaining").text(minutes + ":" + app.helpers.twoDigits(seconds));
 
       var d = 100 * this.currentTime / this.duration;
-      $(".avancee").css({
+      $("#episodeProgress > .avancee").css({
         width: d + "%"
       });
 
@@ -318,7 +318,7 @@ var app = {
       $("#content *, #titles").show();
       $(".timeRemaining").text("0:00");
       $('.play_pause_button').removeClass('pause').addClass('play');
-      $(".avancee").css({
+      $("#episodeProgress > .avancee").css({
         width: "0%"
       });
     },
@@ -331,7 +331,7 @@ var app = {
         "src": ""
       });
       $(".timeRemaining").text("");
-      $(".avancee").css({
+      $("#episodeProgress > .avancee").css({
         width: "0%"
       });
       $('.play_pause_button').removeClass('pause').addClass('play');
@@ -354,7 +354,7 @@ var app = {
     },
     resetTimer: function() {
       $(".timeRemaining").text("");
-      $(".avancee").css({"width": "0%"});
+      $("#episodeProgress > .avancee").css({"width": "0%"});
     },
     resetInteractiveContainer: function() {
       $("#content #interactive").empty();
@@ -362,6 +362,7 @@ var app = {
     hidePlayButton: function() {
       $('.play_pause_button').removeClass('pause').addClass('play').hide();
     },
+
     startInteractionPart: function(parts, partNo) {
       var partName = Object.keys(parts)[partNo];
       var part     = parts[partName];
@@ -374,6 +375,23 @@ var app = {
 
       var timeToNext = part.time * 1000;
 
+      // Update the avancee
+      var width = 1;
+      var avanceeInterval = setInterval(
+        function() {
+          if (width > 99) {
+            clearInterval(avanceeInterval);
+            width = 100;
+          } else {
+            width = width + (1 / part.time);
+          }
+
+          $("#episodeProgress .item." + partName + " .avancee").css({
+            width: width + "%"
+          });
+        },
+        10
+      );
       // And start the timer for the next interaction
       // if this one is not the last one
       if (partNo != Object.keys(app.interactionCurrentParts).length - 1) {
@@ -410,7 +428,6 @@ var app = {
       app.navigation.state = app.navigation.hidden;
       app.navigation.hide();
     }
-
   },
   startInteractiveTimers: function() {
     var currentInteraction = nav.interactive[app.currInteractive - 1];
@@ -418,8 +435,20 @@ var app = {
     // Timings of the episode
     if ("parts" in currentInteraction) {
       var parts = currentInteraction.parts;
+      var c     = Object.keys(parts).length;
 
       app.interactiveAutoplay = true;
+
+      // Set up the progress structure
+      $('#episodeProgress .items').remove();
+      $('#episodeProgress').append('<div class="items"></div>');
+      for (var i = 0; i < c; i++) {
+        $('#episodeProgress .items').append(
+          '<div class="item ' + Object.keys(parts)[i] + '" style="width: ' + 100/c + '%">' +
+              '<div class="avancee"></div>' +
+          '</div>'
+        );
+      }
 
       // Start the first timer
       app.helpers.startInteractionPart(parts, 0);
