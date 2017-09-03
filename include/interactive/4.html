@@ -1,0 +1,240 @@
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<link href='/css/include.css' rel='stylesheet' />
+<link href='/css/interactive-4.css' rel='stylesheet' />
+<link href='/css/morphing-modal.css' rel='stylesheet' />
+
+<div class="loading">
+  <div class="interactive-content"></div>
+  <div class="interactive-content-explanation" style="display: inline-block;">
+    <h2>Explore Norway's oily history</h2>
+    <p style="line-height: 1.5em;">
+      <br><br>
+      <span class="loading-text">Loading ...</span>
+      <a href="" id="start-interactive-tour" style="display:none;">Start!</a>
+    </p>
+  </div>
+</div>
+
+<div class="container-fluid container-full">
+  <div class="full-row row">
+    <div class="col col-sm-5 col-md-5 col-lg-4 col-xl-3 interactive-pane-text" style="display:none; z-index:-99999;">
+
+      <div class="map-features-count">
+        <p><span class="current">1</span> / <span class="total"></span></p>
+      </div>
+
+      <div class="block-content">
+        <h1 class="episode-title">An Oily<br /> History</h1>
+      </div>
+
+      <div class="map-features">
+        <section class="map-details active" data-layer-name="oilwells">
+          <div class="title-holder">
+            <img src="../resources/_Graphics/EP4/_ICN_BTN_oilwell_Inverted@2x.png">
+            <h2 class="title">Oil wells drilled</h2>
+          </div>
+
+          <div class="title-description">
+            <p class="text"></p>
+
+            <label id='year'></label>
+            <input id='slider' type='range' min='0' max='51' step='1' value='0' />
+
+          </div>
+        </section>
+
+        <section class="map-details" data-layer-name="fish">
+          <div class="title-holder">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@3x.png">
+            <h2 class="title"></h2>
+          </div>
+
+          <div class="title-description">
+            <p class="text"></p>
+          </div>
+        </section>
+
+        <section class="map-details" data-layer-name="birds">
+          <div class="title-holder">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_birds_Inverted@3x.png">
+            <h2 class="title"></h2>
+          </div>
+
+          <div class="title-description">
+            <p class="text">
+            </p>
+          </div>
+        </section>
+
+        <section class="map-details" data-layer-name="corals">
+          <div class="title-holder">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_corals_Inverted@3x.png">
+            <h2 class="title"></h2>
+          </div>
+
+          <div class="title-description">
+            <p class="text">
+            </p>
+          </div>
+        </section>
+
+        <section class="map-details" data-layer-name="people">
+          <div class="title-holder">
+            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_MPeople_Inverted@3x.png">
+            <h2 class="title">Experts</h2>
+          </div>
+
+          <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
+            <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what a few experts has to say about the importance of the area for fish, birds and marine mammals.</p>
+          </div>
+
+          <div style="clear:both; padding-right:10px;">
+
+            <div class="row">
+              <div class="col-xs-12">
+
+                <div class="row interview active heike" data-person="heike">
+                  <div class="col-md-4 col-lg-3">
+                    <img src="../resources/_Graphics/EP4/heike@3x.png" />
+                  </div>
+                  <div class="col-md-8 col-lg-9">
+                    <h2>Heike</h2>
+                    <p>Heike has been observering and researching marine mammals in the areas since 2006.</p>
+                  </div>
+                </div>
+
+                <div class="row interview gaute" data-person="gaute">
+                  <div class="col-md-4 col-lg-3">
+                    <img src="../resources/_Graphics/EP4/gaute@3x.png" />
+                  </div>
+                  <div class="col-md-8 col-lg-9">
+                    <h2>Gaute</h2>
+                    <p>Gaute lead the movement against oil drilling from 2009-2012.</p>
+                  </div>
+                </div>
+
+                <div class="row interview odda" data-person="odda">
+                  <div class="col-md-4 col-lg-3">
+                    <img src="../resources/_Graphics/EP4/odda@3x.png" />
+                  </div>
+                  <div class="col-md-8 col-lg-9">
+                    <h2>Odd Arne</h2>
+                    <p>Odd Arne has been fighting against Arctic oil drilling as long as he can remeber.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-sm-5 col-md-5 col-lg-4 col-xl-3 interactive-pane transition"></div>
+  </div>
+</div>
+
+<nav id='map-filters' class='filter-ui'>
+  <ul>
+    <li class="oilwells" data-layer-name="oilwells" alt="Oil wells" title="Oil wells"></li>
+    <!-- <li class="fish" data-layer-name="fish" alt="Spawing sites" title="Spawing sites"></li>
+    <li class="birds" data-layer-name="birds" alt="Bird colonies" title="Bird colonies"></li>
+    <li class="corals" data-layer-name="corals" alt="Coral reefs" title="Coral reefs"></li> -->
+    <li class="people" data-layer-name="people" alt="Interviews" title="Interviews"></li>
+    <li class="empty"></li>
+    <li class="oil" data-layer-name="oil_prospects" alt="Oil and gas" title="Oil and gas"></li>
+    <li class="measure" data-layer-name="measure" alt="Measure distance" title="Measure distance"></li>
+  </ul>
+</nav>
+
+<div id='distance' class='distance-container'></div>
+
+<section class="cd-section" style="display:none; z-index:-99999;">
+  <!-- Interview overlay triggers -->
+  <div class="cd-modal-action heike" data-type="person" data-id="heike">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action gaute" data-type="person" data-id="gaute">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action odda" data-type="person" data-id="odda">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <!-- 360 image overlay triggers -->
+  <div class="cd-modal-action image360_1" data-type="images360" data-id="1">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_2" data-type="images360" data-id="2">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_3" data-type="images360" data-id="3">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_4" data-type="images360" data-id="4">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_5" data-type="images360" data-id="5">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_6" data-type="images360" data-id="6">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_7" data-type="images360" data-id="7">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <!-- Overlay container -->
+  <div class="cd-modal">
+    <div class="cd-modal-content" style="overflow:hidden;">
+      <iframe id="overlayContent" src="" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%;height:100%;"></iframe>
+    </div>
+    <!-- cd-modal-content -->
+  </div>
+  <!-- cd-modal -->
+
+  <a href="#ep4-interactive" class="cd-modal-close">Close</a>
+</section>
+<!-- .cd-section -->
+
+<div id='map'></div>
+
+<script type="text/javascript" src="/js/modernizr.js"></script>
+<script type="text/javascript" src="/js/velocity.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+<!-- <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script> -->
+<script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+<!-- <script type="text/javascript" src="/js/chroma.min.js"></script> -->
+<script type="text/javascript" src="/js/interactive-4.js"></script>

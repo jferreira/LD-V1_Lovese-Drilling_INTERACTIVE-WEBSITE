@@ -3,7 +3,7 @@
 var app = {
   currEpisode: 0,
   currInteractive: 0,
-  liveEpisodes: 2, // 0=1,1=2,2=3 etc. Second episode is live
+  liveEpisodes: 3, // 0=1,1=2,2=3 etc. Second episode is live
   interactiveState: false,
   textPageState: false,
   introSequence1Time: 10,
