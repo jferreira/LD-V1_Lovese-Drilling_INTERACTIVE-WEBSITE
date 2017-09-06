@@ -145,6 +145,12 @@ Main Components
   visibility: visible;
 }
 
+/*
+This fixes the hover bug on the people and 360 icons - but we need to assign the click event to the marker then. Which needs more work on the code...
+.cd-modal-action {
+  pointer-events: none;
+}*/
+
 .cd-modal-close {
   position: fixed;
   z-index: 11;
