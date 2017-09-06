@@ -147,23 +147,24 @@ var land_labels_images = [{
 
 var people = {
   "type": "FeatureCollection",
-  "features": [{
-      "type": "Feature",
-      "properties": {
-        "title": "Heike",
-        "name": "heike",
-        "iconSize": [42, 42],
-        "imgPath": "EP4/",
-        "imgName": "heike@3x"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          14.22199493102596,
-          68.1608805347768
-        ]
-      }
-    },
+  "features": [
+    // {
+    //   "type": "Feature",
+    //   "properties": {
+    //     "title": "Heike",
+    //     "name": "heike",
+    //     "iconSize": [42, 42],
+    //     "imgPath": "EP4/",
+    //     "imgName": "heike@3x"
+    //   },
+    //   "geometry": {
+    //     "type": "Point",
+    //     "coordinates": [
+    //       14.22199493102596,
+    //       68.1608805347768
+    //     ]
+    //   }
+    // },
     {
       "type": "Feature",
       "properties": {
@@ -1221,6 +1222,8 @@ function showMapLayer(layer) {
         map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
       }
 
+      if(layer === "opened_oil_areas") map.setPaintProperty("opened_oil_areas", 'fill-opacity', 1);
+
       if(layer === "oil_prospects") {
         map.setLayoutProperty(layer, 'visibility', 'visible');
         mapLayers[layer].visible = true;
@@ -1231,7 +1234,8 @@ function showMapLayer(layer) {
         // } else if(mapLayers["corals"].visible) {
         //   map.fitBounds(bbox_corals, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
         // }
-
+        map.setPitch(0);
+        map.setBearing(0);
         map.fitBounds(dataLayerBounds[layer], {padding: 30, linear: false, duration: 2000, offset: [200,0]});
 
       } else if(layer === "export") {
@@ -1246,7 +1250,7 @@ function showMapLayer(layer) {
         map.easeTo({
           center: [3.1901099921844605, 59.1799289545379],
           duration: 2000,
-          pitch: 75,
+          pitch: 60,
           bearing: 10,
           zoom: 6,
           easing: function easing(t) {
@@ -1256,29 +1260,44 @@ function showMapLayer(layer) {
       }
     }
   }
-  if(layer === "lovese_land") {
-    map.fitBounds(bbox_area, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
-  }
+
+  // if(layer === "lovese_land") {
+  //   map.fitBounds(bbox_area, {padding: 30, linear: false, duration: 2000, offset: [200,0]});
+  // }
   if (layer === "oilwells") {
+    map.setPitch(0);
+    map.setBearing(0);
+    map.setPaintProperty("opened_oil_areas", 'fill-opacity', 1);
     map.setPaintProperty(layer, 'circle-opacity', 1);
     map.fitBounds(bbox_oilwells, {padding: 20, linear: false, duration: 2000});
   }
   if (layer === "emission") {
+    map.setPitch(0);
+    map.setBearing(0);
     map.fitBounds(bbox_oilwells, {padding: 20, linear: false, duration: 2000});
   }
   if (layer === "spill") {
+    map.setPitch(0);
+    map.setBearing(0);
+    map.setPaintProperty("opened_oil_areas", 'fill-opacity', 0);
     if(!addedSpillMarkers) {
         addMarkers("spill", oil_spills);
     }
     map.fitBounds(bbox_spill, {padding: 20, linear: false, duration: 2000});
   }
   if (layer === "beach") {
+    map.setPitch(0);
+    map.setBearing(0);
+    map.setPaintProperty("opened_oil_areas", 'fill-opacity', 0);
     if(!addedBeachMarkers) {
         addMarkers("beach", beach);
     }
     map.fitBounds(bbox_area, {padding: 50, linear: false, duration: 2000, offset: [100,0]});
   }
   if (layer === "people") {
+    map.setPitch(0);
+    map.setBearing(0);
+    map.setPaintProperty("opened_oil_areas", 'fill-opacity', 0);
     addMarkers("people", people);
     map.fitBounds(bbox_people, {padding: 50, linear: false, duration: 2000, offset: [100,0]});
   }
