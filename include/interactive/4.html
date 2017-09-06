@@ -37,57 +37,97 @@
           </div>
 
           <div class="title-description">
-            <p class="text"></p>
+            <p class="text">Norway has been drilling for offshore oil since the 1960s. During that time, more than 6 000 oil wells has been drilled. Drag the slider to see the accumulated oil well activity.</p>
 
-            <label id='year'></label>
-            <input id='slider' type='range' min='0' max='51' step='1' value='0' />
-
+            <label id='year_oilwells'></label>
+            <!-- <label id='accumulated'></label> -->
+            <input id='slider_oilwells' type='range' min='0' max='51' step='1' value='0' />
+            <br />
+            <p style="text-align: center; font-size: 20px;">Wells drilled:</p>
+            <p id="accumulated_oilwells" style="text-align: center; font-size: 20px;"></p>
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="fish">
+        <!-- EMISSION -->
+        <section class="map-details" data-layer-name="emission">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@3x.png">
-            <h2 class="title"></h2>
+            <img src="../resources/_Graphics/EP4/_ICN_BTN_prod_emission_Inverted@2x.png">
+            <h2 class="title">Norway's Biggest Emitter</h2>
           </div>
 
           <div class="title-description">
-            <p class="text"></p>
+            <p class="text">After the 1980s, when the oil sector was growing rapidly, it quickly became the single most important contributor to Norway's emissions of greenhouse gases. Drag the slider below to see the historical emissions from the sector in Norway.</p>
+
+            <div style="width: 100%;">
+                <canvas id="canvas_emissions"></canvas>
+            </div>
+
+            <input id='slider_emissions' type='range' min='0' max='26' step='1' value='0' />
+
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="birds">
+        <!-- EXPORTED EMISSIONS -->
+        <section class="map-details" data-layer-name="export">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_birds_Inverted@3x.png">
-            <h2 class="title"></h2>
+            <img src="../resources/_Graphics/EP4/_ICN_BTN_export_Inverted@2x.png">
+            <h2 class="title">Exported Emission</h2>
           </div>
 
           <div class="title-description">
             <p class="text">
+              The oil industry is without a doubt the largest source of greenhouse gases in Norway, but that hardly compares to all the emission it has exported to other countries in the form of oil and gas.
+              <br /><br />
+              The exported emissions, which are created when oil and gas are burned in other countries, accounts for roughly 10 times all of Norway's annual emissions.
             </p>
+
+            <label id='year_export'></label>
+            <input id='slider_export' type='range' min='0' max='46' step='1' value='0' />
+
+            <br />
+            <p style="text-align: center; font-size: 20px;">Million tonnes of CO2 exported:</p>
+            <p id="accumulated_export" style="text-align: center; font-size: 20px;"></p>
           </div>
         </section>
 
-        <section class="map-details" data-layer-name="corals">
+        <!-- SPILL -->
+        <section class="map-details" data-layer-name="spill">
           <div class="title-holder">
-            <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_corals_Inverted@3x.png">
-            <h2 class="title"></h2>
+            <img src="../resources/_Graphics/EP4/_ICN_BTN_spill_Inverted@2x.png">
+            <h2 class="title">Oil Spills</h2>
           </div>
 
           <div class="title-description">
-            <p class="text">
+            <p class="text">The oil industry is not only a big climate risk. Since the 60s, there has been numerous large oil spills in Norway. The largest was a blowout in 1977, but since then, there has been other large accidents with large amounts of oil spilling out in the ocean.
+              <br /><br />
+              Common for them all, is that they where more than 70 km away from shore. Thankfully this prevented the oil from reaching the shores. But the potential oil resources outside of Lofoten, Vesterålen and Senja is much closer to land.
             </p>
           </div>
         </section>
 
+        <!-- BEACH -->
+        <section class="map-details" data-layer-name="beach">
+          <div class="title-holder">
+            <img src="../resources/_Graphics/EP4/_ICN_BTN_01_Area_Inverted@2x.png">
+            <h2 class="title">Beaches of Lofoten, Vesterålen and Senja</h2>
+          </div>
+
+          <div class="title-description">
+            <p class="text">Lofoten, Vesterålen and Senja have some of the most stunning beaches and shore lines of Norway. They would be the first places to be hit, after a potential oil spill.
+              <br /><br />
+              Explore the shores of LoVeSe with the 360 images on the map.</p>
+          </div>
+        </section>
+
+        <!-- PEOPLE -->
         <section class="map-details" data-layer-name="people">
           <div class="title-holder">
             <img src="../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_MPeople_Inverted@3x.png">
-            <h2 class="title">Experts</h2>
+            <h2 class="title">Risks of Oil</h2>
           </div>
 
           <div style="clear:both; border-top: 1px solid #fff; margin-top:10px; padding: 10px 10px 0px 10px;">
-            <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear what a few experts has to say about the importance of the area for fish, birds and marine mammals.</p>
+            <p class="text" style="margin-bottom:0px!imporant; padding-bottom:0px!important;">Hear more about seismic blasting, oil spill response and how the the local movement against oil drilling became organized.</p>
           </div>
 
           <div style="clear:both; padding-right:10px;">
@@ -140,9 +180,10 @@
 <nav id='map-filters' class='filter-ui'>
   <ul>
     <li class="oilwells" data-layer-name="oilwells" alt="Oil wells" title="Oil wells"></li>
-    <!-- <li class="fish" data-layer-name="fish" alt="Spawing sites" title="Spawing sites"></li>
-    <li class="birds" data-layer-name="birds" alt="Bird colonies" title="Bird colonies"></li>
-    <li class="corals" data-layer-name="corals" alt="Coral reefs" title="Coral reefs"></li> -->
+    <li class="emission" data-layer-name="emission" alt="Emissions" title="Emissions"></li>
+    <li class="export" data-layer-name="export" alt="Exported emissions" title="Exported emissions"></li>
+    <li class="spill" data-layer-name="spill" alt="Oil spills" title="Oil spills"></li>
+    <li class="beach" data-layer-name="beach" alt="Beaches of Lofoten" title="Beaches of Lofoten"></li>
     <li class="people" data-layer-name="people" alt="Interviews" title="Interviews"></li>
     <li class="empty"></li>
     <li class="oil" data-layer-name="oil_prospects" alt="Oil and gas" title="Oil and gas"></li>
@@ -203,6 +244,8 @@
   </div>
   <!-- cd-modal-action -->
 
+
+
   <div class="cd-modal-action image360_6" data-type="images360" data-id="6">
     <a class="btn" data-type="modal-trigger"></a>
     <span class="cd-modal-bg"></span>
@@ -210,6 +253,48 @@
   <!-- cd-modal-action -->
 
   <div class="cd-modal-action image360_7" data-type="images360" data-id="7">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_8" data-type="images360" data-id="8">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_9" data-type="images360" data-id="9">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_10" data-type="images360" data-id="10">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_11" data-type="images360" data-id="11">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_12" data-type="images360" data-id="12">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_13" data-type="images360" data-id="13">
+    <a class="btn" data-type="modal-trigger"></a>
+    <span class="cd-modal-bg"></span>
+  </div>
+  <!-- cd-modal-action -->
+
+  <div class="cd-modal-action image360_14" data-type="images360" data-id="14">
     <a class="btn" data-type="modal-trigger"></a>
     <span class="cd-modal-bg"></span>
   </div>
@@ -237,4 +322,5 @@
 <!-- <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script> -->
 <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
 <!-- <script type="text/javascript" src="/js/chroma.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="/js/interactive-4.js"></script>

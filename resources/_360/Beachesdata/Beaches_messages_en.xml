@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[Beaches]]></data>
+
+
+
+  <data name="en_pano1710_title"><![CDATA[Unstad]]></data>
+  <data name="en_spotpoint1727_tooltip"><![CDATA[Nykvåg]]></data>
+
+
+  <data name="en_pano1703_title"><![CDATA[Bleik]]></data>
+  <data name="en_spotpoint1733_tooltip"><![CDATA[Bleik 2]]></data>
+  <data name="en_spotpoint1736_tooltip"><![CDATA[Stave]]></data>
+
+
+  <data name="en_pano1704_title"><![CDATA[Bleik 2]]></data>
+  <data name="en_spotpoint1734_tooltip"><![CDATA[Bleik]]></data>
+  <data name="en_spotpoint1735_tooltip"><![CDATA[Stave]]></data>
+
+
+  <data name="en_pano1705_title"><![CDATA[Nykvåg]]></data>
+  <data name="en_spotpoint1728_tooltip"><![CDATA[Nykvåg 2]]></data>
+  <data name="en_spotpoint1742_tooltip"><![CDATA[Unstad]]></data>
+
+
+  <data name="en_pano1706_title"><![CDATA[Nykvåg 2]]></data>
+  <data name="en_spotpoint1729_tooltip"><![CDATA[Hovden]]></data>
+  <data name="en_spotpoint1740_tooltip"><![CDATA[Nykvåg]]></data>
+
+
+  <data name="en_pano1707_title"><![CDATA[Hovden]]></data>
+  <data name="en_spotpoint1730_tooltip"><![CDATA[Nøss]]></data>
+  <data name="en_spotpoint1739_tooltip"><![CDATA[Nykvåg]]></data>
+
+
+  <data name="en_pano1708_title"><![CDATA[Nøss]]></data>
+  <data name="en_spotpoint1731_tooltip"><![CDATA[Stave]]></data>
+  <data name="en_spotpoint1738_tooltip"><![CDATA[Hovden]]></data>
+
+
+  <data name="en_pano1709_title"><![CDATA[Stave]]></data>
+  <data name="en_spotpoint1732_tooltip"><![CDATA[Bleik]]></data>
+  <data name="en_spotpoint1737_tooltip"><![CDATA[Nøss]]></data>
+
+
+	<data name="en_spotmap1719_tooltip"><![CDATA[Bleik]]></data>
+	<data name="en_spotmap1720_tooltip"><![CDATA[Bleik 2]]></data>
+	<data name="en_spotmap1721_tooltip"><![CDATA[Nykvåg]]></data>
+	<data name="en_spotmap1722_tooltip"><![CDATA[Nykvåg 2]]></data>
+	<data name="en_spotmap1723_tooltip"><![CDATA[Hovden]]></data>
+	<data name="en_spotmap1724_tooltip"><![CDATA[Nøss]]></data>
+	<data name="en_spotmap1725_tooltip"><![CDATA[Stave]]></data>
+	<data name="en_spotmap1726_tooltip"><![CDATA[Unstad]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>

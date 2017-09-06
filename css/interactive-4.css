@@ -205,21 +205,21 @@
 #map-filters ul li.oilwells:hover { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_oilwell_Inverted@2x.png");}
 #map-filters ul li.oilwells.active { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_oilwell_Inverted@2x.png");}
 
-#map-filters ul li.fish {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish@2x.png");}
-#map-filters ul li.fish:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@2x.png");}
-#map-filters ul li.fish.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Fish_Inverted@2x.png");}
+#map-filters ul li.emission {background-image: url("../resources/_Graphics/EP4/_ICN_BTN_prod_emission@2x.png");}
+#map-filters ul li.emission:hover { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_prod_emission_Inverted@2x.png");}
+#map-filters ul li.emission.active { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_prod_emission_Inverted@2x.png");}
 
-#map-filters ul li.birds {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds@2x.png");}
-#map-filters ul li.birds:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@2x.png");}
-#map-filters ul li.birds.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@2x.png");}
+#map-filters ul li.export {background-image: url("../resources/_Graphics/EP4/_ICN_BTN_export@2x.png");}
+#map-filters ul li.export:hover { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_export_Inverted@2x.png");}
+#map-filters ul li.export.active { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_export_Inverted@2x.png");}
 
-#map-filters ul li.whales {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
-#map-filters ul li.whales:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
-#map-filters ul li.whales.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/");}
+#map-filters ul li.spill {background-image: url("../resources/_Graphics/EP4/_ICN_BTN_spill@2x.png");}
+#map-filters ul li.spill:hover { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_spill_Inverted@2x.png");}
+#map-filters ul li.spill.active { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_spill_Inverted@2x.png");}
 
-#map-filters ul li.corals {background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral@2x.png");}
-#map-filters ul li.corals:hover { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@2x.png");}
-#map-filters ul li.corals.active { background-image: url("../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Coral_Inverted@2x.png");}
+#map-filters ul li.beach {background-image: url("../resources/_Graphics/EP4/_ICN_BTN_01_Area@2x.png");}
+#map-filters ul li.beach:hover { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_01_Area_Inverted@2x.png");}
+#map-filters ul li.beach.active { background-image: url("../resources/_Graphics/EP4/_ICN_BTN_01_Area_Inverted@2x.png");}
 
 #map-filters ul li.people {background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople@3x.png");}
 #map-filters ul li.people:hover { background-image: url("../resources/_Graphics/_GFX_005_EP2_LD/_ICN_BTN_MPeople_Inverted@3x.png");}
@@ -241,13 +241,17 @@
 }
 
 /* Markers on the map */
-.marker-people, .marker-360, .marker-birds, .marker-corals {
+.marker-people, .marker-360, .marker-birds, .marker-corals, .marker-beach, .marker-spill {
   border-radius: 50%;
   -webkit-background-size: cover; /* For WebKit*/
   -moz-background-size: cover;    /* Mozilla*/
   -o-background-size: cover;      /* Opera*/
   background-size: cover;         /* Generic*/
   cursor: pointer;
+}
+
+/*.marker-beach:hover {
+  background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_360_Inverted@3x.png');
 }
 
 .marker-360:hover {
@@ -260,7 +264,7 @@
 
 .marker-birds:hover {
   background-image: url('../resources/_Graphics/_GFX_006_EP3_BG/_ICN_BTN_Birds_Inverted@3x.png');
-}
+}*/
 
 .interactive-content-explanation h2 {
   font-size: 15px;
