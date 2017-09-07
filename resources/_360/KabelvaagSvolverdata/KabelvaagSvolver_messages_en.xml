@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[Kabelvåg/Svolvær]]></data>
+
+
+
+  <data name="en_pano1472_title"><![CDATA[Kabelvåg]]></data>
+  <data name="en_spotpoint1490_tooltip"><![CDATA[Svolvær]]></data>
+
+
+  <data name="en_pano1473_title"><![CDATA[Svolvær]]></data>
+  <data name="en_spotpoint1491_tooltip"><![CDATA[Svolværgeita]]></data>
+  <data name="en_spotpoint1702_tooltip"><![CDATA[Kabelvåg]]></data>
+
+
+  <data name="en_pano1475_title"><![CDATA[Svolværgeita]]></data>
+  <data name="en_spotpoint1698_tooltip"><![CDATA[Mt. Fløya]]></data>
+  <data name="en_spotpoint1701_tooltip"><![CDATA[Svolvær]]></data>
+
+
+  <data name="en_pano1476_title"><![CDATA[Mt. Fløya]]></data>
+  <data name="en_spotpoint1699_tooltip"><![CDATA[Svolværgeita]]></data>
+  <data name="en_spotpoint1700_tooltip"><![CDATA[Svolvær]]></data>
+
+
+	<data name="en_spotmap1484_tooltip"><![CDATA[Kabelvåg]]></data>
+	<data name="en_spotmap1485_tooltip"><![CDATA[Svolvær]]></data>
+	<data name="en_spotmap1487_tooltip"><![CDATA[Svolværgeita]]></data>
+	<data name="en_spotmap1488_tooltip"><![CDATA[Mt. Fløya]]></data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</krpano>

@@ -30,7 +30,7 @@ var nav = {
       "subtitle": "Episode 3:",
       "description": "",
       "poster": "resources/_Images/optimized/new/E3_Masthead_s.jpg",
-      "slide": "resources/_Images/optimized/new/Title_EP3_TITLE.png",
+      "slide": "resources/_Images/optimized/new/Title_EP3.png",
       "url": "https://vimeo.com/229464326",
       "vid": "229464326",
       "mp4": "https://player.vimeo.com/external/229464326.hd.mp4?s=bb6fcf52b9eb8d5efd7fc38491d4378cb8e401e1&profile_id=174"
@@ -42,10 +42,10 @@ var nav = {
       "subtitle": "Episode 4:",
       "description": "",
       "poster": "resources/_Images/optimized/new/E4_Masthead.jpg",
-      "slide": "resources/_Images/optimized/new/Title_EP4_TITLE.png",
+      "slide": "resources/_Images/optimized/new/Title_EP4.png",
       "url": "",
       "vid": "",
-      "mp4": ""
+      "mp4": "https://player.vimeo.com/external/232736289.hd.mp4?s=90f32461e7be3cf1e01ab6f5b75442daa2e825a4&profile_id=174"
     },
     {
       "id": "5",
