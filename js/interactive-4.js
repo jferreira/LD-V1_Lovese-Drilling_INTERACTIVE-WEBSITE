@@ -18,9 +18,6 @@ var bbox_oilwells = [[0.18,55.65],	[31.73,77.17]];
 var bbox_people = [[14.1779,68.1174],	[14.8645,68.308]];
 var bbox_export = [[-0.11,	56.49],	[11.21,	65.02]];
 var bbox_spill = [[1.36,	56.53],	[11.25,	66.07]]
-// var bbox_roest  = [[11.814423,67.402211],[12.204437,67.542167]];
-// var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
-// var bbox_roest_and_oil = [[10.7865,67.351],[12.2298,67.64]];
 
 var emission_chart;
 
@@ -32,9 +29,6 @@ $(".map-features-count p span.total").text($('.map-details').length);
 // var colors2 = chroma.scale('YlGnBu').colors(5);
 // var colors3 = chroma.scale(['yellow', '008ae5']).mode('lch').colors(5);
 // console.log(colors2)
-
-// GeoJSON data sources for MapBox layer
-// Get more data layers here: http://maps.imr.no/geoserver/web/?wicket:bookmarkablePage=:org.geoserver.web.demo.MapPreviewPage
 
 var dataSources = [
   {
@@ -712,9 +706,6 @@ function filterBy(slider, years, year) {
       var filter = ['<=', 'year', years[year]];
        map.setFilter('oilwells', filter);
 
-      // Get features which is visible on the current layer, within the current viewport
-      // var features = map.queryRenderedFeatures({ layers: ['wells'] });
-
       // Set the label to the year
       document.getElementById('year_'+slider).textContent = years[year];
       document.getElementById('accumulated_'+slider).textContent = wells_accumulated[year].toLocaleString();
@@ -869,6 +860,7 @@ map.on('load', function() {
           });
 
           map.on('mousemove', 'oilwells', function(e) {
+            if(mapLayers['oilwells'].visible) {
               // Change the cursor style as a UI indicator.
               map.getCanvas().style.cursor = 'pointer';
 
@@ -884,11 +876,14 @@ map.on('load', function() {
               popup.setLngLat(e.lngLat)
                   .setText(feature.properties.name)
                   .addTo(map);
+            }
           });
 
           map.on('mouseleave', 'oilwells', function() {
+            if(mapLayers['oilwells'].visible) {
               map.getCanvas().style.cursor = '';
               popup.remove();
+            }
           });
 
         } else if(this[i].layer_name==="export") {
@@ -1388,6 +1383,7 @@ function showMapLayer(layer) {
     map.setPitch(0);
     map.setBearing(0);
     map.setPaintProperty("opened_oil_areas", 'fill-opacity', 0);
+    map.setPaintProperty("oilwells", 'circle-opacity', 0);
     if(!addedSpillMarkers) {
         addMarkers("spill", oil_spills);
     }
@@ -1397,6 +1393,7 @@ function showMapLayer(layer) {
     map.setPitch(0);
     map.setBearing(0);
     map.setPaintProperty("opened_oil_areas", 'fill-opacity', 0);
+    map.setPaintProperty("oilwells", 'circle-opacity', 0);
     if(!addedBeachMarkers) {
         addMarkers("beach", beach);
     }
@@ -1406,15 +1403,17 @@ function showMapLayer(layer) {
     map.setPitch(0);
     map.setBearing(0);
     map.setPaintProperty("opened_oil_areas", 'fill-opacity', 0);
+    map.setPaintProperty("oilwells", 'circle-opacity', 0);
     addMarkers("people", people);
     map.fitBounds(bbox_people, {padding: 50, linear: false, duration: 2000, offset: [100,0]});
   }
+  mapLayers[layer].visible = true;
 }
 
 // Remove a given map layer, except the islands layer - which has no layer
 function removeMapLayer(layer) {
-  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "oilwells" && layer !== "people" && layer !== "beach") {
-    if (mapLayers[layer].visible == true && layer !== "lovese_land" && layer !== "oilwells" && layer !== "people" && layer !== "beach") {
+  if (layer !== undefined || layer !== null || typeof layer !== "undefined" && layer !== "lovese_land" && layer !== "oilwells" && layer !== "people" && layer !== "beach" && layer !== "spill") {
+    if (mapLayers[layer].visible == true && layer !== "lovese_land" && layer !== "oilwells" && layer !== "people" && layer !== "beach" && layer !== "spill") {
       map.setLayoutProperty(layer, 'visibility', 'none');
       // if (layer === "lovese_sea") {
       //   map.setLayoutProperty("lovese-labels", 'visibility', 'none');

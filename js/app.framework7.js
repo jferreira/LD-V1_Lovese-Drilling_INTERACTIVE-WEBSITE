@@ -10,6 +10,7 @@ var app = {
   introSequence2Time: 10,
   hashUrlMapEpisodes: Array(6),
   hashUrlMapEpisodesInteractive: Array(6),
+  hash: 0,
 
   init: function() {
     app.layover.init();
@@ -37,8 +38,12 @@ var app = {
 
     if (window.location.hash) {
       // If a hash is present - show the specific episode or interactive part
-      var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-      app.navigation.hashNavigation(hash);
+      app.hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+      app.navigation.hashNavigation(app.hash);
+
+      if (window.matchMedia('screen and (max-width: 576px)').matches) {
+        app.hidePrevious(); // Only do this if screen size is below xxx pixels
+      }
     } else {
       app.helpers.updateContent(0);
     }
@@ -46,9 +51,12 @@ var app = {
   },
   attachObservers: function() {
     // Navigation
-    $("#hover-navigation .arrow_left").on("click", app.toPrevious);
+    $(".arrow_left").on("click", app.toPrevious);
     $("#hover-navigation .arrow_show_hide").on("click", app.navigation.toggle);
-    $("#hover-navigation .arrow_right").on("click", app.toNext);
+    $(".arrow_right").on("click", app.toNext);
+
+    $(".nav_mobile_left").on("click", app.showPrevious);
+    $(".nav_mobile_right").on("click", app.showNext);
 
     // Video control
     $(".video-controls").on("click", app.video.start);
@@ -109,6 +117,14 @@ var app = {
       console.log('Video has ended!');
     });
     */
+
+    $(window).on('resize', function(){
+      if (window.matchMedia('screen and (max-width: 576px)').matches) {
+        app.hidePrevious(); // Only do this if screen size is below xxx pixels
+      } else if (window.matchMedia('screen and (min-width: 577px)').matches) {
+        app.showAll();
+      }
+    });
   },
   attachScripts: function() {
     // Always have the arrow down when navigation is visible
@@ -198,6 +214,25 @@ var app = {
       app.currEpisode++;
       app.helpers.updateContent();
     }
+  },
+  //TODO: Find out how we can update the menu on page load, if the hash i larger than episode 1
+  showPrevious: function() {
+    if (app.currEpisode >= 0) {
+      $("#episodeSelection").find(".episode").eq(app.currEpisode).show();
+    }
+  },
+  showNext: function() {
+    if (app.currEpisode <= nav.episodes.length - 1) {
+      $("#episodeSelection").find(".episode").eq(app.currEpisode-1).hide();
+    }
+  },
+  hidePrevious: function() {
+    for(var i = 0; i < app.hash.slice(-1)-1; i++) {
+      $("#episodeSelection").find(".episode").eq(i).hide();
+    }
+  },
+  showAll: function() {
+    $("#episodeSelection").find(".episode").show();
   },
   updateTime: function() {
     if (this.readyState > 0) {

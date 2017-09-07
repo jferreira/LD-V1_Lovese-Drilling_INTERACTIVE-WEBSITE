@@ -73,38 +73,49 @@ app.navigation = {
 
             var episode = $('<div></div>',{
                 id: 'episode_' + (i+1),
-                class: 'episode',
-                attr: {
-                    "data-id" : nav.episodes[i].id,
-                    "onClick" : "app.helpers.updateContent(" + i + ")"
-                },
-                html: "<div style='height:100%; float:left; margin-right:5px;'> \
-                    <img src='../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play_Embed@2x.png' style='float:left; width:32px; height: auto;'> \
-                  </div> \
-                  <div style='height:100%; padding-top: 5px;'><h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1></div>",
-                css: {'width': episodeWidth + "%"}
+                class: 'col-xs-12 col-sm-2 col-md-2 episode nospacing',
+                // attr: {
+                //     "data-id" : nav.episodes[i].id,
+                //     "onClick" : "app.helpers.updateContent(" + i + ")"
+                // },
+                //html: "<div style='height:100%; float:left; margin-right:5px;'> \
+                // html: "<div style='height:100%; float:left; margin-right:5px; width: 32px;'> \
+                //         <img src='../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play_Embed@2x.png' style='float:left; width:32px; height: auto;'> \
+                //       </div> \
+                //       <div style='float:left; height:100%; padding-top: 5px; width:50%;'><h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1></div> \
+                //       <div id='interactive_" + (i+1)+ "' class='interactive' data-id='"+nav.episodes[i].id+"' style='height: 100%; width:20%;'><span></span></div> \
+                //       "
+
+                html: "<div class='row' style='height:100%; margin:0; padding:0;'>\
+                  <div class='col-xs-2 visible-xs-block hidden-sm'><div class='arrow arrow_left nav_mobile_left'></div></div> \
+                  <div class='hidden-xs hidden-sm visible-md-block col-md-2 visible-lg-block nospacing' style='padding: 10px 0 0 10px;' onClick='app.helpers.updateContent(" + i + ")'><img src='../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Play_Embed@2x.png' style='float:left; width:32px; height: auto;'></div>\
+                  <div class='col-xs-5 col-sm-8 col-md-7 nospacing' style='padding:10px 0 0 10px;' onClick='app.helpers.updateContent(" + i + ")'><h1>EP" + nav.episodes[i].id + "<br /><span class='ep-title'>" + nav.episodes[i].title + "</span></h1></div>\
+                  <div class='col-xs-3 col-sm-4 col-md-3 nospacing interactive' id='interactive_" + (i+1)+ "' data-id='"+nav.episodes[i].id+"' onClick='app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")'><span></span></div>\
+                  <div class='col-xs-2 visible-xs-block hidden-sm'><div class='arrow arrow_right nav_mobile_right'></div></div> \
+                </div>"
+
+                //css: {'width': episodeWidth + "%"}
             }).appendTo("#episodeSelection");
 
-            var interactive = $('<div></div>',{
-                id: 'interactive_' + (i+1),
-                class: 'interactive',
-                attr: {
-                    "data-id" : nav.episodes[i].id,
-                    "onClick" : "app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")"
-                },
-                html: "<span></span>",
-                css: {'width': interactiveWidth + "%"}
-            }).appendTo("#episodeSelection");
+            // var interactive = $('<div></div>',{
+            //     id: 'interactive_' + (i+1),
+            //     class: 'interactive',
+            //     attr: {
+            //         "data-id" : nav.episodes[i].id,
+            //         "onClick" : "app.helpers.loadInteractiveContent(" + nav.episodes[i].id + ")"
+            //     },
+            //     html: "<span></span>",
+            //     //css: {'width': interactiveWidth + "%"}
+            // }).appendTo("#episodeSelection");
 
             // If the episode is marked as being live, add live classes. Otherwise, disable interactive part.
             if(i <= app.liveEpisodes) {
                 $(episode).addClass("live");
-                $(interactive).addClass("live");
-            } else {
-                interactive.attr("onClick",false);
+                $(episode).find(".interactive").addClass("live");
             }
         }
         $("#episodeSelection").css("width" , "100%");
+        $("#episodeScroll").css({"display" : "block", "padding-top" : "60px;"});
     },
 
     // Change what content we see, based on given hash
