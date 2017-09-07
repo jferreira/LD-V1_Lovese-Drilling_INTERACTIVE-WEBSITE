@@ -281,6 +281,11 @@ p, span, a, input, textarea, ul, li {
   background-size: 32px;
 }
 
+.arrow_left_menu, .arrow_right_menu {
+  visibility: hidden;
+  opacity: 1;
+}
+
 .arrow_left {
   background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Left@2x.png) no-repeat 0 0;
   background-size: 32px;
@@ -289,6 +294,14 @@ p, span, a, input, textarea, ul, li {
 .arrow_right {
   background: url(../resources/_Graphics/_GFX_001_Player-Controls/_ICN_Player_Right@2x.png) no-repeat 0 0;
   background-size: 32px;
+}
+
+/*// Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  .arrow_left_menu, .arrow_right_menu  {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .arrow_up {
@@ -377,13 +390,17 @@ opacity: 0.9;
 
 #navigation .txt div span.timeRemaining{float:right;display:inline-block;color:#444;font-weight:bold;margin-top:-2px;}
 
+.nospacing {
+  margin: 0;
+  padding: 0;
+}
+
 .episode {
   height:100%;
   text-align: left;
   letter-spacing: 0.5px;
   color: #fff;
   display:inline-block;
-  padding: 10px;
   overflow: hidden;
   cursor: pointer;
   word-wrap: break-word;
@@ -449,8 +466,8 @@ opacity: 0.9;
   color: #fff;
   cursor: pointer;
 
-  background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
-  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 10px);
+  background: -webkit-repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3) 1px, rgba(255, 255, 255, 0.2) 2px, rgba(255, 255, 255, 0.2) 10px);
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3) 1px, rgba(255, 255, 255, 0.2) 2px, rgba(255, 255, 255, 0.2) 10px);
 }
 
 .interactive span {
@@ -461,6 +478,7 @@ opacity: 0.9;
   height: 100%;
   opacity: 0.35;
 }
+
 .interactive.live span {
   opacity: 1;
 }
