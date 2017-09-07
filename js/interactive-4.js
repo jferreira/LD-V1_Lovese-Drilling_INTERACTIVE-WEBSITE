@@ -22,6 +22,8 @@ var bbox_spill = [[1.36,	56.53],	[11.25,	66.07]]
 // var bbox_corals = [[7.9871,67.0074],[16.3368,69.3735]];
 // var bbox_roest_and_oil = [[10.7865,67.351],[12.2298,67.64]];
 
+var emission_chart;
+
 // Set the number of interactive sections - should move it somewhere else
 $(".map-features-count p span.total").text($('.map-details').length);
 
@@ -865,6 +867,30 @@ map.on('load', function() {
               var year = parseInt(e.target.value, 10);
               filterBy("oilwells", years, year);
           });
+
+          map.on('mousemove', 'oilwells', function(e) {
+              // Change the cursor style as a UI indicator.
+              map.getCanvas().style.cursor = 'pointer';
+
+              // Single out the first found feature.
+              var feature = e.features[0];
+
+              // var info = "";
+              // if (typeof data_export[feature.properties.id] !== "undefined" && data_export[feature.properties.id] !== undefined && data_export[feature.properties.id] !== null && data_export[feature.properties.id] > 0) {
+              //   info = ": " + data_export[feature.properties.id].toFixed(1) + " Million tonnes CO2 exported.";
+              // }
+
+              // Display a popup with the name of the oilwell
+              popup.setLngLat(e.lngLat)
+                  .setText(feature.properties.name)
+                  .addTo(map);
+          });
+
+          map.on('mouseleave', 'oilwells', function() {
+              map.getCanvas().style.cursor = '';
+              popup.remove();
+          });
+
         } else if(this[i].layer_name==="export") {
           map.addSource(this[i].layer_name, {
             type: 'geojson',
@@ -996,6 +1022,88 @@ map.on('load', function() {
       updateMarkerOverlayPos(true);
     }
   });
+
+
+  var ctx = document.getElementById("canvas_emissions").getContext("2d");
+  emission_chart = new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      scaleFontColor: '#fff',
+      options: {
+          legend: { display: false },
+          scaleFontColor: '#fff',
+          responsive: true,
+          gridLines: {
+              display: false,
+              drawBorder: false
+          },
+          title: {
+              display: false,
+              text: ''
+          },
+          tooltips: {
+              mode: 'index',
+              intersect: true
+          },
+          scales: {
+            xAxes: [{
+              ticks: {
+                fontSize: 10,
+                fontColor:"#fff"
+              },
+              scaleLabel: {
+                 display: true,
+                 fontSize: 10,
+                 fontColor:"#fff"
+              },
+              gridLines: {
+                display: false,
+                color: "#fff"
+              },
+            }],
+            yAxes: [{
+              gridLines: {
+                display: false,
+                color: "#fff"
+              },
+              id: 'A',
+              type: 'linear',
+              position: 'left',
+              ticks: {
+                fontColor:"#fff",
+                min: 0,
+                max: 50,
+                fontSize: 10
+              },
+              scaleLabel: {
+                 display: false,
+                 labelString: "Million tonnes CO2",
+                 fontSize: 10,
+                 fontColor:"#fff"
+              }
+            }, {
+              id: 'B',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                 fontColor:"#fff",
+                 min: 10,
+                 max: 35,
+                 fontSize: 10,
+                 callback: function(value){return value+ "%"}
+                },
+                scaleLabel: {
+                   display: false,
+                   labelString: "Percentage",
+                   fontSize: 10,
+                   fontColor:"#fff"
+                }
+              }
+            ]
+          }
+      }
+  });
+
 });
 
 map.on('mousemove', function (e) {
@@ -1594,95 +1702,13 @@ var chartData = {
 
 };
 
-window.onload = function() {
-    var ctx = document.getElementById("canvas_emissions").getContext("2d");
-    window.myMixedChart = new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        scaleFontColor: '#fff',
-        options: {
-            legend: { display: false },
-            scaleFontColor: '#fff',
-            responsive: true,
-            gridLines: {
-                display: false,
-                drawBorder: false
-            },
-            title: {
-                display: false,
-                text: ''
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: true
-            },
-            scales: {
-              xAxes: [{
-                ticks: {
-                  fontSize: 10,
-                  fontColor:"#fff"
-                },
-                scaleLabel: {
-                   display: true,
-                   fontSize: 10,
-                   fontColor:"#fff"
-                },
-                gridLines: {
-                  display: false,
-                  color: "#fff"
-                },
-              }],
-              yAxes: [{
-                gridLines: {
-                  display: false,
-                  color: "#fff"
-                },
-                id: 'A',
-                type: 'linear',
-                position: 'left',
-                ticks: {
-                  fontColor:"#fff",
-                  min: 0,
-                  max: 50,
-                  fontSize: 10
-                },
-                scaleLabel: {
-                   display: false,
-                   labelString: "Million tonnes CO2",
-                   fontSize: 10,
-                   fontColor:"#fff"
-                }
-              }, {
-                id: 'B',
-                type: 'linear',
-                position: 'right',
-                ticks: {
-                   fontColor:"#fff",
-                   min: 10,
-                   max: 35,
-                   fontSize: 10,
-                   callback: function(value){return value+ "%"}
-                  },
-                  scaleLabel: {
-                     display: false,
-                     labelString: "Percentage",
-                     fontSize: 10,
-                     fontColor:"#fff"
-                  }
-                }
-              ]
-            }
-        }
-    });
-};
-
 function addData(year) {
   if (chartData.datasets.length > 0) {
-      chartData.labels.push(years[year])
-      chartData.datasets[0].data.push((oil_prod_emissions_share[year]*100).toFixed(1));
-      chartData.datasets[1].data.push(oil_prod_emissions[year].toFixed(1));
+    chartData.labels.push(years[year])
+    chartData.datasets[0].data.push((oil_prod_emissions_share[year]*100).toFixed(1));
+    chartData.datasets[1].data.push(oil_prod_emissions[year].toFixed(1));
 
-      window.myMixedChart.update();
+    emission_chart.update();
   }
 }
 function removeData() {
@@ -1690,7 +1716,7 @@ function removeData() {
   chartData.datasets.forEach(function(dataset, datasetIndex) {
       dataset.data.pop();
   });
-  window.myMixedChart.update();
+  emission_chart.update();
 }
 
 document.getElementById('slider_emissions').addEventListener('input', function(e) {
