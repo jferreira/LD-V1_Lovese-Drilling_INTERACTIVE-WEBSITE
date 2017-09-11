@@ -679,6 +679,13 @@ var second = s.getFullYear();
 var years = Array();
 for(var i = first; i <= second; i++) years.push(i);
 
+var d_export = new Date( "01 " + "January 1971");
+var first_export = d_export.getFullYear();
+var s_export = new Date( "01 " + "December 2017");
+var second_export = s_export.getFullYear();
+var years_export = Array();
+for(var i = first_export; i <= second_export; i++) years_export.push(i);
+
 // Data from NPD.no
 var wells_accumulated = [2,8,20,34,55,71,87,110,162,212,243,300,370,436,512,571,660,727,818,937,1051,1199,1315,1435,1555,1685,1819,1979,2154,2311,2500,2704,2880,3094,3313,3550,3748,3944,4103,4286,4484,4689,4945,5218,5423,5624,5849,6086,6320,6577,6793,6931];
 var weels_yearly = [2,6,12,14,21,16,16,23,52,50,31,57,70,66,76,59,89,67,91,119,114,148,116,120,120,130,134,160,175,157,189,204,176,214,219,237,198,196,159,183,198,205,256,273,205,201,225,237,234,257,216,138];
@@ -701,7 +708,7 @@ var data_export = oil_prod_field_emissions[1971]
 var yearly_export_emissions = [0.993145158,5.35904262,5.19913512,5.601401208,30.57801551,45.12669187,52.18330875,88.99526363,111.0234142,139.7301415,136.7741227,137.7231932,157.6138519,177.9599072,189.4020579,202.2582865,230.1887308,253.7749395,313.9372546,330.7460325,368.3575209,413.3510938,435.2898458,488.8928847,524.2086327,599.8915086,617.4267605,597.8301708,607.5838597,645.4975989,663.0077096,675.0943717,679.6170713,682.7823835,659.7414382,634.9349715,602.8332785,611.8897352,601.4502698,574.4600837,544.9579993,554.9781407,528.0642675,535.7548188,563.4305041,570.4160979,292.8517952]
 var yearly_export_accumulated_emissions = [0.993145158,6.352187778,11.5513229,17.15272411,47.73073962,92.85743148,145.0407402,234.0360039,345.0594181,484.7895596,621.5636823,759.2868754,916.9007273,1094.860635,1284.262692,1486.520979,1716.70971,1970.484649,2284.421904,2615.167936,2983.525457,3396.876551,3832.166397,4321.059282,4845.267914,5445.159423,6062.586183,6660.416354,7268.000214,7913.497813,8576.505522,9251.599894,9931.216965,10613.99935,11273.74079,11908.67576,12511.50904,13123.39877,13724.84904,14299.30913,14844.26712,15399.24527,15927.30953,16463.06435,17026.49486,17596.91095,17889.76275]
 
-function filterBy(slider, years, year) {
+function filterBy(slider, year) {
     if(slider==="oilwells") {
       var filter = ['<=', 'year', years[year]];
        map.setFilter('oilwells', filter);
@@ -710,9 +717,9 @@ function filterBy(slider, years, year) {
       document.getElementById('year_'+slider).textContent = years[year];
       document.getElementById('accumulated_'+slider).textContent = wells_accumulated[year].toLocaleString();
     } else if(slider==="export") {
-      if (years.length > 45) years.splice(0, years.length - 47);
-      data_export = oil_prod_field_emissions[years[year]]
-      document.getElementById('year_'+slider).textContent = years[year];
+      //if (years_specific.length > 45) years_specific.splice(0, years.length - 47);
+      data_export = oil_prod_field_emissions[years_export[year]]
+      document.getElementById('year_'+slider).textContent = years_export[year];
       document.getElementById('accumulated_'+slider).textContent = yearly_export_accumulated_emissions[year].toLocaleString();
       try {
         map.removeLayer("export");
@@ -851,12 +858,12 @@ map.on('load', function() {
           dataLayerBounds[this[i].layer_name] = bbox_oilwells;
 
           // Set filter to first year
-          filterBy("oilwells", years, 0);
+          filterBy("oilwells", 0);
 
           // Update filter on slider change
           document.getElementById('slider_oilwells').addEventListener('input', function(e) {
               var year = parseInt(e.target.value, 10);
-              filterBy("oilwells", years, year);
+              filterBy("oilwells", year);
           });
 
           map.on('mousemove', 'oilwells', function(e) {
@@ -1012,12 +1019,15 @@ map.on('load', function() {
 
     // Used to be peopleAdded
     if (zoomed["heike"] || zoomed["gaute"] || zoomed["odda"]) {
-      updateMarkerOverlayPos(false);
+      if(!addedBeachMarkers) {
+        updateMarkerOverlayPos("first");
+      } else {
+        updateMarkerOverlayPos();
+      }
     } else if(addedBeachMarkers) {
-      updateMarkerOverlayPos(true);
+      updateMarkerOverlayPos("last");
     }
   });
-
 
   var ctx = document.getElementById("canvas_emissions").getContext("2d");
   emission_chart = new Chart(ctx, {
@@ -1111,12 +1121,17 @@ map.on('mousemove', function (e) {
   }
 });
 
-// TODO: Function which only checks a subset of mapIcons? Need to be able to update overlay for specific group of markers (beach)
-// TODO: Add code for rest of the 360 images of beaches . 8 in total
+// TODO: Have a fix for the use case, where the people are added before the beaches icons
 function updateMarkerOverlayPos(subset) {
   $(".cd-modal-action").show();
   var mi = mapIcons;
-  if(subset) mi = mapIcons.slice(1).slice(-beach.features.length);
+  if(subset === "first") {
+    console.log("First - not beaches", people.features.length + images360.features.length, mapIcons.slice(0).slice(people.features.length + images360.features.length));
+    console.log("First - not beaches", mapIcons, people.features.length + images360.features.length, mapIcons.slice(0).slice(8));
+    mi = mapIcons.slice(0).slice(people.features.length + images360.features.length);
+  } else if(subset === "last") {
+    mi = mapIcons.slice(1).slice(-beach.features.length);
+  }
   mi.forEach(function(icon) {
     try {
       // Update the overlay if the map moves
@@ -1348,7 +1363,7 @@ function showMapLayer(layer) {
 
         map.setLayoutProperty(layer, 'visibility', 'visible');
         mapLayers[layer].visible = true;
-        filterBy("export", years, 0);
+        filterBy("export", 0);
 
         map.easeTo({
           center: [3.1901099921844605, 59.1799289545379],
@@ -1478,7 +1493,6 @@ function addMarkers(name, markers) {
         .setHTML('<h3>' + marker.properties.title + ' ('+marker.properties.year+')' +'</h3><p>' + marker.properties.description + 'Recorded spillage of '+ marker.properties.tonnes.toLocaleString() +' tonnes of oil, or '+ marker.properties.liter.toLocaleString() + ' literes.</p>'))
         .addTo(map);
     } else {
-      console.log("Add marker to map", el, marker.geometry.coordinates);
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
         .addTo(map);
@@ -1703,7 +1717,7 @@ var chartData = {
 
 function addData(year) {
   if (chartData.datasets.length > 0) {
-    chartData.labels.push(years[year])
+    chartData.labels.push(years_emissions[year])
     chartData.datasets[0].data.push((oil_prod_emissions_share[year]*100).toFixed(1));
     chartData.datasets[1].data.push(oil_prod_emissions[year].toFixed(1));
 
@@ -1730,7 +1744,7 @@ document.getElementById('slider_emissions').addEventListener('input', function(e
 
 document.getElementById('slider_export').addEventListener('input', function(e) {
     var year = parseInt(e.target.value, 10);
-    filterBy("export", years, year);
+    filterBy("export", year);
 });
 
 /*
@@ -1746,7 +1760,7 @@ function getPercentage(value) {
 
   var totalDiff = max - min,
       valueDiff = value - min;
-  var percentage = valueDiff / totalDiff * 300;
+  var percentage = valueDiff / totalDiff * 100;
 
   percentage = Math.max(percentage, 0);
   percentage = Math.min(percentage, 100);
@@ -1754,9 +1768,9 @@ function getPercentage(value) {
   return percentage;
 }
 
-// Get the color for a value depending on the percentage
-var begin = { red: 255, green: 242, blue: 0 };
-var end = { red: 237, green: 66, blue: 100 };
+var begin = { red: 255, green: 250, blue: 110 };
+var end = { red: 139, green: 0, blue: 0 };
+
 function getColor(value) {
   var percentage = getPercentage(value) / 100;
 
@@ -1779,7 +1793,6 @@ function getColorStops() {
     }
 
     var color = getColor(value, min, max);
-
     stops.push([id, color]);
   });
 
@@ -1798,7 +1811,7 @@ function getHeightStops() {
     }
 
     var percentage = Math.floor(getPercentage(value));
-    var height = percentage * 600;
+    var height = percentage * 650;
     stops.push([id, height]);
   });
 

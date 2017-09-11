@@ -297,7 +297,7 @@ p, span, a, input, textarea, ul, li {
 }
 
 /*// Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .arrow_left_menu, .arrow_right_menu  {
     visibility: visible;
     opacity: 1;
